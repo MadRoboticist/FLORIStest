@@ -23,10 +23,12 @@ def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager
 \begin{DoxyCompactList}\small\item\em plot\+\_\+x\+\_\+planes Plots X planes of the u\+\_\+field generated from a static floris model \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ab660449be49e49325d864dd1176e83f0}{animate\+Dn\+Serror}} (self)
 \begin{DoxyCompactList}\small\item\em animate\+Dn\+Serror Plots error over a u\+\_\+field throughout a range of speeds and directions \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}{calc\+Sensitivity\+Matrix}} (self)
+\begin{DoxyCompactList}\small\item\em calc\+Sensitivity\+Matrix calculates the sensitivity matrix of a given u\+\_\+field \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a32793e43e3e04b3819dea7740e5b9ca1}{plot\+Sensitivity\+Matrix}} (self)
 \begin{DoxyCompactList}\small\item\em plot\+Sensitivity\+Matrix Plots the sensitivity matrix of a given u\+\_\+field \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}{reduced\+SM}} (self)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}{reduced\+S\+M()}} Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix v0, d0, v\+Bar, d\+Bar, ep\+Speed, ep\+Dir, sp\+Err\+Max, dir\+Err\+Max, iter\+Max, mask\+\_\+thresh \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -39,6 +41,8 @@ def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ad34898259a1773b5e43ab50eae783e1d}{grid\+\_\+res}}
 \item 
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ad5b8013f5cdf47f6384ae56186810e2b}{grid\+\_\+resolution}}
+\item 
+\mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}{cbr}}
 \end{DoxyCompactItemize}
 
 
@@ -107,7 +111,37 @@ animate\+Dn\+Serror Plots error over a u\+\_\+field throughout a range of speeds
 \end{DoxyParams}
 Generates a plot with two slider bars which allow you to set different speed/direction combinations and see the error vs. the original flowfield defined by WF The plot also includes a button to toggle between error and u\+\_\+field plots so you can see the actual plot of the u\+\_\+field which the error is generated from. 
 
-Definition at line 319 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 326 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+
+\mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}\label{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}} 
+\index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!calc\+Sensitivity\+Matrix@{calc\+Sensitivity\+Matrix}}
+\index{calc\+Sensitivity\+Matrix@{calc\+Sensitivity\+Matrix}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}
+\subsubsection{\texorpdfstring{calc\+Sensitivity\+Matrix()}{calcSensitivityMatrix()}}
+{\footnotesize\ttfamily def visualization\+\_\+manager\+\_\+\+D\+J.\+Visualization\+Manager.\+calc\+Sensitivity\+Matrix (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+calc\+Sensitivity\+Matrix calculates the sensitivity matrix of a given u\+\_\+field 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self.\+params.\+v0} & takes a wind speed in meters per second \\
+\hline
+{\em self.\+params.\+d0} & takes a wind direction in degrees \\
+\hline
+{\em self.\+params.\+ep\+Speed} & is an epsilon over which to calculate df/dv (derivative of speed) \\
+\hline
+{\em self.\+params.\+ep\+Dir} & is an epsilon over which to calculate df/dd (derivative of direction) \\
+\hline
+{\em self.\+params.\+percent\+\_\+height} & takes a value between zero \& one which represents a percentage of the flowfield\textquotesingle{}s height \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+returns the sensitivity matrix of the u\+\_\+field 
+\end{DoxyReturn}
+
+
+Definition at line 522 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a4705f5926bdcecfd8d2d5aff434b2120}\label{classvisualization__manager___d_j_1_1_visualization_manager_a4705f5926bdcecfd8d2d5aff434b2120}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!plot\+\_\+x\+\_\+planes@{plot\+\_\+x\+\_\+planes}}
@@ -201,7 +235,7 @@ Generates a plot with four heatmaps derived from the pseudo-\/invers of the jaco
 \item normalized $\vert$$\vert$df/dd$\vert$$\vert$$\ast$$\vert$$\vert$df/dv$\vert$$\vert$ 
 \end{DoxyEnumerate}
 
-Definition at line 516 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 577 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}\label{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!reduced\+SM@{reduced\+SM}}
@@ -211,11 +245,56 @@ Definition at line 516 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-Definition at line 670 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+\mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}{reduced\+S\+M()}} Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix v0, d0, v\+Bar, d\+Bar, ep\+Speed, ep\+Dir, sp\+Err\+Max, dir\+Err\+Max, iter\+Max, mask\+\_\+thresh 
+
+
+\begin{DoxyParams}{Parameters}
+{\em self.\+params.\+v0} & takes a wind speed in meters per second \\
+\hline
+{\em self.\+params.\+d0} & takes a wind direction in degrees \\
+\hline
+{\em self.\+params.\+v\+Bar} & takes a wind speed in meters per second \\
+\hline
+{\em self.\+params.\+d\+Bar} & takes a wind direction in degrees \\
+\hline
+{\em self.\+params.\+ep\+Speed} & is an epsilon over which to calculate df/dv (derivative of speed) \\
+\hline
+{\em self.\+params.\+ep\+Dir} & is an epsilon over which to calculate df/dd (derivative of direction) \\
+\hline
+{\em self.\+params.\+sp\+Err\+Max} & is a speed error threshold for stopping iterations \\
+\hline
+{\em self.\+params.\+dir\+Err\+Max} & is a direction error threshold for stopping iterations \\
+\hline
+{\em self.\+params.\+iter\+Max} & is the maximum number of iterations to complete \\
+\hline
+{\em self.\+params.\+mask\+\_\+thresh} & threshold value for reducing the normalized sensitivity matrix\\
+\hline
+\end{DoxyParams}
+Generates a figure with six plots\+:
+\begin{DoxyEnumerate}
+\item top left\+: speed estimate vs. iterations
+\item bottom left\+: direction estimate vs. iterations
+\item top center\+: speed estimate error vs. iterations
+\item bottom center\+: direction estimate error vs. iterations
+\item top right\+: u\+\_\+field estimation error. slider on bottom allows you to see the map at different iterations
+\item bottom right\+: the mask being applied to the sensitivity matrix for these calculations. the slider on the bottom allows you to see the mask at different iterations 
+\end{DoxyEnumerate}
+
+Definition at line 752 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
 \subsection{Member Data Documentation}
+\mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}\label{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}} 
+\index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!cbr@{cbr}}
+\index{cbr@{cbr}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}
+\subsubsection{\texorpdfstring{cbr}{cbr}}
+{\footnotesize\ttfamily visualization\+\_\+manager\+\_\+\+D\+J.\+Visualization\+Manager.\+cbr}
+
+
+
+Definition at line 411 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_add58b653067c1364e389b5a9ea1e4f5b}\label{classvisualization__manager___d_j_1_1_visualization_manager_add58b653067c1364e389b5a9ea1e4f5b}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!figure\+\_\+count@{figure\+\_\+count}}
 \index{figure\+\_\+count@{figure\+\_\+count}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}

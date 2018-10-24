@@ -2,13 +2,22 @@
 @mainpage
 
 The FLORIS model is being used to make online predictions about the best locations in a windfarm 
-to take measurements. From this, UAV trajectories will be generated. 
+to take measurements. From this, UAV trajectories are generated. 
+
+These trajectories will be used to simulate a UAV taking measurements over the field,
+hopefully showing that an accurate windspeed and direction estimate can be obtained
+from those measurements.
+
 The files included in this documentation have been created 
 (or altered from the Floris source code) in order to carry out this research.
 
 visualization_manager_DJ.py
 
 This package contains functions which handle visualizations of Floris data.
+
+pathPlan.py
+
+This package contains functions which handle UAV path planning
 
 AnimateError.py
 
@@ -21,6 +30,11 @@ This is a test script which runs the plotSensitivityMatrix function from visuali
 ReducedSM.py
 
 This is a script which runs the reducedSM function from visualization_manager_DJ.py
+
+GreedyPath.py
+
+This is a script which runs the greedyPath function from pathPlan.py and plots
+the generated path over the sensitivity map.
 
 example_input.json
 

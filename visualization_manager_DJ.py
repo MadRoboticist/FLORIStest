@@ -508,6 +508,55 @@ class VisualizationManager():
         slider_dir.on_changed(update_plot)
         plt.show()
 
+    ## @func calcSensitivityMatrix
+    # calculates the sensitivity matrix of a given u_field
+    #
+    # @param self.params.v0 takes a wind speed in meters per second
+    # @param self.params.d0 takes a wind direction in degrees
+    # @param self.params.epSpeed is an epsilon over which to calculate df/dv (derivative of speed)
+    # @param self.params.epDir is an epsilon over which to calculate df/dd (derivative of direction)
+    # @param self.params.percent_height takes a value between zero & one
+    #                       which represents a percentage of the
+    #                       flowfield's height
+    # @return returns the sensitivity matrix of the u_field
+    def calcSensitivityMatrix(self):
+        # set wind speed estimate for floris model
+        self.WF['farm']['properties']['wind_speed'] = self.params.v0
+        # calculate f(v0,d0) = ff
+        ff_vman = VisualizationManager(self.WF, self.grid_res)
+        ff_vman.flowfield.wind_direction = self.params.d0
+        ff_vman.flowfield.calculate_wake()
+        ff = deepcopy(ff_vman.flowfield.u_field)
+
+        # print v0,d0 as initial speed and direction estimates
+        print('v0 = ' + str(self.params.v0))
+        print('d0 = ' + str(self.params.d0))
+
+        # calculate f(v0+ev,d0) = ff_v1
+        self.WF['farm']['properties']['wind_speed'] = self.params.v0 + self.params.epSpeed  # add speed epsilon
+        ff_v1_vman = VisualizationManager(self.WF, self.grid_res)
+        ff_v1_vman.flowfield.wind_direction = self.params.d0
+        ff_v1_vman.flowfield.calculate_wake()
+        ff_v1 = deepcopy(ff_v1_vman.flowfield.u_field)
+
+        # calculate f(v0,d0+ed) = ff_d1
+        ff_d1_vman = deepcopy(ff_vman)
+        ff_d1_vman.flowfield.wind_direction = self.params.d0 + self.params.epDir  # add direction epsilon
+        ff_d1_vman.flowfield.calculate_wake()  # recalculate wake
+        ff_d1 = deepcopy(ff_d1_vman.flowfield.u_field)
+
+        plane = int(ff_d1_vman.flowfield.grid_resolution.z * self.params.percent_height)
+
+        # calculate gradient of f(v,d) = grad_f
+        df_dv = (ff_v1 - ff) / self.params.epSpeed  # partial of f WRT speed
+        df_dd = (ff_d1 - ff) / self.params.epDir  # partial of f WRT direction
+        dfdv = deepcopy(df_dv[:, :, plane])
+        dfdd = deepcopy(df_dd[:, :, plane])
+
+        sens_mat = [dfdv, dfdd]  # 2xn gradient of f (jacobian)
+
+        return sens_mat
+
     ## @func plotSensitivityMatrix
     # Plots the sensitivity matrix of a given u_field
     #
@@ -674,7 +723,7 @@ class VisualizationManager():
         plt.show()
 
 
-    ## @func plotSensitivityMatrix
+    ## @func reducedSM()
     # Plots the convergence of speed and direction estimates
     # based on a reduced sensitivity matrix
     #v0, d0, vBar, dBar, epSpeed, epDir, spErrMax, dirErrMax, iterMax, mask_thresh
@@ -687,9 +736,18 @@ class VisualizationManager():
     # @param self.params.spErrMax is a speed error threshold for stopping iterations
     # @param self.params.dirErrMax is a direction error threshold for stopping iterations
     # @param self.params.iterMax is the maximum number of iterations to complete
-    # @param self.params.mask_thresh threshold value for the normalized sensitivity matrix
+    # @param self.params.mask_thresh threshold value for reducing the normalized sensitivity matrix
     #
-    # Generates a plot
+    # Generates a figure with six plots:
+    #   1.  top left:       speed estimate vs. iterations
+    #   2.  bottom left:    direction estimate vs. iterations
+    #   3.  top center:     speed estimate error vs. iterations
+    #   4.  bottom center:  direction estimate error vs. iterations
+    #   5.  top right:      u_field estimation error. slider on bottom
+    #                       allows you to see the map at different iterations
+    #   6.  bottom right:   the mask being applied to the sensitivity matrix
+    #                       for these calculations. the slider on the bottom
+    #                       allows you to see the mask at different iterations
     #
     def reducedSM(self):
         # calculate f(vbar,dbar) = xBar
@@ -701,10 +759,10 @@ class VisualizationManager():
         ff_bar_vman.flowfield.wind_direction = self.params.dBar
         ff_bar_vman.flowfield.calculate_wake()
         plane = int(ff_bar_vman.flowfield.grid_resolution.z * self.params.percent_height)
-        X = deepcopy(ff_bar_vman.flowfield.x)
-        Y = deepcopy(ff_bar_vman.flowfield.y)
+        X = deepcopy(ff_bar_vman.flowfield.x[:,:,plane])
+        Y = deepcopy(ff_bar_vman.flowfield.y[:,:,plane])
         ff_bar = deepcopy(ff_bar_vman.flowfield.u_field)
-        ff = deepcopy(ff_bar)
+        ff = deepcopy(ff_bar[:,:,plane])
         xBar = np.vstack(ff.flatten())  # 1xn
 
         # initialize error
@@ -761,8 +819,8 @@ class VisualizationManager():
             temp_x_ed = deepcopy(temp2_vman.flowfield.u_field)
 
             # calculate gradient
-            temp_df_dv = (temp_x_ev - temp_x_k) / self.params.epSpeed  # partial of f WRT speed
-            temp_df_dd = (temp_x_ed - temp_x_k) / self.params.epDir  # partial of f WRT direction
+            temp_df_dv = (temp_x_ev[:,:,plane] - temp_x_k[:,:,plane]) / self.params.epSpeed  # partial of f WRT speed
+            temp_df_dd = (temp_x_ed[:,:,plane] - temp_x_k[:,:,plane]) / self.params.epDir  # partial of f WRT direction
             temp_grad_fk = np.column_stack([temp_df_dv.flatten(), temp_df_dd.flatten()])  # 2xn gradient of f (jacobian)
             temp_sens_mat_pinv = np.linalg.pinv(temp_grad_fk)
 
@@ -780,7 +838,7 @@ class VisualizationManager():
             masks.append(temp_Z_mask)
 
             # calculate pseudoinverse[gradient{f(vk,dk)}]*{xBar-f(vk,dk)} = adj_vd (adjustment to current v&d estimates)
-            adj_vd = np.matmul(temp_sens_mat_pinv, xBar - np.vstack(temp_x_k.flatten()))
+            adj_vd = np.matmul(temp_sens_mat_pinv, xBar - np.vstack(temp_x_k[:,:,plane].flatten()))
             # print(adj_vd)
             # calculate v_k+1 and d_k+1
             vd_kp1 = vd_k + adj_vd
@@ -833,7 +891,9 @@ class VisualizationManager():
         axarr[0][1].set_title('speed error')
         v = np.linspace(0, errMax, 100)
         V = np.linspace(0, errMax, 5)
-        cont = axarr[0][2].contourf(X[:,:,plane], Y[:,:,plane], err_field[0],v,cmap='gnuplot2')
+        cont = axarr[0][2].contourf(X, Y, err_field[0],v,cmap='gnuplot2')
+        # cont = axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[0].flatten(),
+        #                    cmap='gnuplot2')
         cb = plt.colorbar(cont, ax=axarr[0][2])
         cb.set_clim(vmin=0, vmax=errMax)
         cb.set_ticks(V, True)
@@ -874,7 +934,8 @@ class VisualizationManager():
             idx = int(round(sld.val))
             sld.valtext.set_text('iteration '+'{}'.format(idx))
             axarr[0][2].clear()
-            axarr[0][2].contourf(X[:, :, plane], Y[:, :, plane], err_field[idx], v, cmap='gnuplot2')
+            axarr[0][2].contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
+            # axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[idx].flatten(), cmap='gnuplot2')
             axarr[1][2].clear()
             axarr[1][2].scatter(x,y,masks[idx],color='black')
             for coord, turbine in self.flowfield.turbine_map.items():
@@ -885,7 +946,9 @@ class VisualizationManager():
                 axarr[0][2].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='white')
                 axarr[1][2].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
             plt.draw()
+            print(sum(masks[idx]))
         sld.on_changed(update_plot)
+
         plt.show()
 
     ## params is a class used to pass parameters to various functions

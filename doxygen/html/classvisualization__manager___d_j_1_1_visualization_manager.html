@@ -101,10 +101,14 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ab660449be49e49325d864dd1176e83f0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#ab660449be49e49325d864dd1176e83f0">animateDnSerror</a> (self)</td></tr>
 <tr class="memdesc:ab660449be49e49325d864dd1176e83f0"><td class="mdescLeft">&#160;</td><td class="mdescRight">animateDnSerror Plots error over a u_field throughout a range of speeds and directions  <a href="#ab660449be49e49325d864dd1176e83f0">More...</a><br /></td></tr>
 <tr class="separator:ab660449be49e49325d864dd1176e83f0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a979c45975c192515cbc17da7c07d2af3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a979c45975c192515cbc17da7c07d2af3">calcSensitivityMatrix</a> (self)</td></tr>
+<tr class="memdesc:a979c45975c192515cbc17da7c07d2af3"><td class="mdescLeft">&#160;</td><td class="mdescRight">calcSensitivityMatrix calculates the sensitivity matrix of a given u_field  <a href="#a979c45975c192515cbc17da7c07d2af3">More...</a><br /></td></tr>
+<tr class="separator:a979c45975c192515cbc17da7c07d2af3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a32793e43e3e04b3819dea7740e5b9ca1"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a32793e43e3e04b3819dea7740e5b9ca1">plotSensitivityMatrix</a> (self)</td></tr>
 <tr class="memdesc:a32793e43e3e04b3819dea7740e5b9ca1"><td class="mdescLeft">&#160;</td><td class="mdescRight">plotSensitivityMatrix Plots the sensitivity matrix of a given u_field  <a href="#a32793e43e3e04b3819dea7740e5b9ca1">More...</a><br /></td></tr>
 <tr class="separator:a32793e43e3e04b3819dea7740e5b9ca1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a92c5f58eddce15c3fa19edd63e66ef43"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a92c5f58eddce15c3fa19edd63e66ef43">reducedSM</a> (self)</td></tr>
+<tr class="memdesc:a92c5f58eddce15c3fa19edd63e66ef43"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a92c5f58eddce15c3fa19edd63e66ef43" title="reducedSM() Plots the convergence of speed and direction estimates based on a reduced sensitivity mat...">reducedSM()</a> Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix v0, d0, vBar, dBar, epSpeed, epDir, spErrMax, dirErrMax, iterMax, mask_thresh  <a href="#a92c5f58eddce15c3fa19edd63e66ef43">More...</a><br /></td></tr>
 <tr class="separator:a92c5f58eddce15c3fa19edd63e66ef43"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
@@ -119,6 +123,8 @@ Public Attributes</h2></td></tr>
 <tr class="separator:ad34898259a1773b5e43ab50eae783e1d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad5b8013f5cdf47f6384ae56186810e2b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#ad5b8013f5cdf47f6384ae56186810e2b">grid_resolution</a></td></tr>
 <tr class="separator:ad5b8013f5cdf47f6384ae56186810e2b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5ebbc21771a576316065fac66b67c292"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a5ebbc21771a576316065fac66b67c292">cbr</a></td></tr>
+<tr class="separator:a5ebbc21771a576316065fac66b67c292"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains functions which handle visualizations of Floris data. </p>
@@ -205,7 +211,40 @@ Public Attributes</h2></td></tr>
 </dl>
 <p>Generates a plot with two slider bars which allow you to set different speed/direction combinations and see the error vs. the original flowfield defined by WF The plot also includes a button to toggle between error and u_field plots so you can see the actual plot of the u_field which the error is generated from. </p>
 
-<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00319">319</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00326">326</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
+
+</div>
+</div>
+<a id="a979c45975c192515cbc17da7c07d2af3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a979c45975c192515cbc17da7c07d2af3">&#9670;&nbsp;</a></span>calcSensitivityMatrix()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def visualization_manager_DJ.VisualizationManager.calcSensitivityMatrix </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>calcSensitivityMatrix calculates the sensitivity matrix of a given u_field </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self.params.v0</td><td>takes a wind speed in meters per second </td></tr>
+    <tr><td class="paramname">self.params.d0</td><td>takes a wind direction in degrees </td></tr>
+    <tr><td class="paramname">self.params.epSpeed</td><td>is an epsilon over which to calculate df/dv (derivative of speed) </td></tr>
+    <tr><td class="paramname">self.params.epDir</td><td>is an epsilon over which to calculate df/dd (derivative of direction) </td></tr>
+    <tr><td class="paramname">self.params.percent_height</td><td>takes a value between zero &amp; one which represents a percentage of the flowfield's height </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>returns the sensitivity matrix of the u_field </dd></dl>
+
+<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00522">522</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
 
 </div>
 </div>
@@ -362,7 +401,7 @@ Public Attributes</h2></td></tr>
 <li>normalized ||df/dd||*||df/dv|| </li>
 </ol>
 
-<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00516">516</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00577">577</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
 
 </div>
 </div>
@@ -382,11 +421,52 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00670">670</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
+<p><a class="el" href="classvisualization__manager___d_j_1_1_visualization_manager.html#a92c5f58eddce15c3fa19edd63e66ef43" title="reducedSM() Plots the convergence of speed and direction estimates based on a reduced sensitivity mat...">reducedSM()</a> Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix v0, d0, vBar, dBar, epSpeed, epDir, spErrMax, dirErrMax, iterMax, mask_thresh </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">self.params.v0</td><td>takes a wind speed in meters per second </td></tr>
+    <tr><td class="paramname">self.params.d0</td><td>takes a wind direction in degrees </td></tr>
+    <tr><td class="paramname">self.params.vBar</td><td>takes a wind speed in meters per second </td></tr>
+    <tr><td class="paramname">self.params.dBar</td><td>takes a wind direction in degrees </td></tr>
+    <tr><td class="paramname">self.params.epSpeed</td><td>is an epsilon over which to calculate df/dv (derivative of speed) </td></tr>
+    <tr><td class="paramname">self.params.epDir</td><td>is an epsilon over which to calculate df/dd (derivative of direction) </td></tr>
+    <tr><td class="paramname">self.params.spErrMax</td><td>is a speed error threshold for stopping iterations </td></tr>
+    <tr><td class="paramname">self.params.dirErrMax</td><td>is a direction error threshold for stopping iterations </td></tr>
+    <tr><td class="paramname">self.params.iterMax</td><td>is the maximum number of iterations to complete </td></tr>
+    <tr><td class="paramname">self.params.mask_thresh</td><td>threshold value for reducing the normalized sensitivity matrix</td></tr>
+  </table>
+  </dd>
+</dl>
+<p>Generates a figure with six plots:</p><ol type="1">
+<li>top left: speed estimate vs. iterations</li>
+<li>bottom left: direction estimate vs. iterations</li>
+<li>top center: speed estimate error vs. iterations</li>
+<li>bottom center: direction estimate error vs. iterations</li>
+<li>top right: u_field estimation error. slider on bottom allows you to see the map at different iterations</li>
+<li>bottom right: the mask being applied to the sensitivity matrix for these calculations. the slider on the bottom allows you to see the mask at different iterations </li>
+</ol>
+
+<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00752">752</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Data Documentation</h2>
+<a id="a5ebbc21771a576316065fac66b67c292"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5ebbc21771a576316065fac66b67c292">&#9670;&nbsp;</a></span>cbr</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">visualization_manager_DJ.VisualizationManager.cbr</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p class="definition">Definition at line <a class="el" href="visualization__manager___d_j_8py_source.html#l00411">411</a> of file <a class="el" href="visualization__manager___d_j_8py_source.html">visualization_manager_DJ.py</a>.</p>
+
+</div>
+</div>
 <a id="add58b653067c1364e389b5a9ea1e4f5b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add58b653067c1364e389b5a9ea1e4f5b">&#9670;&nbsp;</a></span>figure_count</h2>
 
