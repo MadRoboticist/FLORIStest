@@ -2,7 +2,84 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/Read.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPath.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___transition.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___transition.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params-members.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir-members.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/files.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/files.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/functions.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_func.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_func.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_vars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/namespaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespaces.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/pages.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/pages.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_10.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_10.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_11.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_11.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_6.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_9.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_a.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_a.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_b.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_c.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_c.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_e.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_f.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_f.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/files_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/files_2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/files_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/files_3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/files_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/files_4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/files_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/files_5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_6.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/namespaces_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/namespaces_1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/namespaces_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/namespaces_2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/namespaces_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/namespaces_3.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/namespaces_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/namespaces_4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/pages_0.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/pages_0.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/searchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/searchdata.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_7.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_7.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_a.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_a.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___transition.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___transition.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___x__map__node.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___x__map__node.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner_1_1params.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner_1_1params.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_u_a_v.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_u_a_v.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1dir.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1dir.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/files.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/files.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/index.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/index.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespaces.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespaces.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/doxygen/latex/refman.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/refman.tex" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +134,7 @@
     <session id="-931210854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="2" />
+          <entry key="project.closed" value="3" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.22" value="1" />
@@ -88,16 +165,17 @@
           <entry key="json" value="53" />
           <entry key="md" value="1122" />
           <entry key="me" value="117" />
-          <entry key="py" value="35482" />
+          <entry key="py" value="36962" />
           <entry key="tcl" value="7" />
+          <entry key="txt" value="26" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="53" />
           <entry key="Markdown" value="1122" />
-          <entry key="PLAIN_TEXT" value="176" />
-          <entry key="Python" value="35482" />
+          <entry key="PLAIN_TEXT" value="202" />
+          <entry key="Python" value="36962" />
         </counts>
       </usages-collector>
     </session>
@@ -128,11 +206,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="866">
-              <caret line="576" selection-start-line="576" selection-end-line="576" />
+            <state relative-caret-position="69">
+              <caret line="861" selection-start-line="861" selection-end-line="861" />
               <folding>
                 <element signature="e#678#718#0" expanded="true" />
                 <element signature="e#2477#2659#0" />
@@ -151,18 +229,18 @@
                 <element signature="e#6081#6476#0" />
                 <element signature="e#6534#6762#0" />
                 <element signature="e#6820#7048#0" />
-                <element signature="e#7054#7070#0" />
                 <element signature="e#7424#7494#0" />
-                <element signature="e#7500#7522#0" />
                 <element signature="e#7884#7954#0" />
-                <element signature="e#7960#7982#0" />
                 <element signature="e#8332#8402#0" />
                 <element signature="e#8491#8501#0" />
                 <element signature="e#9417#12217#0" />
                 <element signature="e#12257#12528#0" />
+                <element signature="e#13498#22514#0" />
+                <element signature="e#23236#25068#0" />
                 <element signature="e#23530#31037#0" />
-                <marker date="1540406962932" expanded="true" signature="23227:24915" ph="..." />
-                <marker date="1540406962932" expanded="true" signature="35179:45881" ph="..." />
+                <element signature="e#42481#44188#0" />
+                <marker date="1540424790639" expanded="true" signature="23627:25315" ph="..." />
+                <marker date="1540424790639" expanded="true" signature="35500:46202" ph="..." />
               </folding>
             </state>
           </provider>
@@ -171,21 +249,21 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pathPlan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="149">
-              <caret line="284" lean-forward="true" selection-start-line="284" selection-end-line="284" />
+            <state relative-caret-position="-11">
+              <caret line="151" column="52" selection-start-line="151" selection-start-column="52" selection-end-line="151" selection-end-column="52" />
               <folding>
                 <element signature="e#109#127#0" expanded="true" />
-                <marker date="1540422534917" expanded="true" signature="531:776" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="2275:2280" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="2275:3068" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="3235:3236" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="3235:3240" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="3437:3442" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="6798:8207" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="7502:7527" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="8239:8248" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="11386:11483" ph="..." />
-                <marker date="1540422534917" expanded="true" signature="14245:14270" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="541:856" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="2467:2472" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="2467:3350" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="3531:3532" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="3531:3536" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="4733:4738" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="8094:9503" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="8798:8823" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="9535:9544" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="12682:12779" ph="..." />
+                <marker date="1540425833011" expanded="true" signature="15541:15566" ph="..." />
               </folding>
             </state>
           </provider>
@@ -194,18 +272,18 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GreedyPath.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
+            <state relative-caret-position="-32">
+              <caret line="1" column="57" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="268">
-                <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
+              <first_editor relative-caret-position="28">
+                <caret line="32" selection-start-line="32" selection-end-line="32" />
               </first_editor>
               <second_editor />
             </state>
@@ -238,8 +316,8 @@
       <find>-100</find>
       <find>maxIters</find>
       <find>grid</find>
-      <find>right</find>
       <find>X_map_node</find>
+      <find>right</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -272,10 +350,11 @@
         <option value="$PROJECT_DIR$/PlotSensitivityMatrix.py" />
         <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/example_input.json" />
-        <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
-        <option value="$PROJECT_DIR$/pathPlan.py" />
         <option value="$PROJECT_DIR$/PathPlanner.py" />
         <option value="$PROJECT_DIR$/Read.md" />
+        <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
+        <option value="$PROJECT_DIR$/GreedyPath.py" />
+        <option value="$PROJECT_DIR$/pathPlan.py" />
       </list>
     </option>
   </component>
@@ -472,18 +551,25 @@
       <option name="presentableId" value="Default" />
       <updated>1535581994463</updated>
     </task>
+    <task id="LOCAL-00001" summary="added path planning module">
+      <created>1540423343920</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1540423343920</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1032" height="732" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18843469" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37947884" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.37947884" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39739415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -518,6 +604,10 @@
   </component>
   <component name="VcsContentAnnotationSettings">
     <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="added path planning module" />
+    <option name="LAST_COMMIT_MESSAGE" value="added path planning module" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/tests/sample_inputs.py" />
@@ -622,10 +712,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/AnimateError.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PathPlanner.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
+          <folding>
+            <element signature="e#90#147#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="28">
+            <caret line="32" selection-start-line="32" selection-end-line="32" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GreedyPath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-32">
+          <caret line="1" column="57" selection-start-line="1" selection-start-column="57" selection-end-line="1" selection-end-column="57" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pathPlan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-11">
+          <caret line="151" column="52" selection-start-line="151" selection-start-column="52" selection-end-line="151" selection-end-column="52" />
+          <folding>
+            <element signature="e#109#127#0" expanded="true" />
+            <marker date="1540425833011" expanded="true" signature="541:856" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="2467:2472" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="2467:3350" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="3531:3532" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="3531:3536" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="4733:4738" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="8094:9503" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="8798:8823" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="9535:9544" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="12682:12779" ph="..." />
+            <marker date="1540425833011" expanded="true" signature="15541:15566" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="866">
-          <caret line="576" selection-start-line="576" selection-end-line="576" />
+        <state relative-caret-position="69">
+          <caret line="861" selection-start-line="861" selection-end-line="861" />
           <folding>
             <element signature="e#678#718#0" expanded="true" />
             <element signature="e#2477#2659#0" />
@@ -644,79 +794,19 @@
             <element signature="e#6081#6476#0" />
             <element signature="e#6534#6762#0" />
             <element signature="e#6820#7048#0" />
-            <element signature="e#7054#7070#0" />
             <element signature="e#7424#7494#0" />
-            <element signature="e#7500#7522#0" />
             <element signature="e#7884#7954#0" />
-            <element signature="e#7960#7982#0" />
             <element signature="e#8332#8402#0" />
             <element signature="e#8491#8501#0" />
             <element signature="e#9417#12217#0" />
             <element signature="e#12257#12528#0" />
+            <element signature="e#13498#22514#0" />
+            <element signature="e#23236#25068#0" />
             <element signature="e#23530#31037#0" />
-            <marker date="1540406962932" expanded="true" signature="23227:24915" ph="..." />
-            <marker date="1540406962932" expanded="true" signature="35179:45881" ph="..." />
+            <element signature="e#42481#44188#0" />
+            <marker date="1540424790639" expanded="true" signature="23627:25315" ph="..." />
+            <marker date="1540424790639" expanded="true" signature="35500:46202" ph="..." />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/AnimateError.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="26" column="32" selection-start-line="26" selection-start-column="32" selection-end-line="26" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PathPlanner.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="30" column="21" lean-forward="true" selection-start-line="30" selection-start-column="21" selection-end-line="30" selection-end-column="21" />
-          <folding>
-            <element signature="e#90#147#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pathPlan.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="149">
-          <caret line="284" lean-forward="true" selection-start-line="284" selection-end-line="284" />
-          <folding>
-            <element signature="e#109#127#0" expanded="true" />
-            <marker date="1540422534917" expanded="true" signature="531:776" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="2275:2280" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="2275:3068" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="3235:3236" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="3235:3240" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="3437:3442" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="6798:8207" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="7502:7527" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="8239:8248" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="11386:11483" ph="..." />
-            <marker date="1540422534917" expanded="true" signature="14245:14270" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GreedyPath.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="268">
-            <caret line="36" column="44" selection-start-line="36" selection-start-column="44" selection-end-line="36" selection-end-column="44" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>

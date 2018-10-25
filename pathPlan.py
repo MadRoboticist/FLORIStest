@@ -18,21 +18,29 @@ from copy import deepcopy
 # This enumeration can be used to generate compass
 # angles, e.g. NW = 3x45 degrees or 3xPI/4
 class dir(enumerate):
-    ## @E East = 0
+    ## @var E
+    # East = 0
     E = 0
-    ## @NE Northeast = 1
+    ## @var NE
+    # Northeast = 1
     NE = 1
-    ## @N North = 2
+    ## @var N
+    # North = 2
     N = 2
-    ## @NW Northwest = 3
+    ## @var NW
+    # Northwest = 3
     NW = 3
-    ## @W West = 4
+    ## @var W
+    # West = 4
     W = 4
-    ## @SW Southwest = 5
+    ## @var SW
+    # Southwest = 5
     SW = 5
-    ## @S South = 6
+    ## @var S
+    # South = 6
     S = 6
-    ## @SE Southeast = 7
+    ## @var SE
+    # Southeast = 7
     SE = 7
 
 ## a structure which holds information for each possible transition from
@@ -40,14 +48,17 @@ class dir(enumerate):
 class _Transition:
     ## Class constructor
     def __init__(self):
-        ## @thetaCost A cost value
+        ## @var thetaCost
+        # A cost value
         # for wind direction vs. UAV heading
         self.thetaCost = 0.0
-        ## @dSscore A score/cost value
+        ## @var dSscore
+        # A score/cost value
         # for the rate of change of the total score
         # resulting from the corresponding transition
         self.dSscore = 0.0
-        ## @d2Sscore A score/cost value
+        ## @var d2Sscore
+        # A score/cost value
         # for the 2nd derivative of score/transition
         self.d2Sscore = 0.0
 
@@ -56,40 +67,51 @@ class _Transition:
 class _X_map_node:
     ## Class constructor
     def __init__(self):
-        ## @Xitions A list of the 8 possible transitions
+        ## @var Xitions
+        # A list of the 8 possible transitions
         # from the corresponding node
         self.Xitions = [_Transition() for i in range(8)]
-        ## @GPS The GPS coordinates [lat,lon] of the corresponding node
+        ## @var GPS
+        # The GPS coordinates [lat,lon] of the corresponding node
         self.GPS = [0, 0]
-        ## @idx The coordinates [x, y] of the node
+        ## @var idx
+        # The coordinates [x, y] of the node
         self.idx = [0, 0]
-        ## @score The value score of the node from the sensitivity matrix
+        ## @var score
+        # The value score of the node from the sensitivity matrix
         self.score = None
 
 ## A class for representing the state of a UAV on the windfarm
 class UAV:
     ## Class constructor.
     def __init__(self):
-        ## @GPS Holds the "GPS" location
+        ## @var GPS
+        # Holds the "GPS" location
         # of the UAV. Currently, the GPS location is an
         # ordered pair representing the XY position in meters
         # from the map's origin X=GPS[0], Y=GPS[1]
         self.GPS = [0, 0]
-        ## @idx Holds the XY node index from the bottom left
+        ## @var idx
+        # Holds the XY node index from the bottom left
         # corner of the map. X=idx[0], Y=idx[1]
         self.idx = [0, 0]
-        ## @heading Holds the enumerated direction that the UAV
+        ## @var heading
+        # Holds the enumerated direction that the UAV
         # is currently traveling. see Class dir()
         self.heading = dir.E
-        ## @path A list of idx points representing the UAV's path
+        ## @var IDXpath
+        # A list of idx points representing the UAV's path
         # through the nodes.
         self.IDXpath = list()
-        ## @path A list of GPS points representing the UAV's path
+        ## @var GPSpath
+        # A list of GPS points representing the UAV's path
         # through the map.
         self.GPSpath = list()
-        ## @score Holds the score of the UAV's path
+        ## @var score
+        # Holds the score of the UAV's path
         self.score = 0
-        ## @score_mask Holds a map of values which degrade the
+        ## @var score_mask
+        # Holds a map of values which degrade the
         # score of the corresponding node after it has been visited.
         self.score_mask = None
 
@@ -97,16 +119,37 @@ class UAV:
 class PathPlanner:
 
     class params:
-        ## @minDist2turbine sets a minimum distance from the center of a turbine
+        ## @var minDist2turbine
+        # sets a minimum distance from the center of a turbine
         # which serves as a boundary for the UAV
         minDist2turbine = 160
+        ## @var scoreWt
+        #   sets the weight of the sensitivity score in path calculations
         scoreWt = 10
+        ## @var dSwt
+        #   sets the weight of the derivative of the sensitivity score
+        #   in path calculations
         dSwt = 2
+        ## @var windWt
+        #   sets the weight of the wind direction vs. transition heading
+        #   in path calculations
         windWt = 2
+        ## @var waveWt
+        #   sets the weight of the wave map in path calculations
         waveWt = 35
+        ## @var timeWt
+        #   sets the weight of time/iterations elapsed in path calculations
         timeWt = 0.25
+        ## @var maskSUB
+        #   sets a subtractive penalty value to be applied to a node each
+        #   time it is visited (set to 0 to apply no subtractive penalty)
         maskSUB = 0
+        ## @var maskMUL
+        #   sets a multiplicative penalty value to be applied to a node each
+        #   time it is visited (set to 1 to apply no multiplicative penalty)
         maskMUL = 0.5
+        ## @var maskMULthenSUB
+        #   boolean which decides the order maskSUB and maskMUL are carried out
         maskMULthenSUB = True
 
     ## class constructor

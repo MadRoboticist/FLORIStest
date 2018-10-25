@@ -1,5 +1,5 @@
-## \file PathPlanner.py
-# This is a script which utilizes the functions in pathPlan.py
+## \file GreedyPath.py
+# This is a script which utilizes the greedyPath function in pathPlan.py
 #
 
 from visualization_manager_DJ import VisualizationManager

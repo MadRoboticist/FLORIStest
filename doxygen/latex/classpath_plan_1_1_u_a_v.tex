@@ -24,7 +24,7 @@ def \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a57ea529b1f8160c59ac6d3ba1b677c37}
 \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}{G\+P\+Spath}}
 \begin{DoxyCompactList}\small\item\em A list of G\+PS points representing the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path through the map. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}{score}}
-\begin{DoxyCompactList}\small\item\em Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}{score\+\_\+mask}}
 \begin{DoxyCompactList}\small\item\em Holds a map of values which degrade the score of the corresponding node after it has been visited. \end{DoxyCompactList}\end{DoxyCompactItemize}
 
@@ -32,7 +32,7 @@ def \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a57ea529b1f8160c59ac6d3ba1b677c37}
 \subsection{Detailed Description}
 A class for representing the state of a \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} on the windfarm. 
 
-Definition at line 70 of file path\+Plan.\+py.
+Definition at line 85 of file path\+Plan.\+py.
 
 
 
@@ -49,7 +49,7 @@ Class constructor.
 
 
 
-Definition at line 72 of file path\+Plan.\+py.
+Definition at line 87 of file path\+Plan.\+py.
 
 
 
@@ -66,7 +66,7 @@ Holds the \char`\"{}\+G\+P\+S\char`\"{} location of the \mbox{\hyperlink{classpa
 
 Currently, the G\+PS location is an ordered pair representing the XY position in meters from the map\textquotesingle{}s origin X=G\+PS\mbox{[}0\mbox{]}, Y=G\+PS\mbox{[}1\mbox{]} 
 
-Definition at line 77 of file path\+Plan.\+py.
+Definition at line 93 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}\label{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!G\+P\+Spath@{G\+P\+Spath}}
@@ -80,7 +80,7 @@ A list of G\+PS points representing the \mbox{\hyperlink{classpath_plan_1_1_u_a_
 
 
 
-Definition at line 89 of file path\+Plan.\+py.
+Definition at line 109 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_ac49fa37a2aaf8fe987f1500069c4f903}\label{classpath_plan_1_1_u_a_v_ac49fa37a2aaf8fe987f1500069c4f903}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!heading@{heading}}
@@ -94,7 +94,7 @@ Holds the enumerated direction that the \mbox{\hyperlink{classpath_plan_1_1_u_a_
 
 see Class dir() 
 
-Definition at line 83 of file path\+Plan.\+py.
+Definition at line 101 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a8c6578c4b96f4704489038660a4ebe58}\label{classpath_plan_1_1_u_a_v_a8c6578c4b96f4704489038660a4ebe58}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!idx@{idx}}
@@ -108,7 +108,7 @@ Holds the XY node index from the bottom left corner of the map.
 
 X=idx\mbox{[}0\mbox{]}, Y=idx\mbox{[}1\mbox{]} 
 
-Definition at line 80 of file path\+Plan.\+py.
+Definition at line 97 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a640c0f9f8385d53e0742d9ef5f3a7a59}\label{classpath_plan_1_1_u_a_v_a640c0f9f8385d53e0742d9ef5f3a7a59}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!I\+D\+Xpath@{I\+D\+Xpath}}
@@ -122,7 +122,7 @@ A list of idx points representing the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}
 
 
 
-Definition at line 86 of file path\+Plan.\+py.
+Definition at line 105 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}\label{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!score@{score}}
@@ -132,11 +132,11 @@ Definition at line 86 of file path\+Plan.\+py.
 
 
 
-Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path 
+Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path. 
 
 
 
-Definition at line 91 of file path\+Plan.\+py.
+Definition at line 112 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}\label{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!score\+\_\+mask@{score\+\_\+mask}}
@@ -150,7 +150,7 @@ Holds a map of values which degrade the score of the corresponding node after it
 
 
 
-Definition at line 94 of file path\+Plan.\+py.
+Definition at line 116 of file path\+Plan.\+py.
 
 
 

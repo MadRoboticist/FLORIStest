@@ -51,7 +51,7 @@ class VisualizationManager():
     #   @param WF takes a JSON windfarm object
     #   @param grid_resolution takes a 3-element integer array
     #           with [x_resolution, y_resolution_ z_resolution]
-    #   @return a VisualizationManager object
+    #   @return VisualizationManager object
     def __init__(self, WF, grid_resolution=(100, 100, 25)):
         self.WF = WF
         self.figure_count = 0
@@ -168,9 +168,9 @@ class VisualizationManager():
             self.flowfield.z[plane, :, :],
             self.flowfield.u_field[plane, :, :])
 
-    ## plot_z_planes
+    ## @func plot_z_planes
     #
-    # Plots Z planes of the u_field generated from a static floris model
+    # @brief Plots Z planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -183,9 +183,9 @@ class VisualizationManager():
             self._add_z_plane(p)
         self._show()
 
-    ## \func plot_y_planes
+    ## @func plot_y_planes
     #
-    # \brief Plots Y planes of the u_field generated from a static floris model
+    # @brief Plots Y planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -198,8 +198,8 @@ class VisualizationManager():
             self._add_y_plane(p)
         self._show()
 
-    ## \func plot_x_planes
-    # Plots X planes of the u_field generated from a static floris model
+    ## @func plot_x_planes
+    # @brief Plots X planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -299,6 +299,16 @@ class VisualizationManager():
 
         return page, MAX, MIN, Page, max, min
 
+    ## @func _grid
+    #   creates x, y and z grid meshes from 1D arrays of similar length
+    #   so that the data can be represented by a contour plot
+    #
+    #   @param x list of x values
+    #   @param y list of y values
+    #   @param z list of z values
+    #   @return X grid mesh of x values
+    #   @return Y grid mesh of y values
+    #   @return Z grid mesh of z values
     def _grid(self, x, y, z):
         X, Y = np.mgrid[min(x):max(x):self.grid_res[0], min(y):max(y):self.grid_res[1]]
         Z = griddata((x, y), z, (X, Y), method='linear')
@@ -306,6 +316,7 @@ class VisualizationManager():
 
         # X, Y = np.meshgrid(xi, yi)
         return X, Y, Z
+
     ## @func animateDnSerror
     # Plots error over a u_field
     # throughout a range of speeds and directions
@@ -723,10 +734,10 @@ class VisualizationManager():
         plt.show()
 
 
-    ## @func reducedSM()
+    ## @func reducedSM
     # Plots the convergence of speed and direction estimates
     # based on a reduced sensitivity matrix
-    #v0, d0, vBar, dBar, epSpeed, epDir, spErrMax, dirErrMax, iterMax, mask_thresh
+    #
     # @param self.params.v0 takes a wind speed in meters per second
     # @param self.params.d0 takes a wind direction in degrees
     # @param self.params.vBar takes a wind speed in meters per second

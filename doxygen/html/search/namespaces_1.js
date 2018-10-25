@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['input_5freader',['input_reader',['../namespaceinput__reader.html',1,'']]]
+  ['greedypath',['GreedyPath',['../namespace_greedy_path.html',1,'']]]
 ];

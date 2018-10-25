@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['uav1',['UAV1',['../namespace_path_planner.html#a2aedcc016952497246f4666ce4e03505',1,'PathPlanner']]]
+  ['uav1',['UAV1',['../namespace_greedy_path.html#a133ae9f113d9f694f9506cb6bad87f91',1,'GreedyPath']]]
 ];

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['reducedsm',['ReducedSM',['../namespace_reduced_s_m.html',1,'']]]
+  ['pathplan',['pathPlan',['../namespacepath_plan.html',1,'']]],
+  ['plotsensitivitymatrix',['PlotSensitivityMatrix',['../namespace_plot_sensitivity_matrix.html',1,'']]]
 ];

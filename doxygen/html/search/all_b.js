@@ -1,13 +1,11 @@
 var searchData=
 [
   ['params',['params',['../classpath_plan_1_1_path_planner_1_1params.html',1,'pathPlan.PathPlanner.params'],['../classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html',1,'visualization_manager_DJ.VisualizationManager.params']]],
-  ['pathgreedy',['pathGreedy',['../classpath_plan_1_1_path_planner.html#aced5344f393f49830c28225b435fe0c2',1,'pathPlan::PathPlanner']]],
   ['pathplan',['pathPlan',['../namespacepath_plan.html',1,'']]],
   ['pathplan_2epy',['pathPlan.py',['../path_plan_8py.html',1,'']]],
-  ['pathplanner',['PathPlanner',['../classpath_plan_1_1_path_planner.html',1,'pathPlan.PathPlanner'],['../namespace_path_planner.html',1,'PathPlanner']]],
-  ['pathplanner_2epy',['PathPlanner.py',['../_path_planner_8py.html',1,'']]],
+  ['pathplanner',['PathPlanner',['../classpath_plan_1_1_path_planner.html',1,'pathPlan']]],
   ['percent_5fheight',['percent_height',['../classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html#a7cee09abb8816bfc56733ba475592e01',1,'visualization_manager_DJ::VisualizationManager::params']]],
-  ['planner',['planner',['../namespace_path_planner.html#a70f6ef5b1c5da8902eb5038847427be6',1,'PathPlanner']]],
+  ['planner',['planner',['../namespace_greedy_path.html#a48d2bf39a0cc9f5e87640f060e67bd1c',1,'GreedyPath']]],
   ['plot_5fx_5fplanes',['plot_x_planes',['../classvisualization__manager___d_j_1_1_visualization_manager.html#a4705f5926bdcecfd8d2d5aff434b2120',1,'visualization_manager_DJ::VisualizationManager']]],
   ['plot_5fy_5fplanes',['plot_y_planes',['../classvisualization__manager___d_j_1_1_visualization_manager.html#ab0047d9eeda14999bdf8f8de191d9a33',1,'visualization_manager_DJ::VisualizationManager']]],
   ['plot_5fz_5fplanes',['plot_z_planes',['../classvisualization__manager___d_j_1_1_visualization_manager.html#a05c519f1e0389278308ee046d27724cd',1,'visualization_manager_DJ::VisualizationManager']]],
