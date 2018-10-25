@@ -3,7 +3,8 @@
 #
 
 from visualization_manager_DJ import VisualizationManager
-from pathPlan import UAV, dir, PathPlanner
+from pathPlan import PathPlanner
+from UAV import UAV
 import json
 import numpy as np
 
@@ -70,7 +71,7 @@ UAV1 = UAV()
 # see definition at pathPlan.UAV.GPS
 UAV1.GPS = [200,-250]
 # run the greedy path algorithm from pathPlan
-planner.greedyPath(UAV1, 100)
+planner.greedyPath(UAV1, 150)
 # plot the score map with the UAV's path on it
 planner.plotScoreMapUAV(UAV1)
 # show the plot

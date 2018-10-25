@@ -7,8 +7,6 @@ import matplotlib.pyplot as plt
 from floris.coordinate import Coordinate
 from math import pi as PI
 import math
-import matplotlib as mpl
-import time
 from copy import deepcopy
 
 
@@ -18,7 +16,7 @@ from copy import deepcopy
 #
 # This enumeration can be used to generate compass
 # angles, e.g. NW = 3x45 degrees or 3xPI/4
-class dir(enumerate):
+class d(enumerate):
     ## @var E
     # East = 0
     E = 0
@@ -44,28 +42,7 @@ class dir(enumerate):
     # Southeast = 7
     SE = 7
 
-## a structure which holds information for each possible transition from
-#   one position on the map to another
-class _Transition:
-    ## Class constructor
-    def __init__(self):
-        ## @var thetaCost
-        # A cost value
-        # for wind direction vs. transition heading
-        self.thetaCost = 0.0
-        ## @var phiCost
-        # A cost value
-        # for transition heading vs. UAV heading
-        self.phiCost = 0.0
-        ## @var dSscore
-        # A score/cost value
-        # for the rate of change of the total score
-        # resulting from the corresponding transition
-        self.dSscore = 0.0
-        ## @var d2Sscore
-        # A score/cost value
-        # for the 2nd derivative of score/transition
-        self.d2Sscore = 0.0
+
 
 ## a structure which holds information for each node on
 # a discretized transition map
@@ -75,78 +52,28 @@ class _X_map_node:
         ## @var Xitions
         # A list of the 8 possible transitions
         # from the corresponding node
-        self.Xitions = [_Transition() for i in range(8)]
+        self.Xitions = [self._Transition() for i in range(8)]
         ## @var GPS
         # The GPS coordinates [lat,lon] of the corresponding node
         self.GPS = [0, 0]
         ## @var idx
         # The coordinates [x, y] of the node
         self.idx = [0, 0]
-        ## @var score
-        # The value score of the node from the sensitivity matrix
-        self.score = None
 
-## \class UAV
-# @brief A class for representing the state of a UAV on the windfarm
-class UAV:
-    ## Class constructor.
-    def __init__(self):
-        ## @var GPS
-        # Holds the "GPS" location
-        # of the UAV. Currently, the GPS location is an
-        # ordered pair representing the XY position in meters
-        # from the map's origin X=GPS[0], Y=GPS[1]
-        self.GPS = [0, 0]
-        ## @var idx
-        # Holds the XY node index from the bottom left
-        # corner of the map. X=idx[0], Y=idx[1]
-        self.idx = [0, 0]
-        ## @var heading
-        # Holds the enumerated direction that the UAV
-        # is currently traveling. see Class dir()
-        self.heading = dir.E
-        ## @var IDXplan
-        # A list of idx points representing the UAV's planned path
-        # through the nodes.
-        self.IDXplan = list()
-        ## @var GPSplan
-        # A list of GPS points representing the UAV's planned path
-        # through the map.
-        self.GPSplan = list()
-        ## @var IDXpath
-        # A list of idx points representing the UAV's actual path
-        # through the nodes.
-        self.IDXpath = list()
-        ## @var GPSpath
-        # A list of GPS points representing the UAV's actual path
-        # through the map.
-        self.GPSpath = list()
-        ## @var score
-        # Holds the score of the UAV's path
-        self.score = 0
-        ## @var wave_map
-        # Holds a map of values which can serve as
-        # a potential field, drawing the UAV to
-        # the node with the maximum score value
-        self.wave_map = None
-        ## @var score_mask
-        # Holds a map of values which degrade the
-        # score of the corresponding node after it has been visited.
-        # (applied as calculated_score*mask_value)
-        self.score_mask = None
-        ## @var maskSUB
-        #   sets a subtractive penalty value to be applied to a node's
-        #   score mask each time it is visited
-        #   (set to 0 to apply no subtractive penalty)
-        self.maskSUB = 0
-        ## @var maskMUL
-        #   sets a multiplicative penalty value to be applied to a node's
-        #   score mask each time it is visited
-        #   (set to 1 to apply no multiplicative penalty)
-        self.maskMUL = 0.5
-        ## @var maskMULthenSUB
-        #   boolean which decides the order maskSUB and maskMUL are carried out
-        self.maskMULthenSUB = True
+    ## a structure which holds information for each possible transition from
+    #   one position on the map to another
+    class _Transition:
+        ## Class constructor
+        def __init__(self):
+            ## @var thetaCost
+            # A cost value
+            # for wind direction vs. transition heading
+            self.thetaCost = 0.0
+            ## @var dSscore
+            # A score/cost value
+            # for the rate of change of the total score
+            # resulting from the corresponding transition
+            self.dSscore = 0.0
 
 ## \class PathPlanner
 #   @brief Contains all path planning functions and parameters
@@ -160,24 +87,6 @@ class PathPlanner:
         # sets a minimum distance from the center of a turbine
         # which serves as a boundary for the UAV
         minDist2turbine = 160
-        ## @var scoreWt
-        #   sets the weight of the sensitivity score in path calculations
-        scoreWt = 10
-        ## @var dSwt
-        #   sets the weight of the derivative of the sensitivity score
-        #   in path calculations
-        dSwt = 2
-        ## @var windWt
-        #   sets the weight of the wind direction vs. transition heading
-        #   in path calculations
-        windWt = 2
-        ## @var waveWt
-        #   sets the weight of the wave map in path calculations
-        waveWt = 35
-        ## @var timeWt
-        #   sets the weight of time/iterations elapsed in path calculations
-        timeWt = 0.25
-
 
     ## Class constructor
     #   @param vman a VisualManager object
@@ -211,14 +120,14 @@ class PathPlanner:
     ## a method to adjust idx based on a cardinal direction
     def _shiftVals(self, val):
         value = {
-            dir.E: [1,0],   # one right, zero up
-            dir.NE: [1,1],  # one right, one up
-            dir.N: [0,1],   # zero right, one up
-            dir.NW: [-1,1], # one left, one up
-            dir.W: [-1,0],  # one left, zero up
-            dir.SW: [-1,-1],# one left, one down
-            dir.S: [0,-1],  # zero left, one down
-            dir.SE: [1,-1]  # one right, one down
+            d.E: [1,0],   # one right, zero up
+            d.NE: [1,1],  # one right, one up
+            d.N: [0,1],   # zero right, one up
+            d.NW: [-1,1], # one left, one up
+            d.W: [-1,0],  # one left, zero up
+            d.SW: [-1,-1],# one left, one down
+            d.S: [0,-1],  # zero left, one down
+            d.SE: [1,-1]  # one right, one down
         }
         return value.get(val)
 
@@ -238,8 +147,6 @@ class PathPlanner:
                 self.X_map[i][j].idx = [i,j]
                 # record the 'GPS' location of the node
                 self.X_map[i][j].GPS = [self.X[i][j],self.Y[i][j]]
-                # assign the node a score from the current score map
-                self.X_map[i][j].score = self.score_map[i][j]
                 # iterate through the 8 possible transitions at each node
                 for k in range(8):
                     # calculate the cost of moving through the wind at the transition heading
@@ -304,7 +211,7 @@ class PathPlanner:
                 # the program will throw an exception
                 try:
                     # we test the score using the UAV's mask
-                    if self.score_map[i][j]*UAV.score_mask[i][j]>max:
+                    if self.score_map[i][j]*UAV.plan_mask[i][j]>max:
                         max=self.score_map[i][j]
                         idx = [i,j]
                 except:
@@ -362,13 +269,13 @@ class PathPlanner:
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
-    ## Generates a plot of a given UAV's score mask
-    #   @param UAV the UAV whose score mask is to be plotted
+    ## Generates a plot of a UAV's score mask (planned or actual)
+    #   @param mask the mask to be plotted (planned or actual)
     #   @param ax Can be passed to the function if the plot
     #           is to be in a subplot
-    def plotScoreMask(self, UAV, ax=None):
+    def plotScoreMask(self, mask, ax=None):
         # a scatter plot of the UAV's score mask
-        ax = plt.scatter(x=self.X, y=self.Y, c=UAV.score_mask)
+        ax = plt.scatter(x=self.X, y=self.Y, c=mask)
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -399,6 +306,8 @@ class PathPlanner:
         # plot the UAV's path
         plt.plot([i[0] for i in UAV.GPSplan],
                  [i[1] for i in UAV.GPSplan], color='lime')
+        plt.plot([i[0] for i in UAV.GPSpath],
+                 [i[1] for i in UAV.GPSpath], color='red')
         # size the plot to fill the window
         plt.subplots_adjust(left=0.07,
                             bottom=0.08,
@@ -444,22 +353,15 @@ class PathPlanner:
     # @return UAV.IDXplan a path of indices through which the UAV will travel
     # @return UAV.GPSplan a path of GPS points throught which the UAV will travel
     def greedyPath(self, UAV, steps=100, recalc=10):
-        # start with a new GPS path
-        UAV.GPSplan.clear()
-        # append the starting GPS point
-        UAV.GPSplan.append(UAV.GPS)
+        UAV.reset_planner()
         # figure out what the index of the starting point is
         UAV.idx = self._findGPSindex(UAV.GPS)
-        # also start with a new index path
-        UAV.IDXplan.clear()
         # and append the index to the new path
         UAV.IDXplan.append(UAV.idx)
-        # start the score at zero
-        UAV.score=0
         # if the GPS point was valid, the indices should exist
         if (UAV.idx[0] and UAV.idx[1]):
             # set the UAV's score mask to all ones
-            UAV.score_mask = [ [ 1 for i in range(len(self.score_map[0]))] \
+            UAV.plan_mask = [[1 for i in range(len(self.score_map[0]))] \
                              for j in range(len(self.score_map))]
             # calculate the current score map
             self._calcScoreMap()
@@ -472,14 +374,7 @@ class PathPlanner:
                     # if the indices are invalid, an exception will be thrown
                     try:
                         # start by updating the UAV's score mask for the current position
-                        if(UAV.maskMULthenSUB):
-                            # multiply then subtract
-                            UAV.score_mask[x][y] *= UAV.maskMUL
-                            UAV.score_mask[x][y] -= UAV.maskSUB
-                        else:
-                            # subtract then multiply
-                            UAV.score_mask[x][y] -= UAV.maskSUB
-                            UAV.score_mask[x][y] *= UAV.maskMUL
+                        UAV.update_mask(UAV.plan_mask, [x,y])
                         # calculate the new wave map with the updated mask
                         self._calcWaveMap(UAV)
                         # calculate the next step
@@ -490,7 +385,7 @@ class PathPlanner:
                     # add the max to the UAV's score
                     UAV.score += max
                     # update the UAV's heading
-                    UAV.heading = dir
+                    UAV.plan_heading.append(dir)
                     # update idx based on the direction of travel
                     [I, J] = self._shiftVals(dir)
                     # UAV.idx = [x+I,y+J]
@@ -502,7 +397,7 @@ class PathPlanner:
                     UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
         # the starting point was invalid
         else:
-            print("Aborting.")
+            print("Aborting. Invalid start point.")
 
     ## a method which calculates a single step in a greedy path
     def _greedyStep(self, UAV):
@@ -533,16 +428,27 @@ class PathPlanner:
                 # pull the score from the score map for the transition node
                 score = self.score_map[x+I][y+J]
                 # pull the UAV's mask value for the transition node
-                mask = UAV.score_mask[x+I][y+J]
+                mask = UAV.plan_mask[x+I][y+J]
                 # pull the wave map value for the transition node
                 wave = UAV.wave_map[x+I][y+J]
+                # calculate the cost of changing the UAV's heading
+                headCost = abs(i*np.deg2rad(45)- \
+                                  (UAV.plan_heading[len(UAV.plan_heading)-1])*
+                                     np.deg2rad(45))
+                if headCost > PI:
+                    headCost = abs(headCost - 2 * PI)
+                # calculate the 2nd derivative of the score wrt the transition
+                d2S = Xition[i].dSscore-UAV.dSplan[len(UAV.dSplan)-1]
                 # calculate the reward of the move
-                reward = (self.params.scoreWt*score + \
-                       self.params.dSwt*Xition[i].dSscore - \
-                       self.params.windWt*Xition[i].thetaCost/PI + \
-                       self.params.waveWt*wave + \
-                       self.params.timeWt*len(UAV.IDXplan)) * \
+                reward = (UAV.scoreWt*score + \
+                       UAV.dSwt*Xition[i].dSscore + \
+                       UAV.d2Swt*d2S - \
+                       UAV.windWt*Xition[i].thetaCost/PI - \
+                       UAV.headWt*headCost/PI + \
+                       UAV.waveWt*wave + \
+                       UAV.timeWt*len(UAV.IDXplan)) * \
                        mask
+
                 # we are trying to maximize the reward
                 if reward > max and \
                     x+I<self.vman.grid_res[0] and \

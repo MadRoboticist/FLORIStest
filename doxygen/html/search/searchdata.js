@@ -2,9 +2,9 @@ var indexSectionsWithContent =
 {
   0: "_acdefghimnprstuvwxy",
   1: "_dipuv",
-  2: "agiprv",
-  3: "aegiprv",
-  4: "_acgprs",
+  2: "agipruv",
+  3: "aegipruv",
+  4: "_acgmprsu",
   5: "defghimnpstuvwxy",
   6: "r"
 };

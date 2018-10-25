@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['gps',['GPS',['../classpath_plan_1_1___x__map__node.html#a4d104762b4f90c3b130ff6292732299d',1,'pathPlan._X_map_node.GPS()'],['../classpath_plan_1_1_u_a_v.html#a759acf47734cd05447afe9e4a3f61307',1,'pathPlan.UAV.GPS()'],['../namespace_greedy_path.html#a789d06703c87f9f5dca025c8695a1857',1,'GreedyPath.GPS()']]],
-  ['gpspath',['GPSpath',['../classpath_plan_1_1_u_a_v.html#a1d6d4797e8ac522de0da65ba882b8616',1,'pathPlan::UAV']]],
-  ['gpsplan',['GPSplan',['../classpath_plan_1_1_u_a_v.html#ae451682c9642a90aa07c8a24fc6bf8fe',1,'pathPlan::UAV']]],
+  ['gps',['GPS',['../classpath_plan_1_1___x__map__node.html#a4d104762b4f90c3b130ff6292732299d',1,'pathPlan._X_map_node.GPS()'],['../class_u_a_v_1_1_u_a_v.html#a1726a06494e4ca04c9b841c8d69345da',1,'UAV.UAV.GPS()'],['../namespace_greedy_path.html#a789d06703c87f9f5dca025c8695a1857',1,'GreedyPath.GPS()']]],
+  ['gpspath',['GPSpath',['../class_u_a_v_1_1_u_a_v.html#ae2c41d702019dabeaecbb2b6692c9804',1,'UAV::UAV']]],
+  ['gpsplan',['GPSplan',['../class_u_a_v_1_1_u_a_v.html#a1067a3866c5d02e5eb69b39ef23c1509',1,'UAV::UAV']]],
   ['greedypath',['GreedyPath',['../namespace_greedy_path.html',1,'GreedyPath'],['../classpath_plan_1_1_path_planner.html#a48f001c9c670e2bafa027ece0f9261ec',1,'pathPlan.PathPlanner.greedyPath()']]],
   ['greedypath_2epy',['GreedyPath.py',['../_greedy_path_8py.html',1,'']]],
   ['grid_5fres',['grid_res',['../classvisualization__manager___d_j_1_1_visualization_manager.html#ad34898259a1773b5e43ab50eae783e1d',1,'visualization_manager_DJ::VisualizationManager']]],

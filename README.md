@@ -19,6 +19,10 @@ pathPlan.py
 
 This package contains functions which handle UAV path planning
 
+UAV.py
+
+This package contains the UAV class definition
+
 AnimateError.py
 
 This is a test script which runs the animateDnSerror function from visualization_manager_DJ.py

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['heading',['heading',['../classpath_plan_1_1_u_a_v.html#ac49fa37a2aaf8fe987f1500069c4f903',1,'pathPlan::UAV']]]
+  ['heading',['heading',['../class_u_a_v_1_1_u_a_v.html#afdd3623672b4fe263f0325eb2572a575',1,'UAV::UAV']]],
+  ['headwt',['headWt',['../class_u_a_v_1_1_u_a_v.html#a8bdb3faf77e427088d206b3d321e19eb',1,'UAV::UAV']]]
 ];
