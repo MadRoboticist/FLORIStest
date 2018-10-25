@@ -12,7 +12,8 @@ import time
 from copy import deepcopy
 
 
-## an enumeration of the cardinal directions
+## \class dir
+# An enumeration of the cardinal directions
 # starting from East and moving counterclockwise.
 #
 # This enumeration can be used to generate compass
@@ -81,7 +82,8 @@ class _X_map_node:
         # The value score of the node from the sensitivity matrix
         self.score = None
 
-## A class for representing the state of a UAV on the windfarm
+## \class UAV
+# @brief A class for representing the state of a UAV on the windfarm
 class UAV:
     ## Class constructor.
     def __init__(self):
@@ -113,11 +115,29 @@ class UAV:
         ## @var score_mask
         # Holds a map of values which degrade the
         # score of the corresponding node after it has been visited.
+        # (applied as calculated_score*mask_value)
         self.score_mask = None
+        ## @var maskSUB
+        #   sets a subtractive penalty value to be applied to a node's
+        #   score mask each time it is visited
+        #   (set to 0 to apply no subtractive penalty)
+        self.maskSUB = 0
+        ## @var maskMUL
+        #   sets a multiplicative penalty value to be applied to a node's
+        #   score mask each time it is visited
+        #   (set to 1 to apply no multiplicative penalty)
+        self.maskMUL = 0.5
+        ## @var maskMULthenSUB
+        #   boolean which decides the order maskSUB and maskMUL are carried out
+        self.maskMULthenSUB = True
 
-
+## \class PathPlanner
+#   @brief Contains all path planning functions and parameters
 class PathPlanner:
 
+    ## \class params
+    #   @brief A class through which parameters can be passed
+    #   to the member functions
     class params:
         ## @var minDist2turbine
         # sets a minimum distance from the center of a turbine
@@ -140,32 +160,38 @@ class PathPlanner:
         ## @var timeWt
         #   sets the weight of time/iterations elapsed in path calculations
         timeWt = 0.25
-        ## @var maskSUB
-        #   sets a subtractive penalty value to be applied to a node each
-        #   time it is visited (set to 0 to apply no subtractive penalty)
-        maskSUB = 0
-        ## @var maskMUL
-        #   sets a multiplicative penalty value to be applied to a node each
-        #   time it is visited (set to 1 to apply no multiplicative penalty)
-        maskMUL = 0.5
-        ## @var maskMULthenSUB
-        #   boolean which decides the order maskSUB and maskMUL are carried out
-        maskMULthenSUB = True
 
-    ## class constructor
+
+    ## Class constructor
+    #   @param vman a VisualManager object
     def __init__(self, vman):
+        ## @var vman
+        #   A VisualizationManager object
         self.vman = vman
+        ## the plane where the computations and visualizations are taking place
         plane = int(self.vman.flowfield.grid_resolution.z * self.vman.params.percent_height)
+        ## @var X_map
+        #   A map of all possible transitions on the map and their respective scores
         self.X_map = [[_X_map_node() for x in range(self.vman.grid_res[0])]
                  for y in range(self.vman.grid_res[1])]
+        ## @var X
+        #   An X grid mesh of the map's 'GPS' coordinates
         self.X = deepcopy(self.vman.flowfield.x[:, :, plane])
+        ## @var Y
+        #   A Y grid mesh of the map's 'GPS' coordinates
         self.Y = deepcopy(self.vman.flowfield.y[:, :, plane])
-        self.sens_mat = vman.calcSensitivityMatrix()
+        ## the initial sensitivity matrix
+        self._sens_mat = vman.calcSensitivityMatrix()
+        ## @var d0
+        #   The initial wind direction estimate
         self.d0 = self.vman.params.d0
+        ## @var v0
+        #   The initial wind speed estimate
         self.v0 = self.vman.params.v0
         self._calcScoreMap()
-        self.update_cost_map();
+        self._update_cost_map();
 
+    ## a method to adjust idx based on a cardinal direction
     def _shiftVals(self, val):
         value = {
             dir.E: [1,0],
@@ -179,11 +205,13 @@ class PathPlanner:
         }
         return value.get(val)
 
+    ## calculates the euclidean distance between two points
     def _euclidDist(self, P1, P2):
         # print(math.sqrt(((P2[0]-P1[0])**2)+((P2[1]-P1[1])**2)))
         return math.sqrt(((P2[0]-P1[0])**2)+((P2[1]-P1[1])**2))
 
-    def update_cost_map(self):
+    ## a method to update the transition/cost map
+    def _update_cost_map(self):
 
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
@@ -210,6 +238,7 @@ class PathPlanner:
                     except:
                         self.X_map[i][j].Xitions[k].dSscore = None
 
+    ## a method to calculate the score map from the current sensitivity matrix
     def _calcScoreMap(self):
 
         Zd = abs(self.sens_mat[1]) / np.amax(abs(self.sens_mat[1]))
@@ -228,6 +257,7 @@ class PathPlanner:
                         self.score_map[i][j] = None
         self._calcWaveMap()
 
+    ## calculates a wave map using the highest score on the score map
     def _calcWaveMap(self, UAV=None):
         max = -100
         self.wave_map = [[1 for i in range(self.vman.grid_res[0])] \
@@ -248,9 +278,14 @@ class PathPlanner:
                 self.wave_map[i][j] = self._euclidDist([x,y],[i,j])
         self.wave_map = 1-self.wave_map/np.amax(self.wave_map)
 
+    ## Simply calls the plt.show() method to show any figures
+    #   which have been generated.
     def show(self):
         plt.show()
 
+    ## Generates a plot of the current wave map
+    #   @param ax can be passed to the function if the plot
+    #           is to be in a subplot
     def plotWaveMap(self, ax=None):
         ax = plt.scatter(x=self.X, y=self.Y, c=self.wave_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
@@ -262,6 +297,9 @@ class PathPlanner:
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
+    ## Generates a plot of the current score map
+    #   @param ax can be passed to the function if the plot
+    #           is to be in a subplot
     def plotScoreMap(self, ax=None):
         ax = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
@@ -273,6 +311,10 @@ class PathPlanner:
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
+    ## Generates a plot of a given UAV's score mask
+    #   @param UAV the UAV whose score mask is to be plotted
+    #   @param ax Can be passed to the function if the plot
+    #           is to be in a subplot
     def plotScoreMask(self, UAV, ax=None):
         ax = plt.scatter(x=self.X, y=self.Y, c=UAV.score_mask,
                          vmin=0, vmax=1)
@@ -283,6 +325,10 @@ class PathPlanner:
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
+    ## Generates a plot of a given UAV's path over the score map
+    #   @param UAV the UAV whose path is to be plotted
+    #   @param ax Can be passed to the function if the plot
+    #           is to be in a subplot
     def plotScoreMapUAV(self, UAV, ax=None):
         ax = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
@@ -304,6 +350,7 @@ class PathPlanner:
                             wspace=0.27,
                             hspace=0.19)
 
+    ## A method to convert an index to a GPS point
     def _findGPSindex(self, GPS):
         # Figure out how 'wide' each range is
         XleftSpan = np.amax(self.X) - np.amin(self.X)
@@ -320,12 +367,21 @@ class PathPlanner:
         else:
             return [idx, idy]
 
+    ## a method to convert a GPS point to an index
     def _getGPSfromIDX(self, IDX):
         # print(IDX)
         X = self.X[IDX[0]][IDX[1]]
         Y = self.Y[IDX[0]][IDX[1]]
         return [X,Y]
 
+    # greedyPath
+    ## A function which populates a UAV's list with a greedy path
+    # with the given number of steps
+    #
+    # @param UAV The UAV whose path is to be generated
+    # @param steps (optional) the number of moves to be generated for the path
+    # @return UAV.IDXpath a path of indices through which the UAV will travel
+    # @return UAV.GPSpath a path of GPS points throught which the UAV will travel
     def greedyPath(self, UAV, steps=100):
         UAV.GPSpath.clear()
         UAV.GPSpath.append(UAV.GPS)
@@ -348,12 +404,12 @@ class PathPlanner:
 
                 # print("iteration:"+str(i))
                 try:
-                    if(self.params.maskMULthenSUB):
-                        UAV.score_mask[x][y] *= self.params.maskMUL
-                        UAV.score_mask[x][y] -= self.params.maskSUB
+                    if(UAV.maskMULthenSUB):
+                        UAV.score_mask[x][y] *= UAV.maskMUL
+                        UAV.score_mask[x][y] -= UAV.maskSUB
                     else:
-                        UAV.score_mask[x][y] -= self.params.maskSUB
-                        UAV.score_mask[x][y] *= self.params.maskMUL
+                        UAV.score_mask[x][y] -= UAV.maskSUB
+                        UAV.score_mask[x][y] *= UAV.maskMUL
                     self._calcWaveMap(UAV)
                     max, dir = self._greedyStep(UAV)
                 except:
@@ -369,6 +425,7 @@ class PathPlanner:
         else:
             print("Aborting.")
 
+    ## a method which calculates a single step in a greedy path
     def _greedyStep(self, UAV):
         x = UAV.idx[0]
         y = UAV.idx[1]

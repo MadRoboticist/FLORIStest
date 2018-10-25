@@ -72,6 +72,9 @@ $(function() {
 <div class="title">pathPlan.PathPlanner.params Class Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
+
+<p>A class through which parameters can be passed to the member functions.  
+ <a href="classpath_plan_1_1_path_planner_1_1params.html#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -93,19 +96,11 @@ Static Public Attributes</h2></td></tr>
 <tr class="memitem:aca35113628a0f6ca96f5a1d576e74203"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner_1_1params.html#aca35113628a0f6ca96f5a1d576e74203">timeWt</a> = 0.25</td></tr>
 <tr class="memdesc:aca35113628a0f6ca96f5a1d576e74203"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets the weight of time/iterations elapsed in path calculations  <a href="#aca35113628a0f6ca96f5a1d576e74203">More...</a><br /></td></tr>
 <tr class="separator:aca35113628a0f6ca96f5a1d576e74203"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a77d0a7a4d564dde6ce911fd1a25fdd31"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner_1_1params.html#a77d0a7a4d564dde6ce911fd1a25fdd31">maskSUB</a> = 0</td></tr>
-<tr class="memdesc:a77d0a7a4d564dde6ce911fd1a25fdd31"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets a subtractive penalty value to be applied to a node each time it is visited (set to 0 to apply no subtractive penalty)  <a href="#a77d0a7a4d564dde6ce911fd1a25fdd31">More...</a><br /></td></tr>
-<tr class="separator:a77d0a7a4d564dde6ce911fd1a25fdd31"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a31a755ef7499eac2e90deb944c7f1d38"><td class="memItemLeft" align="right" valign="top">float&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner_1_1params.html#a31a755ef7499eac2e90deb944c7f1d38">maskMUL</a> = 0.5</td></tr>
-<tr class="memdesc:a31a755ef7499eac2e90deb944c7f1d38"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets a multiplicative penalty value to be applied to a node each time it is visited (set to 1 to apply no multiplicative penalty)  <a href="#a31a755ef7499eac2e90deb944c7f1d38">More...</a><br /></td></tr>
-<tr class="separator:a31a755ef7499eac2e90deb944c7f1d38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8fb76a1325335d64cea705cc4efec3e8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner_1_1params.html#a8fb76a1325335d64cea705cc4efec3e8">maskMULthenSUB</a> = True</td></tr>
-<tr class="memdesc:a8fb76a1325335d64cea705cc4efec3e8"><td class="mdescLeft">&#160;</td><td class="mdescRight">boolean which decides the order maskSUB and maskMUL are carried out  <a href="#a8fb76a1325335d64cea705cc4efec3e8">More...</a><br /></td></tr>
-<tr class="separator:a8fb76a1325335d64cea705cc4efec3e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock">
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00121">121</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<div class="textblock"><p>A class through which parameters can be passed to the member functions. </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00141">141</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 </div><h2 class="groupheader">Member Data Documentation</h2>
 <a id="a610fb5e919a89498e435fded5291dc1a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a610fb5e919a89498e435fded5291dc1a">&#9670;&nbsp;</a></span>dSwt</h2>
@@ -129,85 +124,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>sets the weight of the derivative of the sensitivity score in path calculations </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00132">132</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
-
-</div>
-</div>
-<a id="a31a755ef7499eac2e90deb944c7f1d38"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a31a755ef7499eac2e90deb944c7f1d38">&#9670;&nbsp;</a></span>maskMUL</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">pathPlan.PathPlanner.params.maskMUL = 0.5</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>sets a multiplicative penalty value to be applied to a node each time it is visited (set to 1 to apply no multiplicative penalty) </p>
-
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00150">150</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
-
-</div>
-</div>
-<a id="a8fb76a1325335d64cea705cc4efec3e8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8fb76a1325335d64cea705cc4efec3e8">&#9670;&nbsp;</a></span>maskMULthenSUB</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">pathPlan.PathPlanner.params.maskMULthenSUB = True</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>boolean which decides the order maskSUB and maskMUL are carried out </p>
-
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00153">153</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
-
-</div>
-</div>
-<a id="a77d0a7a4d564dde6ce911fd1a25fdd31"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a77d0a7a4d564dde6ce911fd1a25fdd31">&#9670;&nbsp;</a></span>maskSUB</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">pathPlan.PathPlanner.params.maskSUB = 0</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">static</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>sets a subtractive penalty value to be applied to a node each time it is visited (set to 0 to apply no subtractive penalty) </p>
-
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00146">146</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00152">152</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -233,7 +150,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>sets a minimum distance from the center of a turbine which serves as a boundary for the <a class="el" href="classpath_plan_1_1_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a> </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00125">125</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00145">145</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -259,7 +176,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>sets the weight of the sensitivity score in path calculations </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00128">128</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00148">148</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -285,7 +202,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>sets the weight of time/iterations elapsed in path calculations </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00142">142</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00162">162</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -311,7 +228,7 @@ Static Public Attributes</h2></td></tr>
 
 <p>sets the weight of the wave map in path calculations </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00139">139</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00159">159</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -338,7 +255,7 @@ Static Public Attributes</h2></td></tr>
 <p>sets the weight of the wind direction vs. </p>
 <p>transition heading in path calculations </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00136">136</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00156">156</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>

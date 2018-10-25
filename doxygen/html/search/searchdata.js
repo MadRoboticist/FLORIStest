@@ -4,8 +4,8 @@ var indexSectionsWithContent =
   1: "_dipuv",
   2: "agiprv",
   3: "aegiprv",
-  4: "_acgprsu",
-  5: "cdefghimnpstuvwxy",
+  4: "_acgprs",
+  5: "defghimnpstuvwxy",
   6: "r"
 };
 

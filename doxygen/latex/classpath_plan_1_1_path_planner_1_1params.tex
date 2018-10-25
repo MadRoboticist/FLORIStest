@@ -1,5 +1,10 @@
 \hypertarget{classpath_plan_1_1_path_planner_1_1params}{}\section{path\+Plan.\+Path\+Planner.\+params Class Reference}
 \label{classpath_plan_1_1_path_planner_1_1params}\index{path\+Plan.\+Path\+Planner.\+params@{path\+Plan.\+Path\+Planner.\+params}}
+
+
+A class through which parameters can be passed to the member functions.  
+
+
 \subsection*{Static Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
@@ -14,19 +19,13 @@ int \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_a0aafe9db7a80b4f2
 int \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_aa33ac57c3fbbe451c9e8a7a34b237eee}{wave\+Wt}} = 35
 \begin{DoxyCompactList}\small\item\em sets the weight of the wave map in path calculations \end{DoxyCompactList}\item 
 float \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_aca35113628a0f6ca96f5a1d576e74203}{time\+Wt}} = 0.\+25
-\begin{DoxyCompactList}\small\item\em sets the weight of time/iterations elapsed in path calculations \end{DoxyCompactList}\item 
-int \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_a77d0a7a4d564dde6ce911fd1a25fdd31}{mask\+S\+UB}} = 0
-\begin{DoxyCompactList}\small\item\em sets a subtractive penalty value to be applied to a node each time it is visited (set to 0 to apply no subtractive penalty) \end{DoxyCompactList}\item 
-float \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_a31a755ef7499eac2e90deb944c7f1d38}{mask\+M\+UL}} = 0.\+5
-\begin{DoxyCompactList}\small\item\em sets a multiplicative penalty value to be applied to a node each time it is visited (set to 1 to apply no multiplicative penalty) \end{DoxyCompactList}\item 
-bool \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params_a8fb76a1325335d64cea705cc4efec3e8}{mask\+M\+U\+Lthen\+S\+UB}} = True
-\begin{DoxyCompactList}\small\item\em boolean which decides the order mask\+S\+UB and mask\+M\+UL are carried out \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em sets the weight of time/iterations elapsed in path calculations \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
+A class through which parameters can be passed to the member functions. 
 
-
-Definition at line 121 of file path\+Plan.\+py.
+Definition at line 141 of file path\+Plan.\+py.
 
 
 
@@ -43,49 +42,7 @@ sets the weight of the derivative of the sensitivity score in path calculations
 
 
 
-Definition at line 132 of file path\+Plan.\+py.
-
-\mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_a31a755ef7499eac2e90deb944c7f1d38}\label{classpath_plan_1_1_path_planner_1_1params_a31a755ef7499eac2e90deb944c7f1d38}} 
-\index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!mask\+M\+UL@{mask\+M\+UL}}
-\index{mask\+M\+UL@{mask\+M\+UL}!path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}}
-\subsubsection{\texorpdfstring{mask\+M\+UL}{maskMUL}}
-{\footnotesize\ttfamily path\+Plan.\+Path\+Planner.\+params.\+mask\+M\+UL = 0.\+5\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-sets a multiplicative penalty value to be applied to a node each time it is visited (set to 1 to apply no multiplicative penalty) 
-
-
-
-Definition at line 150 of file path\+Plan.\+py.
-
-\mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_a8fb76a1325335d64cea705cc4efec3e8}\label{classpath_plan_1_1_path_planner_1_1params_a8fb76a1325335d64cea705cc4efec3e8}} 
-\index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!mask\+M\+U\+Lthen\+S\+UB@{mask\+M\+U\+Lthen\+S\+UB}}
-\index{mask\+M\+U\+Lthen\+S\+UB@{mask\+M\+U\+Lthen\+S\+UB}!path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}}
-\subsubsection{\texorpdfstring{mask\+M\+U\+Lthen\+S\+UB}{maskMULthenSUB}}
-{\footnotesize\ttfamily path\+Plan.\+Path\+Planner.\+params.\+mask\+M\+U\+Lthen\+S\+UB = True\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-boolean which decides the order mask\+S\+UB and mask\+M\+UL are carried out 
-
-
-
-Definition at line 153 of file path\+Plan.\+py.
-
-\mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_a77d0a7a4d564dde6ce911fd1a25fdd31}\label{classpath_plan_1_1_path_planner_1_1params_a77d0a7a4d564dde6ce911fd1a25fdd31}} 
-\index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!mask\+S\+UB@{mask\+S\+UB}}
-\index{mask\+S\+UB@{mask\+S\+UB}!path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}}
-\subsubsection{\texorpdfstring{mask\+S\+UB}{maskSUB}}
-{\footnotesize\ttfamily path\+Plan.\+Path\+Planner.\+params.\+mask\+S\+UB = 0\hspace{0.3cm}{\ttfamily [static]}}
-
-
-
-sets a subtractive penalty value to be applied to a node each time it is visited (set to 0 to apply no subtractive penalty) 
-
-
-
-Definition at line 146 of file path\+Plan.\+py.
+Definition at line 152 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_a839dcb73ab2c3b44e4b2f66d9134bfe7}\label{classpath_plan_1_1_path_planner_1_1params_a839dcb73ab2c3b44e4b2f66d9134bfe7}} 
 \index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!min\+Dist2turbine@{min\+Dist2turbine}}
@@ -99,7 +56,7 @@ sets a minimum distance from the center of a turbine which serves as a boundary 
 
 
 
-Definition at line 125 of file path\+Plan.\+py.
+Definition at line 145 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_aae56a5ff040506a7653180736166bc91}\label{classpath_plan_1_1_path_planner_1_1params_aae56a5ff040506a7653180736166bc91}} 
 \index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!score\+Wt@{score\+Wt}}
@@ -113,7 +70,7 @@ sets the weight of the sensitivity score in path calculations
 
 
 
-Definition at line 128 of file path\+Plan.\+py.
+Definition at line 148 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_aca35113628a0f6ca96f5a1d576e74203}\label{classpath_plan_1_1_path_planner_1_1params_aca35113628a0f6ca96f5a1d576e74203}} 
 \index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!time\+Wt@{time\+Wt}}
@@ -127,7 +84,7 @@ sets the weight of time/iterations elapsed in path calculations
 
 
 
-Definition at line 142 of file path\+Plan.\+py.
+Definition at line 162 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_aa33ac57c3fbbe451c9e8a7a34b237eee}\label{classpath_plan_1_1_path_planner_1_1params_aa33ac57c3fbbe451c9e8a7a34b237eee}} 
 \index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!wave\+Wt@{wave\+Wt}}
@@ -141,7 +98,7 @@ sets the weight of the wave map in path calculations
 
 
 
-Definition at line 139 of file path\+Plan.\+py.
+Definition at line 159 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_1_1params_a0aafe9db7a80b4f22c7e2ad577b8daff}\label{classpath_plan_1_1_path_planner_1_1params_a0aafe9db7a80b4f22c7e2ad577b8daff}} 
 \index{path\+Plan\+::\+Path\+Planner\+::params@{path\+Plan\+::\+Path\+Planner\+::params}!wind\+Wt@{wind\+Wt}}
@@ -155,7 +112,7 @@ sets the weight of the wind direction vs.
 
 transition heading in path calculations 
 
-Definition at line 136 of file path\+Plan.\+py.
+Definition at line 156 of file path\+Plan.\+py.
 
 
 

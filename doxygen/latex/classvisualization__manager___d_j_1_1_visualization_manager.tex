@@ -9,41 +9,37 @@ Contains functions which handle visualizations of Floris data.
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_1_1params}{params}}
-\begin{DoxyCompactList}\small\item\em params is a class used to pass parameters to various functions \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A class used to pass parameters to various functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ac262d79ceedca2ca4dd92b078a0851f1}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a56add1b450c7ecd758b096117f593578}{WF}}, \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ad5b8013f5cdf47f6384ae56186810e2b}{grid\+\_\+resolution}}=(100, 100, 25))
 \begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a05c519f1e0389278308ee046d27724cd}{plot\+\_\+z\+\_\+planes}} (self, planes)
-\begin{DoxyCompactList}\small\item\em plot\+\_\+z\+\_\+planes \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plots Z planes of the u\+\_\+field generated from a static floris model. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ab0047d9eeda14999bdf8f8de191d9a33}{plot\+\_\+y\+\_\+planes}} (self, planes)
-\begin{DoxyCompactList}\small\item\em plot\+\_\+y\+\_\+planes \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plots Y planes of the u\+\_\+field generated from a static floris model. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a4705f5926bdcecfd8d2d5aff434b2120}{plot\+\_\+x\+\_\+planes}} (self, planes)
-\begin{DoxyCompactList}\small\item\em plot\+\_\+x\+\_\+planes \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plots X planes of the u\+\_\+field generated from a static floris model. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ab660449be49e49325d864dd1176e83f0}{animate\+Dn\+Serror}} (self)
-\begin{DoxyCompactList}\small\item\em animate\+Dn\+Serror Plots error over a u\+\_\+field throughout a range of speeds and directions \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plots error over a u\+\_\+field throughout a range of speeds and directions. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}{calc\+Sensitivity\+Matrix}} (self)
-\begin{DoxyCompactList}\small\item\em calc\+Sensitivity\+Matrix calculates the sensitivity matrix of a given u\+\_\+field \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em calculates the sensitivity matrix of a given u\+\_\+field \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a32793e43e3e04b3819dea7740e5b9ca1}{plot\+Sensitivity\+Matrix}} (self)
-\begin{DoxyCompactList}\small\item\em plot\+Sensitivity\+Matrix Plots the sensitivity matrix of a given u\+\_\+field \end{DoxyCompactList}\item 
+\begin{DoxyCompactList}\small\item\em Plots the sensitivity matrix of a given u\+\_\+field. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}{reduced\+SM}} (self)
-\begin{DoxyCompactList}\small\item\em reduced\+SM Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a56add1b450c7ecd758b096117f593578}{WF}}
-\item 
-\mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_add58b653067c1364e389b5a9ea1e4f5b}{figure\+\_\+count}}
-\item 
+\begin{DoxyCompactList}\small\item\em A J\+S\+ON object used to define the wind farm. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_aadb6e88d03aa67b6045f66dcad66799c}{flowfield}}
-\item 
+\begin{DoxyCompactList}\small\item\em holds an instance of the flowfield instantiated from WF \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ad34898259a1773b5e43ab50eae783e1d}{grid\+\_\+res}}
-\item 
+\begin{DoxyCompactList}\small\item\em holds a copy of the grid\+\_\+resolution passed to the constructor \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_ad5b8013f5cdf47f6384ae56186810e2b}{grid\+\_\+resolution}}
-\item 
-\mbox{\hyperlink{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}{cbr}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em holds a copy of the grid resolution which has been converted to F\+L\+O\+R\+IS coordinates \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
@@ -98,7 +94,7 @@ Definition at line 55 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-animate\+Dn\+Serror Plots error over a u\+\_\+field throughout a range of speeds and directions 
+Plots error over a u\+\_\+field throughout a range of speeds and directions. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -111,7 +107,7 @@ animate\+Dn\+Serror Plots error over a u\+\_\+field throughout a range of speeds
 \end{DoxyParams}
 Generates a plot with two slider bars which allow you to set different speed/direction combinations and see the error vs. the original flowfield defined by WF The plot also includes a button to toggle between error and u\+\_\+field plots so you can see the actual plot of the u\+\_\+field which the error is generated from. 
 
-Definition at line 337 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 342 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}\label{classvisualization__manager___d_j_1_1_visualization_manager_a979c45975c192515cbc17da7c07d2af3}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!calc\+Sensitivity\+Matrix@{calc\+Sensitivity\+Matrix}}
@@ -121,7 +117,7 @@ Definition at line 337 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-calc\+Sensitivity\+Matrix calculates the sensitivity matrix of a given u\+\_\+field 
+calculates the sensitivity matrix of a given u\+\_\+field 
 
 
 \begin{DoxyParams}{Parameters}
@@ -141,7 +137,7 @@ returns the sensitivity matrix of the u\+\_\+field
 \end{DoxyReturn}
 
 
-Definition at line 533 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 540 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a4705f5926bdcecfd8d2d5aff434b2120}\label{classvisualization__manager___d_j_1_1_visualization_manager_a4705f5926bdcecfd8d2d5aff434b2120}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!plot\+\_\+x\+\_\+planes@{plot\+\_\+x\+\_\+planes}}
@@ -151,9 +147,7 @@ Definition at line 533 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-plot\+\_\+x\+\_\+planes 
-
-Plots X planes of the u\+\_\+field generated from a static floris model
+Plots X planes of the u\+\_\+field generated from a static floris model. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -162,7 +156,7 @@ Plots X planes of the u\+\_\+field generated from a static floris model
 \end{DoxyParams}
 Generates heatmaps of windspeeds on those planes of the windfarm 
 
-Definition at line 210 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 215 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_ab0047d9eeda14999bdf8f8de191d9a33}\label{classvisualization__manager___d_j_1_1_visualization_manager_ab0047d9eeda14999bdf8f8de191d9a33}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!plot\+\_\+y\+\_\+planes@{plot\+\_\+y\+\_\+planes}}
@@ -172,9 +166,7 @@ Definition at line 210 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-plot\+\_\+y\+\_\+planes 
-
-Plots Y planes of the u\+\_\+field generated from a static floris model
+Plots Y planes of the u\+\_\+field generated from a static floris model. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -183,7 +175,7 @@ Plots Y planes of the u\+\_\+field generated from a static floris model
 \end{DoxyParams}
 Generates heatmaps of windspeeds on those planes of the windfarm 
 
-Definition at line 196 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 201 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a05c519f1e0389278308ee046d27724cd}\label{classvisualization__manager___d_j_1_1_visualization_manager_a05c519f1e0389278308ee046d27724cd}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!plot\+\_\+z\+\_\+planes@{plot\+\_\+z\+\_\+planes}}
@@ -193,9 +185,7 @@ Definition at line 196 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-plot\+\_\+z\+\_\+planes 
-
-Plots Z planes of the u\+\_\+field generated from a static floris model
+Plots Z planes of the u\+\_\+field generated from a static floris model. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -204,7 +194,7 @@ Plots Z planes of the u\+\_\+field generated from a static floris model
 \end{DoxyParams}
 Generates heatmaps of windspeeds on that plane of the windfarm 
 
-Definition at line 181 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 187 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a32793e43e3e04b3819dea7740e5b9ca1}\label{classvisualization__manager___d_j_1_1_visualization_manager_a32793e43e3e04b3819dea7740e5b9ca1}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!plot\+Sensitivity\+Matrix@{plot\+Sensitivity\+Matrix}}
@@ -214,7 +204,7 @@ Definition at line 181 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-plot\+Sensitivity\+Matrix Plots the sensitivity matrix of a given u\+\_\+field 
+Plots the sensitivity matrix of a given u\+\_\+field. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -237,7 +227,7 @@ Generates a plot with four heatmaps derived from the pseudo-\/invers of the jaco
 \item normalized $\vert$$\vert$df/dd$\vert$$\vert$$\ast$$\vert$$\vert$df/dv$\vert$$\vert$ 
 \end{DoxyEnumerate}
 
-Definition at line 588 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 595 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}\label{classvisualization__manager___d_j_1_1_visualization_manager_a92c5f58eddce15c3fa19edd63e66ef43}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!reduced\+SM@{reduced\+SM}}
@@ -247,7 +237,7 @@ Definition at line 588 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-reduced\+SM Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix 
+Plots the convergence of speed and direction estimates based on a reduced sensitivity matrix. 
 
 
 \begin{DoxyParams}{Parameters}
@@ -282,31 +272,11 @@ Generates a figure with six plots\+:
 \item bottom right\+: the mask being applied to the sensitivity matrix for these calculations. the slider on the bottom allows you to see the mask at different iterations 
 \end{DoxyEnumerate}
 
-Definition at line 763 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+Definition at line 770 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
 \subsection{Member Data Documentation}
-\mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}\label{classvisualization__manager___d_j_1_1_visualization_manager_a5ebbc21771a576316065fac66b67c292}} 
-\index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!cbr@{cbr}}
-\index{cbr@{cbr}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}
-\subsubsection{\texorpdfstring{cbr}{cbr}}
-{\footnotesize\ttfamily visualization\+\_\+manager\+\_\+\+D\+J.\+Visualization\+Manager.\+cbr}
-
-
-
-Definition at line 422 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
-
-\mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_add58b653067c1364e389b5a9ea1e4f5b}\label{classvisualization__manager___d_j_1_1_visualization_manager_add58b653067c1364e389b5a9ea1e4f5b}} 
-\index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!figure\+\_\+count@{figure\+\_\+count}}
-\index{figure\+\_\+count@{figure\+\_\+count}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}
-\subsubsection{\texorpdfstring{figure\+\_\+count}{figure\_count}}
-{\footnotesize\ttfamily visualization\+\_\+manager\+\_\+\+D\+J.\+Visualization\+Manager.\+figure\+\_\+count}
-
-
-
-Definition at line 57 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
-
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_aadb6e88d03aa67b6045f66dcad66799c}\label{classvisualization__manager___d_j_1_1_visualization_manager_aadb6e88d03aa67b6045f66dcad66799c}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!flowfield@{flowfield}}
 \index{flowfield@{flowfield}!visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}}
@@ -315,7 +285,11 @@ Definition at line 57 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-Definition at line 58 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+holds an instance of the flowfield instantiated from WF 
+
+
+
+Definition at line 61 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_ad34898259a1773b5e43ab50eae783e1d}\label{classvisualization__manager___d_j_1_1_visualization_manager_ad34898259a1773b5e43ab50eae783e1d}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!grid\+\_\+res@{grid\+\_\+res}}
@@ -325,7 +299,11 @@ Definition at line 58 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-Definition at line 60 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+holds a copy of the grid\+\_\+resolution passed to the constructor 
+
+
+
+Definition at line 64 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_ad5b8013f5cdf47f6384ae56186810e2b}\label{classvisualization__manager___d_j_1_1_visualization_manager_ad5b8013f5cdf47f6384ae56186810e2b}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!grid\+\_\+resolution@{grid\+\_\+resolution}}
@@ -335,7 +313,11 @@ Definition at line 60 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-Definition at line 61 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+holds a copy of the grid resolution which has been converted to F\+L\+O\+R\+IS coordinates 
+
+
+
+Definition at line 67 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 \mbox{\Hypertarget{classvisualization__manager___d_j_1_1_visualization_manager_a56add1b450c7ecd758b096117f593578}\label{classvisualization__manager___d_j_1_1_visualization_manager_a56add1b450c7ecd758b096117f593578}} 
 \index{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager@{visualization\+\_\+manager\+\_\+\+D\+J\+::\+Visualization\+Manager}!WF@{WF}}
@@ -345,7 +327,11 @@ Definition at line 61 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 
-Definition at line 56 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
+A J\+S\+ON object used to define the wind farm. 
+
+
+
+Definition at line 58 of file visualization\+\_\+manager\+\_\+\+D\+J.\+py.
 
 
 

@@ -6,7 +6,6 @@ var searchData=
   ['score_5fmask',['score_mask',['../classpath_plan_1_1_u_a_v.html#a998af53f0d27f93e5ad949a09710f995',1,'pathPlan::UAV']]],
   ['scorewt',['scoreWt',['../classpath_plan_1_1_path_planner_1_1params.html#aae56a5ff040506a7653180736166bc91',1,'pathPlan::PathPlanner::params']]],
   ['se',['SE',['../classpath_plan_1_1dir.html#a748bd4e686a7a6401bb9ed1a65962244',1,'pathPlan::dir']]],
-  ['sens_5fmat',['sens_mat',['../classpath_plan_1_1_path_planner.html#a3a23d66cb64460f9c5ae8968071323c2',1,'pathPlan::PathPlanner']]],
   ['show',['show',['../classpath_plan_1_1_path_planner.html#ac2b91da25e1f81aa210e83d502f9a008',1,'pathPlan::PathPlanner']]],
   ['speed',['speed',['../classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html#af67bd6887a2486bd05116fca8ecbfe08',1,'visualization_manager_DJ.VisualizationManager.params.speed()'],['../namespace_animate_error.html#a7ee7380c6a63ebc4f737cf5d999f9899',1,'AnimateError.speed()']]],
   ['sperrmax',['spErrMax',['../classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html#a6d8b791c33246961acd2b32cf09e5dd8',1,'visualization_manager_DJ.VisualizationManager.params.spErrMax()'],['../namespace_greedy_path.html#ac15dd3310629c8a8e6be44d3a182f356',1,'GreedyPath.spErrMax()'],['../namespace_reduced_s_m.html#a4d41ef5243c51b6b27a644ddd5984879',1,'ReducedSM.spErrMax()']]],

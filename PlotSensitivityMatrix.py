@@ -14,9 +14,13 @@ grid_resolution = [25, 25, 15] # [x_res, y_res, z_res]
 ## VisualizationManager object
 vman = VisualizationManager(WF, grid_resolution) # set up the visualization manager
 # These are the parameters used by the plotSensitivityMatrix() function
+## The initial wind estimate
 vman.params.v0 = 8.0 # the initial wind estimate
+## The initial direction estimate
 vman.params.d0 = np.deg2rad(0.0) # the initial direction estimate
+## speed epsilon (ev)
 vman.params.epSpeed = 0.001  # speed epsilon (ev)
+## direction epsilon (ed)
 vman.params.epDir = 0.0001  # direction epsilon (ed)
 # plot the sensitivity matrix
 vman.plotSensitivityMatrix()

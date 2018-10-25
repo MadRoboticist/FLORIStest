@@ -12,16 +12,17 @@ import json
 with open("example_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
+## grid resolution: [x_resolution, y_resolution, z_resolution]
 grid_resolution = [25, 25, 15]  # grid resolution: [x_resolution, y_resolution, z_resolution]
 ## a new VisualizationManager object
 vman = VisualizationManager(WF, grid_resolution)  # a new VisualizationManager object
 
 # these are the parameters used by the animateDnSerror() function
-# average wind speed
+## average wind speed
 vman.params.speed = WF['farm']['properties']['wind_speed']
-# {min speed, max speed, step}
+## {min speed, max speed, step}
 vman.params.Srange = [vman.params.speed-2.0, vman.params.speed+2.0, 0.25]
-# {min dir error, max dir error, step}
+## {min dir error, max dir error, step}
 vman.params.Drange = [-2.0, 2.0, 0.25]
 
 # call the animateDnSerror function

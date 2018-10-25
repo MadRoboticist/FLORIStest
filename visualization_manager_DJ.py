@@ -53,12 +53,19 @@ class VisualizationManager():
     #           with [x_resolution, y_resolution_ z_resolution]
     #   @return VisualizationManager object
     def __init__(self, WF, grid_resolution=(100, 100, 25)):
+        ## @var WF
+        #   A JSON object used to define the wind farm
         self.WF = WF
-        self.figure_count = 0
+        ## @var flowfield
+        #   holds an instance of the flowfield instantiated from WF
         self.flowfield = Floris(self.WF).farm.flow_field
-        #print(self.flowfield.u_field)
+        ## @var grid_res
+        # holds a copy of the grid_resolution passed to the constructor
         self.grid_res = grid_resolution
+        ## @var grid_resolution
+        #   holds a copy of the grid resolution which has been converted to FLORIS coordinates
         self.grid_resolution = Coordinate(grid_resolution[0], grid_resolution[1], grid_resolution[2])
+        self._figure_count = 0
         self._initialize_flowfield_for_plotting()
         self._boolBTN = False
 
@@ -77,8 +84,8 @@ class VisualizationManager():
         plt.tick_params(which='both', labelsize=15)
 
     def _new_figure(self):
-        plt.figure(self.figure_count)
-        self.figure_count += 1
+        plt.figure(self._figure_count)
+        self._figure_count += 1
 
     def _new_filled_contour(self, mesh1, mesh2, data):
         self._new_figure()
@@ -168,9 +175,8 @@ class VisualizationManager():
             self.flowfield.z[plane, :, :],
             self.flowfield.u_field[plane, :, :])
 
-    ## @func plot_z_planes
-    #
-    # @brief Plots Z planes of the u_field generated from a static floris model
+    # plot_z_planes
+    ## @brief Plots Z planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -183,9 +189,8 @@ class VisualizationManager():
             self._add_z_plane(p)
         self._show()
 
-    ## @func plot_y_planes
-    #
-    # @brief Plots Y planes of the u_field generated from a static floris model
+    # plot_y_planes
+    ## @brief Plots Y planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -198,8 +203,8 @@ class VisualizationManager():
             self._add_y_plane(p)
         self._show()
 
-    ## @func plot_x_planes
-    # @brief Plots X planes of the u_field generated from a static floris model
+    # plot_x_planes
+    ## @brief Plots X planes of the u_field generated from a static floris model
     #
     #   @param planes is a list of numbers between 0-1
     #           which represent a percentage of the
@@ -217,8 +222,8 @@ class VisualizationManager():
         plt.show()
 
     # Dave's stuff
-    ## @func _dirErrorConSpd
-    # Calculates error over a u_field at a constant speed
+    #  _dirErrorConSpd
+    ## @brief Calculates error over a u_field at a constant speed
     # over a specified range of direction values
     #
     # @param flowfield takes a Visualization_manager.flowfield object
@@ -299,8 +304,8 @@ class VisualizationManager():
 
         return page, MAX, MIN, Page, max, min
 
-    ## @func _grid
-    #   creates x, y and z grid meshes from 1D arrays of similar length
+    # _grid()
+    ##  @brief Creates x, y and z grid meshes from 1D arrays of similar length
     #   so that the data can be represented by a contour plot
     #
     #   @param x list of x values
@@ -317,8 +322,8 @@ class VisualizationManager():
         # X, Y = np.meshgrid(xi, yi)
         return X, Y, Z
 
-    ## @func animateDnSerror
-    # Plots error over a u_field
+    # animateDnSerror
+    ## @brief Plots error over a u_field
     # throughout a range of speeds and directions
     #
     # @param self.params.Srange takes a 3-element array
@@ -419,12 +424,14 @@ class VisualizationManager():
         plt.suptitle(Tstr, fontsize=fontsize)
         # set up the error colorbar
         cax, _ = mpl.colorbar.make_axes(C_A)
-        self.cbr = plt.colorbar(map, cax=cax)
+        ## @var cbr
+        # holds a copy of the colorbar
+        self._cbr = plt.colorbar(map, cax=cax)
         #cb = mpl.colorbar.ColorbarBase(cax, cmap='seismic')
-        self.cbr.set_ticks(w, True)
-        self.cbr.ax.tick_params(labelsize=15)
-        self.cbr.set_clim(vmin=errMax * -1, vmax=errMax)
-        self.cbr.set_label('Error in mph')
+        self._cbr.set_ticks(w, True)
+        self._cbr.ax.tick_params(labelsize=15)
+        self._cbr.set_clim(vmin=errMax * -1, vmax=errMax)
+        self._cbr.set_label('Error in mph')
         # put the turbines in the plot
         for coord, turbine in ref.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -478,7 +485,7 @@ class VisualizationManager():
             slider_dir.valtext.set_text('{}'.format(Edir + dirvalue) + ' degrees')
             # clear the current plot
             C_A.clear()
-            #self.cbr.remove()
+            #self._cbr.remove()
             # plot the turbines
             for coord, turbine in self.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -492,23 +499,23 @@ class VisualizationManager():
                 map = C_A.contourf(page[idx][idy][0], page[idx][idy][1], page[idx][idy][2], v,
                          cmap='seismic', vmin=errMax*-1,vmax=errMax)
                 # set the colorbar
-                self.cbr = plt.colorbar(map, cax=cax)
-                self.cbr.set_clim(vmin=errMax*-1,vmax=errMax)
-                self.cbr.set_ticks(w)
-                self.cbr.set_cmap('seismic')
-                self.cbr.set_label('Error in mph')
-                self.cbr.draw_all()
+                self._cbr = plt.colorbar(map, cax=cax)
+                self._cbr.set_clim(vmin=errMax*-1,vmax=errMax)
+                self._cbr.set_ticks(w)
+                self._cbr.set_cmap('seismic')
+                self._cbr.set_label('Error in mph')
+                self._cbr.draw_all()
             else:
                 # plot the u_field data
                 map = C_A.contourf(Page[idx][idy][0], Page[idx][idy][1], Page[idx][idy][2], V,
                          cmap='gnuplot2', vmin=spdMin,vmax=spdMax)
                 # set the colorbar
-                self.cbr = plt.colorbar(map, cax=cax)
-                self.cbr.set_clim(vmin=spdMin,vmax=spdMax)
-                self.cbr.set_ticks(W)
-                self.cbr.set_cmap('gnuplot2')
-                self.cbr.set_label('Speed in mph')
-                self.cbr.draw_all()
+                self._cbr = plt.colorbar(map, cax=cax)
+                self._cbr.set_clim(vmin=spdMin,vmax=spdMax)
+                self._cbr.set_ticks(W)
+                self._cbr.set_cmap('gnuplot2')
+                self._cbr.set_label('Speed in mph')
+                self._cbr.draw_all()
             # put the title back up
             plt.suptitle(Tstr, fontsize=fontsize)
             # draw the plot
@@ -519,8 +526,8 @@ class VisualizationManager():
         slider_dir.on_changed(update_plot)
         plt.show()
 
-    ## @func calcSensitivityMatrix
-    # calculates the sensitivity matrix of a given u_field
+    # calcSensitivityMatrix
+    ## @brief calculates the sensitivity matrix of a given u_field
     #
     # @param self.params.v0 takes a wind speed in meters per second
     # @param self.params.d0 takes a wind direction in degrees
@@ -568,8 +575,8 @@ class VisualizationManager():
 
         return sens_mat
 
-    ## @func plotSensitivityMatrix
-    # Plots the sensitivity matrix of a given u_field
+    # plotSensitivityMatrix()
+    ## @brief Plots the sensitivity matrix of a given u_field
     #
     # @param self.params.v0 takes a wind speed in meters per second
     # @param self.params.d0 takes a wind direction in degrees
@@ -734,8 +741,8 @@ class VisualizationManager():
         plt.show()
 
 
-    ## @func reducedSM
-    # Plots the convergence of speed and direction estimates
+    # reducedSM
+    ## @brief Plots the convergence of speed and direction estimates
     # based on a reduced sensitivity matrix
     #
     # @param self.params.v0 takes a wind speed in meters per second
@@ -962,7 +969,8 @@ class VisualizationManager():
 
         plt.show()
 
-    ## params is a class used to pass parameters to various functions
+    # params
+    ## @brief  A class used to pass parameters to various functions
     #
     #   animateDnSerror: Srange, Drange, (percent_height)
     #

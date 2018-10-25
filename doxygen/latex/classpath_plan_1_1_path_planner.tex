@@ -1,46 +1,47 @@
 \hypertarget{classpath_plan_1_1_path_planner}{}\section{path\+Plan.\+Path\+Planner Class Reference}
 \label{classpath_plan_1_1_path_planner}\index{path\+Plan.\+Path\+Planner@{path\+Plan.\+Path\+Planner}}
+
+
+Contains all path planning functions and parameters.  
+
+
 \subsection*{Classes}
 \begin{DoxyCompactItemize}
 \item 
 class \mbox{\hyperlink{classpath_plan_1_1_path_planner_1_1params}{params}}
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A class through which parameters can be passed to the member functions. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Member Functions}
 \begin{DoxyCompactItemize}
 \item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_a4725d91c2d54372bbfecfce0a71a3552}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{classpath_plan_1_1_path_planner_a8e31f83f0d8983286bb3746da568af81}{vman}})
-\begin{DoxyCompactList}\small\item\em class constructor \end{DoxyCompactList}\item 
-def \mbox{\hyperlink{classpath_plan_1_1_path_planner_a3ec1a61977be524a6d7099f4e4cd83b1}{update\+\_\+cost\+\_\+map}} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em Class constructor. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_ac2b91da25e1f81aa210e83d502f9a008}{show}} (self)
-\item 
+\begin{DoxyCompactList}\small\item\em Simply calls the plt.\+show() method to show any figures which have been generated. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_ad0aac3259a17970adbb7652d32365f44}{plot\+Wave\+Map}} (self, ax=None)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a plot of the current wave map. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_abe0f6150b91e41dc9625d29a7005e37d}{plot\+Score\+Map}} (self, ax=None)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a plot of the current score map. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_a6e74d35801d637631580333ea9210aa5}{plot\+Score\+Mask}} (self, \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}, ax=None)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a plot of a given \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s score mask. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_aa5506bc585bd5f1d3fa76d0e383b0cc2}{plot\+Score\+Map\+U\+AV}} (self, \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}, ax=None)
-\item 
+\begin{DoxyCompactList}\small\item\em Generates a plot of a given \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path over the score map. \end{DoxyCompactList}\item 
 def \mbox{\hyperlink{classpath_plan_1_1_path_planner_aa578a0dcb25eed4782bb660d8b71b731}{greedy\+Path}} (self, \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}, steps=100)
-\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em A function which populates a \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s list with a greedy path with the given number of steps. \end{DoxyCompactList}\end{DoxyCompactItemize}
 \subsection*{Public Attributes}
 \begin{DoxyCompactItemize}
 \item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a8e31f83f0d8983286bb3746da568af81}{vman}}
-\item 
+\begin{DoxyCompactList}\small\item\em A Visualization\+Manager object. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a726f4b4f55f7fb557eabceb962e25871}{X\+\_\+map}}
-\item 
+\begin{DoxyCompactList}\small\item\em the plane where the computations and visualizations are taking place \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_ac7e6ed6310bc8e1064e42af17b8a5948}{X}}
-\item 
+\begin{DoxyCompactList}\small\item\em An X grid mesh of the map\textquotesingle{}s \textquotesingle{}G\+PS\textquotesingle{} coordinates. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a4e78ffd0fb9df91a15d01ca5cb615d24}{Y}}
-\item 
-\mbox{\hyperlink{classpath_plan_1_1_path_planner_a3a23d66cb64460f9c5ae8968071323c2}{sens\+\_\+mat}}
-\item 
+\begin{DoxyCompactList}\small\item\em A Y grid mesh of the map\textquotesingle{}s \textquotesingle{}G\+PS\textquotesingle{} coordinates. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a508cce57c5e6deb7880fe2ef631c983e}{d0}}
-\item 
+\begin{DoxyCompactList}\small\item\em The initial wind direction estimate. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a56e0e1649ae12d5c72409041c2aaeae9}{v0}}
-\item 
+\begin{DoxyCompactList}\small\item\em The initial wind speed estimate. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_aec7491cbbb5ea16f5fbeceecbb405efd}{score\+\_\+map}}
 \item 
 \mbox{\hyperlink{classpath_plan_1_1_path_planner_a3db343c9859cd328507cee118e1df6b3}{wave\+\_\+map}}
@@ -48,9 +49,9 @@ def \mbox{\hyperlink{classpath_plan_1_1_path_planner_aa578a0dcb25eed4782bb660d8b
 
 
 \subsection{Detailed Description}
+Contains all path planning functions and parameters. 
 
-
-Definition at line 119 of file path\+Plan.\+py.
+Definition at line 136 of file path\+Plan.\+py.
 
 
 
@@ -63,11 +64,16 @@ Definition at line 119 of file path\+Plan.\+py.
 
 
 
-class constructor 
+Class constructor. 
 
 
+\begin{DoxyParams}{Parameters}
+{\em vman} & a Visual\+Manager object \\
+\hline
+\end{DoxyParams}
 
-Definition at line 156 of file path\+Plan.\+py.
+
+Definition at line 167 of file path\+Plan.\+py.
 
 
 
@@ -80,7 +86,23 @@ Definition at line 156 of file path\+Plan.\+py.
 
 
 
-Definition at line 329 of file path\+Plan.\+py.
+A function which populates a \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s list with a greedy path with the given number of steps. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}} & The \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} whose path is to be generated \\
+\hline
+{\em steps} & (optional) the number of moves to be generated for the path \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\mbox{\hyperlink{classpath_plan_1_1_u_a_v_a640c0f9f8385d53e0742d9ef5f3a7a59}{U\+A\+V.\+I\+D\+Xpath}} a path of indices through which the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} will travel 
+
+\mbox{\hyperlink{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}{U\+A\+V.\+G\+P\+Spath}} a path of G\+PS points throught which the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} will travel 
+\end{DoxyReturn}
+
+
+Definition at line 385 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_abe0f6150b91e41dc9625d29a7005e37d}\label{classpath_plan_1_1_path_planner_abe0f6150b91e41dc9625d29a7005e37d}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!plot\+Score\+Map@{plot\+Score\+Map}}
@@ -90,7 +112,16 @@ Definition at line 329 of file path\+Plan.\+py.
 
 
 
-Definition at line 265 of file path\+Plan.\+py.
+Generates a plot of the current score map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ax} & can be passed to the function if the plot is to be in a subplot \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 303 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_aa5506bc585bd5f1d3fa76d0e383b0cc2}\label{classpath_plan_1_1_path_planner_aa5506bc585bd5f1d3fa76d0e383b0cc2}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!plot\+Score\+Map\+U\+AV@{plot\+Score\+Map\+U\+AV}}
@@ -100,7 +131,18 @@ Definition at line 265 of file path\+Plan.\+py.
 
 
 
-Definition at line 286 of file path\+Plan.\+py.
+Generates a plot of a given \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path over the score map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}} & the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} whose path is to be plotted \\
+\hline
+{\em ax} & Can be passed to the function if the plot is to be in a subplot \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 332 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a6e74d35801d637631580333ea9210aa5}\label{classpath_plan_1_1_path_planner_a6e74d35801d637631580333ea9210aa5}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!plot\+Score\+Mask@{plot\+Score\+Mask}}
@@ -110,7 +152,18 @@ Definition at line 286 of file path\+Plan.\+py.
 
 
 
-Definition at line 276 of file path\+Plan.\+py.
+Generates a plot of a given \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s score mask. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}} & the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} whose score mask is to be plotted \\
+\hline
+{\em ax} & Can be passed to the function if the plot is to be in a subplot \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 318 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_ad0aac3259a17970adbb7652d32365f44}\label{classpath_plan_1_1_path_planner_ad0aac3259a17970adbb7652d32365f44}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!plot\+Wave\+Map@{plot\+Wave\+Map}}
@@ -120,7 +173,16 @@ Definition at line 276 of file path\+Plan.\+py.
 
 
 
-Definition at line 254 of file path\+Plan.\+py.
+Generates a plot of the current wave map. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em ax} & can be passed to the function if the plot is to be in a subplot \\
+\hline
+\end{DoxyParams}
+
+
+Definition at line 289 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_ac2b91da25e1f81aa210e83d502f9a008}\label{classpath_plan_1_1_path_planner_ac2b91da25e1f81aa210e83d502f9a008}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!show@{show}}
@@ -130,17 +192,11 @@ Definition at line 254 of file path\+Plan.\+py.
 
 
 
-Definition at line 251 of file path\+Plan.\+py.
-
-\mbox{\Hypertarget{classpath_plan_1_1_path_planner_a3ec1a61977be524a6d7099f4e4cd83b1}\label{classpath_plan_1_1_path_planner_a3ec1a61977be524a6d7099f4e4cd83b1}} 
-\index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!update\+\_\+cost\+\_\+map@{update\+\_\+cost\+\_\+map}}
-\index{update\+\_\+cost\+\_\+map@{update\+\_\+cost\+\_\+map}!path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}}
-\subsubsection{\texorpdfstring{update\+\_\+cost\+\_\+map()}{update\_cost\_map()}}
-{\footnotesize\ttfamily def path\+Plan.\+Path\+Planner.\+update\+\_\+cost\+\_\+map (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+Simply calls the plt.\+show() method to show any figures which have been generated. 
 
 
 
-Definition at line 186 of file path\+Plan.\+py.
+Definition at line 283 of file path\+Plan.\+py.
 
 
 
@@ -153,7 +209,11 @@ Definition at line 186 of file path\+Plan.\+py.
 
 
 
-Definition at line 164 of file path\+Plan.\+py.
+The initial wind direction estimate. 
+
+
+
+Definition at line 187 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_aec7491cbbb5ea16f5fbeceecbb405efd}\label{classpath_plan_1_1_path_planner_aec7491cbbb5ea16f5fbeceecbb405efd}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!score\+\_\+map@{score\+\_\+map}}
@@ -163,17 +223,7 @@ Definition at line 164 of file path\+Plan.\+py.
 
 
 
-Definition at line 219 of file path\+Plan.\+py.
-
-\mbox{\Hypertarget{classpath_plan_1_1_path_planner_a3a23d66cb64460f9c5ae8968071323c2}\label{classpath_plan_1_1_path_planner_a3a23d66cb64460f9c5ae8968071323c2}} 
-\index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!sens\+\_\+mat@{sens\+\_\+mat}}
-\index{sens\+\_\+mat@{sens\+\_\+mat}!path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}}
-\subsubsection{\texorpdfstring{sens\+\_\+mat}{sens\_mat}}
-{\footnotesize\ttfamily path\+Plan.\+Path\+Planner.\+sens\+\_\+mat}
-
-
-
-Definition at line 163 of file path\+Plan.\+py.
+Definition at line 248 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a56e0e1649ae12d5c72409041c2aaeae9}\label{classpath_plan_1_1_path_planner_a56e0e1649ae12d5c72409041c2aaeae9}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!v0@{v0}}
@@ -183,7 +233,11 @@ Definition at line 163 of file path\+Plan.\+py.
 
 
 
-Definition at line 165 of file path\+Plan.\+py.
+The initial wind speed estimate. 
+
+
+
+Definition at line 190 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a8e31f83f0d8983286bb3746da568af81}\label{classpath_plan_1_1_path_planner_a8e31f83f0d8983286bb3746da568af81}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!vman@{vman}}
@@ -193,7 +247,11 @@ Definition at line 165 of file path\+Plan.\+py.
 
 
 
-Definition at line 157 of file path\+Plan.\+py.
+A Visualization\+Manager object. 
+
+
+
+Definition at line 170 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a3db343c9859cd328507cee118e1df6b3}\label{classpath_plan_1_1_path_planner_a3db343c9859cd328507cee118e1df6b3}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!wave\+\_\+map@{wave\+\_\+map}}
@@ -203,7 +261,7 @@ Definition at line 157 of file path\+Plan.\+py.
 
 
 
-Definition at line 233 of file path\+Plan.\+py.
+Definition at line 263 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_ac7e6ed6310bc8e1064e42af17b8a5948}\label{classpath_plan_1_1_path_planner_ac7e6ed6310bc8e1064e42af17b8a5948}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!X@{X}}
@@ -213,7 +271,11 @@ Definition at line 233 of file path\+Plan.\+py.
 
 
 
-Definition at line 161 of file path\+Plan.\+py.
+An X grid mesh of the map\textquotesingle{}s \textquotesingle{}G\+PS\textquotesingle{} coordinates. 
+
+
+
+Definition at line 179 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a726f4b4f55f7fb557eabceb962e25871}\label{classpath_plan_1_1_path_planner_a726f4b4f55f7fb557eabceb962e25871}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!X\+\_\+map@{X\+\_\+map}}
@@ -223,7 +285,11 @@ Definition at line 161 of file path\+Plan.\+py.
 
 
 
-Definition at line 159 of file path\+Plan.\+py.
+the plane where the computations and visualizations are taking place 
+
+A map of all possible transitions on the map and their respective scores 
+
+Definition at line 175 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_path_planner_a4e78ffd0fb9df91a15d01ca5cb615d24}\label{classpath_plan_1_1_path_planner_a4e78ffd0fb9df91a15d01ca5cb615d24}} 
 \index{path\+Plan\+::\+Path\+Planner@{path\+Plan\+::\+Path\+Planner}!Y@{Y}}
@@ -233,7 +299,11 @@ Definition at line 159 of file path\+Plan.\+py.
 
 
 
-Definition at line 162 of file path\+Plan.\+py.
+A Y grid mesh of the map\textquotesingle{}s \textquotesingle{}G\+PS\textquotesingle{} coordinates. 
+
+
+
+Definition at line 182 of file path\+Plan.\+py.
 
 
 

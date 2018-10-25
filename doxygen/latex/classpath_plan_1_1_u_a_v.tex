@@ -26,13 +26,19 @@ def \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a57ea529b1f8160c59ac6d3ba1b677c37}
 \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}{score}}
 \begin{DoxyCompactList}\small\item\em Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textquotesingle{}s path. \end{DoxyCompactList}\item 
 \mbox{\hyperlink{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}{score\+\_\+mask}}
-\begin{DoxyCompactList}\small\item\em Holds a map of values which degrade the score of the corresponding node after it has been visited. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\begin{DoxyCompactList}\small\item\em Holds a map of values which degrade the score of the corresponding node after it has been visited. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpath_plan_1_1_u_a_v_a74225919230caef7abcd27e5dfcb1f7e}{mask\+S\+UB}}
+\begin{DoxyCompactList}\small\item\em sets a subtractive penalty value to be applied to a node\textquotesingle{}s score mask each time it is visited (set to 0 to apply no subtractive penalty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpath_plan_1_1_u_a_v_ad5c1ef816da92a394a4e6bc1f0ebac62}{mask\+M\+UL}}
+\begin{DoxyCompactList}\small\item\em sets a multiplicative penalty value to be applied to a node\textquotesingle{}s score mask each time it is visited (set to 1 to apply no multiplicative penalty) \end{DoxyCompactList}\item 
+\mbox{\hyperlink{classpath_plan_1_1_u_a_v_aba8b84c7dde1938e44f23dbf9955b207}{mask\+M\+U\+Lthen\+S\+UB}}
+\begin{DoxyCompactList}\small\item\em boolean which decides the order mask\+S\+UB and mask\+M\+UL are carried out \end{DoxyCompactList}\end{DoxyCompactItemize}
 
 
 \subsection{Detailed Description}
 A class for representing the state of a \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}} on the windfarm. 
 
-Definition at line 85 of file path\+Plan.\+py.
+Definition at line 87 of file path\+Plan.\+py.
 
 
 
@@ -49,7 +55,7 @@ Class constructor.
 
 
 
-Definition at line 87 of file path\+Plan.\+py.
+Definition at line 89 of file path\+Plan.\+py.
 
 
 
@@ -66,7 +72,7 @@ Holds the \char`\"{}\+G\+P\+S\char`\"{} location of the \mbox{\hyperlink{classpa
 
 Currently, the G\+PS location is an ordered pair representing the XY position in meters from the map\textquotesingle{}s origin X=G\+PS\mbox{[}0\mbox{]}, Y=G\+PS\mbox{[}1\mbox{]} 
 
-Definition at line 93 of file path\+Plan.\+py.
+Definition at line 95 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}\label{classpath_plan_1_1_u_a_v_a1d6d4797e8ac522de0da65ba882b8616}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!G\+P\+Spath@{G\+P\+Spath}}
@@ -80,7 +86,7 @@ A list of G\+PS points representing the \mbox{\hyperlink{classpath_plan_1_1_u_a_
 
 
 
-Definition at line 109 of file path\+Plan.\+py.
+Definition at line 111 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_ac49fa37a2aaf8fe987f1500069c4f903}\label{classpath_plan_1_1_u_a_v_ac49fa37a2aaf8fe987f1500069c4f903}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!heading@{heading}}
@@ -94,7 +100,7 @@ Holds the enumerated direction that the \mbox{\hyperlink{classpath_plan_1_1_u_a_
 
 see Class dir() 
 
-Definition at line 101 of file path\+Plan.\+py.
+Definition at line 103 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a8c6578c4b96f4704489038660a4ebe58}\label{classpath_plan_1_1_u_a_v_a8c6578c4b96f4704489038660a4ebe58}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!idx@{idx}}
@@ -108,7 +114,7 @@ Holds the XY node index from the bottom left corner of the map.
 
 X=idx\mbox{[}0\mbox{]}, Y=idx\mbox{[}1\mbox{]} 
 
-Definition at line 97 of file path\+Plan.\+py.
+Definition at line 99 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a640c0f9f8385d53e0742d9ef5f3a7a59}\label{classpath_plan_1_1_u_a_v_a640c0f9f8385d53e0742d9ef5f3a7a59}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!I\+D\+Xpath@{I\+D\+Xpath}}
@@ -122,7 +128,49 @@ A list of idx points representing the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}
 
 
 
-Definition at line 105 of file path\+Plan.\+py.
+Definition at line 107 of file path\+Plan.\+py.
+
+\mbox{\Hypertarget{classpath_plan_1_1_u_a_v_ad5c1ef816da92a394a4e6bc1f0ebac62}\label{classpath_plan_1_1_u_a_v_ad5c1ef816da92a394a4e6bc1f0ebac62}} 
+\index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!mask\+M\+UL@{mask\+M\+UL}}
+\index{mask\+M\+UL@{mask\+M\+UL}!path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}}
+\subsubsection{\texorpdfstring{mask\+M\+UL}{maskMUL}}
+{\footnotesize\ttfamily path\+Plan.\+U\+A\+V.\+mask\+M\+UL}
+
+
+
+sets a multiplicative penalty value to be applied to a node\textquotesingle{}s score mask each time it is visited (set to 1 to apply no multiplicative penalty) 
+
+
+
+Definition at line 129 of file path\+Plan.\+py.
+
+\mbox{\Hypertarget{classpath_plan_1_1_u_a_v_aba8b84c7dde1938e44f23dbf9955b207}\label{classpath_plan_1_1_u_a_v_aba8b84c7dde1938e44f23dbf9955b207}} 
+\index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!mask\+M\+U\+Lthen\+S\+UB@{mask\+M\+U\+Lthen\+S\+UB}}
+\index{mask\+M\+U\+Lthen\+S\+UB@{mask\+M\+U\+Lthen\+S\+UB}!path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}}
+\subsubsection{\texorpdfstring{mask\+M\+U\+Lthen\+S\+UB}{maskMULthenSUB}}
+{\footnotesize\ttfamily path\+Plan.\+U\+A\+V.\+mask\+M\+U\+Lthen\+S\+UB}
+
+
+
+boolean which decides the order mask\+S\+UB and mask\+M\+UL are carried out 
+
+
+
+Definition at line 132 of file path\+Plan.\+py.
+
+\mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a74225919230caef7abcd27e5dfcb1f7e}\label{classpath_plan_1_1_u_a_v_a74225919230caef7abcd27e5dfcb1f7e}} 
+\index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!mask\+S\+UB@{mask\+S\+UB}}
+\index{mask\+S\+UB@{mask\+S\+UB}!path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}}
+\subsubsection{\texorpdfstring{mask\+S\+UB}{maskSUB}}
+{\footnotesize\ttfamily path\+Plan.\+U\+A\+V.\+mask\+S\+UB}
+
+
+
+sets a subtractive penalty value to be applied to a node\textquotesingle{}s score mask each time it is visited (set to 0 to apply no subtractive penalty) 
+
+
+
+Definition at line 124 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}\label{classpath_plan_1_1_u_a_v_a5f9c3173062f490e98024972e954cb1c}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!score@{score}}
@@ -136,7 +184,7 @@ Holds the score of the \mbox{\hyperlink{classpath_plan_1_1_u_a_v}{U\+AV}}\textqu
 
 
 
-Definition at line 112 of file path\+Plan.\+py.
+Definition at line 114 of file path\+Plan.\+py.
 
 \mbox{\Hypertarget{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}\label{classpath_plan_1_1_u_a_v_a998af53f0d27f93e5ad949a09710f995}} 
 \index{path\+Plan\+::\+U\+AV@{path\+Plan\+::\+U\+AV}!score\+\_\+mask@{score\+\_\+mask}}
@@ -148,9 +196,9 @@ Definition at line 112 of file path\+Plan.\+py.
 
 Holds a map of values which degrade the score of the corresponding node after it has been visited. 
 
+(applied as calculated\+\_\+score$\ast$mask\+\_\+value) 
 
-
-Definition at line 116 of file path\+Plan.\+py.
+Definition at line 119 of file path\+Plan.\+py.
 
 
 
