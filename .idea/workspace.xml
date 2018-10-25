@@ -2,124 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimateError.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnimateError.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPath.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlotSensitivityMatrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlotSensitivityMatrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/Doxyfile" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/Doxyfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_animate_error_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_animate_error_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_animate_error_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_animate_error_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_path_planner_8py.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_path_planner_8py_source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_read_8md.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_read_8md_source.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/annotated.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/annotated.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_contains.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___transition.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___transition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1__transition-members.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1__transition.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner_1_1params.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_u_a_v.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_x__map__node-members.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_x__map__node.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1dir.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/dir_2606a361c89ce29e3fd6fe910eaae6ca.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/dir_2824d4c8eb7169ad090e8282c7636f8d.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/dir_2f976e4d68f8f6f6646c29d190dcda3f.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/dir_9e349c7c519f9d5668a49de82812b115.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/dir_d522931ffa1371640980b621734a4381.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_func.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_func.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/hierarchy.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/hierarchy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/md__c_1__users__david__james__documents__py_charm_projects__f_l_o_r_i_stest__read.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/menudata.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/menudata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_animate_error.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_animate_error.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_path_planner.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_plot_sensitivity_matrix.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_plot_sensitivity_matrix.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_reduced_s_m.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_reduced_s_m.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacepath_plan.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacepath_plan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_10.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_10.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_9.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_d.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_f.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_f.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/classes_6.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/classes_6.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/searchdata.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/searchdata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_0.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_7.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_7.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_a.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_a.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_f.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_f.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_animate_error_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/_animate_error_8py.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_greedy_path_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/_greedy_path_8py.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_path_planner_8py.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_plot_sensitivity_matrix_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/_plot_sensitivity_matrix_8py.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_read_8md.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/_reduced_s_m_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/_reduced_s_m_8py.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/annotated.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/annotated.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/class_contains.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___transition.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___transition.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___x__map__node.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1___x__map__node.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1__transition.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner_1_1params.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_path_planner_1_1params.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_u_a_v.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_u_a_v.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1_x__map__node.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1dir.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classpath_plan_1_1dir.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/dir_2606a361c89ce29e3fd6fe910eaae6ca.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/dir_2824d4c8eb7169ad090e8282c7636f8d.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/dir_2f976e4d68f8f6f6646c29d190dcda3f.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/dir_9e349c7c519f9d5668a49de82812b115.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/dir_d522931ffa1371640980b621734a4381.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/md__c_1__users__david__james__documents__py_charm_projects__f_l_o_r_i_stest__read.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespace_animate_error.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespace_animate_error.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespace_greedy_path.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespace_greedy_path.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespace_path_planner.tex" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespace_plot_sensitivity_matrix.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespace_plot_sensitivity_matrix.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespace_reduced_s_m.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespace_reduced_s_m.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/namespacepath_plan.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/namespacepath_plan.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/path_plan_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/path_plan_8py.tex" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/latex/visualization__manager___d_j_8py.tex" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/latex/visualization__manager___d_j_8py.tex" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -206,7 +89,7 @@
           <entry key="json" value="53" />
           <entry key="md" value="1122" />
           <entry key="me" value="117" />
-          <entry key="py" value="41209" />
+          <entry key="py" value="47002" />
           <entry key="tcl" value="7" />
           <entry key="txt" value="26" />
         </counts>
@@ -216,7 +99,7 @@
           <entry key="JSON" value="53" />
           <entry key="Markdown" value="1122" />
           <entry key="PLAIN_TEXT" value="202" />
-          <entry key="Python" value="41209" />
+          <entry key="Python" value="47002" />
         </counts>
       </usages-collector>
     </session>
@@ -241,8 +124,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pathPlan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1179">
-              <caret line="139" column="31" selection-start-line="139" selection-start-column="31" selection-end-line="139" selection-end-column="31" />
+            <state relative-caret-position="293">
+              <caret line="503" column="31" selection-start-line="503" selection-start-column="31" selection-end-line="503" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -250,7 +133,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GreedyPath.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-560">
+            <state relative-caret-position="-290">
               <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
             </state>
           </provider>
@@ -288,6 +171,8 @@
       <find>self.figure_count</find>
       <find>update_cost_map</find>
       <find>self.sens_mat</find>
+      <find>self.wave_map</find>
+      <find>GPSpath</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -320,11 +205,11 @@
         <option value="$PROJECT_DIR$/PathPlanner.py" />
         <option value="$PROJECT_DIR$/Read.md" />
         <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
-        <option value="$PROJECT_DIR$/pathPlan.py" />
         <option value="$PROJECT_DIR$/AnimateError.py" />
         <option value="$PROJECT_DIR$/PlotSensitivityMatrix.py" />
         <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/GreedyPath.py" />
+        <option value="$PROJECT_DIR$/pathPlan.py" />
       </list>
     </option>
   </component>
@@ -536,12 +421,12 @@
     <frame x="-4" y="-4" width="1032" height="732" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.18843469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18843469" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.37947884" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37947884" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39739415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -722,15 +607,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/GreedyPath.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-560">
+        <state relative-caret-position="-290">
           <caret line="22" column="1" lean-forward="true" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pathPlan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1179">
-          <caret line="139" column="31" selection-start-line="139" selection-start-column="31" selection-end-line="139" selection-end-column="31" />
+        <state relative-caret-position="293">
+          <caret line="503" column="31" selection-start-line="503" selection-start-column="31" selection-end-line="503" selection-end-column="31" />
         </state>
       </provider>
     </entry>

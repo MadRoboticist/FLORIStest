@@ -5,6 +5,7 @@ var searchData=
   ['pathplan_2epy',['pathPlan.py',['../path_plan_8py.html',1,'']]],
   ['pathplanner',['PathPlanner',['../classpath_plan_1_1_path_planner.html',1,'pathPlan']]],
   ['percent_5fheight',['percent_height',['../classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html#a7cee09abb8816bfc56733ba475592e01',1,'visualization_manager_DJ::VisualizationManager::params']]],
+  ['phicost',['phiCost',['../classpath_plan_1_1___transition.html#aba33731fca7c1a4dee6a20bafc1b41fc',1,'pathPlan::_Transition']]],
   ['planner',['planner',['../namespace_greedy_path.html#a48d2bf39a0cc9f5e87640f060e67bd1c',1,'GreedyPath']]],
   ['plot_5fx_5fplanes',['plot_x_planes',['../classvisualization__manager___d_j_1_1_visualization_manager.html#a4705f5926bdcecfd8d2d5aff434b2120',1,'visualization_manager_DJ::VisualizationManager']]],
   ['plot_5fy_5fplanes',['plot_y_planes',['../classvisualization__manager___d_j_1_1_visualization_manager.html#ab0047d9eeda14999bdf8f8de191d9a33',1,'visualization_manager_DJ::VisualizationManager']]],
@@ -14,5 +15,5 @@ var searchData=
   ['plotscoremask',['plotScoreMask',['../classpath_plan_1_1_path_planner.html#a6e74d35801d637631580333ea9210aa5',1,'pathPlan::PathPlanner']]],
   ['plotsensitivitymatrix',['PlotSensitivityMatrix',['../namespace_plot_sensitivity_matrix.html',1,'PlotSensitivityMatrix'],['../classvisualization__manager___d_j_1_1_visualization_manager.html#a32793e43e3e04b3819dea7740e5b9ca1',1,'visualization_manager_DJ.VisualizationManager.plotSensitivityMatrix()']]],
   ['plotsensitivitymatrix_2epy',['PlotSensitivityMatrix.py',['../_plot_sensitivity_matrix_8py.html',1,'']]],
-  ['plotwavemap',['plotWaveMap',['../classpath_plan_1_1_path_planner.html#ad0aac3259a17970adbb7652d32365f44',1,'pathPlan::PathPlanner']]]
+  ['plotwavemap',['plotWaveMap',['../classpath_plan_1_1_path_planner.html#a1812ee8e5ce2772a9f35cc4e28f30f1b',1,'pathPlan::PathPlanner']]]
 ];
