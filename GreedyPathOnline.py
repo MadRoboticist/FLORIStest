@@ -1,12 +1,13 @@
-## \file GreedyPath.py
+## \file GreedyPathOnline.py
 # This is a script which utilizes the greedyPath function in pathPlan.py
-#
+# while doing online updates of the sensitivity matrix and associated estimates
 
 from visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
 from UAV import UAV
 import json
 import numpy as np
+import matplotlib.pyplot as plt
 
 with open("example_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
@@ -36,6 +37,26 @@ vman.params.epSpeed = 0.001  # speed epsilon (ev)
 #
 # see definition at visualization_manager_DJ.VisualizationManager.params.epDir
 vman.params.epDir = 0.0001  # direction epsilon (ed)
+## Speed error minimum threshold
+#
+# see definition at visualization_manager_DJ.VisualizationManager.params.spErrMax
+vman.params.spErrMax = 0.1  # speed error threshold
+## Direction error minimum threshold
+#
+# see definition at visualization_manager_DJ.VisualizationManager.params.dirErrMax
+vman.params.dirErrMax = 0.01  # direction error threshold
+## Maximum number of iterations to complete
+#
+# see definition at visualization_manager_DJ.VisualizationManager.params.iterMax
+vman.params.iterMax = 100  # iteration threshold
+## Actual wind speed
+#
+# see definition at visualization_manager_DJ.VisualizationManager.params.vBar
+vman.params.vBar = 7.5 # actual wind speed
+## Actual wind direction in radians
+#
+# see definition at visualization_manager_DJ.VisualizationManager.params.dBar
+vman.params.dBar = np.deg2rad(0.5) # actual wind direction
 
 ## A PathPlanner object
 #
@@ -44,22 +65,29 @@ planner = PathPlanner(vman)
 
 ## A UAV object
 #
-# see definition at UAV.UAV
+# see definition at pathPlan.UAV
 UAV1 = UAV(planner)
-## Holds a UAV's GPS point
+## Holds a UAV's "GPS" point
+# starting point for this script is 200,-250
 #
-# see definition at UAV.UAV.GPS
+# see definition at pathPlan.UAV.GPS
 UAV1.GPS = [200,-250]
-## Holds the UAV's planning horizon
-#  (the number of steps to plan ahead)
-#
-# see definition at UAV.UAV.plan_horizon
-UAV1.plan_horizon = 150
-# run the greedy path algorithm from pathPlan for 150 iterations
+#run the first iteration
+UAV1.plan_horizon = 20
+UAV1.moves2recalc = 10
+UAV1.patrolMax = 40
 planner.greedyPath(UAV1)
-# plot the score map with the UAV's path on it
-planner.plotScoreMapUAV(UAV1)
-# show the plot
-planner.show()
+
+for i in range(10):
+    # run the greedy path algorithm from pathPlan
+
+    # plot the score map with the UAV's path on it
+    UAV1.move()
+    planner.updateEstimates(UAV1)
+    planner.greedyPath(UAV1)
+
+planner.plotHistory(UAV1)
+
+
 
 

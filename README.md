@@ -38,7 +38,7 @@ This is a script which runs the reducedSM function from visualization_manager_DJ
 GreedyPath.py
 
 This is a script which runs the greedyPath function from pathPlan.py and plots
-the generated path over the sensitivity map.
+the generated path over a static sensitivity map.
 
 example_input.json
 

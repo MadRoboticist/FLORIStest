@@ -547,8 +547,8 @@ class VisualizationManager():
         ff = deepcopy(ff_vman.flowfield.u_field)
 
         # print v0,d0 as initial speed and direction estimates
-        print('v0 = ' + str(self.params.v0))
-        print('d0 = ' + str(self.params.d0))
+        # print('v0 = ' + str(self.params.v0))
+        # print('d0 = ' + str(self.params.d0))
 
         # calculate f(v0+ev,d0) = ff_v1
         self.WF['farm']['properties']['wind_speed'] = self.params.v0 + self.params.epSpeed  # add speed epsilon
@@ -1010,3 +1010,4 @@ class VisualizationManager():
         ## a range of directions: [min direction err, max direction err, step]
         Drange = [-2.0, 2.0, 0.25]  # [min dir error, max dir error, step]
         ## a JSON windfarm object
+

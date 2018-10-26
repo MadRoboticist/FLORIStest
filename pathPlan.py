@@ -4,11 +4,12 @@
 
 import numpy as np
 import matplotlib.pyplot as plt
+from matplotlib.widgets import Slider
 from floris.coordinate import Coordinate
+from visualization_manager_DJ import VisualizationManager
 from math import pi as PI
 import math
 from copy import deepcopy
-
 
 ## \class dir
 # An enumeration of the cardinal directions
@@ -41,8 +42,6 @@ class d(enumerate):
     ## @var SE
     # Southeast = 7
     SE = 7
-
-
 
 ## a structure which holds information for each node on
 # a discretized transition map
@@ -79,42 +78,55 @@ class _X_map_node:
 #   @brief Contains all path planning functions and parameters
 class PathPlanner:
 
-    ## \class params
-    #   @brief A class through which parameters can be passed
-    #   to the member functions
-    class params:
-        ## @var minDist2turbine
-        # sets a minimum distance from the center of a turbine
-        # which serves as a boundary for the UAV
-        minDist2turbine = 160
+    ## @var minDist2turbine
+    # sets a minimum distance from the center of a turbine
+    # which serves as a boundary for the UAV
+    minDist2turbine = 160
+    history = list()
 
     ## Class constructor
     #   @param vman a VisualManager object
     def __init__(self, vman):
         ## @var vman
         #   A VisualizationManager object
-        self.vman = vman
-        ## the plane where the computations and visualizations are taking place
-        plane = int(self.vman.flowfield.grid_resolution.z * self.vman.params.percent_height)
+        self.vman = deepcopy(vman)
+        ## @var params
+        #   A local copy of vman.params
+        self.params = deepcopy(vman.params)
+        ## @var plane
+        # the plane where the computations and visualizations are taking place
+        self.plane = int(self.vman.flowfield.grid_resolution.z * self.params.percent_height)
+        # time to calculate Xbar
+        vman.WF['farm']['properties']['wind_speed'] = self.vman.params.vBar
+        vman_bar = VisualizationManager(vman.WF, vman.grid_res)
+        ## @var Xbar
+        #   this is the 'actual' u_field
+        self.Xbar = deepcopy(vman_bar.flowfield.u_field[:, :, self.plane])
+        ## @var WF
+        #  a local copy of vman.WF
+        self.WF = deepcopy(vman.WF)
         ## @var X_map
         #   A map of all possible transitions on the map and their respective scores
         self.X_map = [[_X_map_node() for x in range(self.vman.grid_res[0])]
-                 for y in range(self.vman.grid_res[1])]
+                 for y in range(vman.grid_res[1])]
         ## @var X
         #   An X grid mesh of the map's 'GPS' coordinates
-        self.X = deepcopy(self.vman.flowfield.x[:, :, plane])
+        self.X = deepcopy(vman.flowfield.x[:, :, self.plane])
         ## @var Y
         #   A Y grid mesh of the map's 'GPS' coordinates
-        self.Y = deepcopy(self.vman.flowfield.y[:, :, plane])
+        self.Y = deepcopy(vman.flowfield.y[:, :, self.plane])
         ## the initial sensitivity matrix
-        self._sens_mat = vman.calcSensitivityMatrix()
-        ## @var d0
-        #   The initial wind direction estimate
-        self.d0 = self.vman.params.d0
-        ## @var v0
-        #   The initial wind speed estimate
-        self.v0 = self.vman.params.v0
+        self._sens_mat = self.vman.calcSensitivityMatrix()
+        self.sens_mat = list()
+        self.sens_mat.append(self._sens_mat)
+        # delete the old vman objects
+        self.error = list()
+        self.error.append([self.params.vBar-self.params.v0,
+                           self.params.dBar-self.params.d0])
+        del vman, vman_bar
+        # calculate the score map
         self._calcScoreMap()
+        # calculate the cost map
         self._update_cost_map();
 
     ## a method to adjust idx based on a cardinal direction
@@ -150,10 +162,11 @@ class PathPlanner:
                 # iterate through the 8 possible transitions at each node
                 for k in range(8):
                     # calculate the cost of moving through the wind at the transition heading
-                    self.X_map[i][j].Xitions[k].thetaCost = k*np.deg2rad(45)-self.d0
+                    self.X_map[i][j].Xitions[k].thetaCost = k*np.deg2rad(45)-self.params.d0
                     # adjust the cost to a positive value 0-PI
                     if self.X_map[i][j].Xitions[k].thetaCost > PI:
-                        self.X_map[i][j].Xitions[k].thetaCost = abs(k*np.deg2rad(45)-self.d0-2*PI)
+                        self.X_map[i][j].Xitions[k].thetaCost = \
+                            abs(k*np.deg2rad(45)-self.params.d0-2*PI)
                     # test the map indices after the transition
                     [I,J] = self._shiftVals(k)
                     # if the index is out of bounds, this will throw an exception
@@ -190,7 +203,7 @@ class PathPlanner:
                     if self._euclidDist([self.X[i][j],
                                          self.Y[i][j]],
                                         [coord.x, coord.y]) < \
-                            self.params.minDist2turbine:
+                            self.minDist2turbine:
                         # if it is, make it untraversable
                         self.score_map[i][j] = None
         # calculate a wave map from this score map
@@ -240,34 +253,51 @@ class PathPlanner:
     #           is to be in a subplot
     def plotWaveMap(self, UAV, ax=None):
         # a scatter plot of the wave map
-        ax = plt.scatter(x=self.X, y=self.Y, c=UAV.wave_map,
+        if(ax):
+            axx = ax.scatter(x=self.X, y=self.Y, c=UAV.wave_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
-        # the colorbar
-        plt.colorbar(ax)
+            plt.colorbar(axx, ax=ax)
+        else:
+            axx = plt.scatter(x=self.X, y=self.Y, c=UAV.wave_map,
+                         vmin=0, vmax=1, cmap='gnuplot2')
+            plt.colorbar(axx)
+
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
             a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            if ax:
+                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            else:
+                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
     ## Generates a plot of the current score map
     #   @param ax can be passed to the function if the plot
     #           is to be in a subplot
     def plotScoreMap(self, ax=None):
         # a scatter plot of the score map
-        ax = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
+        if ax:
+            axx = ax.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
+            plt.colorbar(axx, ax=ax)
+        else:
+            axx = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
+                         vmin=0, vmax=1, cmap='gnuplot2')
+            plt.colorbar(axx)
         # the color bar
-        plt.colorbar(ax)
+
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
             a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            if ax:
+                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            else:
+                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
     ## Generates a plot of a UAV's score mask (planned or actual)
     #   @param mask the mask to be plotted (planned or actual)
@@ -275,25 +305,39 @@ class PathPlanner:
     #           is to be in a subplot
     def plotScoreMask(self, mask, ax=None):
         # a scatter plot of the UAV's score mask
-        ax = plt.scatter(x=self.X, y=self.Y, c=mask)
+        if ax:
+            axx = ax.scatter(x=self.X, y=self.Y, c=mask)
+            plt.colorbar(axx, ax=ax)
+        else:
+            axx = plt.scatter(x=self.X, y=self.Y, c=mask)
+            plt.colorbar(axx)
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
             a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            if ax:
+                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+            else:
+                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
 
     ## Generates a plot of a given UAV's path over the score map
     #   @param UAV the UAV whose path is to be plotted
     #   @param ax Can be passed to the function if the plot
     #           is to be in a subplot
     def plotScoreMapUAV(self, UAV, ax=None):
-        # a scatter plot of the score map
-        ax = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
+        if ax:
+            axx = ax.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
+            plt.colorbar(axx, ax=ax)
+        # a scatter plot of the score map
+        else:
+            axx = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
+                         vmin=0, vmax=1, cmap='gnuplot2')
+            plt.colorbar(axx)
         # the color bar
-        plt.colorbar(ax)
+
         # the title
         plt.suptitle("Greedy UAV path\n"+str(len(UAV.GPSplan)-1)+" moves")
         # plot the turbines
@@ -302,19 +346,29 @@ class PathPlanner:
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
             a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            if ax:
+                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            else:
+                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
         # plot the UAV's path
-        plt.plot([i[0] for i in UAV.GPSplan],
-                 [i[1] for i in UAV.GPSplan], color='lime')
-        plt.plot([i[0] for i in UAV.GPSpath],
-                 [i[1] for i in UAV.GPSpath], color='red')
+        if ax:
+            ax.plot([i[0] for i in UAV.GPSplan],
+                     [i[1] for i in UAV.GPSplan], color='lime')
+            ax.plot([i[0] for i in UAV.GPSpath],
+                     [i[1] for i in UAV.GPSpath], color='red')
+        else:
+            plt.plot([i[0] for i in UAV.GPSplan],
+                    [i[1] for i in UAV.GPSplan], color='lime')
+            plt.plot([i[0] for i in UAV.GPSpath],
+                    [i[1] for i in UAV.GPSpath], color='red')
         # size the plot to fill the window
-        plt.subplots_adjust(left=0.07,
-                            bottom=0.08,
-                            right=1.0,
-                            top=0.91,
-                            wspace=0.27,
-                            hspace=0.19)
+        if not ax:
+            plt.subplots_adjust(left=0.07,
+                                bottom=0.08,
+                                right=1.0,
+                                top=0.91,
+                                wspace=0.27,
+                                hspace=0.19)
 
     ## A method to convert an index to a GPS point
     def _findGPSindex(self, GPS):
@@ -345,59 +399,68 @@ class PathPlanner:
 
     # greedyPath
     ## A function which populates a UAV's list with a greedy path
-    # with the given number of steps
+    # with the given number of steps in the UAV's planning horizon
     #
     # @param UAV The UAV whose path is to be generated
-    # @param steps (optional) the number of moves to be generated for the path
+    # @param UAV.plan_horizon the number of steps to plan ahead
     # @param recalc (optional) the number of moves before the score map is recalculated
     # @return UAV.IDXplan a path of indices through which the UAV will travel
     # @return UAV.GPSplan a path of GPS points throught which the UAV will travel
-    def greedyPath(self, UAV, steps=100, recalc=10):
+    def greedyPath(self, UAV):
+
         UAV.reset_planner()
         # figure out what the index of the starting point is
-        UAV.idx = self._findGPSindex(UAV.GPS)
-        # and append the index to the new path
-        UAV.IDXplan.append(UAV.idx)
+        if not (UAV.idx):
+            UAV.idx = self._findGPSindex(UAV.GPS)
+            # and append the index to the new path
+            UAV.IDXplan.append(UAV.idx)
+        else:
+            UAV.IDXplan.append(UAV.idx)
         # if the GPS point was valid, the indices should exist
         if (UAV.idx[0] and UAV.idx[1]):
-            # set the UAV's score mask to all ones
-            UAV.plan_mask = [[1 for i in range(len(self.score_map[0]))] \
-                             for j in range(len(self.score_map))]
             # calculate the current score map
             self._calcScoreMap()
             # let the iteration begin
-            for i in range(steps):
-                    # just for shorthand notation
-                    x=UAV.IDXplan[i][0]
-                    y=UAV.IDXplan[i][1]
+            for i in range(UAV.plan_horizon):
+                # just for shorthand notation
+                x=UAV.IDXplan[i][0]
+                y=UAV.IDXplan[i][1]
 
-                    # if the indices are invalid, an exception will be thrown
-                    try:
-                        # start by updating the UAV's score mask for the current position
-                        UAV.update_mask(UAV.plan_mask, [x,y])
-                        # calculate the new wave map with the updated mask
-                        self._calcWaveMap(UAV)
-                        # calculate the next step
-                        max, dir = self._greedyStep(UAV)
-                    except:
-                        # if we run off the map, or into a no-fly zone, end the run
-                        return
-                    # add the max to the UAV's score
-                    UAV.score += max
-                    # update the UAV's heading
-                    UAV.plan_heading.append(dir)
-                    # update idx based on the direction of travel
-                    [I, J] = self._shiftVals(dir)
-                    # UAV.idx = [x+I,y+J]
-                    # add the index to the IDXplan
-                    UAV.IDXplan.append([UAV.IDXplan[i][0]+I, UAV.IDXplan[i][1]+J])
-                    # set the UAV's new GPS point
-                    # UAV.GPS = self._getGPSfromIDX(UAV.idx)
-                    # add the GPS point to the UAV's path
-                    UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
+                # if the indices are invalid, an exception will be thrown
+                try:
+                    # start by updating the UAV's score mask for the current position
+                    UAV.update_mask(UAV.plan_mask, [x,y])
+                    # calculate the new wave map with the updated mask
+                    self._calcWaveMap(UAV)
+                    # calculate the next step
+                    max, dir = self._greedyStep(UAV)
+                except:
+                    # if we run off the map, or into a no-fly zone, end the run
+                    return
+                # add the max to the UAV's score
+                UAV.score += max
+                # add the current dS to the list for d2S calculation
+                UAV.dSplan.append(self.X_map[x][y].Xitions[dir].dSscore)
+                # update the UAV's heading
+                UAV.plan_heading.append(dir)
+                # update idx based on the direction of travel
+                [I, J] = self._shiftVals(dir)
+                # UAV.idx = [x+I,y+J]
+                # add the index to the IDXplan
+                UAV.IDXplan.append([UAV.IDXplan[i][0]+I, UAV.IDXplan[i][1]+J])
+                # add the GPS point to the UAV's path
+                UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
+                self.history.append(deepcopy([self.score_map,
+                                              UAV.GPSpath,
+                                              UAV.GPSplan,
+                                              UAV.wave_map,
+                                              self.error[len(self.error)-1],
+                                              self.params.v0,
+                                              self.params.d0]))
         # the starting point was invalid
         else:
             print("Aborting. Invalid start point.")
+
 
     ## a method which calculates a single step in a greedy path
     def _greedyStep(self, UAV):
@@ -462,3 +525,131 @@ class PathPlanner:
             except:
                 pass
         return max, dir
+
+    def updateEstimates(self, UAV):
+
+        Xk = deepcopy(self.vman.flowfield.u_field[:,:,self.plane])
+        vd_k = [[self.params.v0],
+                [self.params.d0]]
+        sens_mat = np.column_stack([self._sens_mat[0].flatten(), self._sens_mat[1].flatten()])
+        sens_mat_pinv = np.linalg.pinv(sens_mat)
+        Xbar = deepcopy(self.Xbar)
+        counter=0
+        for i in range(self.vman.grid_res[0]):
+            for j in range(self.vman.grid_res[1]):
+                if UAV.path_mask[i][j]==1:
+                    counter += 1
+                    Xbar[i][j]=Xk[i][j]
+        Xbar = np.vstack(Xbar.flatten())
+        Xk = np.vstack(Xk.flatten())
+        # Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
+        [[self.params.v0],
+         [self.params.d0]]=vd_k+np.matmul(sens_mat_pinv,Xbar-Xk)
+
+        self.WF['farm']['properties']['wind_speed'] = self.params.v0
+        vmanTemp = VisualizationManager(self.WF, self.vman.grid_res)
+        vmanTemp.params.d0 = self.params.d0
+        vmanTemp.flowfield.calculate_wake()
+        self._sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix())
+        self.sens_mat.append(self._sens_mat)
+        self._calcScoreMap()
+        self.vman = deepcopy(vmanTemp)
+        self.error.append([self.params.vBar-self.params.v0,
+                           self.params.dBar-self.params.d0])
+        print(self.error[len(self.error)-1])
+
+    def plotHistory(self, UAV):
+        steps = [i for i in range(len(self.history))]
+        print(self.history[20][4])
+        f, axarr = plt.subplots(2,2,gridspec_kw = {'width_ratios':[1, 3]})
+        sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
+        sld = Slider(sld_ax,
+                     'steps',
+                     0, len(self.history) - 1, valinit=0)
+        sld.valtext.set_text('step 0')
+        f.suptitle('Speed estimate: ' + str(self.params.v0) +
+                   ' m/s, Actual: ' + str(self.params.vBar) +
+                   ' m/s\nDirection estimate: ' + str(np.rad2deg(self.params.d0)) + '\N{DEGREE SIGN}' +
+                   ', Actual: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                   '\nPlanning Horizon: ' + str(UAV.plan_horizon) +
+                   ' Total steps planned: ' + str(len(self.history)) +
+                   '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' +
+                   str(self.error[len(self.error)-1][0]) +
+                   ' ev = ' + str(self.error[len(self.error)-1][1]))
+        axarr[0][0].plot([i for i in range(len(self.error))], [i[0] for i in self.error])
+        axarr[0][0].set_title('speed error')
+        v = np.linspace(0, np.amax([i[0] for i in self.history]), 100)
+        V = np.linspace(0, np.amax([i[0] for i in self.history]), 5)
+        x = deepcopy(self.X)
+        y = deepcopy(self.Y)
+        c = deepcopy(self.history[1][0])
+        cont = axarr[0][1].scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), cmap='gnuplot2')
+        # cont = axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[0].flatten(),
+        #                    cmap='gnuplot2')
+        plt.colorbar(cont, ax=axarr[0][1])
+        # cb = plt.colorbar(cont, ax=axarr[0][2])
+        # cb.set_clim(vmin=0, vmax=np.amax([i[0] for i in self.history]))
+        # cb.set_ticks(V, True)
+        # cb.set_label('||df/dd||*||df/dv||')
+        # cb.draw_all()
+        axarr[0][1].set_title('path over score map')
+        axarr[1][0].plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
+        axarr[1][0].set_title('direction error')
+        axarr[1][0].set_xlabel('steps')
+        u = np.linspace(0, 1, 100)
+        U = np.linspace(0, 1, 5)
+        c = deepcopy(self.history[0][3])
+        cont2 = axarr[1][1].scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), cmap='gnuplot2')
+        plt.colorbar(cont2, ax=axarr[1][1])
+        '''
+        cb2 = plt.colorbar(mappable=cont, ax=axarr[1][2])
+        cb2.set_clim(vmin=0, vmax=1)
+        cb2.set_ticks(U)
+        cb2.draw_all()'''
+        for coord, turbine in self.vman.flowfield.turbine_map.items():
+            a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
+            b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
+            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            axarr[0][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            axarr[1][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+        axarr[1][1].set_title('wave map')
+
+        # f.tight_layout()
+        plt.subplots_adjust(left=0.05,
+                            bottom=0.15,
+                            right=0.95,
+                            top=0.83,
+                            wspace=0.27,
+                            hspace=0.19)
+
+        def update_plot(val):
+
+            idx = int(round(sld.val))
+            sld.valtext.set_text('iteration ' + '{}'.format(idx))
+            axarr[0][1].clear()
+            axarr[0][1].scatter(x=x.flatten(), y=y.flatten(), c=self.history[idx][0].flatten(), cmap='gnuplot2')
+            axarr[0][1].plot([i[0] for i in self.history[idx][2]],
+                             [i[1] for i in self.history[idx][2]], color = 'lime')
+            axarr[0][1].plot([i[0] for i in self.history[idx][1]],
+                             [i[1] for i in self.history[idx][1]], color = 'red')
+            # axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[idx].flatten(), cmap='gnuplot2')
+            axarr[1][1].clear()
+            axarr[1][1].scatter(x=x.flatten(), y=y.flatten(), c=self.history[idx][3].flatten(), cmap='gnuplot2')
+            axarr[1][1].plot([i[0] for i in self.history[idx][2]],
+                             [i[1] for i in self.history[idx][2]], color='lime')
+            axarr[1][1].plot([i[0] for i in self.history[idx][1]],
+                             [i[1] for i in self.history[idx][1]], color='red')
+            for coord, turbine in self.vman.flowfield.turbine_map.items():
+                a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
+                b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
+                a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+                b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+                axarr[0][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+                axarr[1][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            plt.draw()
+
+        sld.on_changed(update_plot)
+
+        plt.show()
+
