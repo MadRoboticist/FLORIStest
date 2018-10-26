@@ -650,6 +650,11 @@ class PathPlanner:
             plt.draw()
 
         sld.on_changed(update_plot)
-
+        plt.subplots_adjust(left=0.05,
+                            bottom=0.11,
+                            right=1.0,
+                            top=0.84,
+                            wspace=0.15,
+                            hspace=0.24)
         plt.show()
 

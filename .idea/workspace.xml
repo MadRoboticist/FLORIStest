@@ -2,13 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPath.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -95,7 +89,7 @@
           <entry key="json" value="53" />
           <entry key="md" value="1215" />
           <entry key="me" value="117" />
-          <entry key="py" value="56592" />
+          <entry key="py" value="56605" />
           <entry key="tcl" value="7" />
           <entry key="txt" value="26" />
         </counts>
@@ -105,7 +99,7 @@
           <entry key="JSON" value="53" />
           <entry key="Markdown" value="1215" />
           <entry key="PLAIN_TEXT" value="202" />
-          <entry key="Python" value="56592" />
+          <entry key="Python" value="56605" />
         </counts>
       </usages-collector>
     </session>
@@ -139,8 +133,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pathPlan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="167">
-              <caret line="563" column="73" selection-start-line="563" selection-start-column="73" selection-end-line="563" selection-end-column="73" />
+            <state relative-caret-position="231">
+              <caret line="657" column="39" selection-start-line="657" selection-start-column="39" selection-end-line="657" selection-end-column="39" />
               <folding>
                 <element signature="e#105#123#0" expanded="true" />
               </folding>
@@ -748,8 +742,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pathPlan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="167">
-          <caret line="563" column="73" selection-start-line="563" selection-start-column="73" selection-end-line="563" selection-end-column="73" />
+        <state relative-caret-position="231">
+          <caret line="657" column="39" selection-start-line="657" selection-start-column="39" selection-end-line="657" selection-end-column="39" />
           <folding>
             <element signature="e#105#123#0" expanded="true" />
           </folding>
