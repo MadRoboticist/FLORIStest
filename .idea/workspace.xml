@@ -2,6 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -57,13 +61,13 @@
     <session id="-931210854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="3" />
+          <entry key="project.closed" value="5" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.5" value="1" />
-          <entry key="project.opened" value="6" />
+          <entry key="project.open.time.5" value="3" />
+          <entry key="project.opened" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -71,7 +75,7 @@
           <entry key="json" value="1" />
           <entry key="md" value="3" />
           <entry key="me" value="1" />
-          <entry key="py" value="49" />
+          <entry key="py" value="51" />
           <entry key="tcl" value="1" />
         </counts>
       </usages-collector>
@@ -80,7 +84,7 @@
           <entry key="JSON" value="1" />
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="49" />
+          <entry key="Python" value="51" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -89,7 +93,7 @@
           <entry key="json" value="53" />
           <entry key="md" value="1215" />
           <entry key="me" value="117" />
-          <entry key="py" value="56605" />
+          <entry key="py" value="59839" />
           <entry key="tcl" value="7" />
           <entry key="txt" value="26" />
         </counts>
@@ -99,7 +103,7 @@
           <entry key="JSON" value="53" />
           <entry key="Markdown" value="1215" />
           <entry key="PLAIN_TEXT" value="202" />
-          <entry key="Python" value="56605" />
+          <entry key="Python" value="59839" />
         </counts>
       </usages-collector>
     </session>
@@ -109,22 +113,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="88" selection-start-line="88" selection-end-line="88" />
+            <state relative-caret-position="222">
+              <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
               <folding>
                 <element signature="e#183#240#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="238">
-              <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-              <folding>
-                <element signature="e#133#165#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -133,10 +125,11 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pathPlan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="231">
-              <caret line="657" column="39" selection-start-line="657" selection-start-column="39" selection-end-line="657" selection-end-column="39" />
+            <state relative-caret-position="302">
+              <caret line="587" column="21" selection-start-line="587" selection-start-column="21" selection-end-line="587" selection-end-column="21" />
               <folding>
                 <element signature="e#105#123#0" expanded="true" />
+                <marker date="1540606686781" expanded="true" signature="27546:27794" ph="..." />
               </folding>
             </state>
           </provider>
@@ -145,34 +138,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-4192">
-              <caret line="20" column="37" selection-start-line="20" selection-end-line="20" selection-end-column="37" />
+            <state relative-caret-position="7264">
+              <caret line="461" column="14" selection-start-line="461" selection-start-column="14" selection-end-line="461" selection-end-column="14" />
               <folding>
-                <element signature="e#2475#2657#0" />
-                <element signature="e#2696#2755#0" />
-                <element signature="e#2790#2859#0" />
-                <element signature="e#2896#2956#0" />
-                <element signature="e#3021#3175#0" />
-                <element signature="e#3264#3409#0" />
-                <element signature="e#3522#4120#0" />
-                <element signature="e#4175#4614#0" />
-                <element signature="e#4658#5146#0" />
-                <element signature="e#5224#5574#0" />
-                <element signature="e#5636#5723#0" />
-                <element signature="e#5785#5872#0" />
-                <element signature="e#5934#6021#0" />
-                <element signature="e#6079#6474#0" />
-                <element signature="e#6532#6760#0" />
-                <element signature="e#6818#7046#0" />
-                <element signature="e#7435#7505#0" />
-                <element signature="e#7895#7965#0" />
-                <element signature="e#8350#8420#0" />
-                <element signature="e#8509#8519#0" />
-                <element signature="e#9435#12235#0" />
-                <element signature="e#12656#12927#0" />
-                <element signature="e#13898#22914#0" />
-                <element signature="e#26325#33832#0" />
-                <element signature="e#46224#47931#0" />
+                <element signature="e#678#718#0" expanded="true" />
                 <marker date="1540518421890" expanded="true" signature="24036:25728" ph="..." />
                 <marker date="1540518421890" expanded="true" signature="35917:46630" ph="..." />
               </folding>
@@ -184,7 +153,7 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="256">
+              <first_editor relative-caret-position="640">
                 <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
               </first_editor>
               <second_editor />
@@ -195,10 +164,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UAV.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1237">
-              <caret line="213" column="21" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="21" />
+            <state relative-caret-position="14">
+              <caret line="191" column="28" selection-start-line="191" selection-start-column="28" selection-end-line="191" selection-end-column="28" />
               <folding>
-                <marker date="1540516893438" expanded="true" signature="6249:6499" ph="..." />
+                <marker date="1540604902661" expanded="true" signature="6250:6500" ph="..." />
               </folding>
             </state>
           </provider>
@@ -215,10 +184,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>boolBTN</find>
-      <find>WF</find>
-      <find>Visual</find>
-      <find>dirErrorConSpd</find>
       <find>floris</find>
       <find>ff_bar</find>
       <find>-100</find>
@@ -243,8 +208,12 @@
       <find>plan_mask</find>
       <find>steps</find>
       <find>print(self.params.v0</find>
-      <find>print</find>
       <find>print(&quot;v0 =</find>
+      <find>button</find>
+      <find>print</find>
+      <find>dBar</find>
+      <find>self.moves2recalc</find>
+      <find>moves2recalc</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -281,8 +250,8 @@
         <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/README.md" />
         <option value="$PROJECT_DIR$/GreedyPath.py" />
-        <option value="$PROJECT_DIR$/UAV.py" />
         <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
+        <option value="$PROJECT_DIR$/UAV.py" />
         <option value="$PROJECT_DIR$/GreedyPathOnline.py" />
         <option value="$PROJECT_DIR$/pathPlan.py" />
       </list>
@@ -313,6 +282,27 @@
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
               <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
+              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -493,15 +483,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1032" height="732" extended-state="6" />
+    <frame x="-4" y="-4" width="1288" height="924" extended-state="7" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18843469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15011914" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.37947884" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.28908187" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39739415" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -538,6 +528,9 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/FLORIStest" />
+    </ignored-roots>
     <MESSAGE value="added path planning module" />
     <option name="LAST_COMMIT_MESSAGE" value="added path planning module" />
   </component>
@@ -632,28 +625,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/README.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="256">
-            <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
-          </first_editor>
-          <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ReducedSM.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="291">
           <caret line="42" column="26" selection-start-line="42" selection-start-column="26" selection-end-line="42" selection-end-column="26" />
-          <folding>
-            <element signature="e#111#143#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -661,75 +636,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="160">
           <caret line="55" column="40" selection-start-line="55" selection-start-column="40" selection-end-line="55" selection-end-column="40" />
-          <folding>
-            <element signature="e#99#156#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UAV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1237">
-          <caret line="213" column="21" selection-start-line="213" selection-start-column="16" selection-end-line="213" selection-end-column="21" />
-          <folding>
-            <marker date="1540516893438" expanded="true" signature="6249:6499" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
-          <folding>
-            <element signature="e#133#165#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="88" selection-start-line="88" selection-end-line="88" />
-          <folding>
-            <element signature="e#183#240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-4192">
-          <caret line="20" column="37" selection-start-line="20" selection-end-line="20" selection-end-column="37" />
-          <folding>
-            <element signature="e#2475#2657#0" />
-            <element signature="e#2696#2755#0" />
-            <element signature="e#2790#2859#0" />
-            <element signature="e#2896#2956#0" />
-            <element signature="e#3021#3175#0" />
-            <element signature="e#3264#3409#0" />
-            <element signature="e#3522#4120#0" />
-            <element signature="e#4175#4614#0" />
-            <element signature="e#4658#5146#0" />
-            <element signature="e#5224#5574#0" />
-            <element signature="e#5636#5723#0" />
-            <element signature="e#5785#5872#0" />
-            <element signature="e#5934#6021#0" />
-            <element signature="e#6079#6474#0" />
-            <element signature="e#6532#6760#0" />
-            <element signature="e#6818#7046#0" />
-            <element signature="e#7435#7505#0" />
-            <element signature="e#7895#7965#0" />
-            <element signature="e#8350#8420#0" />
-            <element signature="e#8509#8519#0" />
-            <element signature="e#9435#12235#0" />
-            <element signature="e#12656#12927#0" />
-            <element signature="e#13898#22914#0" />
-            <element signature="e#26325#33832#0" />
-            <element signature="e#46224#47931#0" />
-            <marker date="1540518421890" expanded="true" signature="24036:25728" ph="..." />
-            <marker date="1540518421890" expanded="true" signature="35917:46630" ph="..." />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -740,12 +646,79 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="22" column="25" selection-start-line="22" selection-start-column="25" selection-end-line="22" selection-end-column="25" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/ffmpeg/video.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1776" />
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="118">
+          <caret line="163" selection-start-line="163" selection-end-line="163" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7264">
+          <caret line="461" column="14" selection-start-line="461" selection-start-column="14" selection-end-line="461" selection-end-column="14" />
+          <folding>
+            <element signature="e#678#718#0" expanded="true" />
+            <marker date="1540518421890" expanded="true" signature="24036:25728" ph="..." />
+            <marker date="1540518421890" expanded="true" signature="35917:46630" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="640">
+            <caret line="40" column="32" selection-start-line="40" selection-start-column="32" selection-end-line="40" selection-end-column="32" />
+          </first_editor>
+          <second_editor />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="14">
+          <caret line="191" column="28" selection-start-line="191" selection-start-column="28" selection-end-line="191" selection-end-column="28" />
+          <folding>
+            <marker date="1540604902661" expanded="true" signature="6250:6500" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="222">
+          <caret line="80" column="17" selection-start-line="80" selection-start-column="17" selection-end-line="80" selection-end-column="17" />
+          <folding>
+            <element signature="e#183#240#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/pathPlan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="657" column="39" selection-start-line="657" selection-start-column="39" selection-end-line="657" selection-end-column="39" />
+        <state relative-caret-position="302">
+          <caret line="587" column="21" selection-start-line="587" selection-start-column="21" selection-end-line="587" selection-end-column="21" />
           <folding>
             <element signature="e#105#123#0" expanded="true" />
+            <marker date="1540606686781" expanded="true" signature="27546:27794" ph="..." />
           </folding>
         </state>
       </provider>

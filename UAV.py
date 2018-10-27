@@ -98,7 +98,7 @@ class UAV:
         #   sets a multiplicative penalty value to be applied to a node's
         #   score mask each time it is visited
         #   (set to 1 to apply no multiplicative penalty)
-        self.maskMUL = 0.5
+        self.maskMUL = 0.75
         ## @var maskMULthenSUB
         #   boolean which decides the order maskSUB and maskMUL are carried out
         self.maskMULthenSUB = True
@@ -112,7 +112,7 @@ class UAV:
         ## @var d2Swt
         #   sets the weight of the 2nd derivative of the sensitivity score
         #   wrt transition in path calculations
-        self.d2Swt = 1
+        self.d2Swt = 2
         ## @var windWt
         #   sets the weight of the wind direction vs. transition heading
         #   in path calculations
@@ -120,10 +120,10 @@ class UAV:
         ## @var headWt
         #   sets the weight of the UAV heading vs. transition heading
         #   in path calculations
-        self.headWt = 2
+        self.headWt = 4
         ## @var waveWt
         #   sets the weight of the wave map in path calculations
-        self.waveWt = 35
+        self.waveWt = 50
         ## @var timeWt
         #   sets the weight of time/iterations elapsed in path calculations
         self.timeWt = 0.25
@@ -184,7 +184,7 @@ class UAV:
         tempHead = deepcopy(self.heading)
         tempMask = deepcopy(self.path_mask)
         # step through the current plan
-        for i in range(self.moves2recalc):
+        for i in range(self.moves2recalc+1):
             # if the moves haven't been planned yet,
             # an exception will be thrown
             try:
@@ -204,6 +204,14 @@ class UAV:
                     for i in range(len(self.IDXpath)):
                         self.update_mask(self.path_mask,
                                          self.IDXpath[i])
+
+                self.planner.history.append(deepcopy([self.planner.score_map,
+                                              self.GPSpath,
+                                              self.GPSplan,
+                                              self.wave_map,
+                                              self.planner.error[len(self.planner.error) - 1],
+                                              self.planner.params.v0,
+                                              self.planner.params.d0]))
             except:
                 # set everything back to how it was
                 self.IDXpath = deepcopy(tempIDXpath)

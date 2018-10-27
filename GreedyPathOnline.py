@@ -73,20 +73,20 @@ UAV1 = UAV(planner)
 # see definition at pathPlan.UAV.GPS
 UAV1.GPS = [200,-250]
 #run the first iteration
-UAV1.plan_horizon = 20
+UAV1.plan_horizon = 30
 UAV1.moves2recalc = 10
-UAV1.patrolMax = 40
+UAV1.patrolMax = 125
 planner.greedyPath(UAV1)
 
-for i in range(10):
+for i in range(50):
     # run the greedy path algorithm from pathPlan
 
     # plot the score map with the UAV's path on it
     UAV1.move()
     planner.updateEstimates(UAV1)
     planner.greedyPath(UAV1)
-
-planner.plotHistory(UAV1)
+filename = "UAV"
+planner.plotHistory(UAV1,filename)
 
 
 
