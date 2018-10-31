@@ -575,7 +575,7 @@ class PathPlanner:
         c = deepcopy(self.history[1][0])
         cont = axbig.scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), cmap='gnuplot2')
         plt.colorbar(cont, ax=axbig)
-        ax_d.plot([i for i in range(len(self.error))], [i[1] for i in self.error])
+        ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
         plt.suptitle("Wind Speed and Direction Estimates with a UAV for Sensing\n" +
                      'Initial Speed estimate: ' + str(self.history[0][5]) +
                      ' m/s, Actual: ' + str(self.params.vBar) +
@@ -587,11 +587,11 @@ class PathPlanner:
                      '          Memory: ' + str(UAV.patrolMax) + ' nodes'
                      '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' +
                      str(self.error[len(self.error) - 1][0]) + '\N{DEGREE SIGN}' +
-                     '          ev = ' + str(self.error[len(self.error) - 1][1]))
+                     '          ev = ' + str(self.error[len(self.error) - 1][1]) + ' m/s')
 
-        ax_d.set_title('direction error')
+        ax_d.set_title('direction error (\N{DEGREE SIGN})')
         ax_d.set_xlabel('# of recalculations')
-        ax_v.set_title('speed error')
+        ax_v.set_title('speed error (m/s)')
         #f.tight_layout()
         plt.subplots_adjust(left=0.05,
                             bottom=0.15,
@@ -642,9 +642,9 @@ class PathPlanner:
             else:
                 #axbig.set(title='path over wave map')
                 btn.label.set_text('Show Score')
-            ax_d.set_ylabel('direction error')
+            ax_d.set_ylabel('direction error (\N{DEGREE SIGN})')
             ax_d.set_xlabel('# of recalculations')
-            ax_v.set_ylabel('speed error')
+            ax_v.set_ylabel('speed error (m/s)')
             axbig.scatter(x=x.flatten(), y=y.flatten(), c=self.history[idx][self._map_sel].flatten(), cmap='gnuplot2')
             axbig.plot([i[0] for i in self.history[idx][2]],
                        [i[1] for i in self.history[idx][2]], color='lime')
@@ -656,7 +656,7 @@ class PathPlanner:
             axbig.plot(_x,_y, marker='o', markersize=10, color="red")
             ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
             ax_v.axvline(idx/(UAV.moves2recalc+1), color='red')
-            ax_d.plot([i for i in range(len(self.error))], [i[1] for i in self.error])
+            ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
             ax_d.axvline(idx / (UAV.moves2recalc + 1), color='red')
             for coord, turbine in self.vman.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)

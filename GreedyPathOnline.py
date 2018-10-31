@@ -52,11 +52,11 @@ vman.params.iterMax = 100  # iteration threshold
 ## Actual wind speed
 #
 # see definition at visualization_manager_DJ.VisualizationManager.params.vBar
-vman.params.vBar = 7.5 # actual wind speed
+vman.params.vBar = 13.0 # actual wind speed
 ## Actual wind direction in radians
 #
 # see definition at visualization_manager_DJ.VisualizationManager.params.dBar
-vman.params.dBar = np.deg2rad(0.5) # actual wind direction
+vman.params.dBar = np.deg2rad(8.0) # actual wind direction
 
 ## A PathPlanner object
 #
@@ -74,7 +74,7 @@ UAV1 = UAV(planner)
 UAV1.GPS = [200,-250]
 #run the first iteration
 UAV1.plan_horizon = 30
-UAV1.moves2recalc = 10
+UAV1.moves2recalc = 20
 UAV1.patrolMax = 125
 planner.greedyPath(UAV1)
 
@@ -85,7 +85,7 @@ for i in range(50):
     UAV1.move()
     planner.updateEstimates(UAV1)
     planner.greedyPath(UAV1)
-filename = "UAV"
+filename = "UAV_ev5_ed8"
 planner.plotHistory(UAV1,filename)
 
 
