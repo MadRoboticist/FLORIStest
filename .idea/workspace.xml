@@ -1,83 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_r_e_a_d_m_e_8md_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_r_e_a_d_m_e_8md_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/annotated.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/annotated.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/class_u_a_v.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classes.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classes.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node_1_1___transition.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1___x__map__node_1_1___transition.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1d.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1d.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/files.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/files.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_func.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_func.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/hierarchy.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/hierarchy.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/menudata.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/menudata.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_u_a_v.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacepath_plan.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacepath_plan.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespaces.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespaces.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_0.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_10.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_10.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_11.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_11.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_12.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_12.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_7.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_7.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_9.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_c.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_c.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_d.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_f.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_f.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/classes_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/classes_1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/classes_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/classes_3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/classes_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/classes_4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/files_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/files_2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_0.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/namespaces_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/namespaces_1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_0.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_0.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_1.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_2.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_3.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_3.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_4.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_6.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_9.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_c.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_d.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_e.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-    </list>
+    <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,7 +55,7 @@
     <session id="-931210854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="6" />
+          <entry key="project.closed" value="7" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.16" value="1" />
           <entry key="project.open.time.21" value="1" />
@@ -237,7 +161,7 @@
         <entry file="file://$PROJECT_DIR$/UAV.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-32">
-              <caret line="1" column="36" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+              <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
               <folding>
                 <marker date="1541027407676" expanded="true" signature="6314:6564" ph="..." />
               </folding>
@@ -556,7 +480,6 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-4" y="-4" width="1288" height="924" extended-state="6" />
-    <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15011914" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -773,7 +696,7 @@
     <entry file="file://$PROJECT_DIR$/UAV.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-32">
-          <caret line="1" column="36" lean-forward="true" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
           <folding>
             <marker date="1541027407676" expanded="true" signature="6314:6564" ph="..." />
           </folding>
