@@ -1,16 +1,19 @@
 ## \file UAV.py
-# contains the definition of a UAV
+# contains the definition of a UAV and various functions to
+# move the UAV and update its state
 from copy import deepcopy
 
-## \class UAV
-# @brief A class for representing the state of a UAV on the windfarm
+## \class UAV.UAV
+#  A class for representing the state of a UAV on the windfarm
 class UAV:
 
-    ## Class constructor.
+    ## Class constructor
     def __init__(self, planner):
-        '''Class constructor.'''
+        ''' Class constructor'''
+
 
         ''' This section holds "ACTUAL" values '''
+
         ## @var GPS
         # Holds the "GPS" location
         # of the UAV. Currently, the GPS location is an
@@ -33,8 +36,8 @@ class UAV:
         self.moves2recalc = 10
         ## @var patrolMax
         # The length of the UAV's path history
-        ## @var path_mask
         self.patrolMax = 100
+        ## @var path_mask
         # Holds a map of values which degrade the
         # score of the corresponding node after it
         # has been visited by the UAV.
@@ -69,7 +72,7 @@ class UAV:
         # A list of GPS points representing the UAV's actual path
         # through the map.
         self.GPSpath = list()
-        ## @var dS
+        ## @var dSplan
         # holds the previous values of dS for calculation of d2S during planning
         self.dSplan = list()
         ## @var score
@@ -87,12 +90,12 @@ class UAV:
         # (applied as calculated_score*mask_value)
         self.plan_mask = [[1 for i in range(len(planner.score_map[0]))] \
                              for j in range(len(planner.score_map))]
+
+        ''' This section contains WEIGHTS '''
         ## @var maskSUB
         #   sets a subtractive penalty value to be applied to a node's
         #   score mask each time it is visited
         #   (set to 0 to apply no subtractive penalty)
-
-        ''' This section contains WEIGHTS '''
         self.maskSUB = 0
         ## @var maskMUL
         #   sets a multiplicative penalty value to be applied to a node's

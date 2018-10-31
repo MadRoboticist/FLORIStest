@@ -12,7 +12,7 @@ import math
 from copy import deepcopy
 from matplotlib import animation as anim
 
-## \class dir
+## \class d
 # An enumeration of the cardinal directions
 # starting from East and moving counterclockwise.
 #
@@ -83,6 +83,17 @@ class PathPlanner:
     # sets a minimum distance from the center of a turbine
     # which serves as a boundary for the UAV
     minDist2turbine = 160
+    ## @var history
+    # keeps track of everything that happens so it can be plotted afterward.
+    #
+    # This is how history is populated:
+    # self.history.append(deepcopy([self.score_map,
+    #                                UAV.GPSpath,
+    #                                UAV.GPSplan,
+    #                                UAV.wave_map,
+    #                               self.error[len(self.error)-1],
+    #                               self.params.v0,
+    #                               self.params.d0]))
     history = list()
 
     ## Class constructor
@@ -101,9 +112,13 @@ class PathPlanner:
         #  a local copy of vman.WF
         self.WF = deepcopy(vman.WF)
         # time to calculate Xbar
+        # set the wind_speed in the JSON object to vBar
         vman.WF['farm']['properties']['wind_speed'] = self.vman.params.vBar
+        # create a new VisualizationManager object with vBar as the velocity
         vman_bar = VisualizationManager(vman.WF, vman.grid_res)
+        # set the direction to dBar
         vman_bar.flowfield.wind_direction = vman_bar.params.dBar
+        # recalculate the wake with the new direction
         vman_bar.flowfield.calculate_wake()
         ## @var Xbar
         #   this is the 'actual' u_field
@@ -118,12 +133,15 @@ class PathPlanner:
         ## @var Y
         #   A Y grid mesh of the map's 'GPS' coordinates
         self.Y = deepcopy(vman.flowfield.y[:, :, self.plane])
-        ## the initial sensitivity matrix
+        ## the local copy of the sensitivity matrix
         self._sens_mat = self.vman.calcSensitivityMatrix()
-        # delete the old vman objects
+        ## @var error
+        # holds a record of the direction and velocity errors for plotting
         self.error = list()
+        # append the initial error
         self.error.append([self.params.vBar-self.params.v0,
                            self.params.dBar-self.params.d0])
+        # delete the old vman objects
         del vman, vman_bar
         # calculate the score map
         self._calcScoreMap()
@@ -192,7 +210,8 @@ class PathPlanner:
         Zd = abs(self._sens_mat[1]) / np.amax(abs(self._sens_mat[1]))
         # compute the normalized df/dv column of the sensitivity matrix ||df/dv||
         Zv = abs(self._sens_mat[0]) / np.amax(abs(self._sens_mat[0]))
-        # the score is computed as ||df/dd||*||df/dv||
+        ## @var score_map
+        # the score map is computed as ||df/dd||*||df/dv||
         self.score_map = Zd * Zv
         # iterate through the entire score map
         for i in range(self.vman.grid_res[0]):
@@ -224,7 +243,7 @@ class PathPlanner:
                 # (such as for the initial wave map calculation)
                 # the program will throw an exception
                 try:
-                    # we test the score using the UAV's mask
+                    # we test the score using the UAV's path mask
                     if self.score_map[i][j]*UAV.plan_mask[i][j]>max:
                         max=self.score_map[i][j]
                         idx = [i,j]
@@ -232,6 +251,7 @@ class PathPlanner:
                     if self.score_map[i][j]>max:
                         max=self.score_map[i][j]
                         idx = [i,j]
+        # just for shorthand
         x = idx[0]
         y = idx[1]
         # iterate through the map again
@@ -255,10 +275,12 @@ class PathPlanner:
     def plotWaveMap(self, UAV, ax=None):
         # a scatter plot of the wave map
         if(ax):
+            # using a subplot axis that was generated elsewhere
             axx = ax.scatter(x=self.X, y=self.Y, c=UAV.wave_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx, ax=ax)
         else:
+            # standalone plot
             axx = plt.scatter(x=self.X, y=self.Y, c=UAV.wave_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx)
@@ -280,14 +302,15 @@ class PathPlanner:
     def plotScoreMap(self, ax=None):
         # a scatter plot of the score map
         if ax:
+            # using a subplot axis that was generated elsewhere
             axx = ax.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx, ax=ax)
         else:
+            # standalone plot
             axx = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx)
-        # the color bar
 
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
@@ -307,11 +330,14 @@ class PathPlanner:
     def plotScoreMask(self, mask, ax=None):
         # a scatter plot of the UAV's score mask
         if ax:
+            # using a subplot axis that was generated elsewhere
             axx = ax.scatter(x=self.X, y=self.Y, c=mask)
             plt.colorbar(axx, ax=ax)
         else:
+            # standalone plot
             axx = plt.scatter(x=self.X, y=self.Y, c=mask)
             plt.colorbar(axx)
+
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -328,16 +354,17 @@ class PathPlanner:
     #   @param ax Can be passed to the function if the plot
     #           is to be in a subplot
     def plotScoreMapUAV(self, UAV, ax=None):
+        # a score map with the UAV's planned path and actual path overlayed
         if ax:
+            # using an axis that was generated elsewhere
             axx = ax.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx, ax=ax)
-        # a scatter plot of the score map
         else:
+            # standalone plot
             axx = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx)
-        # the color bar
 
         # the title
         plt.suptitle("Greedy UAV path\n"+str(len(UAV.GPSplan)-1)+" moves")
@@ -353,13 +380,17 @@ class PathPlanner:
                 plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
         # plot the UAV's path
         if ax:
+            # planned path
             ax.plot([i[0] for i in UAV.GPSplan],
                      [i[1] for i in UAV.GPSplan], color='lime')
+            # actual path
             ax.plot([i[0] for i in UAV.GPSpath],
                      [i[1] for i in UAV.GPSpath], color='red')
         else:
+            # planned path
             plt.plot([i[0] for i in UAV.GPSplan],
                     [i[1] for i in UAV.GPSplan], color='lime')
+            # actual path
             plt.plot([i[0] for i in UAV.GPSpath],
                     [i[1] for i in UAV.GPSpath], color='red')
         # size the plot to fill the window
@@ -408,14 +439,16 @@ class PathPlanner:
     # @return UAV.IDXplan a path of indices through which the UAV will travel
     # @return UAV.GPSplan a path of GPS points throught which the UAV will travel
     def greedyPath(self, UAV):
-
+        # start the planner fresh
         UAV.reset_planner()
         # figure out what the index of the starting point is
         if not (UAV.idx):
+            # if there isn't already an index, get it from the 'GPS' value
             UAV.idx = self._findGPSindex(UAV.GPS)
-            # and append the index to the new path
+            # and append the index to the planned path
             UAV.IDXplan.append(UAV.idx)
         else:
+            # otherwise just add the index to the planned path
             UAV.IDXplan.append(UAV.idx)
         # if the GPS point was valid, the indices should exist
         if (UAV.idx):
@@ -451,6 +484,7 @@ class PathPlanner:
                 UAV.IDXplan.append([UAV.IDXplan[i][0]+I, UAV.IDXplan[i][1]+J])
                 # add the GPS point to the UAV's path
                 UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
+                # uncomment the following to plot each step of the planner
                 '''
                 self.history.append(deepcopy([self.score_map,
                                               UAV.GPSpath,
@@ -473,7 +507,8 @@ class PathPlanner:
 
         # first check to make sure the transition is valid
         if x>=self.vman.grid_res[0] or \
-            y>=self.vman.grid_res[1]:
+            y>=self.vman.grid_res[1] or \
+            x<0 or y<0:
             return None
         # set an unobtainably low maximum value
         max = -10000000
@@ -482,8 +517,10 @@ class PathPlanner:
         # if there isn't a transition list for this node
         # then the node doesn't exist, and any move is invalid
         try:
+            # just for shorthand
             Xition = self.X_map[x][y].Xitions
         except:
+            # if that doesn't work, something is wrong. end the run
             return None
         # iterate through the 8 possible transitions
         for i in range(8):
@@ -501,6 +538,7 @@ class PathPlanner:
                 headCost = abs(i*np.deg2rad(45)- \
                                   (UAV.plan_heading[len(UAV.plan_heading)-1])*
                                      np.deg2rad(45))
+                # normalize to a value between -PI and PI
                 if headCost > PI:
                     headCost = abs(headCost - 2 * PI)
                 # calculate the 2nd derivative of the score wrt the transition
@@ -527,55 +565,90 @@ class PathPlanner:
             # if the transition is invalid, skip it
             except:
                 pass
+        # return the decision and the resulting score
         return max, dir
 
+    # updateEstimates
+    ## A function which updates the direction and speed estimates
+    # based on the UAV's path mask over Xbar
+    #
+    # @param UAV The UAV whose path is being used to update the estimates
     def updateEstimates(self, UAV):
-
+        # current field estimate
         Xk = deepcopy(self.vman.flowfield.u_field[:,:,self.plane])
+        # current velocity and direction estimates
         vd_k = [[deepcopy(self.params.v0)],
                 [deepcopy(self.params.d0)]]
+        # current sensitivity matrix
         sens_mat = np.column_stack([self._sens_mat[0].flatten(), self._sens_mat[1].flatten()])
+        # apply the pseudoinverse
         sens_mat_pinv = np.linalg.pinv(sens_mat)
+        # field actual
         Xbar = deepcopy(self.Xbar)
+        # if the node is not masked by the UAV's path, use the estimate
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
                 if UAV.path_mask[i][j]==1:
                     Xbar[i][j]=Xk[i][j]
+        # convert Xk and Xbar to column vectors
         Xbar = np.vstack(Xbar.flatten())
         Xk = np.vstack(Xk.flatten())
-        # Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
+        # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
         vd_kp1=vd_k+np.matmul(sens_mat_pinv,Xbar-Xk)
+        # update the estimates
         self.params.v0 = vd_kp1[0][0]
         self.params.d0 = vd_kp1[1][0]
+        # update the wind speed estimate
         self.WF['farm']['properties']['wind_speed'] = self.params.v0
+        # calculate the FLORIS model with the new speed
         vmanTemp = VisualizationManager(self.WF, self.vman.grid_res)
+        # update the direction estimate
         vmanTemp.flowfield.wind_direction = self.params.d0
+        # recalculate the FLORIS wake model with the new direction estimate
         vmanTemp.flowfield.calculate_wake()
+        # update the sensitivity matrix
         self._sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix())
+        # update the score map
         self._calcScoreMap()
+        # output the error to the terminal
         print(self.error[len(self.error) - 1])
+        # update the local VisualManager object
         self.vman = deepcopy(vmanTemp)
+        # keep track of the error signals for plotting
         self.error.append([self.params.vBar-self.params.v0,
                            self.params.dBar-self.params.d0])
 
-
+    # updateEstimates
+    ## A function which updates the direction and speed estimates
+    # based on the UAV's path mask over Xbar
+    #
+    # @param UAV The UAV whose path is being used to update the estimates
     def plotHistory(self, UAV, filename='path'):
+        # variable which tells us if we are looking at the Wave or the Score map
         self._map_sel = 0
+        # boolean which tells us if the animation is playing
         self._play = True
+        # create a figure
         f = plt.figure(figsize=(10,7.5))
+        # separate it into a grid
         gs = f.add_gridspec(2,3)
+        # put the error plots in the leftmost figures
         ax_v = f.add_subplot(gs[0,0], title='speed error')
         ax_d = f.add_subplot(gs[1,0])
-
+        # the path plot takes up the right 2/3 of the figure
         axbig = f.add_subplot(gs[0:,1:])
-
+        # plot the velocity error
         ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
+        # format x,y and c for scatterplotting
         x = deepcopy(self.X)
         y = deepcopy(self.Y)
         c = deepcopy(self.history[1][0])
+        # plot the score map
         cont = axbig.scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), cmap='gnuplot2')
         plt.colorbar(cont, ax=axbig)
+        # plot the direction error
         ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
+        # the plot's title holds a lot of info
         plt.suptitle("Wind Speed and Direction Estimates with a UAV for Sensing\n" +
                      'Initial Speed estimate: ' + str(self.history[0][5]) +
                      ' m/s, Actual: ' + str(self.params.vBar) +
@@ -588,104 +661,128 @@ class PathPlanner:
                      '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' +
                      str(self.error[len(self.error) - 1][0]) + '\N{DEGREE SIGN}' +
                      '          ev = ' + str(self.error[len(self.error) - 1][1]) + ' m/s')
-
-        ax_d.set_title('direction error (\N{DEGREE SIGN})')
+        # set plot and axis titles for the error plots
+        ax_d.set_ylabel('direction error (\N{DEGREE SIGN})')
         ax_d.set_xlabel('# of recalculations')
-        ax_v.set_title('speed error (m/s)')
-        #f.tight_layout()
+        ax_v.set_ylabel('speed error (m/s)')
+        # adjust how the plots fill the figure
         plt.subplots_adjust(left=0.05,
                             bottom=0.15,
                             right=0.95,
                             top=0.83,
                             wspace=0.27,
                             hspace=0.19)
+        # slider axis
         sld_ax = plt.axes((0.2, 0.02, 0.56, 0.02))
+        # create the slider
         sld = Slider(sld_ax,
                      'moves',
                      0, len(self.history) - 1, valinit=0)
+        # set the initial slider text
         sld.valtext.set_text('move 0')
+        # button axis
         btn_ax = plt.axes([0.85, 0.925, 0.125, 0.05])
+        # create a button which toggles between score map and wave map
         btn = Button(btn_ax, 'Show Wave')
+        # button axis
         btn2_ax = plt.axes([0.85, 0.01, 0.125, 0.05])
+        # create a button which plays/pauses the animation
         btn2 = Button(btn2_ax, 'Pause')
+        # function for the map button
         def map_btn(event):
-            if self._map_sel == 0:
-                self._map_sel = 3
-                #axbig.set(title='path over wave map')
-                btn.label.set_text('Show Score')
+            if self._map_sel == 0: # currently showing the score map
+                self._map_sel = 3 # change to showing the wave map
+                btn.label.set_text('Show Score') # update button text
             else:
-                self._map_sel = 0
-                #axbig.set(title='path over score map')
-                btn.label.set_text('Show Wave')
-            update_plot(0)
+                self._map_sel = 0 # otherwise change to showing the score map
+                btn.label.set_text('Show Wave') # update button text
+            update_plot(0) # and update the plot
+        # set the above function for the map button
         btn.on_clicked(map_btn)
+        # function for the play button
         def play_btn(event):
-            if self._play:
-                self._play = False
-                btn2.label.set_text("Play")
+            if self._play: # currently playing
+                self._play = False # pause it
+                btn2.label.set_text("Play") # update button text
             else:
-                self._play = True
-                btn2.label.set_text("Pause")
-
-
+                self._play = True # otherwise, play the animation
+                btn2.label.set_text("Pause") # update button text
+        # set the above function for the play button
         btn2.on_clicked(play_btn)
+        # function which updates the plot
         def update_plot(val):
-
+            # discretize the slider to integer values
             idx = int(round(sld.val))
+            # set the slider text
             sld.valtext.set_text('move ' + '{}'.format(idx))
+            # clear the plots
             axbig.clear()
             ax_v.clear()
             ax_d.clear()
-            if self._map_sel == 0:
-                #axbig.set(title='path over score map')
-                btn.label.set_text('Show Wave')
-            else:
-                #axbig.set(title='path over wave map')
-                btn.label.set_text('Show Score')
+            # check map selection
+            if self._map_sel == 0: # it's the score map
+                btn.label.set_text('Show Wave') # set the button text
+            else: # it's the wave map
+                btn.label.set_text('Show Score') # set the button text\
+            # set the subplot labels
             ax_d.set_ylabel('direction error (\N{DEGREE SIGN})')
             ax_d.set_xlabel('# of recalculations')
             ax_v.set_ylabel('speed error (m/s)')
+            # plot the map
             axbig.scatter(x=x.flatten(), y=y.flatten(), c=self.history[idx][self._map_sel].flatten(), cmap='gnuplot2')
+            # plot the plan
             axbig.plot([i[0] for i in self.history[idx][2]],
                        [i[1] for i in self.history[idx][2]], color='lime')
+            # plot the actual path
             axbig.plot([i[0] for i in self.history[idx][1]],
                              [i[1] for i in self.history[idx][1]], color = 'red')
-
+            # for shorthand, UAV's location on the map
             _x = self.history[idx][1][len(self.history[idx][1])-1][0]
             _y = self.history[idx][1][len(self.history[idx][1])-1][1]
+            # plot the UAV, a big red circle
             axbig.plot(_x,_y, marker='o', markersize=10, color="red")
+            # plot the velocity error
             ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
+            # add a vertical red line to show where we are in the iterations
             ax_v.axvline(idx/(UAV.moves2recalc+1), color='red')
+            # plot the direction error
             ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
+            # add a vertical red line to show where we are in the iterations
             ax_d.axvline(idx / (UAV.moves2recalc + 1), color='red')
+            # plot the turbines
             for coord, turbine in self.vman.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
                 b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
                 a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
                 b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
                 axbig.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
-                # axarr[1][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            # show the plot
             plt.draw()
-
+        # set the update function for what happens when the slider value changes
         sld.on_changed(update_plot)
+        # adjust how the plots fill the figure
         plt.subplots_adjust(left=0.1,
                             bottom=0.14,
                             right=1.0,
                             top=0.84,
                             wspace=0.2,
                             hspace=0.24)
+        # function to animate the plot
         def animate(frame, *fargs):
-
+            # check if it is playing
             if self._play:
+                # if it's not at the end, increment the slider value
                 if sld.val < sld.valmax-1:
                     temp = sld.val
                     sld.set_val(temp + 1)
                 else:
+                # if it's at the end, set it to the beginning
                     sld.set_val(sld.valmin)
 
-
+        # set the animate function to the FuncAnimation function for animation
         an = anim.FuncAnimation(f, animate, interval=100,frames=len(self.history))
+        # render to video. to make it play faster, increase fps
         an.save(filename+'.mp4',fps=7,dpi=300)
-
+        # show the plot
         plt.show()
 

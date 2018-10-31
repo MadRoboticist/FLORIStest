@@ -66,9 +66,9 @@ $(function() {
 </div><!-- top -->
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a> &#124;
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#pub-attribs">Public Attributes</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
 <a href="classpath_plan_1_1_path_planner-members.html">List of all members</a>  </div>
   <div class="headertitle">
 <div class="title">pathPlan.PathPlanner Class Reference</div>  </div>
@@ -78,12 +78,6 @@ $(function() {
 <p>Contains all path planning functions and parameters.  
  <a href="classpath_plan_1_1_path_planner.html#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner_1_1params.html">params</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A class through which parameters can be passed to the member functions.  <a href="classpath_plan_1_1_path_planner_1_1params.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a4725d91c2d54372bbfecfce0a71a3552"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a4725d91c2d54372bbfecfce0a71a3552">__init__</a> (self, <a class="el" href="classpath_plan_1_1_path_planner.html#a8e31f83f0d8983286bb3746da568af81">vman</a>)</td></tr>
@@ -92,29 +86,47 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac2b91da25e1f81aa210e83d502f9a008"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ac2b91da25e1f81aa210e83d502f9a008">show</a> (self)</td></tr>
 <tr class="memdesc:ac2b91da25e1f81aa210e83d502f9a008"><td class="mdescLeft">&#160;</td><td class="mdescRight">Simply calls the plt.show() method to show any figures which have been generated.  <a href="#ac2b91da25e1f81aa210e83d502f9a008">More...</a><br /></td></tr>
 <tr class="separator:ac2b91da25e1f81aa210e83d502f9a008"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a1812ee8e5ce2772a9f35cc4e28f30f1b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a1812ee8e5ce2772a9f35cc4e28f30f1b">plotWaveMap</a> (self, <a class="el" href="class_u_a_v_1_1_u_a_v.html">UAV</a>, ax=None)</td></tr>
+<tr class="memitem:a1812ee8e5ce2772a9f35cc4e28f30f1b"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a1812ee8e5ce2772a9f35cc4e28f30f1b">plotWaveMap</a> (self, UAV, ax=None)</td></tr>
 <tr class="memdesc:a1812ee8e5ce2772a9f35cc4e28f30f1b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of the current wave map.  <a href="#a1812ee8e5ce2772a9f35cc4e28f30f1b">More...</a><br /></td></tr>
 <tr class="separator:a1812ee8e5ce2772a9f35cc4e28f30f1b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:abe0f6150b91e41dc9625d29a7005e37d"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#abe0f6150b91e41dc9625d29a7005e37d">plotScoreMap</a> (self, ax=None)</td></tr>
 <tr class="memdesc:abe0f6150b91e41dc9625d29a7005e37d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of the current score map.  <a href="#abe0f6150b91e41dc9625d29a7005e37d">More...</a><br /></td></tr>
 <tr class="separator:abe0f6150b91e41dc9625d29a7005e37d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ab60cef9dbfbb64e9282869c860edb16c"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ab60cef9dbfbb64e9282869c860edb16c">plotScoreMask</a> (self, mask, ax=None)</td></tr>
-<tr class="memdesc:ab60cef9dbfbb64e9282869c860edb16c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of a <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s score mask (planned or actual)  <a href="#ab60cef9dbfbb64e9282869c860edb16c">More...</a><br /></td></tr>
+<tr class="memdesc:ab60cef9dbfbb64e9282869c860edb16c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of a <a class="el" href="namespace_u_a_v.html">UAV</a>'s score mask (planned or actual)  <a href="#ab60cef9dbfbb64e9282869c860edb16c">More...</a><br /></td></tr>
 <tr class="separator:ab60cef9dbfbb64e9282869c860edb16c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aa5506bc585bd5f1d3fa76d0e383b0cc2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#aa5506bc585bd5f1d3fa76d0e383b0cc2">plotScoreMapUAV</a> (self, <a class="el" href="class_u_a_v_1_1_u_a_v.html">UAV</a>, ax=None)</td></tr>
-<tr class="memdesc:aa5506bc585bd5f1d3fa76d0e383b0cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of a given <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s path over the score map.  <a href="#aa5506bc585bd5f1d3fa76d0e383b0cc2">More...</a><br /></td></tr>
+<tr class="memitem:aa5506bc585bd5f1d3fa76d0e383b0cc2"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#aa5506bc585bd5f1d3fa76d0e383b0cc2">plotScoreMapUAV</a> (self, UAV, ax=None)</td></tr>
+<tr class="memdesc:aa5506bc585bd5f1d3fa76d0e383b0cc2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates a plot of a given <a class="el" href="namespace_u_a_v.html">UAV</a>'s path over the score map.  <a href="#aa5506bc585bd5f1d3fa76d0e383b0cc2">More...</a><br /></td></tr>
 <tr class="separator:aa5506bc585bd5f1d3fa76d0e383b0cc2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48f001c9c670e2bafa027ece0f9261ec"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a48f001c9c670e2bafa027ece0f9261ec">greedyPath</a> (self, <a class="el" href="class_u_a_v_1_1_u_a_v.html">UAV</a>, steps=100, recalc=10)</td></tr>
-<tr class="memdesc:a48f001c9c670e2bafa027ece0f9261ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which populates a <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s list with a greedy path with the given number of steps.  <a href="#a48f001c9c670e2bafa027ece0f9261ec">More...</a><br /></td></tr>
-<tr class="separator:a48f001c9c670e2bafa027ece0f9261ec"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ada84606d003d5f17ff79119c9b192363"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ada84606d003d5f17ff79119c9b192363">greedyPath</a> (self, UAV)</td></tr>
+<tr class="memdesc:ada84606d003d5f17ff79119c9b192363"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which populates a <a class="el" href="namespace_u_a_v.html">UAV</a>'s list with a greedy path with the given number of steps in the <a class="el" href="namespace_u_a_v.html">UAV</a>'s planning horizon.  <a href="#ada84606d003d5f17ff79119c9b192363">More...</a><br /></td></tr>
+<tr class="separator:ada84606d003d5f17ff79119c9b192363"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a09e0c6742127d6643a92c056f9703ac3"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a09e0c6742127d6643a92c056f9703ac3">updateEstimates</a> (self, UAV)</td></tr>
+<tr class="memdesc:a09e0c6742127d6643a92c056f9703ac3"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which updates the direction and speed estimates based on the <a class="el" href="namespace_u_a_v.html">UAV</a>'s path mask over Xbar.  <a href="#a09e0c6742127d6643a92c056f9703ac3">More...</a><br /></td></tr>
+<tr class="separator:a09e0c6742127d6643a92c056f9703ac3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af73fe8f41cc20872ef526deef40f3df0"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#af73fe8f41cc20872ef526deef40f3df0">plotHistory</a> (self, UAV, filename='path')</td></tr>
+<tr class="memdesc:af73fe8f41cc20872ef526deef40f3df0"><td class="mdescLeft">&#160;</td><td class="mdescRight">A function which updates the direction and speed estimates based on the <a class="el" href="namespace_u_a_v.html">UAV</a>'s path mask over Xbar.  <a href="#af73fe8f41cc20872ef526deef40f3df0">More...</a><br /></td></tr>
+<tr class="separator:af73fe8f41cc20872ef526deef40f3df0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a8e31f83f0d8983286bb3746da568af81"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a8e31f83f0d8983286bb3746da568af81">vman</a></td></tr>
 <tr class="memdesc:a8e31f83f0d8983286bb3746da568af81"><td class="mdescLeft">&#160;</td><td class="mdescRight">A VisualizationManager object.  <a href="#a8e31f83f0d8983286bb3746da568af81">More...</a><br /></td></tr>
 <tr class="separator:a8e31f83f0d8983286bb3746da568af81"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a08c0a53a2d75ca5274fd1bbcd63f9353"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a08c0a53a2d75ca5274fd1bbcd63f9353">params</a></td></tr>
+<tr class="memdesc:a08c0a53a2d75ca5274fd1bbcd63f9353"><td class="mdescLeft">&#160;</td><td class="mdescRight">A local copy of vman.params.  <a href="#a08c0a53a2d75ca5274fd1bbcd63f9353">More...</a><br /></td></tr>
+<tr class="separator:a08c0a53a2d75ca5274fd1bbcd63f9353"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a022804084fc74bcdb870fc2d50b18b95"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a022804084fc74bcdb870fc2d50b18b95">plane</a></td></tr>
+<tr class="memdesc:a022804084fc74bcdb870fc2d50b18b95"><td class="mdescLeft">&#160;</td><td class="mdescRight">the plane where the computations and visualizations are taking place  <a href="#a022804084fc74bcdb870fc2d50b18b95">More...</a><br /></td></tr>
+<tr class="separator:a022804084fc74bcdb870fc2d50b18b95"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab4ccf8419d7e8d160f73127c2f2a76fe"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ab4ccf8419d7e8d160f73127c2f2a76fe">WF</a></td></tr>
+<tr class="memdesc:ab4ccf8419d7e8d160f73127c2f2a76fe"><td class="mdescLeft">&#160;</td><td class="mdescRight">a local copy of vman.WF  <a href="#ab4ccf8419d7e8d160f73127c2f2a76fe">More...</a><br /></td></tr>
+<tr class="separator:ab4ccf8419d7e8d160f73127c2f2a76fe"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aa4c3bb7b8489c18d3c9c0db4964ab7b6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#aa4c3bb7b8489c18d3c9c0db4964ab7b6">Xbar</a></td></tr>
+<tr class="memdesc:aa4c3bb7b8489c18d3c9c0db4964ab7b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">this is the 'actual' u_field  <a href="#aa4c3bb7b8489c18d3c9c0db4964ab7b6">More...</a><br /></td></tr>
+<tr class="separator:aa4c3bb7b8489c18d3c9c0db4964ab7b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a726f4b4f55f7fb557eabceb962e25871"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a726f4b4f55f7fb557eabceb962e25871">X_map</a></td></tr>
-<tr class="memdesc:a726f4b4f55f7fb557eabceb962e25871"><td class="mdescLeft">&#160;</td><td class="mdescRight">the plane where the computations and visualizations are taking place  <a href="#a726f4b4f55f7fb557eabceb962e25871">More...</a><br /></td></tr>
+<tr class="memdesc:a726f4b4f55f7fb557eabceb962e25871"><td class="mdescLeft">&#160;</td><td class="mdescRight">A map of all possible transitions on the map and their respective scores.  <a href="#a726f4b4f55f7fb557eabceb962e25871">More...</a><br /></td></tr>
 <tr class="separator:a726f4b4f55f7fb557eabceb962e25871"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ac7e6ed6310bc8e1064e42af17b8a5948"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ac7e6ed6310bc8e1064e42af17b8a5948">X</a></td></tr>
 <tr class="memdesc:ac7e6ed6310bc8e1064e42af17b8a5948"><td class="mdescLeft">&#160;</td><td class="mdescRight">An X grid mesh of the map's 'GPS' coordinates.  <a href="#ac7e6ed6310bc8e1064e42af17b8a5948">More...</a><br /></td></tr>
@@ -122,19 +134,26 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:a4e78ffd0fb9df91a15d01ca5cb615d24"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a4e78ffd0fb9df91a15d01ca5cb615d24">Y</a></td></tr>
 <tr class="memdesc:a4e78ffd0fb9df91a15d01ca5cb615d24"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Y grid mesh of the map's 'GPS' coordinates.  <a href="#a4e78ffd0fb9df91a15d01ca5cb615d24">More...</a><br /></td></tr>
 <tr class="separator:a4e78ffd0fb9df91a15d01ca5cb615d24"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a508cce57c5e6deb7880fe2ef631c983e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a508cce57c5e6deb7880fe2ef631c983e">d0</a></td></tr>
-<tr class="memdesc:a508cce57c5e6deb7880fe2ef631c983e"><td class="mdescLeft">&#160;</td><td class="mdescRight">The initial wind direction estimate.  <a href="#a508cce57c5e6deb7880fe2ef631c983e">More...</a><br /></td></tr>
-<tr class="separator:a508cce57c5e6deb7880fe2ef631c983e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a56e0e1649ae12d5c72409041c2aaeae9"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a56e0e1649ae12d5c72409041c2aaeae9">v0</a></td></tr>
-<tr class="memdesc:a56e0e1649ae12d5c72409041c2aaeae9"><td class="mdescLeft">&#160;</td><td class="mdescRight">The initial wind speed estimate.  <a href="#a56e0e1649ae12d5c72409041c2aaeae9">More...</a><br /></td></tr>
-<tr class="separator:a56e0e1649ae12d5c72409041c2aaeae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae95aac37eb002e14363fa4ccffcbe7cc"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#ae95aac37eb002e14363fa4ccffcbe7cc">error</a></td></tr>
+<tr class="memdesc:ae95aac37eb002e14363fa4ccffcbe7cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">holds a record of the direction and velocity errors for plotting  <a href="#ae95aac37eb002e14363fa4ccffcbe7cc">More...</a><br /></td></tr>
+<tr class="separator:ae95aac37eb002e14363fa4ccffcbe7cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aec7491cbbb5ea16f5fbeceecbb405efd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#aec7491cbbb5ea16f5fbeceecbb405efd">score_map</a></td></tr>
+<tr class="memdesc:aec7491cbbb5ea16f5fbeceecbb405efd"><td class="mdescLeft">&#160;</td><td class="mdescRight">the score map is computed as ||df/dd||*||df/dv||  <a href="#aec7491cbbb5ea16f5fbeceecbb405efd">More...</a><br /></td></tr>
 <tr class="separator:aec7491cbbb5ea16f5fbeceecbb405efd"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a15670c0455bbbef27218e680a791c7aa"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#a15670c0455bbbef27218e680a791c7aa">minDist2turbine</a> = 160</td></tr>
+<tr class="memdesc:a15670c0455bbbef27218e680a791c7aa"><td class="mdescLeft">&#160;</td><td class="mdescRight">sets a minimum distance from the center of a turbine which serves as a boundary for the <a class="el" href="namespace_u_a_v.html">UAV</a>  <a href="#a15670c0455bbbef27218e680a791c7aa">More...</a><br /></td></tr>
+<tr class="separator:a15670c0455bbbef27218e680a791c7aa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:af4644107cc868efe6c520d497500c61d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classpath_plan_1_1_path_planner.html#af4644107cc868efe6c520d497500c61d">history</a> = list()</td></tr>
+<tr class="memdesc:af4644107cc868efe6c520d497500c61d"><td class="mdescLeft">&#160;</td><td class="mdescRight">keeps track of everything that happens so it can be plotted afterward.  <a href="#af4644107cc868efe6c520d497500c61d">More...</a><br /></td></tr>
+<tr class="separator:af4644107cc868efe6c520d497500c61d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains all path planning functions and parameters. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00083">83</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00080">80</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a4725d91c2d54372bbfecfce0a71a3552"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a4725d91c2d54372bbfecfce0a71a3552">&#9670;&nbsp;</a></span>__init__()</h2>
@@ -170,13 +189,13 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00096">96</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00101">101</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a48f001c9c670e2bafa027ece0f9261ec"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a48f001c9c670e2bafa027ece0f9261ec">&#9670;&nbsp;</a></span>greedyPath()</h2>
+<a id="ada84606d003d5f17ff79119c9b192363"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ada84606d003d5f17ff79119c9b192363">&#9670;&nbsp;</a></span>greedyPath()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -191,19 +210,7 @@ Public Attributes</h2></td></tr>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>UAV</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>steps</em> = <code>100</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>recalc</em> = <code>10</code>&#160;</td>
+          <td class="paramname"><em>UAV</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -213,20 +220,64 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A function which populates a <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s list with a greedy path with the given number of steps. </p>
+<p>A function which populates a <a class="el" href="namespace_u_a_v.html">UAV</a>'s list with a greedy path with the given number of steps in the <a class="el" href="namespace_u_a_v.html">UAV</a>'s planning horizon. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a></td><td>The <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a> whose path is to be generated </td></tr>
-    <tr><td class="paramname">steps</td><td>(optional) the number of moves to be generated for the path </td></tr>
+    <tr><td class="paramname"><a class="el" href="namespace_u_a_v.html">UAV</a></td><td>The <a class="el" href="namespace_u_a_v.html">UAV</a> whose path is to be generated </td></tr>
+    <tr><td class="paramname">UAV.plan_horizon</td><td>the number of steps to plan ahead </td></tr>
     <tr><td class="paramname">recalc</td><td>(optional) the number of moves before the score map is recalculated </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><a class="el" href="class_u_a_v_1_1_u_a_v.html#aad327e256a934c507094da885205a8a6" title="A list of idx points representing the UAV&#39;s planned path through the nodes. ">UAV.IDXplan</a> a path of indices through which the <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a> will travel </dd>
+<dl class="section return"><dt>Returns</dt><dd>UAV.IDXplan a path of indices through which the <a class="el" href="namespace_u_a_v.html">UAV</a> will travel </dd>
 <dd>
-<a class="el" href="class_u_a_v_1_1_u_a_v.html#a1067a3866c5d02e5eb69b39ef23c1509" title="A list of GPS points representing the UAV&#39;s planned path through the map. ">UAV.GPSplan</a> a path of GPS points throught which the <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a> will travel </dd></dl>
+UAV.GPSplan a path of GPS points throught which the <a class="el" href="namespace_u_a_v.html">UAV</a> will travel </dd></dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00356">356</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00441">441</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="af73fe8f41cc20872ef526deef40f3df0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af73fe8f41cc20872ef526deef40f3df0">&#9670;&nbsp;</a></span>plotHistory()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def pathPlan.PathPlanner.plotHistory </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>UAV</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>filename</em> = <code>'path'</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A function which updates the direction and speed estimates based on the <a class="el" href="namespace_u_a_v.html">UAV</a>'s path mask over Xbar. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="namespace_u_a_v.html">UAV</a></td><td>The <a class="el" href="namespace_u_a_v.html">UAV</a> whose path is being used to update the estimates </td></tr>
+  </table>
+  </dd>
+</dl>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00626">626</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -264,7 +315,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00261">261</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00302">302</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -300,16 +351,16 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generates a plot of a given <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s path over the score map. </p>
+<p>Generates a plot of a given <a class="el" href="namespace_u_a_v.html">UAV</a>'s path over the score map. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname"><a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a></td><td>the <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a> whose path is to be plotted </td></tr>
+    <tr><td class="paramname"><a class="el" href="namespace_u_a_v.html">UAV</a></td><td>the <a class="el" href="namespace_u_a_v.html">UAV</a> whose path is to be plotted </td></tr>
     <tr><td class="paramname">ax</td><td>Can be passed to the function if the plot is to be in a subplot </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00294">294</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00356">356</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -345,7 +396,7 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>Generates a plot of a <a class="el" href="class_u_a_v.html" title="A class for representing the state of a UAV on the windfarm. ">UAV</a>'s score mask (planned or actual) </p>
+<p>Generates a plot of a <a class="el" href="namespace_u_a_v.html">UAV</a>'s score mask (planned or actual) </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">mask</td><td>the mask to be plotted (planned or actual) </td></tr>
@@ -354,7 +405,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00279">279</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00330">330</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -398,7 +449,7 @@ Public Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00244">244</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00275">275</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -420,26 +471,153 @@ Public Attributes</h2></td></tr>
 
 <p>Simply calls the plt.show() method to show any figures which have been generated. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00238">238</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00269">269</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
-<h2 class="groupheader">Member Data Documentation</h2>
-<a id="a508cce57c5e6deb7880fe2ef631c983e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a508cce57c5e6deb7880fe2ef631c983e">&#9670;&nbsp;</a></span>d0</h2>
+<a id="a09e0c6742127d6643a92c056f9703ac3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a09e0c6742127d6643a92c056f9703ac3">&#9670;&nbsp;</a></span>updateEstimates()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">pathPlan.PathPlanner.d0</td>
+          <td class="memname">def pathPlan.PathPlanner.updateEstimates </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>self</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>UAV</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>The initial wind direction estimate. </p>
+<p>A function which updates the direction and speed estimates based on the <a class="el" href="namespace_u_a_v.html">UAV</a>'s path mask over Xbar. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname"><a class="el" href="namespace_u_a_v.html">UAV</a></td><td>The <a class="el" href="namespace_u_a_v.html">UAV</a> whose path is being used to update the estimates </td></tr>
+  </table>
+  </dd>
+</dl>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00116">116</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00576">576</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<h2 class="groupheader">Member Data Documentation</h2>
+<a id="ae95aac37eb002e14363fa4ccffcbe7cc"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae95aac37eb002e14363fa4ccffcbe7cc">&#9670;&nbsp;</a></span>error</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.error</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>holds a record of the direction and velocity errors for plotting </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00140">140</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="af4644107cc868efe6c520d497500c61d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af4644107cc868efe6c520d497500c61d">&#9670;&nbsp;</a></span>history</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.history = list()</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>keeps track of everything that happens so it can be plotted afterward. </p>
+<p>This is how history is populated: self.history.append(deepcopy([self.score_map, UAV.GPSpath, UAV.GPSplan, UAV.wave_map, self.error[len(self.error)-1], self.params.v0, self.params.d0])) </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00097">97</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="a15670c0455bbbef27218e680a791c7aa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a15670c0455bbbef27218e680a791c7aa">&#9670;&nbsp;</a></span>minDist2turbine</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.minDist2turbine = 160</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">static</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>sets a minimum distance from the center of a turbine which serves as a boundary for the <a class="el" href="namespace_u_a_v.html">UAV</a> </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00085">85</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="a08c0a53a2d75ca5274fd1bbcd63f9353"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a08c0a53a2d75ca5274fd1bbcd63f9353">&#9670;&nbsp;</a></span>params</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.params</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A local copy of vman.params. </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00107">107</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="a022804084fc74bcdb870fc2d50b18b95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a022804084fc74bcdb870fc2d50b18b95">&#9670;&nbsp;</a></span>plane</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.plane</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>the plane where the computations and visualizations are taking place </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00110">110</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -455,25 +633,9 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00185">185</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p>the score map is computed as ||df/dd||*||df/dv|| </p>
 
-</div>
-</div>
-<a id="a56e0e1649ae12d5c72409041c2aaeae9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a56e0e1649ae12d5c72409041c2aaeae9">&#9670;&nbsp;</a></span>v0</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">pathPlan.PathPlanner.v0</td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>The initial wind speed estimate. </p>
-
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00119">119</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00215">215</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -491,7 +653,25 @@ Public Attributes</h2></td></tr>
 
 <p>A VisualizationManager object. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00099">99</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00104">104</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="ab4ccf8419d7e8d160f73127c2f2a76fe"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab4ccf8419d7e8d160f73127c2f2a76fe">&#9670;&nbsp;</a></span>WF</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.WF</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>a local copy of vman.WF </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00113">113</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -509,7 +689,7 @@ Public Attributes</h2></td></tr>
 
 <p>An X grid mesh of the map's 'GPS' coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00108">108</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00132">132</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -525,10 +705,27 @@ Public Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>the plane where the computations and visualizations are taking place </p>
-<p>A map of all possible transitions on the map and their respective scores </p>
+<p>A map of all possible transitions on the map and their respective scores. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00104">104</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00128">128</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+
+</div>
+</div>
+<a id="aa4c3bb7b8489c18d3c9c0db4964ab7b6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa4c3bb7b8489c18d3c9c0db4964ab7b6">&#9670;&nbsp;</a></span>Xbar</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">pathPlan.PathPlanner.Xbar</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>this is the 'actual' u_field </p>
+
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00125">125</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>
@@ -546,7 +743,7 @@ Public Attributes</h2></td></tr>
 
 <p>A Y grid mesh of the map's 'GPS' coordinates. </p>
 
-<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00111">111</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="path_plan_8py_source.html#l00135">135</a> of file <a class="el" href="path_plan_8py_source.html">pathPlan.py</a>.</p>
 
 </div>
 </div>

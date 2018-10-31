@@ -5,5 +5,6 @@ var searchData=
   ['readme_2emd',['README.md',['../_r_e_a_d_m_e_8md.html',1,'']]],
   ['reducedsm',['ReducedSM',['../namespace_reduced_s_m.html',1,'ReducedSM'],['../classvisualization__manager___d_j_1_1_visualization_manager.html#a92c5f58eddce15c3fa19edd63e66ef43',1,'visualization_manager_DJ.VisualizationManager.reducedSM()']]],
   ['reducedsm_2epy',['ReducedSM.py',['../_reduced_s_m_8py.html',1,'']]],
-  ['reset_5fplanner',['reset_planner',['../class_u_a_v_1_1_u_a_v.html#a592dc223db306fc52761ea8c97f0d001',1,'UAV::UAV']]]
+  ['reset_5fplanner',['reset_planner',['../class_u_a_v_1_1_u_a_v.html#a592dc223db306fc52761ea8c97f0d001',1,'UAV::UAV']]],
+  ['reset_5fuav',['reset_UAV',['../class_u_a_v_1_1_u_a_v.html#a7a543ecba6bf68f909b80679a63035c7',1,'UAV::UAV']]]
 ];
