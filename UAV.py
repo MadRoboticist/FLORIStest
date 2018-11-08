@@ -9,10 +9,8 @@ class UAV:
 
     ## Class constructor
     def __init__(self, planner):
-        ''' Class constructor'''
 
-
-        ''' This section holds "ACTUAL" values '''
+        # This section contains "ACTUAL" values
 
         ## @var GPS
         # Holds the "GPS" location
@@ -37,6 +35,9 @@ class UAV:
         ## @var patrolMax
         # The length of the UAV's path history
         self.patrolMax = 100
+        ## @var init_mask_size
+        # The number of nodes to visit before the first recalculation
+        self.init_mask_size = 100
         ## @var path_mask
         # Holds a map of values which degrade the
         # score of the corresponding node after it
@@ -52,6 +53,9 @@ class UAV:
         ## @var plan_horizon
         #   The number of steps to plan ahead
         self.plan_horizon = 100
+        ## @var init_plan_horizon
+        #   The number of steps to plan ahead
+        self.init_plan_horizon = 125
         ## @var plan_heading
         # A list of the enumerated directions that the UAV
         # plans to travel. see Class dir()
@@ -90,6 +94,7 @@ class UAV:
         # (applied as calculated_score*mask_value)
         self.plan_mask = [[1 for i in range(len(planner.score_map[0]))] \
                              for j in range(len(planner.score_map))]
+
 
         ''' This section contains WEIGHTS '''
         ## @var maskSUB
@@ -187,7 +192,11 @@ class UAV:
         tempHead = deepcopy(self.heading)
         tempMask = deepcopy(self.path_mask)
         # step through the current plan
-        for i in range(self.moves2recalc+1):
+        if len(self.planner.history)>0:
+            moves = self.moves2recalc
+        else:
+            moves = self.init_mask_size
+        for i in range(moves):
             # if the moves haven't been planned yet,
             # an exception will be thrown
             try:

@@ -442,6 +442,11 @@ class PathPlanner:
         # start the planner fresh
         UAV.reset_planner()
         # figure out what the index of the starting point is
+        if len(self.history) < UAV.init_mask_size:
+            plan_horizon = UAV.init_plan_horizon
+        else:
+            plan_horizon = UAV.plan_horizon
+
         if not (UAV.idx):
             # if there isn't already an index, get it from the 'GPS' value
             UAV.idx = self._findGPSindex(UAV.GPS)
@@ -455,7 +460,7 @@ class PathPlanner:
             # calculate the current score map
             self._calcScoreMap()
             # let the iteration begin
-            for i in range(UAV.plan_horizon):
+            for i in range(plan_horizon):
                 # just for shorthand notation
                 x=UAV.IDXplan[i][0]
                 y=UAV.IDXplan[i][1]
@@ -623,7 +628,7 @@ class PathPlanner:
     # based on the UAV's path mask over Xbar
     #
     # @param UAV The UAV whose path is being used to update the estimates
-    def plotHistory(self, UAV, filename='path'):
+    def plotHistory(self, UAV, filename=None):
         # variable which tells us if we are looking at the Wave or the Score map
         self._map_sel = 0
         # boolean which tells us if the animation is playing
@@ -744,11 +749,17 @@ class PathPlanner:
             # plot the velocity error
             ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
             # add a vertical red line to show where we are in the iterations
-            ax_v.axvline(idx/(UAV.moves2recalc+1), color='red')
+            if idx > 100:
+                ax_v.axvline((idx-UAV.init_mask_size)/(UAV.moves2recalc+1), color='red')
+            else:
+                ax_v.axvline(0, color='red')
             # plot the direction error
             ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
             # add a vertical red line to show where we are in the iterations
-            ax_d.axvline(idx / (UAV.moves2recalc + 1), color='red')
+            if idx > 100:
+                ax_d.axvline((idx-UAV.init_mask_size) / (UAV.moves2recalc + 1), color='red')
+            else:
+                ax_d.axvline(0, color='red')
             # plot the turbines
             for coord, turbine in self.vman.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -782,7 +793,8 @@ class PathPlanner:
         # set the animate function to the FuncAnimation function for animation
         an = anim.FuncAnimation(f, animate, interval=100,frames=len(self.history))
         # render to video. to make it play faster, increase fps
-        an.save(filename+'.mp4',fps=7,dpi=300)
+        if filename:
+            an.save(filename+'.mp4',fps=15,dpi=300)
         # show the plot
         plt.show()
 

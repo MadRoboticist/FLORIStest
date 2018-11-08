@@ -21,9 +21,9 @@ vman = VisualizationManager(WF, grid_resolution)  # a new VisualizationManager o
 ## average wind speed
 vman.params.speed = WF['farm']['properties']['wind_speed']
 ## {min speed, max speed, step}
-vman.params.Srange = [vman.params.speed-2.0, vman.params.speed+2.0, 0.25]
+vman.params.Srange = [vman.params.speed-5.0, vman.params.speed+5.0, 1]
 ## {min dir error, max dir error, step}
-vman.params.Drange = [-2.0, 2.0, 0.25]
+vman.params.Drange = [-10.0, 10.0, 1]
 
 # call the animateDnSerror function
 vman.animateDnSerror()

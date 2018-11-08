@@ -22,7 +22,7 @@ from matplotlib.widgets import Slider, Button
 import numpy as np
 from scipy.interpolate import griddata
 from copy import deepcopy
-
+from matplotlib import animation as anim
 
 ## \class VisualizationManager
 # Contains functions which handle visualizations of Floris data.
@@ -91,7 +91,7 @@ class VisualizationManager():
         self._new_figure()
         #vmax = np.amax(data)
         plt.contourf(mesh1, mesh2, data, 50,
-                            cmap='gnuplot2', vmin=0, vmax=5)
+                            cmap='gnuplot2', vmin=np.amin(data), vmax=np.amax(data))
 
     def _plot_constant_plane(self, mesh1, mesh2, data, title, xlabel, ylabel):
         self._new_filled_contour(mesh1, mesh2, data)
@@ -891,7 +891,7 @@ class VisualizationManager():
         print('Max error = '+str(errMax))
         print('Total iterations: ' + str(iters))
 
-        f, axarr = plt.subplots(2, 3, sharex='col')
+        f, axarr = plt.subplots(2, 3, sharex='col', figsize=(10,7.5))
         sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
         sld = Slider(sld_ax,
                      'iterations',
@@ -951,11 +951,29 @@ class VisualizationManager():
 
             idx = int(round(sld.val))
             sld.valtext.set_text('iteration '+'{}'.format(idx))
-            axarr[0][2].clear()
+            for i in range(2):
+                for j in range(3):
+                    axarr[i][j].clear()
             axarr[0][2].contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
             # axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[idx].flatten(), cmap='gnuplot2')
-            axarr[1][2].clear()
             axarr[1][2].scatter(x,y,masks[idx],color='black')
+            axarr[1][2].set_title('mask')
+            axarr[0][2].set_title('u_field error')
+            axarr[1][0].plot(iterations, np.rad2deg(D_k))
+            axarr[1][0].axvline(idx, color='red')
+            axarr[1][0].set_title('direction estimate')
+            axarr[1][0].set_xlabel('iterations')
+            axarr[1][1].plot(iterations, np.rad2deg(directionError))
+            axarr[1][1].axvline(idx, color='red')
+            axarr[1][1].set_title('direction error')
+            axarr[1][1].set_xlabel('iterations')
+            axarr[0][0].plot(iterations, V_k)
+            axarr[0][0].axvline(idx, color='red')
+            axarr[0][0].set_title('speed estimate')
+            axarr[0][1].plot(iterations, speedError)
+            axarr[0][1].axvline(idx, color='red')
+            axarr[0][1].set_title('speed error')
+
             for coord, turbine in self.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
                 b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
@@ -966,7 +984,21 @@ class VisualizationManager():
             plt.draw()
             print(sum(masks[idx]))
         sld.on_changed(update_plot)
+        def animate(frame, *fargs):
+            # check if it is playing
+            #if self._play:
+                # if it's not at the end, increment the slider value
+            if sld.val < sld.valmax-1:
+                temp = sld.val
+                sld.set_val(temp + 1)
+            else:
+            # if it's at the end, set it to the beginning
+                sld.set_val(sld.valmin)
 
+        # set the animate function to the FuncAnimation function for animation
+        an = anim.FuncAnimation(f, animate, interval=100,frames=sld.valmax*5)
+        # render to video. to make it play faster, increase fps
+        an.save('ReducedSM'+'.mp4',fps=7,dpi=300)
         plt.show()
 
     # params

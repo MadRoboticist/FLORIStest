@@ -56,7 +56,7 @@ vman.params.vBar = 13.0 # actual wind speed
 ## Actual wind direction in radians
 #
 # see definition at visualization_manager_DJ.VisualizationManager.params.dBar
-vman.params.dBar = np.deg2rad(8.0) # actual wind direction
+vman.params.dBar = np.deg2rad(10.0) # actual wind direction
 
 ## A PathPlanner object
 #
@@ -73,30 +73,41 @@ UAV1 = UAV(planner)
 # see definition at pathPlan.UAV.GPS
 UAV1.GPS = [200,-250]
 ## A parameter which decides how far ahead the planner will work
+# for the first iteration.
+#
+# see definition at pathPlan.UAV.plan_horizon
+UAV1.init_plan_horizon = 125
+## A parameter which decides how far ahead the planner will work
+# after the first iteration.
 #
 # see definition at pathPlan.UAV.plan_horizon
 UAV1.plan_horizon = 30
-## A parameter which decides how many moves the UAV will take on a given
-# planned path before it recalculates the estimates and the plan
+## A parameter which decides how many moves the UAV will take on
+# the planned path before it recalculates the estimates and the plan
 #
 # see definition at pathPlan.UAV.moves2recalc
 UAV1.moves2recalc = 20
+## A parameter which decides how many moves the UAV will take on
+# the first planned path before the first recalculation
+#
+# see definition at pathPlan.UAV.moves2recalc
+UAV1.init_mask_size = 100
 ## A parameter which decides how many moves the UAV will hold in memory.
 # this is basically the number of nodes in the pseudoinverse mask
 #
 # see definition at pathPlan.UAV.patrolMax
 UAV1.patrolMax = 125
-# run the first iteration
-planner.greedyPath(UAV1)
 
 # run it for the indicated number of recalculations
-for i in range(50):
+for i in range(10):
+    planner.greedyPath(UAV1)  # recalculate the plan
     UAV1.move() # move the UAV
     planner.updateEstimates(UAV1) # recalculate the estimates
-    planner.greedyPath(UAV1) # recalculate the plan
+
 filename = "UAV_ev5_ed8" # set the file name
-# plot what happened
-planner.plotHistory(UAV1,filename)
+# animate what happened
+planner.plotHistory(UAV1, None) # don't save the animation
+# planner.plotHistory(UAV1, filename) # save the animation as an mp4
 
 
 

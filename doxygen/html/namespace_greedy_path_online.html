@@ -115,12 +115,18 @@ Variables</h2></td></tr>
 <tr class="memitem:a936da4debdab4a0c6d9960b0b4c9f22f"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#a936da4debdab4a0c6d9960b0b4c9f22f">GPS</a></td></tr>
 <tr class="memdesc:a936da4debdab4a0c6d9960b0b4c9f22f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Holds a <a class="el" href="namespace_u_a_v.html">UAV</a>'s "GPS" point starting point for this script is 200,-250.  <a href="#a936da4debdab4a0c6d9960b0b4c9f22f">More...</a><br /></td></tr>
 <tr class="separator:a936da4debdab4a0c6d9960b0b4c9f22f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aefc96f8465231fd0b340ac25185f32d6"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#aefc96f8465231fd0b340ac25185f32d6">init_plan_horizon</a></td></tr>
+<tr class="memdesc:aefc96f8465231fd0b340ac25185f32d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how far ahead the planner will work for the first iteration.  <a href="#aefc96f8465231fd0b340ac25185f32d6">More...</a><br /></td></tr>
+<tr class="separator:aefc96f8465231fd0b340ac25185f32d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8a77620b7dd92cae1a1965b390a8629e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#a8a77620b7dd92cae1a1965b390a8629e">plan_horizon</a></td></tr>
-<tr class="memdesc:a8a77620b7dd92cae1a1965b390a8629e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how far ahead the planner will work.  <a href="#a8a77620b7dd92cae1a1965b390a8629e">More...</a><br /></td></tr>
+<tr class="memdesc:a8a77620b7dd92cae1a1965b390a8629e"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how far ahead the planner will work after the first iteration.  <a href="#a8a77620b7dd92cae1a1965b390a8629e">More...</a><br /></td></tr>
 <tr class="separator:a8a77620b7dd92cae1a1965b390a8629e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a29901a17e19ee2b8cd9a59680a24ca7c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#a29901a17e19ee2b8cd9a59680a24ca7c">moves2recalc</a></td></tr>
-<tr class="memdesc:a29901a17e19ee2b8cd9a59680a24ca7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on a given planned path before it recalculates the estimates and the plan.  <a href="#a29901a17e19ee2b8cd9a59680a24ca7c">More...</a><br /></td></tr>
+<tr class="memdesc:a29901a17e19ee2b8cd9a59680a24ca7c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on the planned path before it recalculates the estimates and the plan.  <a href="#a29901a17e19ee2b8cd9a59680a24ca7c">More...</a><br /></td></tr>
 <tr class="separator:a29901a17e19ee2b8cd9a59680a24ca7c"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a5e3196e5792b0e35ee5247711c778b0c"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#a5e3196e5792b0e35ee5247711c778b0c">init_mask_size</a></td></tr>
+<tr class="memdesc:a5e3196e5792b0e35ee5247711c778b0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on the first planned path before the first recalculation.  <a href="#a5e3196e5792b0e35ee5247711c778b0c">More...</a><br /></td></tr>
+<tr class="separator:a5e3196e5792b0e35ee5247711c778b0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2135a090f8fc6e8931856995bbb96b02"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespace_greedy_path_online.html#a2135a090f8fc6e8931856995bbb96b02">patrolMax</a></td></tr>
 <tr class="memdesc:a2135a090f8fc6e8931856995bbb96b02"><td class="mdescLeft">&#160;</td><td class="mdescRight">A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will hold in memory.  <a href="#a2135a090f8fc6e8931856995bbb96b02">More...</a><br /></td></tr>
 <tr class="separator:a2135a090f8fc6e8931856995bbb96b02"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -235,7 +241,7 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00097">97</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00107">107</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
 
 </div>
 </div>
@@ -276,6 +282,44 @@ Variables</h2></td></tr>
 
 </div>
 </div>
+<a id="a5e3196e5792b0e35ee5247711c778b0c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5e3196e5792b0e35ee5247711c778b0c">&#9670;&nbsp;</a></span>init_mask_size</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GreedyPathOnline.init_mask_size</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on the first planned path before the first recalculation. </p>
+<p>see definition at pathPlan.UAV.moves2recalc </p>
+
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00094">94</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+
+</div>
+</div>
+<a id="aefc96f8465231fd0b340ac25185f32d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aefc96f8465231fd0b340ac25185f32d6">&#9670;&nbsp;</a></span>init_plan_horizon</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">GreedyPathOnline.init_plan_horizon</td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>A parameter which decides how far ahead the planner will work for the first iteration. </p>
+<p>see definition at pathPlan.UAV.plan_horizon </p>
+
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00079">79</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+
+</div>
+</div>
 <a id="a7e9c8f2efb08836bd4ddc25fe0e653db"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a7e9c8f2efb08836bd4ddc25fe0e653db">&#9670;&nbsp;</a></span>iterMax</h2>
 
@@ -307,10 +351,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on a given planned path before it recalculates the estimates and the plan. </p>
+<p>A parameter which decides how many moves the <a class="el" href="namespace_u_a_v.html">UAV</a> will take on the planned path before it recalculates the estimates and the plan. </p>
 <p>see definition at pathPlan.UAV.moves2recalc </p>
 
-<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00083">83</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00089">89</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
 
 </div>
 </div>
@@ -330,7 +374,7 @@ Variables</h2></td></tr>
 <p>this is basically the number of nodes in the pseudoinverse mask</p>
 <p>see definition at pathPlan.UAV.patrolMax </p>
 
-<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00088">88</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00099">99</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
 
 </div>
 </div>
@@ -346,10 +390,10 @@ Variables</h2></td></tr>
       </table>
 </div><div class="memdoc">
 
-<p>A parameter which decides how far ahead the planner will work. </p>
+<p>A parameter which decides how far ahead the planner will work after the first iteration. </p>
 <p>see definition at pathPlan.UAV.plan_horizon </p>
 
-<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00078">78</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
+<p class="definition">Definition at line <a class="el" href="_greedy_path_online_8py_source.html#l00084">84</a> of file <a class="el" href="_greedy_path_online_8py_source.html">GreedyPathOnline.py</a>.</p>
 
 </div>
 </div>
