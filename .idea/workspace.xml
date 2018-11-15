@@ -3,61 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimateError.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnimateError.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlotSensitivityMatrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlotSensitivityMatrix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV_ev5_ed8.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_animate_error_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_animate_error_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_online_8py.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_online_8py.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_greedy_path_online_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_greedy_path_online_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_plot_sensitivity_matrix_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_reduced_s_m_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/_u_a_v_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/class_u_a_v_1_1_u_a_v.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner-members.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classpath_plan_1_1_path_planner.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/classvisualization__manager___d_j_1_1_visualization_manager_1_1params.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_func.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_func.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/functions_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/functions_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path_online.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespace_greedy_path_online.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/namespacemembers_vars.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/path_plan_8py_source.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_8.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_8.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/all_b.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/all_b.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/functions_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/search/variables_5.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" beforeDir="false" afterPath="$PROJECT_DIR$/doxygen/html/visualization__manager___d_j_8py_source.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/Error.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/EstimationErrorConvergencePlot.pdf" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/EstimationErrorConvergencePlot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/SensMat.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV2.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV3.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV4.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV5.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV6.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/UAV7.mp4" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/dfPlot.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/dfPlot2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/dfPlot3.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/dfPlot4.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/dfplot5.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/greedyUAV100.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/greedyUAV150.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/greedyUAV150_2.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/greedyUAV200.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/reducedSM_0_iters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/reducedSM_91_iters.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/stripped_SM.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/ReducedSM.mp4" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/plots/UAV_ev5_ed10.mp4" beforeDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -112,17 +62,18 @@
     <session id="-931210854">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="8" />
+          <entry key="project.closed" value="9" />
           <entry key="project.open.time.11" value="1" />
           <entry key="project.open.time.16" value="1" />
+          <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.21" value="1" />
           <entry key="project.open.time.22" value="1" />
           <entry key="project.open.time.25" value="1" />
           <entry key="project.open.time.3" value="2" />
           <entry key="project.open.time.33" value="1" />
           <entry key="project.open.time.35" value="1" />
-          <entry key="project.open.time.5" value="3" />
-          <entry key="project.opened" value="12" />
+          <entry key="project.open.time.5" value="4" />
+          <entry key="project.opened" value="14" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
@@ -130,7 +81,7 @@
           <entry key="json" value="2" />
           <entry key="md" value="3" />
           <entry key="me" value="1" />
-          <entry key="py" value="55" />
+          <entry key="py" value="58" />
           <entry key="tcl" value="1" />
         </counts>
       </usages-collector>
@@ -139,7 +90,7 @@
           <entry key="JSON" value="2" />
           <entry key="Markdown" value="3" />
           <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="55" />
+          <entry key="Python" value="58" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
@@ -148,28 +99,28 @@
           <entry key="json" value="53" />
           <entry key="md" value="1412" />
           <entry key="me" value="117" />
-          <entry key="py" value="66669" />
+          <entry key="py" value="66815" />
           <entry key="tcl" value="7" />
-          <entry key="txt" value="26" />
+          <entry key="txt" value="62" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="JSON" value="53" />
           <entry key="Markdown" value="1412" />
-          <entry key="PLAIN_TEXT" value="202" />
-          <entry key="Python" value="66669" />
+          <entry key="PLAIN_TEXT" value="238" />
+          <entry key="Python" value="66815" />
         </counts>
       </usages-collector>
     </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1392">
-              <caret line="87" column="23" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
+            <state relative-caret-position="304">
+              <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
               <folding>
                 <element signature="e#183#240#0" expanded="true" />
               </folding>
@@ -180,25 +131,11 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pathPlan.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="176">
-              <caret line="752" column="52" selection-start-line="752" selection-start-column="52" selection-end-line="752" selection-end-column="52" />
+            <state relative-caret-position="416">
+              <caret line="500" column="19" lean-forward="true" selection-start-line="500" selection-start-column="19" selection-end-line="500" selection-end-column="19" />
               <folding>
                 <element signature="e#105#123#0" expanded="true" />
-                <marker date="1541714951599" expanded="true" signature="31894:32340" ph="..." />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="769">
-              <caret line="864" column="35" selection-start-line="864" selection-start-column="35" selection-end-line="864" selection-end-column="35" />
-              <folding>
-                <element signature="e#678#718#0" expanded="true" />
-                <marker date="1541704425838" expanded="true" signature="24100:25792" ph="..." />
-                <marker date="1541704425838" expanded="true" signature="35981:48247" ph="..." />
+                <marker date="1542325608995" expanded="true" signature="31864:32310" ph="..." />
               </folding>
             </state>
           </provider>
@@ -207,8 +144,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ReducedSM.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="608">
-              <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
+            <state relative-caret-position="336">
+              <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
             </state>
           </provider>
         </entry>
@@ -217,21 +154,21 @@
         <entry file="file://$PROJECT_DIR$/README.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
-              <first_editor relative-caret-position="96">
-                <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+              <first_editor relative-caret-position="176">
+                <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
               </first_editor>
               <second_editor />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/UAV.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="160">
-              <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
+            <state relative-caret-position="352">
+              <caret line="225" column="71" selection-start-line="225" selection-start-column="71" selection-end-line="225" selection-end-column="71" />
               <folding>
-                <marker date="1541715498444" expanded="true" signature="6530:6780" ph="..." />
+                <marker date="1542323229275" expanded="true" signature="6530:6780" ph="..." />
               </folding>
             </state>
           </provider>
@@ -313,11 +250,11 @@
         <option value="$PROJECT_DIR$/example_script.py" />
         <option value="$PROJECT_DIR$/AnimateError.py" />
         <option value="$PROJECT_DIR$/PlotSensitivityMatrix.py" />
-        <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
-        <option value="$PROJECT_DIR$/pathPlan.py" />
-        <option value="$PROJECT_DIR$/GreedyPathOnline.py" />
+        <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/UAV.py" />
+        <option value="$PROJECT_DIR$/GreedyPathOnline.py" />
+        <option value="$PROJECT_DIR$/pathPlan.py" />
       </list>
     </option>
   </component>
@@ -536,7 +473,14 @@
       <option name="project" value="LOCAL" />
       <updated>1540423343920</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="update path planning module, doxygen">
+      <created>1541715534134</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1541715534135</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -589,7 +533,8 @@
       <path value="$PROJECT_DIR$/FLORIStest" />
     </ignored-roots>
     <MESSAGE value="added path planning module" />
-    <option name="LAST_COMMIT_MESSAGE" value="added path planning module" />
+    <MESSAGE value="update path planning module, doxygen" />
+    <option name="LAST_COMMIT_MESSAGE" value="update path planning module, doxygen" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/tests/sample_inputs.py" />
@@ -693,6 +638,33 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/example_input.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1392">
+          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/example_script.py" />
+    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="13232">
+          <caret line="835" column="27" selection-start-line="835" selection-start-column="27" selection-end-line="835" selection-end-column="27" />
+          <folding>
+            <element signature="e#678#718#0" expanded="true" />
+            <marker date="1541704425838" expanded="true" signature="24100:25792" ph="..." />
+            <marker date="1541704425838" expanded="true" signature="35981:48247" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="160">
+          <caret line="13" column="30" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
       <provider editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -701,26 +673,19 @@
       </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
-          <first_editor relative-caret-position="96">
-            <caret line="6" column="39" selection-start-line="6" selection-start-column="39" selection-end-line="6" selection-end-column="39" />
+          <first_editor relative-caret-position="176">
+            <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           </first_editor>
           <second_editor />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/example_input.json">
+    <entry file="file://$PROJECT_DIR$/UAV.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1392">
-          <caret line="24" column="7" selection-start-line="24" selection-start-column="7" selection-end-line="24" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="367">
-          <caret line="27" column="30" lean-forward="true" selection-start-line="27" selection-start-column="30" selection-end-line="27" selection-end-column="30" />
+        <state relative-caret-position="352">
+          <caret line="225" column="71" selection-start-line="225" selection-start-column="71" selection-end-line="225" selection-end-column="71" />
           <folding>
-            <element signature="e#549#581#0" expanded="true" />
+            <marker date="1542323229275" expanded="true" signature="6530:6780" ph="..." />
           </folding>
         </state>
       </provider>
@@ -732,59 +697,30 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="256">
-          <caret line="19" column="29" selection-start-line="19" selection-start-column="29" selection-end-line="19" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ReducedSM.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="608">
-          <caret line="43" column="16" selection-start-line="43" selection-start-column="16" selection-end-line="43" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="769">
-          <caret line="864" column="35" selection-start-line="864" selection-start-column="35" selection-end-line="864" selection-end-column="35" />
-          <folding>
-            <element signature="e#678#718#0" expanded="true" />
-            <marker date="1541704425838" expanded="true" signature="24100:25792" ph="..." />
-            <marker date="1541704425838" expanded="true" signature="35981:48247" ph="..." />
-          </folding>
+        <state relative-caret-position="336">
+          <caret line="32" column="41" selection-start-line="32" selection-start-column="41" selection-end-line="32" selection-end-column="41" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/pathPlan.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="752" column="52" selection-start-line="752" selection-start-column="52" selection-end-line="752" selection-end-column="52" />
+        <state relative-caret-position="416">
+          <caret line="500" column="19" lean-forward="true" selection-start-line="500" selection-start-column="19" selection-end-line="500" selection-end-column="19" />
           <folding>
             <element signature="e#105#123#0" expanded="true" />
-            <marker date="1541714951599" expanded="true" signature="31894:32340" ph="..." />
+            <marker date="1542325608995" expanded="true" signature="31864:32310" ph="..." />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1392">
-          <caret line="87" column="23" selection-start-line="87" selection-start-column="23" selection-end-line="87" selection-end-column="23" />
+        <state relative-caret-position="304">
+          <caret line="101" column="16" selection-start-line="101" selection-start-column="16" selection-end-line="101" selection-end-column="16" />
           <folding>
             <element signature="e#183#240#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/UAV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="13" lean-forward="true" selection-start-line="13" selection-end-line="13" />
-          <folding>
-            <marker date="1541715498444" expanded="true" signature="6530:6780" ph="..." />
           </folding>
         </state>
       </provider>

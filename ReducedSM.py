@@ -28,9 +28,9 @@ vman.params.epSpeed = 0.001  # speed epsilon (ev)
 ## direction epsilon (ed)
 vman.params.epDir = 0.0001  # direction epsilon (ed)
 ## speed error minimum threshold
-vman.params.spErrMax = 0.1  # speed error threshold
+vman.params.spErrMax = 0.00000000000001  # speed error threshold
 ## direction error minimum threshold
-vman.params.dirErrMax = 0.01  # direction error threshold
+vman.params.dirErrMax = 0.0000000000000001  # direction error threshold
 ## maximum number of iterations to be completed
 vman.params.iterMax = 100  # iteration threshold
 ## The actual wind speed
@@ -38,7 +38,7 @@ vman.params.vBar = 13.0 # actual wind speed
 ## The actual wind direction
 vman.params.dBar = np.deg2rad(10.0) # actual wind direction
 ## A masking threshold for reducing the sensitivity matrix
-vman.params.mask_thresh = 0.5 # masking threshold for reducing normalized sensitivity matrix
+vman.params.mask_thresh = 0 # masking threshold for reducing normalized sensitivity matrix
 
 # run the reducedSM function
 vman.reducedSM()

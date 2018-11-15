@@ -77,6 +77,11 @@ UAV1.GPS = [200,-250]
 #
 # see definition at pathPlan.UAV.plan_horizon
 UAV1.init_plan_horizon = 125
+## A parameter which decides how many moves the UAV will take on
+# the first planned path before the first recalculation
+#
+# see definition at pathPlan.UAV.moves2recalc
+UAV1.init_mask_size = 100
 ## A parameter which decides how far ahead the planner will work
 # after the first iteration.
 #
@@ -87,11 +92,6 @@ UAV1.plan_horizon = 30
 #
 # see definition at pathPlan.UAV.moves2recalc
 UAV1.moves2recalc = 20
-## A parameter which decides how many moves the UAV will take on
-# the first planned path before the first recalculation
-#
-# see definition at pathPlan.UAV.moves2recalc
-UAV1.init_mask_size = 100
 ## A parameter which decides how many moves the UAV will hold in memory.
 # this is basically the number of nodes in the pseudoinverse mask
 #
@@ -99,15 +99,15 @@ UAV1.init_mask_size = 100
 UAV1.patrolMax = 125
 
 # run it for the indicated number of recalculations
-for i in range(10):
+for i in range(30):
     planner.greedyPath(UAV1)  # recalculate the plan
     UAV1.move() # move the UAV
     planner.updateEstimates(UAV1) # recalculate the estimates
 
-filename = "UAV_ev5_ed8" # set the file name
+filename = "UAV_ev5_ed10_WAVE" # set the file name
 # animate what happened
-planner.plotHistory(UAV1, None) # don't save the animation
-# planner.plotHistory(UAV1, filename) # save the animation as an mp4
+# planner.plotHistory(UAV1, None) # don't save the animation
+planner.plotHistory(UAV1, filename) # save the animation as an mp4
 
 
 

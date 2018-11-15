@@ -498,7 +498,7 @@ class PathPlanner:
                                               self.error[len(self.error)-1],
                                               self.params.v0,
                                               self.params.d0]))
-                                              '''
+                '''
         # the starting point was invalid
         else:
             print("Aborting. Invalid start point.")
@@ -742,10 +742,13 @@ class PathPlanner:
             axbig.plot([i[0] for i in self.history[idx][1]],
                              [i[1] for i in self.history[idx][1]], color = 'red')
             # for shorthand, UAV's location on the map
-            _x = self.history[idx][1][len(self.history[idx][1])-1][0]
-            _y = self.history[idx][1][len(self.history[idx][1])-1][1]
-            # plot the UAV, a big red circle
-            axbig.plot(_x,_y, marker='o', markersize=10, color="red")
+            try:
+                _x = self.history[idx][1][len(self.history[idx][1])-1][0]
+                _y = self.history[idx][1][len(self.history[idx][1])-1][1]
+                # plot the UAV, a big red circle
+                axbig.plot(_x,_y, marker='o', markersize=10, color="red")
+            except:
+                pass
             # plot the velocity error
             ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
             # add a vertical red line to show where we are in the iterations
