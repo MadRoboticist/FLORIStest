@@ -448,7 +448,7 @@ class VisualizationManager():
                             self.params.Srange[0],
                             self.params.Srange[1],
                             valinit=Espeed)
-        slider_spd.valtext.set_text('{}'.format(Espeed) + ' mph')
+        slider_spd.valtext.set_text('{}'.format(Espeed) + ' m/s')
         # set up the direction slider
         slider_dir = Slider(ax_dir,
                             'actual wind direction',
@@ -474,7 +474,7 @@ class VisualizationManager():
             # set the new speed value
             spdvalue = self.params.Srange[0] + idx * self.params.Srange[2]
             # put the speed value in the slider text
-            slider_spd.valtext.set_text('{}'.format(spdvalue) + ' mph')
+            slider_spd.valtext.set_text('{}'.format(spdvalue) + ' m/s')
             # set the direction index based on the slider value
             idy = int(round((slider_dir.val -
                              self.params.Drange[0]) /
@@ -503,7 +503,7 @@ class VisualizationManager():
                 self._cbr.set_clim(vmin=errMax*-1,vmax=errMax)
                 self._cbr.set_ticks(w)
                 self._cbr.set_cmap('seismic')
-                self._cbr.set_label('Error in mph')
+                self._cbr.set_label('Error in m/s')
                 self._cbr.draw_all()
             else:
                 # plot the u_field data
@@ -514,7 +514,7 @@ class VisualizationManager():
                 self._cbr.set_clim(vmin=spdMin,vmax=spdMax)
                 self._cbr.set_ticks(W)
                 self._cbr.set_cmap('gnuplot2')
-                self._cbr.set_label('Speed in mph')
+                self._cbr.set_label('Speed in m/s')
                 self._cbr.draw_all()
             # put the title back up
             plt.suptitle(Tstr, fontsize=fontsize)
