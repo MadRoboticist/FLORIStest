@@ -2,31 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/BFPlanOnline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/COSPlanOnline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/COSPlanTV.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/LearnPathOnline.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/MultiUAV.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/TV_SM_SOWFA.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oneTurb_input.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readVTK.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/readVTK2.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twoTurb_input.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimateError.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnimateError.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlotSensitivityMatrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/PlotSensitivityMatrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/example_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/FlorisErr_v0-10_d8-13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/Floris_d0_v8.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/Floris_d10_v13.PNG" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/IDM_d10_v13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/SM_d0_v8.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/plots/SM_d10_v13.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -136,7 +112,7 @@
     <session id="-971535125">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="11" />
+          <entry key="project.closed" value="12" />
           <entry key="project.open.time.15" value="1" />
           <entry key="project.open.time.17" value="1" />
           <entry key="project.open.time.18" value="1" />
@@ -579,7 +555,14 @@
       <option name="project" value="LOCAL" />
       <updated>1541715534135</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="update path planning module, doxygen">
+      <created>1557440233246</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1557440233246</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -591,7 +574,7 @@
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.4528536" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" weight="0.4528536" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39702234" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
