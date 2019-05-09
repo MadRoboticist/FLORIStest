@@ -10,11 +10,11 @@ import json
 import numpy as np
 import matplotlib.pyplot as plt
 
-with open("example_input.json") as WFJSON:
+with open("twoTurb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
 ## flowfield resolution given as [x_resolution, y_resolution, z_resolution]
-grid_resolution = [48, 15, 15] # [x_res, y_res, z_res]
+grid_resolution = [30, 15, 15] # [x_res, y_res, z_res]
 
 ## VisualizationManager object
 vman = VisualizationManager(WF, grid_resolution) # set up the visualization manager
@@ -25,26 +25,27 @@ vman.params.v0 = 8.0 # initial speed estimate
 ## The initial direction estimate
 vman.params.d0 = np.deg2rad(0.0) # initial direction estimate
 ## speed epsilon (ev)
-vman.params.epSpeed = 0.01  # speed epsilon (ev)
+vman.params.epSpeed = 0.001  # speed epsilon (ev)
 ## direction epsilon (ed)
-vman.params.epDir = 0.001  # direction epsilon (ed)
+vman.params.epDir = 0.0001  # direction epsilon (ed)
 ## speed error minimum threshold
-vman.params.spErrMax = -0.1  # speed error threshold
+vman.params.spErrMax = -0.01  # speed error threshold
 ## direction error minimum threshold
-vman.params.dirErrMax = -np.deg2rad(0.1)  # direction error threshold
-## maximum number of iterations to be completed
-vman.params.iterMax = 10 # iteration threshold
+vman.params.dirErrMax = -0.001  # direction error threshold
 ## The actual wind speed
-vman.params.vBar = 13.0 # actual wind speed
+vman.params.vBar = 8.0 # actual wind speed
 ## The actual wind direction
-vman.params.dBar = np.deg2rad(10.0) # actual wind direction
+vman.params.dBar = np.deg2rad(0.0) # actual wind direction
 ## A masking threshold for reducing the sensitivity matrix
 vman.params.mask_thresh = 0.5 # masking threshold for reducing normalized sensitivity matrix
+# 0 for no mask
 
-VTKpath = "L:\\SOWFAdata\\oneTurb_lowTI\\postProcessing\\slicedatainstantaneous\\22000"
+VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataInstantaneous"
+#VTKrange = [20145, 21875] #two Turbines, cut initialization
+VTKrange = [20005, 21875] #two Turbines, leave in initialization
 
-VTKfilename = "T_slice_horizontal_1.vtk"
-# VTK = VTKreader(VTKpath, VTKfilename, vman)
-# xBar = deepcopy(VTK.u_field)
+#VTKrange = [20005, 22000] #one or 36 Turbines, leave in initialization
+#VTKrange = [20145, 22000] #one or 36 Turbines, cut initialization
+VTKfilename = "U_slice_horizontal_1.vtk"
 # run the reducedSM function
-vman.reducedSM(True, False, None, None) # no animation, no mp4, xBar from FLORIS
+vman.TV_SM_SOWFA(VTKpath, VTKfilename, VTKrange, 5, True, "TV_SOWFA_5Mask_0InitErr")

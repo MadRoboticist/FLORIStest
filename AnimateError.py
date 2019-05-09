@@ -13,7 +13,7 @@ with open("example_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
 ## grid resolution: [x_resolution, y_resolution, z_resolution]
-grid_resolution = [25, 25, 15]  # grid resolution: [x_resolution, y_resolution, z_resolution]
+grid_resolution = [48, 15, 15]  # grid resolution: [x_resolution, y_resolution, z_resolution]
 ## a new VisualizationManager object
 vman = VisualizationManager(WF, grid_resolution)  # a new VisualizationManager object
 

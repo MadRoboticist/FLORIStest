@@ -9,9 +9,13 @@ class UAV:
 
     ## Class constructor
     def __init__(self, planner):
-
+        self.v0 = planner.params.v0
+        self.d0 = planner.params.d0
         # This section contains "ACTUAL" values
-
+        self.minX = 0
+        self.minY = 0
+        self.maxX = 100
+        self.maxY = 100
         ## @var GPS
         # Holds the "GPS" location
         # of the UAV. Currently, the GPS location is an
@@ -31,7 +35,7 @@ class UAV:
         self.dS = 0
         ## @var moves2recalc
         # The number of moves to make before recalculating the path
-        self.moves2recalc = 10
+        self.moves2recalc = 20
         ## @var patrolMax
         # The length of the UAV's path history
         self.patrolMax = 100
@@ -75,6 +79,8 @@ class UAV:
         ## @var GPSpath
         # A list of GPS points representing the UAV's actual path
         # through the map.
+        self.measure = list()
+
         self.GPSpath = list()
         ## @var dSplan
         # holds the previous values of dS for calculation of d2S during planning
@@ -87,6 +93,7 @@ class UAV:
         # a potential field, drawing the UAV to
         # the node with the maximum score value
         self.wave_map = None
+        self.max_wave_idx=[0,0]
         ## @var plan_mask
         # Holds a map of values which degrade the
         # score of the corresponding node after it
@@ -101,54 +108,45 @@ class UAV:
         #   sets a subtractive penalty value to be applied to a node's
         #   score mask each time it is visited
         #   (set to 0 to apply no subtractive penalty)
-        self.maskSUB = 0
+        self.maskSUB = 0.0
         ## @var maskMUL
         #   sets a multiplicative penalty value to be applied to a node's
         #   score mask each time it is visited
         #   (set to 1 to apply no multiplicative penalty)
-        self.maskMUL = 0.75
-        ## @var maskMULthenSUB
-        #   boolean which decides the order maskSUB and maskMUL are carried out
-        self.maskMULthenSUB = True
+        self.maskMUL = 0.7
         ## @var scoreWt
         #   sets the weight of the sensitivity score in path calculations
-        self.scoreWt = 10
+        self.scoreWt = 0
         ## @var dSwt
         #   sets the weight of the derivative of the sensitivity score
         #   wrt transition in path calculations
-        self.dSwt = 2
+        self.dSwt = 0
         ## @var d2Swt
         #   sets the weight of the 2nd derivative of the sensitivity score
         #   wrt transition in path calculations
-        self.d2Swt = 2
+        self.d2Swt = 0
         ## @var windWt
         #   sets the weight of the wind direction vs. transition heading
         #   in path calculations
-        self.windWt = 2
+        self.windWt = 0
         ## @var headWt
         #   sets the weight of the UAV heading vs. transition heading
         #   in path calculations
-        self.headWt = 4
+        self.headWt = 0
         ## @var waveWt
         #   sets the weight of the wave map in path calculations
-        self.waveWt = 50
+        self.waveWt = 0
         ## @var timeWt
         #   sets the weight of time/iterations elapsed in path calculations
-        self.timeWt = 0.25
+        self.timeWt = 0
 
     # update mask
     ## a method to update either the plan or the actual mask
     def update_mask(self, mask, IDX):
         x = IDX[0]
         y = IDX[1]
-        if (self.maskMULthenSUB):
-            # multiply then subtract
-            mask[x][y] *= self.maskMUL
-            mask[x][y] -= self.maskSUB
-        else:
-            # subtract then multiply
-            mask[x][y] -= self.maskSUB
-            mask[x][y] *= self.maskMUL
+        mask[x][y] *= self.maskMUL
+
 
     ## a method to reset the planner
     def reset_planner(self):
@@ -172,6 +170,9 @@ class UAV:
         self.score = 0
         # clear the plan mask
         self.plan_mask = deepcopy(self.path_mask)
+        self.planner.sens_mat = deepcopy(self.planner.vman.calcSensitivityMatrix(self.v0, self.d0))
+        # update the score map
+        self.planner.calcScoreMap()
 
     ## A method to reset the UAV to defaults
     def reset_UAV(self):
@@ -192,22 +193,40 @@ class UAV:
         tempHead = deepcopy(self.heading)
         tempMask = deepcopy(self.path_mask)
         # step through the current plan
-        if len(self.planner.history)>0:
+
+        #print("steps planned: "+str(self.planner.steps_planned))
+        if len(self.planner.hist)>0 and len(self.GPSpath)>=self.init_mask_size:
             moves = self.moves2recalc
         else:
-            moves = self.init_mask_size
+            print("initial mask size: " + str(self.init_mask_size))
+            print("GPS path length: " + str(len(self.GPSpath)))
+            moves = self.init_mask_size-len(self.GPSpath)
+        if moves > int(self.planner.steps_planned*self.planner.percent_plan):
+            moves = int(self.planner.steps_planned*self.planner.percent_plan)
+        print("taking "+str(moves)+" steps")
         for i in range(moves):
+            #print("moving...")
             # if the moves haven't been planned yet,
             # an exception will be thrown
             try:
                 self.IDXpath.append(deepcopy(self.IDXplan[i]))
+                #print("1")
                 self.GPSpath.append(deepcopy(self.GPSplan[i]))
+                #print("2")
                 self.idx = self.IDXpath[len(self.IDXpath) - 1]
+                #print("3")
                 self.GPS = self.GPSpath[len(self.GPSpath) - 1]
-                self.dS = deepcopy(self.dSplan[i])
+                #print("4")
+                try:
+                    self.dS = deepcopy(self.dSplan[i])
+                except:
+                    pass
+                #print("5")
                 self.heading = deepcopy(self.plan_heading[i])
+                #print("6")
                 self.path_mask[self.idx[0]][self.idx[1]]= \
                     deepcopy(self.plan_mask[self.idx[0]][self.idx[1]])
+                #print("7")
                 if len(self.GPSpath)>self.patrolMax:
                     del self.GPSpath[:-self.patrolMax]
                     del self.IDXpath[:-self.patrolMax]
@@ -217,13 +236,87 @@ class UAV:
                         self.update_mask(self.path_mask,
                                          self.IDXpath[i])
 
-                self.planner.history.append(deepcopy([self.planner.score_map,
+                self.planner.hist.append(deepcopy([self.planner.score_map,
                                               self.GPSpath,
                                               self.GPSplan,
                                               self.wave_map,
                                               self.planner.error[len(self.planner.error) - 1],
-                                              self.planner.params.v0,
-                                              self.planner.params.d0]))
+                                              self.v0,
+                                              self.d0]))
+
+            except:
+                # set everything back to how it was
+                self.IDXpath = deepcopy(tempIDXpath)
+                self.GPSpath = deepcopy(tempGPSpath)
+                self.dS = tempdS
+                self.heading = tempHead
+                self.path_mask = deepcopy(tempMask)
+                print("Error: This number of steps has not been planned.")
+                return
+        #print(self.GPSpath)
+    def moveTV(self):
+        # just in case, make a backup copy of the current values
+        tempIDXpath = deepcopy(self.IDXpath)
+        tempMeasure = deepcopy(self.measure)
+        tempGPSpath = deepcopy(self.GPSpath)
+        tempdS = deepcopy(self.dS)
+        tempHead = deepcopy(self.heading)
+        tempMask = deepcopy(self.path_mask)
+        # step through the current plan
+
+        #print("steps planned: "+str(self.planner.steps_planned))
+        if len(self.planner.hist)>0 and len(self.GPSpath)>=self.init_mask_size:
+            moves = self.moves2recalc
+        else:
+            print("initial mask size: " + str(self.init_mask_size))
+            print("GPS path length: " + str(len(self.GPSpath)))
+            moves = self.init_mask_size-len(self.GPSpath)
+        if moves > int(self.planner.steps_planned*self.planner.percent_plan):
+            moves = int(self.planner.steps_planned*self.planner.percent_plan)
+        print("taking "+str(moves)+" steps")
+        for i in range(moves):
+            #print("moving...")
+            # if the moves haven't been planned yet,
+            # an exception will be thrown
+            try:
+                self.IDXpath.append(deepcopy(self.IDXplan[i]))
+                XY = deepcopy(self.IDXplan[i])
+                self.measure.append(self.planner.getMeasure(XY))
+                #print("1")
+                self.GPSpath.append(deepcopy(self.GPSplan[i]))
+                #print("2")
+                self.idx = self.IDXpath[len(self.IDXpath) - 1]
+                #print("3")
+                self.GPS = self.GPSpath[len(self.GPSpath) - 1]
+                #print("4")
+                try:
+                    self.dS = deepcopy(self.dSplan[i])
+                except:
+                    pass
+                #print("5")
+                self.heading = deepcopy(self.plan_heading[i])
+                #print("6")
+                self.path_mask[self.idx[0]][self.idx[1]]= \
+                    deepcopy(self.plan_mask[self.idx[0]][self.idx[1]])
+                #print("7")
+                if len(self.GPSpath)>self.patrolMax:
+                    del self.GPSpath[:-self.patrolMax]
+                    del self.IDXpath[:-self.patrolMax]
+                    del self.measure[:-self.patrolMax]
+                    self.path_mask = [[1 for i in range(len(self.planner.score_map[0]))] \
+                                      for j in range(len(self.planner.score_map))]
+                    for i in range(len(self.IDXpath)):
+                        self.update_mask(self.path_mask,
+                                         self.IDXpath[i])
+
+                self.planner.hist.append(deepcopy([self.planner.score_map,
+                                              self.GPSpath,
+                                              self.GPSplan,
+                                              self.wave_map,
+                                              self.planner.error[len(self.planner.error) - 1],
+                                              self.v0,
+                                              self.d0]))
+
             except:
                 # set everything back to how it was
                 self.IDXpath = deepcopy(tempIDXpath)

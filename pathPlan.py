@@ -1,7 +1,7 @@
 ## \file pathPlan.py
 # This file contains functions which handle UAV path planning using Floris data.
 #
-
+from mpl_toolkits.axes_grid1 import make_axes_locatable
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.widgets import Slider, Button
@@ -11,7 +11,7 @@ from math import pi as PI
 import math
 from copy import deepcopy
 from matplotlib import animation as anim
-
+from readVTK import VTKreader
 ## \class d
 # An enumeration of the cardinal directions
 # starting from East and moving counterclockwise.
@@ -59,6 +59,8 @@ class _X_map_node:
         ## @var idx
         # The coordinates [x, y] of the node
         self.idx = [0, 0]
+        # set aspect ratio of planner plot, initialize to 1
+        self._aspect = 1
 
     ## a structure which holds information for each possible transition from
     #   one position on the map to another
@@ -83,18 +85,18 @@ class PathPlanner:
     # sets a minimum distance from the center of a turbine
     # which serves as a boundary for the UAV
     minDist2turbine = 160
-    ## @var history
+    ## @var hist
     # keeps track of everything that happens so it can be plotted afterward.
     #
     # This is how history is populated:
-    # self.history.append(deepcopy([self.score_map,
+    # self.hist.append(deepcopy([self.score_map,
     #                                UAV.GPSpath,
     #                                UAV.GPSplan,
     #                                UAV.wave_map,
     #                               self.error[len(self.error)-1],
     #                               self.params.v0,
     #                               self.params.d0]))
-    history = list()
+
 
     ## Class constructor
     #   @param vman a VisualManager object
@@ -102,6 +104,9 @@ class PathPlanner:
         ## @var vman
         #   A VisualizationManager object
         self.vman = deepcopy(vman)
+        for coord, turbine in self.vman.flowfield.turbine_map.items():
+            turbine.yaw_angle = self.vman.flowfield.wind_direction
+        self.vman.flowfield.calculate_wake()
         ## @var params
         #   A local copy of vman.params
         self.params = deepcopy(vman.params)
@@ -118,6 +123,8 @@ class PathPlanner:
         vman_bar = VisualizationManager(vman.WF, vman.grid_res)
         # set the direction to dBar
         vman_bar.flowfield.wind_direction = vman_bar.params.dBar
+        for coord, turbine in vman_bar.flowfield.turbine_map.items():
+            turbine.yaw_angle = vman_bar.flowfield.wind_direction
         # recalculate the wake with the new direction
         vman_bar.flowfield.calculate_wake()
         ## @var Xbar
@@ -125,16 +132,16 @@ class PathPlanner:
         self.Xbar = deepcopy(vman_bar.flowfield.u_field[:, :, self.plane])
         ## @var X_map
         #   A map of all possible transitions on the map and their respective scores
-        self.X_map = [[_X_map_node() for x in range(self.vman.grid_res[0])]
-                 for y in range(vman.grid_res[1])]
+        self.X_map = [[_X_map_node() for x in range(self.vman.grid_res[1])]
+                 for y in range(self.vman.grid_res[0])]
         ## @var X
         #   An X grid mesh of the map's 'GPS' coordinates
-        self.X = deepcopy(vman.flowfield.x[:, :, self.plane])
+        self.X = deepcopy(self.vman.flowfield.x[:, :, self.plane])
         ## @var Y
         #   A Y grid mesh of the map's 'GPS' coordinates
-        self.Y = deepcopy(vman.flowfield.y[:, :, self.plane])
+        self.Y = deepcopy(self.vman.flowfield.y[:, :, self.plane])
         ## the local copy of the sensitivity matrix
-        self._sens_mat = self.vman.calcSensitivityMatrix()
+        self.sens_mat = self.vman.calcSensitivityMatrix(self.params.v0,self.params.d0)
         ## @var error
         # holds a record of the direction and velocity errors for plotting
         self.error = list()
@@ -144,9 +151,31 @@ class PathPlanner:
         # delete the old vman objects
         del vman, vman_bar
         # calculate the score map
-        self._calcScoreMap()
+        self.calcScoreMap()
         # calculate the cost map
-        self._update_cost_map();
+        self._init_cost_map()
+        self.hist = list()
+        self.IDMhistory_max = list()
+        self.IDMhistory_min = list()
+        self.IDMhistory_avg = list()
+        self.mask_size_history = list()
+        self.learn_length = 1000
+        self.learn_alpha = 0.5
+        self.learn_gamma = -0.5
+        self.learn_thresh = 0.5
+        self.max_score_box = 2
+        self.steps_planned = 0
+        self.percent_plan = 0.75
+        self.learn_path_length = 200
+        self.MAX_BONUS = 100
+
+        self.steps_taken = 0
+        self.VTKrange = {0, 0}
+        self.VTKpath = None
+        self.VTKfilename = None
+        self.VTKincrement = 5
+        self.VTKlist = list()
+        self.VTK_FULL = False
 
     ## a method to adjust idx based on a cardinal direction
     def _shiftVals(self, val):
@@ -163,12 +192,12 @@ class PathPlanner:
         return value.get(val)
 
     ## calculates the euclidean distance between two points
-    def _euclidDist(self, P1, P2):
+    def euclidDist(self, P1, P2):
         # sqrt((Y2-Y1)^2+(X2-X1)^2)
         return math.sqrt(((P2[0]-P1[0])**2)+((P2[1]-P1[1])**2))
 
     ## a method to update the transition/cost map
-    def _update_cost_map(self):
+    def _init_cost_map(self):
         # iterate over the entire range of the discretized map
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
@@ -204,15 +233,51 @@ class PathPlanner:
                         # then the move is not possible
                         self.X_map[i][j].Xitions[k].dSscore = None
 
+    def _update_cost_map(self, UAV):
+        # iterate over the entire range of the discretized map
+        for i in range(self.vman.grid_res[0]):
+            for j in range(self.vman.grid_res[1]):
+                # record the index of the node
+                # so that it can easily be retrieved if non-indexed
+                # search methods are used
+                self.X_map[i][j].idx = [i,j]
+                # record the 'GPS' location of the node
+                self.X_map[i][j].GPS = [self.X[i][j],self.Y[i][j]]
+                # iterate through the 8 possible transitions at each node
+                for k in range(8):
+                    # calculate the cost of moving through the wind at the transition heading
+                    self.X_map[i][j].Xitions[k].thetaCost = k*np.deg2rad(45)-UAV.d0
+                    # adjust the cost to a positive value 0-PI
+                    if self.X_map[i][j].Xitions[k].thetaCost > PI:
+                        self.X_map[i][j].Xitions[k].thetaCost = \
+                            abs(k*np.deg2rad(45)-UAV.d0-2*PI)
+                    # test the map indices after the transition
+                    [I,J] = self._shiftVals(k)
+                    # if the index is out of bounds, this will throw an exception
+                    try:
+                        # compute the first derivative of score with respect to transition
+                        dS = self.score_map[i + I][j + J] - self.score_map[i][j]
+                        # check to make sure the number is real
+                        if math.isnan(dS):
+                            # if not, then the move is not possible
+                            self.X_map[i][j].Xitions[k].dSscore = None
+                        else:
+                            # otherwise, take a copy of the value
+                            self.X_map[i][j].Xitions[k].dSscore = deepcopy(dS)
+                    # if the index is out of bounds...
+                    except:
+                        # then the move is not possible
+                        self.X_map[i][j].Xitions[k].dSscore = None
     ## a method to calculate the score map from the current sensitivity matrix
-    def _calcScoreMap(self):
+    def calcScoreMap(self):
         # compute the normalized df/dd column of the sensitivity matrix ||df/dd||
-        Zd = abs(self._sens_mat[1]) / np.amax(abs(self._sens_mat[1]))
+        Zd = abs(self.sens_mat[1]) / np.amax(abs(self.sens_mat[1]))
         # compute the normalized df/dv column of the sensitivity matrix ||df/dv||
-        Zv = abs(self._sens_mat[0]) / np.amax(abs(self._sens_mat[0]))
+        Zv = abs(self.sens_mat[0]) / np.amax(abs(self.sens_mat[0]))
         ## @var score_map
         # the score map is computed as ||df/dd||*||df/dv||
         self.score_map = Zd * Zv
+        #self.score_map = Zd
         # iterate through the entire score map
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
@@ -220,7 +285,7 @@ class PathPlanner:
                 for coord, turbine in self.vman.flowfield.turbine_map.items():
                     # compute if the euclidean distance is less
                     # than the minimum distance threshold minDist2turbine
-                    if self._euclidDist([self.X[i][j],
+                    if self.euclidDist([self.X[i][j],
                                          self.Y[i][j]],
                                         [coord.x, coord.y]) < \
                             self.minDist2turbine:
@@ -229,13 +294,15 @@ class PathPlanner:
         # calculate a wave map from this score map
 
     ## calculates a wave map using the highest score on the score map
-    def _calcWaveMap(self, UAV):
+    def _calcWaveMap(self, UAV, plan_mask=None):
         # set the max unobtainably low (since our range is 0-1)
+        if(plan_mask==None):
+            plan_mask=UAV.plan_mask
         max = -100
         idx = [0,0]
         # set the wave_map to all ones
-        UAV.wave_map = [[1 for i in range(self.vman.grid_res[0])] \
-                          for j in range(self.vman.grid_res[1])]
+        UAV.wave_map = [[1 for i in range(self.vman.grid_res[1])] \
+                          for j in range(self.vman.grid_res[0])]
         # iterate through the entire map
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
@@ -244,9 +311,10 @@ class PathPlanner:
                 # the program will throw an exception
                 try:
                     # we test the score using the UAV's path mask
-                    if self.score_map[i][j]*UAV.plan_mask[i][j]>max:
+                    if self.score_map[i][j]*plan_mask[i][j]*UAV.path_mask[i][j]>max:
                         max=self.score_map[i][j]
                         idx = [i,j]
+
                 except:
                     if self.score_map[i][j]>max:
                         max=self.score_map[i][j]
@@ -259,10 +327,15 @@ class PathPlanner:
             for j in range(self.vman.grid_res[1]):
                 # set the value of the wave map to the euclidean
                 # distance from the maximum score
-                UAV.wave_map[i][j] = self._euclidDist([x,y],[i,j])
+                try:
+                    UAV.wave_map[i][j] = 1/(self.euclidDist([x,y],[i,j])*self.euclidDist([x,y],[i,j]))
+                except:
+                    UAV.wave_map[i][j] = 1
         # normalize the wave values to 0-1,
         # but with increasing values as they approach the maximum
-        UAV.wave_map = 1-UAV.wave_map/np.amax(UAV.wave_map)
+        #UAV.wave_map = 1-UAV.wave_map/np.amax(UAV.wave_map)
+        UAV.max_wave_idx = idx
+
 
     ## Simply calls the plt.show() method to show any figures
     #   which have been generated.
@@ -289,8 +362,8 @@ class PathPlanner:
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            a.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
             if ax:
                 ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
             else:
@@ -316,8 +389,8 @@ class PathPlanner:
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            a.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
             if ax:
                 ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
             else:
@@ -342,12 +415,12 @@ class PathPlanner:
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            a.rotate_z(turbine.yaw_angle, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle, coord.as_tuple())
             if ax:
-                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+                ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=0.2, color='lime')
             else:
-                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='lime')
+                plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=0.2, color='lime')
 
     ## Generates a plot of a given UAV's path over the score map
     #   @param UAV the UAV whose path is to be plotted
@@ -365,15 +438,15 @@ class PathPlanner:
             axx = plt.scatter(x=self.X, y=self.Y, c=self.score_map,
                          vmin=0, vmax=1, cmap='gnuplot2')
             plt.colorbar(axx)
-
+        plt.axes().set_aspect('equal')
         # the title
         plt.suptitle("Greedy UAV path\n"+str(len(UAV.GPSplan)-1)+" moves")
         # plot the turbines
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
             b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            a.rotate_z(turbine.yaw_angle, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle, coord.as_tuple())
             if ax:
                 ax.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
             else:
@@ -416,7 +489,7 @@ class PathPlanner:
         # Is it a valid GPS point?
         if math.isnan(self.score_map[idx][idy]) or idx<0 or idy<0:
             # if not, let the user know
-            print("Error: GPS point is out of bounds")
+            print("Error: GPS point is out of bounds: "+str(GPS))
             return [None, None]
         else:
             # otherwise, send back the coordinates
@@ -439,26 +512,12 @@ class PathPlanner:
     # @return UAV.IDXplan a path of indices through which the UAV will travel
     # @return UAV.GPSplan a path of GPS points throught which the UAV will travel
     def greedyPath(self, UAV):
-        # start the planner fresh
-        UAV.reset_planner()
-        # figure out what the index of the starting point is
-        if len(self.history) < UAV.init_mask_size:
-            plan_horizon = UAV.init_plan_horizon
-        else:
-            plan_horizon = UAV.plan_horizon
-
-        if not (UAV.idx):
-            # if there isn't already an index, get it from the 'GPS' value
-            UAV.idx = self._findGPSindex(UAV.GPS)
-            # and append the index to the planned path
-            UAV.IDXplan.append(UAV.idx)
-        else:
-            # otherwise just add the index to the planned path
-            UAV.IDXplan.append(UAV.idx)
+        plan_horizon = self._init_planner(UAV)
         # if the GPS point was valid, the indices should exist
         if (UAV.idx):
             # calculate the current score map
-            self._calcScoreMap()
+            self.calcScoreMap(UAV)
+            self._update_cost_map(UAV)
             # let the iteration begin
             for i in range(plan_horizon):
                 # just for shorthand notation
@@ -469,10 +528,13 @@ class PathPlanner:
                 try:
                     # start by updating the UAV's score mask for the current position
                     UAV.update_mask(UAV.plan_mask, [x,y])
+                    #print("1")
                     # calculate the new wave map with the updated mask
                     self._calcWaveMap(UAV)
+                    #print("wave map calculated")
                     # calculate the next step
                     max, dir = self._greedyStep(UAV)
+                    #print("step planned")
                 except:
                     # if we run off the map, or into a no-fly zone, end the run
                     return
@@ -490,15 +552,7 @@ class PathPlanner:
                 # add the GPS point to the UAV's path
                 UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
                 # uncomment the following to plot each step of the planner
-                '''
-                self.history.append(deepcopy([self.score_map,
-                                              UAV.GPSpath,
-                                              UAV.GPSplan,
-                                              UAV.wave_map,
-                                              self.error[len(self.error)-1],
-                                              self.params.v0,
-                                              self.params.d0]))
-                '''
+
         # the starting point was invalid
         else:
             print("Aborting. Invalid start point.")
@@ -524,6 +578,7 @@ class PathPlanner:
         try:
             # just for shorthand
             Xition = self.X_map[x][y].Xitions
+            #print("1")
         except:
             # if that doesn't work, something is wrong. end the run
             return None
@@ -535,19 +590,24 @@ class PathPlanner:
             try:
                 # pull the score from the score map for the transition node
                 score = self.score_map[x+I][y+J]
+                #print("1")
                 # pull the UAV's mask value for the transition node
                 mask = UAV.plan_mask[x+I][y+J]
+                #print("2")
                 # pull the wave map value for the transition node
                 wave = UAV.wave_map[x+I][y+J]
+                #print("3")
                 # calculate the cost of changing the UAV's heading
                 headCost = abs(i*np.deg2rad(45)- \
                                   (UAV.plan_heading[len(UAV.plan_heading)-1])*
                                      np.deg2rad(45))
+                #print("4")
                 # normalize to a value between -PI and PI
                 if headCost > PI:
                     headCost = abs(headCost - 2 * PI)
                 # calculate the 2nd derivative of the score wrt the transition
                 d2S = Xition[i].dSscore-UAV.dSplan[len(UAV.dSplan)-1]
+                #print("5")
                 # calculate the reward of the move
                 reward = (UAV.scoreWt*score + \
                        UAV.dSwt*Xition[i].dSscore + \
@@ -557,20 +617,25 @@ class PathPlanner:
                        UAV.waveWt*wave + \
                        UAV.timeWt*len(UAV.IDXplan)) * \
                        mask
-
+                #print("6")
                 # we are trying to maximize the reward
                 if reward > max and \
                     x+I<self.vman.grid_res[0] and \
                     y+J<self.vman.grid_res[1] and \
                     x+I>=0 and y+J>=0:
+
                     # if the transition is valid and has the highest reward
                     # then track the reward score and the direction of the transition
                     max = reward
+                    #print("max: "+ str(max))
                     dir = i
+                #print("7")
+                #print("index" + str(i))
             # if the transition is invalid, skip it
             except:
                 pass
         # return the decision and the resulting score
+        #print("direction:" + str(dir))
         return max, dir
 
     # updateEstimates
@@ -579,62 +644,170 @@ class PathPlanner:
     #
     # @param UAV The UAV whose path is being used to update the estimates
     def updateEstimates(self, UAV):
+        print("Updating Estimates...")
         # current field estimate
-        Xk = deepcopy(self.vman.flowfield.u_field[:,:,self.plane])
+        Xk = deepcopy(self.vman.flowfield.u_field[:, :, self.plane])
         # current velocity and direction estimates
-        vd_k = [[deepcopy(self.params.v0)],
-                [deepcopy(self.params.d0)]]
+        vd_k = [[deepcopy(UAV.v0)],
+                [deepcopy(UAV.d0)]]
         # current sensitivity matrix
-        sens_mat = np.column_stack([self._sens_mat[0].flatten(), self._sens_mat[1].flatten()])
+        sens_mat = np.column_stack([self.sens_mat[0].flatten(), self.sens_mat[1].flatten()])
         # apply the pseudoinverse
         sens_mat_pinv = np.linalg.pinv(sens_mat)
         # field actual
         Xbar = deepcopy(self.Xbar)
         # if the node is not masked by the UAV's path, use the estimate
+        self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
+                    (self.vman.grid_res[0]*self.vman.grid_res[1]))
+        IDM = list()
         for i in range(self.vman.grid_res[0]):
             for j in range(self.vman.grid_res[1]):
-                if UAV.path_mask[i][j]==1:
-                    Xbar[i][j]=Xk[i][j]
+                if UAV.path_mask[i][j] == 1:
+                    Xbar[i][j] = Xk[i][j]
+                else:
+                    IDM.append(self.score_map[i][j])
+        #self.IDMhistory_max.append(np.amax(IDM))
+        #self.IDMhistory_min.append(np.amin(IDM))
+        #self.IDMhistory_avg.append(np.average(IDM))
         # convert Xk and Xbar to column vectors
         Xbar = np.vstack(Xbar.flatten())
         Xk = np.vstack(Xk.flatten())
         # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
-        vd_kp1=vd_k+np.matmul(sens_mat_pinv,Xbar-Xk)
+        vd_kp1 = vd_k + np.matmul(sens_mat_pinv, Xbar - Xk)
         # update the estimates
-        self.params.v0 = vd_kp1[0][0]
-        self.params.d0 = vd_kp1[1][0]
+        UAV.v0 = vd_kp1[0][0]
+        UAV.d0 = vd_kp1[1][0]
         # update the wind speed estimate
-        self.WF['farm']['properties']['wind_speed'] = self.params.v0
+        self.WF['farm']['properties']['wind_speed'] = UAV.v0
         # calculate the FLORIS model with the new speed
         vmanTemp = VisualizationManager(self.WF, self.vman.grid_res)
         # update the direction estimate
-        vmanTemp.flowfield.wind_direction = self.params.d0
+        vmanTemp.flowfield.wind_direction = UAV.d0
         # recalculate the FLORIS wake model with the new direction estimate
+        turbines = [turbine for _, turbine in vmanTemp.flowfield.turbine_map.items()]
+        for k, turbine in enumerate(turbines):
+            turbine.yaw_angle = UAV.d0
         vmanTemp.flowfield.calculate_wake()
         # update the sensitivity matrix
-        self._sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix())
+        self.sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix(UAV.v0,UAV.d0))
         # update the score map
-        self._calcScoreMap()
+        self.calcScoreMap()
         # output the error to the terminal
-        print(self.error[len(self.error) - 1])
+
         # update the local VisualManager object
         self.vman = deepcopy(vmanTemp)
         # keep track of the error signals for plotting
-        self.error.append([self.params.vBar-self.params.v0,
-                           self.params.dBar-self.params.d0])
+        self.error.append([self.params.vBar - UAV.v0,
+                           self.params.dBar - UAV.d0])
+        print("Error: [v,theta]=" + str(self.error[len(self.error) - 1]))
 
+    def updateEstimatesRM(self, UAV):
+        print("Updating Estimates...")
+        print("Prior estimate: " + str([UAV.v0, UAV.d0]))
+        # current field estimate
+        temp_Xk = deepcopy(self.vman.flowfield.u_field[:, :, self.plane]).flatten()
+        # current velocity and direction estimates
+        vd_k = [[deepcopy(UAV.v0)],
+                [deepcopy(UAV.d0)]]
+        # current sensitivity matrix
+        temp_sens_mat0 = self.sens_mat[0].flatten()
+        temp_sens_mat1 = self.sens_mat[1].flatten()
+
+        # field actual
+        temp_Xbar = deepcopy(self.Xbar).flatten()
+        temp_mask = deepcopy(np.array(UAV.path_mask).flatten())
+        # if the node is not masked by the UAV's path, use the estimate
+        self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
+                    (self.vman.grid_res[0]*self.vman.grid_res[1]))
+
+        sens_mat0 = list()
+        sens_mat1 = list()
+        Xbar = list()
+        Xk = list()
+        IDM = list()
+        temp_score_map = deepcopy(self.score_map).flatten()
+        for i in range(len(temp_mask)):
+                if temp_mask[i] != 1:
+                    Xbar.append(temp_Xbar[i])
+                    Xk.append(temp_Xk[i])
+                    sens_mat0.append(temp_sens_mat0[i])
+                    sens_mat1.append(temp_sens_mat1[i])
+                    IDM.append(temp_score_map[i])
+
+
+        # convert Xk and Xbar to column vectors
+        Xbar = np.vstack(np.array(Xbar))
+        Xk = np.vstack(np.array(Xk))
+        sens_mat0 = np.vstack(np.array(sens_mat0))
+        sens_mat1 = np.vstack(np.array(sens_mat1))
+        #print("Xbar shape")
+        #print(Xbar.shape)
+        #print("Xk shape")
+        #print(Xk.shape)
+        #print("sens_mat0 shape")
+        #print(sens_mat0.shape)
+        #print("sens_mat1 shape")
+        #print(sens_mat1.shape)
+        # apply the pseudoinverse
+        sens_mat_pinv = np.linalg.pinv(np.column_stack([sens_mat0, sens_mat1]))
+        #print("sens_mat_pinv shape")
+        #print(sens_mat_pinv.shape)
+        # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
+        vd_kp1 = vd_k + np.matmul(sens_mat_pinv, Xbar - Xk)
+        # update the estimates
+        UAV.v0 = vd_kp1[0][0]
+        UAV.d0 = vd_kp1[1][0]
+        # update the wind speed estimate
+        self.WF['farm']['properties']['wind_speed'] = UAV.v0
+        # calculate the FLORIS model with the new speed
+        vmanTemp = VisualizationManager(self.WF, self.vman.grid_res)
+        # update the direction estimate
+        vmanTemp.flowfield.wind_direction = UAV.d0
+        # recalculate the FLORIS wake model with the new direction estimate
+        turbines = [turbine for _, turbine in vmanTemp.flowfield.turbine_map.items()]
+        for k, turbine in enumerate(turbines):
+            turbine.yaw_angle = UAV.d0
+        vmanTemp.flowfield.calculate_wake()
+        # update the sensitivity matrix
+        self.sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix(UAV.v0,UAV.d0))
+        # update the score map
+        self.calcScoreMap()
+        # output the error to the terminal
+
+        # update the local VisualManager object
+        self.vman = deepcopy(vmanTemp)
+        # keep track of the error signals for plotting
+        error = [self.params.vBar - UAV.v0,
+                           self.params.dBar - UAV.d0]
+        print("Actual: "+str([self.params.vBar, self.params.dBar]))
+        print("New estimate: " + str([UAV.v0, UAV.d0]))
+        print("Error: [v,theta]=" + str(error))
+
+
+    def printAVGs(self):
+        print("IDM max: "+str(np.average(self.IDMhistory_max)))
+        print("IDM min: " + str(np.average(self.IDMhistory_min)))
+        print("IDM avg: "+str(np.average(self.IDMhistory_avg)))
+        print("mask max: "+str(np.amax(self.mask_size_history)))
+        print("mask min: "+str(np.amin(self.mask_size_history)))
+        print("mask avg: "+str(np.average(self.mask_size_history)))
     # updateEstimates
     ## A function which updates the direction and speed estimates
     # based on the UAV's path mask over Xbar
     #
     # @param UAV The UAV whose path is being used to update the estimates
-    def plotHistory(self, UAV, filename=None):
+    def plotHistory(self, UAV, filename=None, plot=True):
+        self.colors = ['b', 'g', 'r', 'c', 'm', 'y', 'lime', 'orange','purple']
         # variable which tells us if we are looking at the Wave or the Score map
         self._map_sel = 0
         # boolean which tells us if the animation is playing
-        self._play = True
+        if filename==None:
+            self._play = False
+        else:
+            self._play = True
+        fontsize = 14
         # create a figure
-        f = plt.figure(figsize=(10,7.5))
+        f = plt.figure(figsize=(10,9))
         # separate it into a grid
         gs = f.add_gridspec(2,3)
         # put the error plots in the leftmost figures
@@ -642,31 +815,47 @@ class PathPlanner:
         ax_d = f.add_subplot(gs[1,0])
         # the path plot takes up the right 2/3 of the figure
         axbig = f.add_subplot(gs[0:,1:])
+        axbig.set_aspect('equal')
         # plot the velocity error
         ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
         # format x,y and c for scatterplotting
         x = deepcopy(self.X)
         y = deepcopy(self.Y)
-        c = deepcopy(self.history[1][0])
+        c = deepcopy(UAV[0].planner.hist[1][0])
         # plot the score map
-        cont = axbig.scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), cmap='gnuplot2')
-        plt.colorbar(cont, ax=axbig)
+        cont = axbig.scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), s=15, cmap='gnuplot2')
+        divider = make_axes_locatable(axbig)
+        cax = divider.append_axes("right", size="5%", pad=0.05)
+        cb = plt.colorbar(cont, cax=cax)
+        cb.set_label('IDM score',fontsize=fontsize)
+        cb.ax.tick_params(labelsize=fontsize)
+        for tick in axbig.xaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        for tick in axbig.yaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        axbig.set_xlabel('meters', fontsize=fontsize)
         # plot the direction error
-        ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
+        axbig.clear()
+        for ind, uav in enumerate(UAV):
+            ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
+            ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
+            axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                          c=uav.planner.hist[0][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s=15,
+                          cmap='gnuplot2')
+        for coord, turbine in self.vman.flowfield.turbine_map.items():
+            a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
+            b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
+            a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+            axbig.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
         # the plot's title holds a lot of info
-        plt.suptitle("Wind Speed and Direction Estimates with a UAV for Sensing\n" +
-                     'Initial Speed estimate: ' + str(self.history[0][5]) +
-                     ' m/s, Actual: ' + str(self.params.vBar) +
-                     ' m/s\nInitial Direction estimate: ' + str(
-            np.rad2deg(self.history[0][6])) + '\N{DEGREE SIGN}' +
-                     ', Actual: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
-                     '\nPlanning Horizon: ' + str(UAV.plan_horizon) +
-                     '          Moves until recalculation: ' + str(UAV.moves2recalc) +
-                     '          Memory: ' + str(UAV.patrolMax) + ' nodes'
-                     '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' +
-                     str(self.error[len(self.error) - 1][0]) + '\N{DEGREE SIGN}' +
-                     '          ev = ' + str(self.error[len(self.error) - 1][1]) + ' m/s')
-        # set plot and axis titles for the error plots
+        plt.suptitle("Wind Speed and Direction Estimates with a UAV swarm for Sensing\n" +
+                     'Actual Speed: ' + str(self.params.vBar) +
+                     ', Actual Direction: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                     '\nPlanning Horizon: ' + str(UAV[0].plan_horizon) +
+                     '          Moves until recalculation: ' + str(UAV[0].moves2recalc) +
+                     '          Memory: ' + str(UAV[0].patrolMax) + ' nodes')
+                             # set plot and axis titles for the error plots
         ax_d.set_ylabel('direction error (\N{DEGREE SIGN})')
         ax_d.set_xlabel('# of recalculations')
         ax_v.set_ylabel('speed error (m/s)')
@@ -680,9 +869,12 @@ class PathPlanner:
         # slider axis
         sld_ax = plt.axes((0.2, 0.02, 0.56, 0.02))
         # create the slider
+        LEN = 1000000000000000
+        for uav in UAV:
+            LEN = np.amin([len(uav.planner.hist),LEN])
         sld = Slider(sld_ax,
                      'moves',
-                     0, len(self.history) - 1, valinit=0)
+                     0, LEN - 1, valinit=0)
         # set the initial slider text
         sld.valtext.set_text('move 0')
         # button axis
@@ -692,7 +884,10 @@ class PathPlanner:
         # button axis
         btn2_ax = plt.axes([0.85, 0.01, 0.125, 0.05])
         # create a button which plays/pauses the animation
-        btn2 = Button(btn2_ax, 'Pause')
+        if filename==None:
+            btn2 = Button(btn2_ax, 'Play')
+        else:
+            btn2 = Button(btn2_ax, 'Pause')
         # function for the map button
         def map_btn(event):
             if self._map_sel == 0: # currently showing the score map
@@ -716,6 +911,7 @@ class PathPlanner:
         btn2.on_clicked(play_btn)
         # function which updates the plot
         def update_plot(val):
+
             # discretize the slider to integer values
             idx = int(round(sld.val))
             # set the slider text
@@ -734,41 +930,51 @@ class PathPlanner:
             ax_d.set_xlabel('# of recalculations')
             ax_v.set_ylabel('speed error (m/s)')
             # plot the map
-            axbig.scatter(x=x.flatten(), y=y.flatten(), c=self.history[idx][self._map_sel].flatten(), cmap='gnuplot2')
-            # plot the plan
-            axbig.plot([i[0] for i in self.history[idx][2]],
-                       [i[1] for i in self.history[idx][2]], color='lime')
-            # plot the actual path
-            axbig.plot([i[0] for i in self.history[idx][1]],
-                             [i[1] for i in self.history[idx][1]], color = 'red')
-            # for shorthand, UAV's location on the map
-            try:
-                _x = self.history[idx][1][len(self.history[idx][1])-1][0]
-                _y = self.history[idx][1][len(self.history[idx][1])-1][1]
-                # plot the UAV, a big red circle
-                axbig.plot(_x,_y, marker='o', markersize=10, color="red")
-            except:
-                pass
-            # plot the velocity error
-            ax_v.plot([i for i in range(len(self.error))], [i[0] for i in self.error])
-            # add a vertical red line to show where we are in the iterations
-            if idx > 100:
-                ax_v.axvline((idx-UAV.init_mask_size)/(UAV.moves2recalc+1), color='red')
-            else:
-                ax_v.axvline(0, color='red')
-            # plot the direction error
-            ax_d.plot([i for i in range(len(self.error))], [np.rad2deg(i[1]) for i in self.error])
-            # add a vertical red line to show where we are in the iterations
-            if idx > 100:
-                ax_d.axvline((idx-UAV.init_mask_size) / (UAV.moves2recalc + 1), color='red')
-            else:
-                ax_d.axvline(0, color='red')
+            for ind, uav in enumerate(UAV):
+                axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                              y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                              c = uav.planner.hist[idx][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s = 15,
+                              cmap = 'gnuplot2')
+                # plot the plan
+                axbig.plot([i[0] for i in uav.planner.hist[idx][2]],
+                           [i[1] for i in uav.planner.hist[idx][2]], linewidth=1.0, color=self.colors[ind % len(self.colors)])
+                # plot the actual path
+                axbig.plot([i[0] for i in uav.planner.hist[idx][1]],
+                                 [i[1] for i in uav.planner.hist[idx][1]], linewidth=1.0, color = self.colors[ind % len(self.colors)])
+                for tick in axbig.xaxis.get_major_ticks():
+                    tick.label.set_fontsize(fontsize)
+                for tick in axbig.yaxis.get_major_ticks():
+                    tick.label.set_fontsize(fontsize)
+                # for shorthand, UAV's location on the map
+                try:
+                    _x = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][0]
+                    _y = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][1]
+                    # plot the UAV, a big red circle
+                    axbig.plot(_x,_y, marker='o', markersize=10, color=self.colors[ind % 8])
+                except:
+                    print("couldn't draw UAV")
+                    pass
+
+                # plot the velocity error
+                ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % 8])
+                # add a vertical red line to show where we are in the iterations
+                #if idx > uav.init_mask_size:
+                #    ax_v.axvline((idx-uav.init_mask_size+1)/(uav.moves2recalc)+1, color='red')
+                #else:
+                #    ax_v.axvline(idx/uav.init_mask_size, color='red')
+                # plot the direction error
+                ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % 8])
+                # add a vertical red line to show where we are in the iterations
+                #if idx > uav.init_mask_size:
+                #    ax_d.axvline((idx-uav.init_mask_size+1) / (uav.moves2recalc)+1, color='red')
+                #else:
+                #    ax_d.axvline(idx/uav.init_mask_size, color='red')
             # plot the turbines
             for coord, turbine in self.vman.flowfield.turbine_map.items():
                 a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
                 b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-                a.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
-                b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
+                a.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
+                b.rotate_z(turbine.yaw_angle-self.vman.flowfield.wind_direction, coord.as_tuple())
                 axbig.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
             # show the plot
             plt.draw()
@@ -794,10 +1000,498 @@ class PathPlanner:
                     sld.set_val(sld.valmin)
 
         # set the animate function to the FuncAnimation function for animation
-        an = anim.FuncAnimation(f, animate, interval=100,frames=len(self.history))
+        an = anim.FuncAnimation(f, animate, interval=100,frames=len(UAV[0].planner.hist))
         # render to video. to make it play faster, increase fps
         if filename:
             an.save(filename+'.mp4',fps=15,dpi=300)
         # show the plot
-        plt.show()
+        if plot:
+            plt.show()
 
+    def learnPath(self, UAV):
+        #if not plan_horizon:
+        plan_horizon = self._init_planner(UAV)
+
+        print("learn horizon: "+str(self.learn_path_length))
+        # if the GPS point was valid, the indices should exist
+        if (UAV.idx):
+            # calculate the current score map
+            switches=0
+            self.calcScoreMap()
+
+            Qmap = [[[0 for i in range(8)] for x in range(self.vman.grid_res[1])] \
+                              for y in range(self.vman.grid_res[0])]
+            print("Learning...")
+            plan_mask = deepcopy(UAV.path_mask)
+            self._calcWaveMap(UAV, plan_mask)
+            print("initial max coordinate: "+str(UAV.max_wave_idx))
+
+            for j in range(self.learn_length):
+                self.scoreTOT = 0
+                plan_mask = deepcopy(UAV.path_mask)
+                X = UAV.idx[0]
+                Y = UAV.idx[1]
+                #print("learning iteration " + str(j))
+                self.head = 0
+                self.action = 0
+                reward = 0
+                SWITCH = False
+
+                for i in range(self.learn_path_length):
+                    # start with a fresh Qmap
+                    #print("iteration "+str(i))
+                    step = False
+                    while not step:
+                        maxQ = -1000000000000
+                        for m in range(8):
+                            if Qmap[X][Y][m] > maxQ:
+                                maxQ = Qmap[X][Y][m]
+                                self.action = m
+
+                        if (np.random.random_sample()) < self.learn_thresh:
+                            self.action = np.random.randint(0, 8)
+
+                        [I, J] = self._shiftVals(self.action)
+
+                        if X+I<self.vman.grid_res[0] and Y+J<self.vman.grid_res[1] and \
+                            X+I>=0 and Y+J>=0 and not math.isnan(self.score_map[X+I][Y+J]):
+                                maxQ = np.amax(Qmap[X+I][Y+J])
+                                Xition = self.X_map[X][Y].Xitions
+                                # pull the score from the score map for the transition node
+                                score = self.score_map[X + I][Y + J]
+                                self.scoreTOT = self.scoreTOT + score
+                                #print(self.scoreTOT)
+                                # pull the UAV's mask value for the transition node
+                                mask = plan_mask[X + I][Y + J]*UAV.path_mask[X + I][Y + J]
+                                # pull the wave map value for the transition node
+                                wave = UAV.wave_map[X + I][Y + J]
+                                # calculate the cost of changing the UAV's heading
+                                headCost = abs(self.action * np.deg2rad(45) - \
+                                               (self.head * np.deg2rad(45)))
+                                if X + I == UAV.max_wave_idx[0] and Y + J == UAV.max_wave_idx[1]:
+                                    self.scoreTOT = self.scoreTOT + self.MAX_BONUS
+                                # normalize to a value between -PI and PI
+                                if headCost > PI:
+                                    headCost = abs(headCost - 2 * PI)
+                                # print("5")
+                                # calculate the reward of the move
+                                '''
+                                temp_reward = (UAV.scoreWt * score - \
+                                               UAV.windWt * Xition[self.action].thetaCost / PI - \
+                                               UAV.headWt * headCost / PI + \
+                                               UAV.waveWt * wave) -(mask)*UAV.maskSUB
+                                               '''
+                                temp_reward = self.scoreTOT
+                                #print("temp_reward: "+str(temp_reward))
+                                if not math.isnan(temp_reward):
+                                    reward = temp_reward
+                                    if X+I == UAV.max_wave_idx[0] and Y+J == UAV.max_wave_idx[1]:
+                                        SWITCH = True
+                                        #print(reward)
+                                    tempQmap = Qmap[X][Y][self.action] + \
+                                               self.learn_alpha * (reward +
+                                               self.learn_gamma * maxQ - Qmap[X][Y][self.action])
+
+                                    if not math.isnan(tempQmap):
+
+                                        Qmap[X][Y][self.action] = tempQmap
+                                        X = X + I
+                                        Y = Y + J
+                                        UAV.update_mask(plan_mask, [X, Y])
+                                        step = True
+                                        self.head = self.action
+                                        # start by updating the UAV's score mask for the current position
+
+                                        if SWITCH:
+                                            switch_mask = deepcopy(UAV.path_mask)
+                                            for boxi in range(self.max_score_box):
+                                                for boxj in range(self.max_score_box):
+                                                    if(np.sqrt(boxi*boxi+boxj*boxj)<self.max_score_box):
+                                                        try:
+                                                            UAV.update_mask(switch_mask, [X-boxi, Y-boxj])
+                                                        except:
+                                                            pass
+                                                        try:
+                                                            UAV.update_mask(switch_mask, [X + boxi, Y + boxj])
+                                                        except:
+                                                            pass
+
+                                            temp_mask = np.array(switch_mask)*np.array(plan_mask)
+                                            self._calcWaveMap(UAV,temp_mask.tolist())
+                                            #plan_mask = deepcopy(UAV.path_mask)
+                                            SWITCH = False
+                        else:
+                            Qmap[X][Y][self.action] = -100000000000
+
+            print("learning complete.")
+            print("plan horizon: " + str(plan_horizon))
+            print(" Planning...")
+            #print(Qmap)
+            X = UAV.idx[0]
+            Y = UAV.idx[1]
+            switch=0
+            prevMaxQ = np.amin(Qmap)
+            prevCoords=[X,Y]
+            if (len(UAV.GPSpath) == 0):
+                plan_len = UAV.init_plan_horizon
+            else:
+                plan_len = UAV.plan_horizon
+            for n in range(plan_len):
+                step = False
+                while not step and n<plan_len:
+                    maxQ = np.amin(Qmap)
+                    index = 0
+                    for j in range(8):
+
+                        if Qmap[X][Y][j]>maxQ:
+                            [I, J] = self._shiftVals(j)
+                            if X + I < self.vman.grid_res[0] and X + I >= 0 and \
+                                    Y + J < self.vman.grid_res[1] and Y + J >= 0\
+                                    and X+I != prevCoords[0] \
+                                    and Y+J != prevCoords[1]:
+                                        if self.euclidDist([X+I,Y+J],prevCoords)<np.sqrt(2):
+                                            pass
+                                        else:
+                                            maxQ = Qmap[X][Y][j]
+                                            Qmap[X][Y][j] = Qmap[X][Y][j] - 100
+                                            #print(maxQ)
+                                            index = j
+                    if maxQ < prevMaxQ:
+                        plan_len=plan_len-1
+                        step = True
+                    elif maxQ==prevMaxQ or maxQ==-100000000000:
+                    #if maxQ == prevMaxQ:
+                        break
+
+                    else:
+                        step = True
+                if maxQ == prevMaxQ or maxQ==-100000000000:
+                    break
+                print([maxQ,prevMaxQ,[X,Y]])
+                prevMaxQ = maxQ
+                # update the UAV's heading
+                UAV.plan_heading.append(index)
+                # update idx based on the direction of travel
+                prevCoords=[X,Y]
+                [I, J] = self._shiftVals(index)
+                X = X + I
+                Y = Y + J
+
+                #print([index, I, J])
+                # UAV.idx = [x+I,y+J]
+                # add the index to the IDXplan
+                UAV.IDXplan.append([UAV.IDXplan[n][0] + I, UAV.IDXplan[n][1] + J])
+                #print([X, Y])
+                # add the GPS point to the UAV's path
+                UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[n + 1]))
+                # uncomment the following to plot each step of the planner
+            #print(UAV.IDXplan)
+            print(str(len(UAV.IDXplan))+' steps planned')
+            self.steps_planned = len(UAV.IDXplan)
+
+
+    def _init_planner(self, UAV):
+        if len(UAV.GPSpath) == 0:
+            print("GPS minimum coords")
+            GPSmin = self._getGPSfromIDX([UAV.minX,UAV.minY])
+            print(GPSmin)
+            print("GPS maximum coords")
+            GPSmax = self._getGPSfromIDX([UAV.maxX-1,UAV.maxY-1])
+            print(GPSmax)
+            self._aspect = float(GPSmax[1]-GPSmin[1])/(GPSmax[0]-GPSmin[0])
+            print("y/x aspect ratio:")
+            print(self._aspect)
+        # start the planner fresh
+        UAV.reset_planner()
+        # figure out what the index of the starting point is
+        if len(self.hist) < UAV.init_mask_size:
+            plan_horizon = UAV.init_plan_horizon
+        else:
+            plan_horizon = UAV.plan_horizon
+
+        if not (UAV.idx):
+            # if there isn't already an index, get it from the 'GPS' value
+            UAV.idx = self._findGPSindex(UAV.GPS)
+            # and append the index to the planned path
+            UAV.IDXplan.append(UAV.idx)
+        else:
+            # otherwise just add the index to the planned path
+            UAV.IDXplan.append(UAV.idx)
+        return plan_horizon
+
+
+    def COSPlan(self,UAV):
+        plan_horizon = self._init_planner(UAV)
+        print("plan horizon: "+str(plan_horizon))
+        print("planning...")
+        if (UAV.idx):
+            [X,Y]=UAV.idx
+            #print([X, Y])
+            # calculate the current score map
+            self.calcScoreMap()
+            dirplan = list()
+            UAV.update_mask(UAV.plan_mask, [X, Y])
+
+            max_sum=-10000000000000
+            for i in range(8):
+                total = self._total_line(UAV, X, Y, i)
+                # print([total,i])
+                if total == 'nan':
+                    pass
+                elif total > max_sum:
+                    max_sum = total
+                    heading = i
+
+            [I, J] = self._shiftVals(heading)
+            #print("first heading: "+str(heading))
+
+
+            step=0
+            while step < plan_horizon:
+                max_sum = -1000000000000
+                x=X+I
+                y=Y+J
+                max_coords=[x,y]
+                while x < UAV.maxX and x >= UAV.minX \
+                    and y < UAV.maxY and y >= UAV.minY:
+                    #print(".")
+                    if not np.isnan(self.score_map[x][y]):
+                        #print(",")
+                        for i in range(8):
+                            #print(":")
+                            if i != heading-4 and i != heading+4 \
+                                and i != heading:
+                                #print("direction: "+str(i))
+                                total=self._total_line(UAV, deepcopy(x),deepcopy(y),i)
+
+                                if total=='nan':
+                                    pass
+                                elif total>max_sum:
+                                    #print("_")
+                                    max_sum=total
+                                    max_dir=i
+                                    max_coords=[x,y]
+
+                            else:
+                                total = 0
+                        x=x+I
+                        y=y+J
+                    else:
+                        #print("nope1: "+str([x,y]))
+                        break
+                #print("tested coords: "+str(max_coords))
+                #print("current coords: "+str([X,Y]))
+                if(max_coords==[X,Y]):
+                    print("BROKEN: "+str([X,Y,heading,step]))
+                    break
+                #print("plan horizon: "+str(plan_horizon))
+                #print("dir1, dir2, pos, next, step, sum:"+str([heading, max_dir, [X,Y], max_coords, step, max_sum]))
+                if heading == max_dir:
+                    print("broken")
+                    break
+                while X != max_coords[0] or Y != max_coords[1]:
+                    dirplan.append(heading)
+                    X = X + I
+                    Y = Y + J
+                    UAV.IDXplan.append([X, Y])
+                    UAV.GPSplan.append(self._getGPSfromIDX([X, Y]))
+                    UAV.plan_heading.append(heading)
+                    UAV.update_mask(UAV.plan_mask, [X, Y])
+                    step=step+1
+                #print("new coords: "+str([X, Y]))
+                heading = max_dir
+                [I, J] = self._shiftVals(max_dir)
+            #print(UAV.IDXplan)
+            print("steps planned: "+str(len(UAV.IDXplan)))
+            self.steps_planned=len(UAV.IDXplan)
+
+
+
+
+
+
+    def _total_line(self, UAV, X,Y, d):
+        [I, J]=self._shiftVals(d)
+        X=X+I
+        Y=Y+J
+        i=1
+        total = 0
+        while X<UAV.maxX and X>=UAV.minX\
+                and Y<UAV.maxY and Y>=UAV.minY:
+            if not np.isnan(self.score_map[X][Y]):
+                total = total + self.checkScore(UAV,[X, Y], None)
+                i=i+1
+            else:
+                if i==1:
+                    #print("nope2: "+str([X, Y, d]))
+
+                    return 'nan'
+                else:
+                    #print("EOL: "+str(total))
+                    return total
+            X = X + I
+            Y = Y + J
+        #print("EOL: " + str(total))
+        #print([X, Y])
+        if i>1:
+            return total
+        else:
+            return 'nan'
+
+    def checkScore(self,UAV,coord, path_mask=None):
+        X=coord[0]
+        Y=coord[1]
+        if path_mask == None:
+            path_mask = UAV.plan_mask
+        try:
+            #print(path_mask[X][Y])
+            return self.score_map[X][Y] * path_mask[X][Y] - UAV.maskSUB * (1 - UAV.plan_mask[X][Y])
+
+        except:
+            return None
+
+    def quadSearchPlan(self, UAV):
+        plan_horizon = self._init_planner(UAV)
+        print("plan horizon: " + str(plan_horizon))
+        print("planning...")
+        if (UAV.idx):
+            [X,Y]=UAV.idx
+            #print([X, Y])
+            # calculate the current score map
+            self.calcScoreMap()
+            UAV.update_mask(UAV.plan_mask, [X, Y])
+            self.avgQuad([X,Y])
+
+
+
+    def avgQuad(self,XY):
+        X = XY[0]
+        Y = XY[1]
+        Q1=0
+        Q2=0
+        Q3=0
+        Q4=0
+        for i in range(X,self.vman.grid_res[0],1):
+            for j in range(Y,self.vman.grid_res[1],1):
+                if not np.isnan(self.score_map[i][j]):
+                    Q1=Q1+self.score_map[i][j]
+        for i in range(0,X,1):
+            for j in range(Y,self.vman.grid_res[1],1):
+                if not np.isnan(self.score_map[i][j]):
+                    Q2=Q2+self.score_map[i][j]
+        for i in range(0,X,1):
+            for j in range(0,Y,1):
+                if not np.isnan(self.score_map[i][j]):
+                    Q3=Q3+self.score_map[i][j]
+        for i in range(X,self.vman.grid_res[0],1):
+            for j in range(0,Y,1):
+                if not np.isnan(self.score_map[i][j]):
+                    Q4=Q4+self.score_map[i][j]
+        print(Q1)
+        print(Q2)
+        print(Q3)
+        print(Q4)
+        TOT=Q1+Q2+Q3+Q4
+        I = (Q1-Q2-Q3+Q4)/TOT
+        J = (Q1+Q2-Q3-Q4)/TOT
+        if round(I)==0 and round(J)==0:
+            g=2
+        if not np.isnan(self.score_map[X+round(I)][Y+round(J)]):
+            return round(I),round(J)
+        elif not np.isnan(self.score_map[X + round(I)][Y]):
+            return
+
+
+    def updateEstimatesTV(self, UAV):
+        print("Updating Estimates...")
+        # current field estimate
+        Xk = deepcopy(self.vman.flowfield.u_field[:, :, self.plane])
+        # current velocity and direction estimates
+        vd_k = [[deepcopy(UAV.v0)],
+                [deepcopy(UAV.d0)]]
+        # current sensitivity matrix
+        sens_mat = np.column_stack([self.sens_mat[0].flatten(), self.sens_mat[1].flatten()])
+        # apply the pseudoinverse
+        sens_mat_pinv = np.linalg.pinv(sens_mat)
+        # field actual
+
+        # if the node is not masked by the UAV's path, use the estimate
+        self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
+                    (self.vman.grid_res[0]*self.vman.grid_res[1]))
+
+        for i in range(len(UAV.IDXpath)):
+            XY=UAV.IDXpath[i]
+            self.Xbar[XY[0]][XY[1]]=UAV.measure[i]
+
+        # convert Xk and Xbar to column vectors
+        Xbar = deepcopy(self.Xbar)
+        Xbar = np.vstack(Xbar.flatten())
+        Xk = np.vstack(Xk.flatten())
+        # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
+        vd_kp1 = vd_k + np.matmul(sens_mat_pinv, Xbar - Xk)
+        # update the estimates
+        UAV.v0 = vd_kp1[0][0]
+        UAV.d0 = vd_kp1[1][0]
+        # update the wind speed estimate
+        self.WF['farm']['properties']['wind_speed'] = UAV.v0
+        # calculate the FLORIS model with the new speed
+        vmanTemp = VisualizationManager(self.WF, self.vman.grid_res)
+        # update the direction estimate
+        vmanTemp.flowfield.wind_direction = UAV.d0
+        # recalculate the FLORIS wake model with the new direction estimate
+        turbines = [turbine for _, turbine in vmanTemp.flowfield.turbine_map.items()]
+        for k, turbine in enumerate(turbines):
+            turbine.yaw_angle = UAV.d0
+        vmanTemp.flowfield.calculate_wake()
+        # update the sensitivity matrix
+        self.sens_mat = deepcopy(vmanTemp.calcSensitivityMatrix(UAV.v0,UAV.d0))
+        # update the score map
+        self.calcScoreMap()
+        # output the error to the terminal
+        print("Error: [v,theta]="+str(self.error[len(self.error) - 1]))
+        # update the local VisualManager object
+        self.vman = deepcopy(vmanTemp)
+        # keep track of the error signals for plotting
+        self.error.append([self.params.vBar - UAV.v0,
+                           self.params.dBar - UAV.d0])
+
+    def getMeasure(self, XY):
+        VTK_good = False
+        if not self.VTK_FULL:
+            while not VTK_good and not self.VTK_FULL:
+                try:
+                    if (self.VTKpath.find("instantaneous")):
+                        VTK = VTKreader(self.VTKpath, str(self.steps_taken * \
+                                            self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename, self.vman,
+                                        False)
+                    else:
+                        VTK = VTKreader(self.VTKpath, str(self.steps_taken * \
+                                            self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename, self.vman)
+                    VTK_good = True
+                except:
+                    print(self.VTKpath + '/' + str(
+                        (self.steps_taken) * self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename + ' is invalid')
+                    self.steps_taken = self.steps_taken + 1
+                    if self.steps_taken >= (self.VTKrange[1] - self.VTKrange[0]) / self.VTKincrement:
+                        print("VTK_list full, looping to beginning of data")
+                        self.steps_taken=0
+                        self.VTK_FULL = True
+            if not self.VTK_FULL:
+                self.VTKlist.append(VTK)
+                self.steps_taken = self.steps_taken + 1
+                if self.steps_taken >= (self.VTKrange[1] - self.VTKrange[0]) / self.VTKincrement:
+                    print("VTK_list full, looping to beginning of data")
+                    self.steps_taken = 0
+                    self.VTK_FULL = True
+                return VTK.u_field[XY[0]][XY[1]]
+            else:
+                self.steps_taken = 0
+                self.VTK_FULL = True
+                print("VTK_list full, looping to beginning of data")
+                return self.VTKlist[self.steps_taken].u_field[XY[0]][XY[1]]
+        else:
+            self.steps_taken=self.steps_taken+1
+            if self.steps_taken >= len(self.VTKlist):
+                self.steps_taken = 0
+                print("loop to beginning of data")
+            return self.VTKlist[self.steps_taken].u_field[XY[0]][XY[1]]
