@@ -2,7 +2,7 @@
 # contains the definition of a UAV and various functions to
 # move the UAV and update its state
 from copy import deepcopy
-
+import numpy as np
 ## \class UAV.UAV
 #  A class for representing the state of a UAV on the windfarm
 class UAV:
@@ -14,8 +14,8 @@ class UAV:
         # This section contains "ACTUAL" values
         self.minX = 0
         self.minY = 0
-        self.maxX = 100
-        self.maxY = 100
+        self.maxX = 48
+        self.maxY = 15
         ## @var GPS
         # Holds the "GPS" location
         # of the UAV. Currently, the GPS location is an
@@ -49,7 +49,7 @@ class UAV:
         # (applied as calculated_score*mask_value)
         self.path_mask = [[1 for i in range(len(planner.score_map[0]))] \
                              for j in range(len(planner.score_map))]
-
+        self.mask_size = list()
         ''' This section contains PLANNING values '''
         ## @var planner
         # An instance of the path planner
@@ -113,29 +113,29 @@ class UAV:
         #   sets a multiplicative penalty value to be applied to a node's
         #   score mask each time it is visited
         #   (set to 1 to apply no multiplicative penalty)
-        self.maskMUL = 0.7
+        self.maskMUL = 0.2
         ## @var scoreWt
         #   sets the weight of the sensitivity score in path calculations
-        self.scoreWt = 0
+        self.scoreWt = 10
         ## @var dSwt
         #   sets the weight of the derivative of the sensitivity score
         #   wrt transition in path calculations
-        self.dSwt = 0
+        self.dSwt = 2
         ## @var d2Swt
         #   sets the weight of the 2nd derivative of the sensitivity score
         #   wrt transition in path calculations
-        self.d2Swt = 0
+        self.d2Swt = 1
         ## @var windWt
         #   sets the weight of the wind direction vs. transition heading
         #   in path calculations
-        self.windWt = 0
+        self.windWt = 1
         ## @var headWt
         #   sets the weight of the UAV heading vs. transition heading
         #   in path calculations
-        self.headWt = 0
+        self.headWt = 4
         ## @var waveWt
         #   sets the weight of the wave map in path calculations
-        self.waveWt = 0
+        self.waveWt = 200
         ## @var timeWt
         #   sets the weight of time/iterations elapsed in path calculations
         self.timeWt = 0
@@ -235,7 +235,7 @@ class UAV:
                     for i in range(len(self.IDXpath)):
                         self.update_mask(self.path_mask,
                                          self.IDXpath[i])
-
+                #print("here")
                 self.planner.hist.append(deepcopy([self.planner.score_map,
                                               self.GPSpath,
                                               self.GPSplan,
@@ -244,15 +244,21 @@ class UAV:
                                               self.v0,
                                               self.d0]))
 
-            except:
+
+
+            except Exception as e:
+
                 # set everything back to how it was
                 self.IDXpath = deepcopy(tempIDXpath)
                 self.GPSpath = deepcopy(tempGPSpath)
                 self.dS = tempdS
                 self.heading = tempHead
                 self.path_mask = deepcopy(tempMask)
-                print("Error: This number of steps has not been planned.")
+                print("Error: This number of steps has not been planned. Exception:")
+                print(e)
+
                 return
+        self.mask_size.append(np.sum(np.where(np.array(self.path_mask) < 1, 1, 0)))
         #print(self.GPSpath)
     def moveTV(self):
         # just in case, make a backup copy of the current values

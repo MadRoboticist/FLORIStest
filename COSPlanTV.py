@@ -4,18 +4,33 @@
 
 from visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
-from readVTK import VTKreader
 from UAV import UAV
 import json
 import numpy as np
 import scipy.io as scio
 from copy import deepcopy
 
+# read *.u file into list
+SOWFAfile = "twoTurb_lowTI.u"
+xBar = []
+with open(SOWFAfile) as f:
+    lines = []  # list to collect lines
+    while 1:
+        aline = f.readline()
+        if aline.strip():
+            lines.append(aline)     # nonempty line
+        else:              # empty line
+            if len(lines)==0: break
+            xBar.append(np.loadtxt(lines, dtype=int))
+            lines = []
+xBar = np.array(xBar) # convert to array
+print(xBar.shape) # print the shape
+
 with open("twoTurb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
 ## flowfield resolution given as [x_resolution, y_resolution, z_resolution]
-grid_resolution = [48, 15, 15] # [x_res, y_res, z_res]
+grid_resolution = [xBar.shape[1], xBar.shape[2], 15] # [x_res, y_res, z_res]
 grid_size = grid_resolution[0]*grid_resolution[1]
 coverage = 0.15
 ## @var vman
@@ -57,32 +72,23 @@ vman.params.vBar = 8.0 # actual wind speed
 # see definition at visualization_manager_DJ.VisualizationManager.params.dBar
 vman.params.dBar = np.deg2rad(0.0) # actual wind direction
 
+vman.params.iterMax = xBar.shape[0]
 ## A PathPlanner object
 #
 # see definition at pathPlan.PathPlanner
 planner = PathPlanner(vman)
 
-
-
-planner.VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataInstantaneous"
-
-planner.VTKfilename = "U_slice_horizontal_1.vtk"
-#VTK = VTKreader(VTKpath, VTKfilename, vman)
-planner.VTKrange = [20145, 21875] #two Turbines, leave in initialization
-planner.VTKincrement = 5
-
-#change Xbar to Xk
-plane = int(vman.flowfield.grid_resolution.z * vman.params.percent_height)
-
-
 ## A UAV object
 #
 # see definition at pathPlan.UAV
+planner.Xbar = deepcopy(xBar)
 UAV1 = UAV(planner)
-planner.updateEstimates(UAV1)
-planner.Xbar = deepcopy(planner.vman.flowfield.u_field[:, :, plane])
+
 print("[direction, speed] estimates")
 print([planner.vman.flowfield.wind_direction, planner.vman.flowfield.wind_speed])
+#set boundaries of map
+UAV1.maxX = xBar.shape[1]
+UAV1.maxY = xBar.shape[2]
 ## @var maskSUB
 #   sets a subtractive penalty value to be applied to a node's
 #   score mask each time it is visited
@@ -161,8 +167,8 @@ planner.percent_plan = 1 #percentage of planned steps that will be taken
 # run it for the indicated number of recalculations
 i=0
 #while dirErr[i]>planner.params.dirErrMax or spdErr[i]>planner.params.spErrMax:
-for i in range(1000):
-    print('iteration '+ str(i))
+for i in range(60):
+    print('\n\niteration '+ str(i))
     planner.COSPlan(UAV1)  # recalculate the plan
     UAV1.moveTV() # move the UAV
     if (len(UAV1.GPSpath) >= UAV1.init_mask_size):
@@ -172,7 +178,7 @@ for i in range(1000):
     i=i+1
 #planner.plotScoreMapUAV(UAV1)
 #planner.show()
-MAT = False
+MAT = True
 
 if(MAT):
     scio.savemat('mat/2turbs_'+str(vman.params.vBar) + '_' + \
@@ -183,7 +189,7 @@ if(MAT):
          '_dirERR_UAV.mat', mdict={'dirErrUAV'+str(int(100*coverage)): dirErr})
 
 #planner.printAVGs()
-filename = "UAV_2turb_COSPlanTV_IDM-D_1000it" # set the file name
+filename = "UAV_2turb_COSPlanTV_SOWFA_non0init-err" # set the file name
 # animate what happened
 #planner.plotHistory(UAV1, None, True) # don't save the animation, show the plot
 planner.plotHistory(UAV1, filename, False) # save the animation as an mp4, don't show the plot

@@ -160,7 +160,7 @@ while dirErr[i]>planner.params.dirErrMax or spdErr[i]>planner.params.spErrMax:
     spdErr.append(abs(planner.params.vBar - planner.params.v0))
     i=i+1
 
-MAT = False
+MAT = True
 
 if(MAT):
     scio.savemat('mat/2turbs_'+str(vman.params.vBar) + '_' + \

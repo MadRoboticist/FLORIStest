@@ -11,7 +11,7 @@ from math import pi as PI
 import math
 from copy import deepcopy
 from matplotlib import animation as anim
-from readVTK import VTKreader
+
 ## \class d
 # An enumeration of the cardinal directions
 # starting from East and moving counterclockwise.
@@ -335,7 +335,7 @@ class PathPlanner:
         # but with increasing values as they approach the maximum
         #UAV.wave_map = 1-UAV.wave_map/np.amax(UAV.wave_map)
         UAV.max_wave_idx = idx
-
+        #print(idx)
 
     ## Simply calls the plt.show() method to show any figures
     #   which have been generated.
@@ -516,7 +516,7 @@ class PathPlanner:
         # if the GPS point was valid, the indices should exist
         if (UAV.idx):
             # calculate the current score map
-            self.calcScoreMap(UAV)
+            self.calcScoreMap()
             self._update_cost_map(UAV)
             # let the iteration begin
             for i in range(plan_horizon):
@@ -531,12 +531,15 @@ class PathPlanner:
                     #print("1")
                     # calculate the new wave map with the updated mask
                     self._calcWaveMap(UAV)
-                    #print("wave map calculated")
+                    # print("wave map calculated")
                     # calculate the next step
                     max, dir = self._greedyStep(UAV)
-                    #print("step planned")
+                    UAV.planner.steps_planned = UAV.planner.steps_planned + 1
+                    #print(str(max) +','+str(dir))
+                    # print("step planned")
                 except:
                     # if we run off the map, or into a no-fly zone, end the run
+                    print("problem occurred")
                     return
                 # add the max to the UAV's score
                 UAV.score += max
@@ -552,10 +555,11 @@ class PathPlanner:
                 # add the GPS point to the UAV's path
                 UAV.GPSplan.append(self._getGPSfromIDX(UAV.IDXplan[i+1]))
                 # uncomment the following to plot each step of the planner
-
+            # print(UAV.GPSplan)
         # the starting point was invalid
         else:
             print("Aborting. Invalid start point.")
+
 
 
     ## a method which calculates a single step in a greedy path
@@ -655,7 +659,10 @@ class PathPlanner:
         # apply the pseudoinverse
         sens_mat_pinv = np.linalg.pinv(sens_mat)
         # field actual
-        Xbar = deepcopy(self.Xbar)
+        if self.Xbar.ndim == 2:
+            Xbar = deepcopy(self.Xbar)
+        else:
+            Xbar = deepcopy(self.Xbar[self.steps_taken].flatten())
         # if the node is not masked by the UAV's path, use the estimate
         self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
                     (self.vman.grid_res[0]*self.vman.grid_res[1]))
@@ -714,7 +721,10 @@ class PathPlanner:
         temp_sens_mat1 = self.sens_mat[1].flatten()
 
         # field actual
-        temp_Xbar = deepcopy(self.Xbar).flatten()
+        if self.Xbar.ndim == 2:
+            temp_Xbar = deepcopy(self.Xbar).flatten()
+        else:
+            temp_Xbar = deepcopy(self.Xbar[self.steps_taken]).flatten()
         temp_mask = deepcopy(np.array(UAV.path_mask).flatten())
         # if the node is not masked by the UAV's path, use the estimate
         self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
@@ -791,11 +801,15 @@ class PathPlanner:
         print("mask max: "+str(np.amax(self.mask_size_history)))
         print("mask min: "+str(np.amin(self.mask_size_history)))
         print("mask avg: "+str(np.average(self.mask_size_history)))
-    # updateEstimates
-    ## A function which updates the direction and speed estimates
-    # based on the UAV's path mask over Xbar
+
+    # plotHistory
+    ## A function which plots a UAV's history
     #
-    # @param UAV The UAV whose path is being used to update the estimates
+    # @param UAV a UAV object or list of UAV objects to plot the history of
+    # @param filename a filename for the video WITHOUT THE FILE EXTENSION
+    #       omit for no output video
+    # @param plot boolean- to show the plot or not to show the plot
+    #
     def plotHistory(self, UAV, filename=None, plot=True):
         self.colors = ['b', 'g', 'r', 'c', 'm', 'y', 'lime', 'orange','purple']
         # variable which tells us if we are looking at the Wave or the Score map
@@ -821,7 +835,10 @@ class PathPlanner:
         # format x,y and c for scatterplotting
         x = deepcopy(self.X)
         y = deepcopy(self.Y)
-        c = deepcopy(UAV[0].planner.hist[1][0])
+        if type(UAV)==list:
+            c = deepcopy(UAV[0].planner.hist[1][0])
+        else:
+            c = deepcopy(UAV.planner.hist[1][0])
         # plot the score map
         cont = axbig.scatter(x=x.flatten(), y=y.flatten(), c=c.flatten(), s=15, cmap='gnuplot2')
         divider = make_axes_locatable(axbig)
@@ -836,11 +853,21 @@ class PathPlanner:
         axbig.set_xlabel('meters', fontsize=fontsize)
         # plot the direction error
         axbig.clear()
-        for ind, uav in enumerate(UAV):
-            ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
-            ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
-            axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
-                          c=uav.planner.hist[0][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s=15,
+        if type(UAV)==list:
+            for ind, uav in enumerate(UAV):
+                ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
+                ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % len(self.colors)])
+                axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                              c=uav.planner.hist[0][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s=15,
+                              cmap='gnuplot2')
+        else:
+            ax_v.plot([i for i in range(len(UAV.planner.error))],
+                      [i[0] for i in UAV.planner.error], color='black')
+            ax_d.plot([i for i in range(len(UAV.planner.error))],
+                      [np.rad2deg(i[1]) for i in UAV.planner.error],color='black')
+            axbig.scatter(x=x[UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(),
+                          y=y[UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(),
+                          c=UAV.planner.hist[0][self._map_sel][UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(), s=15,
                           cmap='gnuplot2')
         for coord, turbine in self.vman.flowfield.turbine_map.items():
             a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
@@ -849,13 +876,22 @@ class PathPlanner:
             b.rotate_z(turbine.yaw_angle - self.vman.flowfield.wind_direction, coord.as_tuple())
             axbig.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
         # the plot's title holds a lot of info
-        plt.suptitle("Wind Speed and Direction Estimates with a UAV swarm for Sensing\n" +
-                     'Actual Speed: ' + str(self.params.vBar) +
-                     ', Actual Direction: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
-                     '\nPlanning Horizon: ' + str(UAV[0].plan_horizon) +
-                     '          Moves until recalculation: ' + str(UAV[0].moves2recalc) +
-                     '          Memory: ' + str(UAV[0].patrolMax) + ' nodes')
-                             # set plot and axis titles for the error plots
+        if type(UAV)==list:
+            plt.suptitle("Wind Speed and Direction Estimates with a UAV swarm for Sensing\n" +
+                         'Actual Speed: ' + str(self.params.vBar) +
+                         ', Actual Direction: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                         '\nPlanning Horizon: ' + str(UAV[0].plan_horizon) +
+                         '          Moves until recalculation: ' + str(UAV[0].moves2recalc) +
+                         '          Memory: ' + str(UAV[0].patrolMax) + ' nodes')
+                                 # set plot and axis titles for the error plots
+        else:
+            plt.suptitle("Wind Speed and Direction Estimates with a UAV swarm for Sensing\n" +
+                         'Actual Speed: ' + str(self.params.vBar) +
+                         ', Actual Direction: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                         '\nPlanning Horizon: ' + str(UAV.plan_horizon) +
+                         '          Moves until recalculation: ' + str(UAV.moves2recalc) +
+                         '          Memory: ' + str(UAV.patrolMax) + ' nodes')
+            # set plot and axis titles for the error plots
         ax_d.set_ylabel('direction error (\N{DEGREE SIGN})')
         ax_d.set_xlabel('# of recalculations')
         ax_v.set_ylabel('speed error (m/s)')
@@ -870,8 +906,11 @@ class PathPlanner:
         sld_ax = plt.axes((0.2, 0.02, 0.56, 0.02))
         # create the slider
         LEN = 1000000000000000
-        for uav in UAV:
-            LEN = np.amin([len(uav.planner.hist),LEN])
+        if type(UAV)==list:
+            for uav in UAV:
+                LEN = np.amin([len(uav.planner.hist),LEN])
+        else:
+            LEN = len(UAV.planner.hist)
         sld = Slider(sld_ax,
                      'moves',
                      0, LEN - 1, valinit=0)
@@ -930,44 +969,81 @@ class PathPlanner:
             ax_d.set_xlabel('# of recalculations')
             ax_v.set_ylabel('speed error (m/s)')
             # plot the map
-            for ind, uav in enumerate(UAV):
-                axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
-                              y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
-                              c = uav.planner.hist[idx][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s = 15,
-                              cmap = 'gnuplot2')
+            if type(UAV)==list:
+                for ind, uav in enumerate(UAV):
+                    axbig.scatter(x=x[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                                  y=y[uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(),
+                                  c = uav.planner.hist[idx][self._map_sel][uav.minX:uav.maxX,uav.minY:uav.maxY].flatten(), s = 15,
+                                  cmap = 'gnuplot2')
+                    # plot the plan
+                    axbig.plot([i[0] for i in uav.planner.hist[idx][2]],
+                               [i[1] for i in uav.planner.hist[idx][2]], linewidth=1.0, color=self.colors[ind % len(self.colors)])
+                    # plot the actual path
+                    axbig.plot([i[0] for i in uav.planner.hist[idx][1]],
+                                     [i[1] for i in uav.planner.hist[idx][1]], linewidth=1.0, color = self.colors[ind % len(self.colors)])
+                    for tick in axbig.xaxis.get_major_ticks():
+                        tick.label.set_fontsize(fontsize)
+                    for tick in axbig.yaxis.get_major_ticks():
+                        tick.label.set_fontsize(fontsize)
+                    # for shorthand, UAV's location on the map
+                    try:
+                        _x = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][0]
+                        _y = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][1]
+                        # plot the UAV, a big red circle
+                        axbig.plot(_x,_y, marker='o', markersize=10, color=self.colors[ind % 8])
+                    except:
+                        print("couldn't draw UAV")
+                        pass
+
+                    # plot the velocity error
+                    ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % 8])
+
+                    # plot the direction error
+                    ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % 8])
+
+            else:
+                axbig.scatter(x=x[UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(),
+                              y=y[UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(),
+                              c=UAV.planner.hist[idx][self._map_sel][UAV.minX:UAV.maxX, UAV.minY:UAV.maxY].flatten(),
+                              s=15,
+                              cmap='gnuplot2')
                 # plot the plan
-                axbig.plot([i[0] for i in uav.planner.hist[idx][2]],
-                           [i[1] for i in uav.planner.hist[idx][2]], linewidth=1.0, color=self.colors[ind % len(self.colors)])
+                axbig.plot([i[0] for i in UAV.planner.hist[idx][2]],
+                           [i[1] for i in UAV.planner.hist[idx][2]],
+                           linewidth=1.0, color='lime')
                 # plot the actual path
-                axbig.plot([i[0] for i in uav.planner.hist[idx][1]],
-                                 [i[1] for i in uav.planner.hist[idx][1]], linewidth=1.0, color = self.colors[ind % len(self.colors)])
+                axbig.plot([i[0] for i in UAV.planner.hist[idx][1]],
+                           [i[1] for i in UAV.planner.hist[idx][1]],
+                           linewidth=1.0, color='red')
                 for tick in axbig.xaxis.get_major_ticks():
                     tick.label.set_fontsize(fontsize)
                 for tick in axbig.yaxis.get_major_ticks():
                     tick.label.set_fontsize(fontsize)
                 # for shorthand, UAV's location on the map
                 try:
-                    _x = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][0]
-                    _y = uav.planner.hist[idx][1][len(uav.planner.hist[idx][1])-1][1]
+                    _x = UAV.planner.hist[idx][1][len(UAV.planner.hist[idx][1]) - 1][0]
+                    _y = UAV.planner.hist[idx][1][len(UAV.planner.hist[idx][1]) - 1][1]
                     # plot the UAV, a big red circle
-                    axbig.plot(_x,_y, marker='o', markersize=10, color=self.colors[ind % 8])
+                    axbig.plot(_x, _y, marker='o', markersize=10, color='red')
                 except:
                     print("couldn't draw UAV")
                     pass
 
                 # plot the velocity error
-                ax_v.plot([i for i in range(len(uav.planner.error))], [i[0] for i in uav.planner.error],color=self.colors[ind % 8])
+                ax_v.plot([i for i in range(len(UAV.planner.error))],
+                          [i[0] for i in UAV.planner.error],color='black')
                 # add a vertical red line to show where we are in the iterations
-                #if idx > uav.init_mask_size:
+                # if idx > uav.init_mask_size:
                 #    ax_v.axvline((idx-uav.init_mask_size+1)/(uav.moves2recalc)+1, color='red')
-                #else:
+                # else:
                 #    ax_v.axvline(idx/uav.init_mask_size, color='red')
                 # plot the direction error
-                ax_d.plot([i for i in range(len(uav.planner.error))], [np.rad2deg(i[1]) for i in uav.planner.error],color=self.colors[ind % 8])
+                ax_d.plot([i for i in range(len(UAV.planner.error))],
+                          [np.rad2deg(i[1]) for i in UAV.planner.error],color='black')
                 # add a vertical red line to show where we are in the iterations
-                #if idx > uav.init_mask_size:
+                # if idx > uav.init_mask_size:
                 #    ax_d.axvline((idx-uav.init_mask_size+1) / (uav.moves2recalc)+1, color='red')
-                #else:
+                # else:
                 #    ax_d.axvline(idx/uav.init_mask_size, color='red')
             # plot the turbines
             for coord, turbine in self.vman.flowfield.turbine_map.items():
@@ -1000,7 +1076,10 @@ class PathPlanner:
                     sld.set_val(sld.valmin)
 
         # set the animate function to the FuncAnimation function for animation
-        an = anim.FuncAnimation(f, animate, interval=100,frames=len(UAV[0].planner.hist))
+        if type(UAV)==list:
+            an = anim.FuncAnimation(f, animate, interval=100,frames=len(UAV[0].planner.hist))
+        else:
+            an = anim.FuncAnimation(f, animate, interval=100,frames=len(UAV.planner.hist))
         # render to video. to make it play faster, increase fps
         if filename:
             an.save(filename+'.mp4',fps=15,dpi=300)
@@ -1418,15 +1497,59 @@ class PathPlanner:
         # if the node is not masked by the UAV's path, use the estimate
         self.mask_size_history.append(1-float(np.sum(UAV.path_mask))/ \
                     (self.vman.grid_res[0]*self.vman.grid_res[1]))
-
+        temp_Xbar = deepcopy(self.Xbar[self.steps_taken])
         for i in range(len(UAV.IDXpath)):
             XY=UAV.IDXpath[i]
-            self.Xbar[XY[0]][XY[1]]=UAV.measure[i]
+            temp_Xbar[XY[0]][XY[1]]=UAV.measure[i]
 
         # convert Xk and Xbar to column vectors
-        Xbar = deepcopy(self.Xbar)
-        Xbar = np.vstack(Xbar.flatten())
-        Xk = np.vstack(Xk.flatten())
+
+        print("Updating Estimates...")
+        print("Prior estimate: " + str([UAV.v0, UAV.d0]))
+        # current field estimate
+        temp_Xk = deepcopy(self.vman.flowfield.u_field[:, :, self.plane]).flatten()
+        # current velocity and direction estimates
+        vd_k = [[deepcopy(UAV.v0)],
+                [deepcopy(UAV.d0)]]
+        # current sensitivity matrix
+        temp_sens_mat0 = self.sens_mat[0].flatten()
+        temp_sens_mat1 = self.sens_mat[1].flatten()
+
+        temp_mask = deepcopy(np.array(UAV.path_mask).flatten())
+        # if the node is not masked by the UAV's path, use the estimate
+        self.mask_size_history.append(1 - float(np.sum(UAV.path_mask)) / \
+                                      (self.vman.grid_res[0] * self.vman.grid_res[1]))
+        Xbar = list()
+        sens_mat0 = list()
+        sens_mat1 = list()
+        Xk = list()
+        IDM = list()
+        temp_score_map = deepcopy(self.score_map).flatten()
+        for i in range(len(temp_mask)):
+            if temp_mask[i] != 1:
+                Xbar.append(temp_Xbar.flatten()[i])
+                Xk.append(temp_Xk[i])
+                sens_mat0.append(temp_sens_mat0[i])
+                sens_mat1.append(temp_sens_mat1[i])
+                IDM.append(temp_score_map[i])
+
+        # convert Xk and Xbar to column vectors
+        Xbar = np.vstack(np.array(Xbar))
+        Xk = np.vstack(np.array(Xk))
+        sens_mat0 = np.vstack(np.array(sens_mat0))
+        sens_mat1 = np.vstack(np.array(sens_mat1))
+        # print("Xbar shape")
+        # print(Xbar.shape)
+        # print("Xk shape")
+        # print(Xk.shape)
+        # print("sens_mat0 shape")
+        # print(sens_mat0.shape)
+        # print("sens_mat1 shape")
+        # print(sens_mat1.shape)
+        # apply the pseudoinverse
+        sens_mat_pinv = np.linalg.pinv(np.column_stack([sens_mat0, sens_mat1]))
+        # print("sens_mat_pinv shape")
+        # print(sens_mat_pinv.shape)
         # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
         vd_kp1 = vd_k + np.matmul(sens_mat_pinv, Xbar - Xk)
         # update the estimates
@@ -1456,42 +1579,9 @@ class PathPlanner:
                            self.params.dBar - UAV.d0])
 
     def getMeasure(self, XY):
-        VTK_good = False
-        if not self.VTK_FULL:
-            while not VTK_good and not self.VTK_FULL:
-                try:
-                    if (self.VTKpath.find("instantaneous")):
-                        VTK = VTKreader(self.VTKpath, str(self.steps_taken * \
-                                            self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename, self.vman,
-                                        False)
-                    else:
-                        VTK = VTKreader(self.VTKpath, str(self.steps_taken * \
-                                            self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename, self.vman)
-                    VTK_good = True
-                except:
-                    print(self.VTKpath + '/' + str(
-                        (self.steps_taken) * self.VTKincrement + self.VTKrange[0]) + '/' + self.VTKfilename + ' is invalid')
-                    self.steps_taken = self.steps_taken + 1
-                    if self.steps_taken >= (self.VTKrange[1] - self.VTKrange[0]) / self.VTKincrement:
-                        print("VTK_list full, looping to beginning of data")
-                        self.steps_taken=0
-                        self.VTK_FULL = True
-            if not self.VTK_FULL:
-                self.VTKlist.append(VTK)
-                self.steps_taken = self.steps_taken + 1
-                if self.steps_taken >= (self.VTKrange[1] - self.VTKrange[0]) / self.VTKincrement:
-                    print("VTK_list full, looping to beginning of data")
-                    self.steps_taken = 0
-                    self.VTK_FULL = True
-                return VTK.u_field[XY[0]][XY[1]]
-            else:
-                self.steps_taken = 0
-                self.VTK_FULL = True
-                print("VTK_list full, looping to beginning of data")
-                return self.VTKlist[self.steps_taken].u_field[XY[0]][XY[1]]
-        else:
-            self.steps_taken=self.steps_taken+1
-            if self.steps_taken >= len(self.VTKlist):
-                self.steps_taken = 0
-                print("loop to beginning of data")
-            return self.VTKlist[self.steps_taken].u_field[XY[0]][XY[1]]
+        measure = self.Xbar[self.steps_taken][XY[0]][XY[1]]
+        self.steps_taken=self.steps_taken+1
+        if self.steps_taken >= self.Xbar.shape[0]:
+            print("looping to beginning of data")
+            self.steps_taken = 0
+        return measure

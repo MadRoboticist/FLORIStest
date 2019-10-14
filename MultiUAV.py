@@ -1,15 +1,15 @@
-## \file COSPlanOnline.py
-# This is a script which utilizes the greedyPath function in pathPlan.py
+## \file MultiUAV.py
+# This is a script which utilizes the COSplan function in pathPlan.py
 # while doing online updates of the sensitivity matrix and associated estimates
+# using a swarm of UAVs with independent consensus-based nearest-neighbor estimates
+# and truth data from a static FLORIS model
 
 from visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
-from readVTK import VTKreader
 from UAV import UAV
 import json
 import numpy as np
 import scipy.io as scio
-from copy import deepcopy
 
 with open("36_turb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file

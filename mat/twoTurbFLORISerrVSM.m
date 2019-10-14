@@ -1,10 +1,9 @@
 close()
 fontsize=14;
-per_covg_max = [0.0,2.5,5:5:100]
+per_covg_max = [0.0,2,5,10:10:100]
 gamma = (0:10:100)
-iters = [1000000,396, 103, 49, 32, 22, 16,...
-         13, 11, 10, 10, 9, 8,...
-         8,8,8,7,7,7,7,7,7];
+iters = [NaN,5, 5, 5, 5, 5, 5,...
+         5, 5, 4, 4, 4, 4];
 mask_max = [ 0.0, 0.625, 1.241, 2.491, 3.732, 4.965, 6.224,...
              7.439, 8.628, 9.805,10.883,12.543,...
             13.477,14.221,15.925,16.660,18.216,...
@@ -24,15 +23,15 @@ converg = [5,9,11,14,17,23,34,61,135,400,100000000];
 yyaxis right
 plot(per_covg_max,iters,'-.o');
 
-ylim([0,400])
+ylim([0,10])
 ylabel('steps to convergence');
 hold on
 %plot(fliplr(gamma),converg,'-.o')
 yyaxis left
-plot(per_covg_max,mask_max,'-*',per_covg_max,mask_min,'-x',per_covg_max,mask_avg,'-o')
+%plot(per_covg_max,mask_max,'-*',per_covg_max,mask_min,'-x',per_covg_max,mask_avg,'-o')
 ylabel('% coverage');
 xlabel('Max. % Coverage');
-
+legend('max. coverage','min. coverage','avg. coverage','convergence')
 ylim([0, 100])
 hold on
 %plot(fliplr(gamma),max_per,'--*',fliplr(gamma),min_per,'--x',fliplr(gamma),avg_per,'-o')
