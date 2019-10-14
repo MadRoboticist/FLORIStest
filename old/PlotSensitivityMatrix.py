@@ -1,8 +1,7 @@
 ## \file PlotSensitivityMatrix.py
 # This is a script which runs the plotSensitivityMatrix function from visualization_manager_DJ.py
 
-from floris.floris import Floris
-from visualization_manager_DJ import VisualizationManager
+from old.visualization_manager_DJ import VisualizationManager
 import json
 import numpy as np
 

@@ -4,9 +4,7 @@
 ## \file example_input.json
 # This is an example JSON windfarm input file for the Floris model.
 
-from floris.floris import Floris
-from copy import deepcopy
-from visualization_manager_DJ import VisualizationManager
+from old.visualization_manager_DJ import VisualizationManager
 import json
 
 with open("example_input.json") as WFJSON:

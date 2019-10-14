@@ -4,7 +4,7 @@
 # using a swarm of UAVs with independent consensus-based nearest-neighbor estimates
 # and truth data from a static FLORIS model
 
-from visualization_manager_DJ import VisualizationManager
+from old.visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
 from UAV import UAV
 import json

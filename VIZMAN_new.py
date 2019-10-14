@@ -1,4 +1,4 @@
-## \file visualization_manager_DJ.py
+## \file VIZMAN_new.py
 #
 #   This file contains functions which handle visualization of Floris data.
 #
@@ -13,9 +13,6 @@
 # CONDITIONS OF ANY KIND, either express or implied. See the License for the
 # specific language governing permissions and limitations under the License.
 #
-from mpl_toolkits.axes_grid1 import make_axes_locatable
-from floris.coordinate import Coordinate
-from floris.floris import Floris
 import matplotlib.pyplot as plt
 import matplotlib as mpl
 from matplotlib.widgets import Slider, Button
@@ -24,7 +21,7 @@ from scipy.interpolate import griddata
 import scipy.io as scio
 from copy import deepcopy
 from matplotlib import animation as anim
-from readVTK import VTKreader
+from old.readVTK import VTKreader
 
 ## \class VisualizationManager
 # Contains functions which handle visualizations of Floris data.
@@ -60,251 +57,14 @@ class VisualizationManager():
         self.WF = WF
         ## @var flowfield
         #   holds an instance of the flowfield instantiated from WF
-        self.flowfield = Floris(self.WF).farm.flow_field
-        ## @var grid_res
-        # holds a copy of the grid_resolution passed to the constructor
-        self.grid_res = grid_resolution
+        self.u_field = WF.u_field
         ## @var grid_resolution
-        #   holds a copy of the grid resolution which has been converted to FLORIS coordinates
-        self.grid_resolution = Coordinate(grid_resolution[0], grid_resolution[1], grid_resolution[2])
-        self._figure_count = 0
-        self._initialize_flowfield_for_plotting()
+        # holds a copy of the grid_resolution passed to the constructor
+        self.grid_resolution = grid_resolution
         self._boolBTN = False
 
-    def _set_texts(self, plot_title, horizontal_axis_title, vertical_axis_title):
-        fontsize = 15
-        plt.title(plot_title, fontsize=fontsize)
-        plt.xlabel(horizontal_axis_title, fontsize=fontsize)
-        plt.ylabel(vertical_axis_title, fontsize=fontsize)
-
-    def _set_colorbar(self):
-        cb = plt.colorbar()
-        cb.ax.tick_params(labelsize=15)
-
-    def _set_axis(self):
-        plt.axis('equal')
-        plt.tick_params(which='both', labelsize=15)
-
-    def _new_figure(self):
-        plt.figure(self._figure_count)
-        self._figure_count += 1
-
-    def _new_filled_contour(self, mesh1, mesh2, data):
-        self._new_figure()
-        #vmax = np.amax(data)
-        plt.contourf(mesh1, mesh2, data, 50,
-                            cmap='gnuplot2', vmin=np.amin(data), vmax=np.amax(data))
-
-    def _plot_constant_plane(self, mesh1, mesh2, data, title, xlabel, ylabel):
-        self._new_filled_contour(mesh1, mesh2, data)
-        self._set_texts(title, xlabel, ylabel)
-        self._set_colorbar()
-        self._set_axis()
-
-    # FLORIS-specific data manipulation and plotting
-    def _initialize_flowfield_for_plotting(self):
-        self.flowfield.grid_resolution = self.grid_resolution
-        self.flowfield.xmin, self.flowfield.xmax, self.flowfield.ymin, self.flowfield.ymax, self.flowfield.zmin, self.flowfield.zmax = self._set_domain_bounds()
-        self.flowfield.x, self.flowfield.y, self.flowfield.z = self._discretize_freestream_domain()
-        self.flowfield.initial_flowfield = self.flowfield._initial_flowfield()
-        self.flowfield.u_field = self.flowfield._initial_flowfield()
-        for turbine in self.flowfield.turbine_map.turbines:
-            turbine.plotting = True
-        self.flowfield.calculate_wake()
-
-    def _discretize_freestream_domain(self):
-        """
-            Generate a structured grid for the entire flow field domain.
-        """
-        x = np.linspace(self.flowfield.xmin, self.flowfield.xmax, self.flowfield.grid_resolution.x)
-        y = np.linspace(self.flowfield.ymin, self.flowfield.ymax, self.flowfield.grid_resolution.y)
-        z = np.linspace(self.flowfield.zmin, self.flowfield.zmax, self.flowfield.grid_resolution.z)
-        return np.meshgrid(x, y, z, indexing="ij")
-
-    def _set_domain_bounds(self):
-        coords = self.flowfield.turbine_map.coords
-        x = [coord.x for coord in coords]
-        y = [coord.y for coord in coords]
-        eps = 0.1
-        xmin = min(x) - 2 * self.flowfield.max_diameter
-        xmax = max(x) + 10 * self.flowfield.max_diameter
-        ymin = min(y) - 3 * self.flowfield.max_diameter
-        ymax = max(y) + 3 * self.flowfield.max_diameter
-        zmin = 0 + eps 
-        zmax = 2 * self.flowfield.hub_height
-        return xmin, xmax, ymin, ymax, zmin, zmax
-
-    def _add_turbine_marker(self, turbine, coords, wind_direction):
-        a = Coordinate(coords.x, coords.y - turbine.rotor_radius)
-        b = Coordinate(coords.x, coords.y + turbine.rotor_radius)
-        a.rotate_z(turbine.yaw_angle - wind_direction, coords.as_tuple())
-        b.rotate_z(turbine.yaw_angle - wind_direction, coords.as_tuple())
-        plt.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1)
-
-    def _plot_constant_z(self, xmesh, ymesh, data):
-        self._plot_constant_plane(
-            xmesh, ymesh, data, "z plane", "x (m)", "y (m)")
-
-    def _plot_constant_y(self, xmesh, zmesh, data):
-        self._plot_constant_plane(
-            xmesh, zmesh, data, "y plane", "x (m)", "z (m)")
-
-    def _plot_constant_x(self, ymesh, zmesh, data):
-        self._plot_constant_plane(
-            ymesh, zmesh, data, "x plane", "y (m)", "z (m)")
-
-    def _add_z_plane(self, percent_height=0.5):
-        plane = int(self.flowfield.grid_resolution.z * percent_height)
-        self._plot_constant_z(
-            self.flowfield.x[:, :, plane],
-            self.flowfield.y[:, :, plane],
-            self.flowfield.u_field[:, :, plane])
-        for coord, turbine in self.flowfield.turbine_map.items():
-            self._add_turbine_marker(
-                turbine, coord, self.flowfield.wind_direction)
-
-    def _add_y_plane(self, percent_height=0.5):
-        plane = int(self.flowfield.grid_resolution.y * percent_height)
-        self._plot_constant_y(
-            self.flowfield.x[:, plane, :],
-            self.flowfield.z[:, plane, :],
-            self.flowfield.u_field[:, plane, :])
-
-    def _add_x_plane(self, percent_height=0.5):
-        plane = int(self.flowfield.grid_resolution.x * percent_height)
-        self._plot_constant_x(
-            self.flowfield.y[plane, :, :],
-            self.flowfield.z[plane, :, :],
-            self.flowfield.u_field[plane, :, :])
-
-    # plot_z_planes
-    ## @brief Plots Z planes of the u_field generated from a static floris model
-    #
-    #   @param planes is a list of numbers between 0-1
-    #           which represent a percentage of the
-    #           flowfield's height
-    #
-    # Generates heatmaps of windspeeds on that plane of the windfarm
-    #
-    def plot_z_planes(self, planes):
-        for p in planes:
-            self._add_z_plane(p)
-        self._show()
-
-    # plot_y_planes
-    ## @brief Plots Y planes of the u_field generated from a static floris model
-    #
-    #   @param planes is a list of numbers between 0-1
-    #           which represent a percentage of the
-    #           flowfield's width
-    #
-    # Generates heatmaps of windspeeds on those planes of the windfarm
-    #
-    def plot_y_planes(self, planes):
-        for p in planes:
-            self._add_y_plane(p)
-        self._show()
-
-    # plot_x_planes
-    ## @brief Plots X planes of the u_field generated from a static floris model
-    #
-    #   @param planes is a list of numbers between 0-1
-    #           which represent a percentage of the
-    #           flowfield's length
-    #
-    # Generates heatmaps of windspeeds on those planes of the windfarm
-    #
-    def plot_x_planes(self, planes):
-        for p in planes:
-            self._add_x_plane(p)
-        self._show()
-
-    ## Shows plots generated by the Visualization manager
-    def _show(self):
-        plt.show()
 
     # Dave's stuff
-    #  _dirErrorConSpd
-    ## @brief Calculates error over a u_field at a constant speed
-    # over a specified range of direction values
-    #
-    # @param flowfield takes a Visualization_manager.flowfield object
-    # @return page, MAX, MIN, Page, max, min
-    #
-    #       page[][]:
-    #           each page[][0] is an X mesh
-    #           each page[][1] is a Y mesh
-    #           each page[][2] is an error field at a given step in Drange
-    #       MAX is the maximum error value computed
-    #       MIN is the minimum error value computed
-    #       Page[][]:
-    #           each Page[][0] is an X mesh
-    #           each Page[][1] is a Y mesh
-    #           each Page[][2] is a u_field at a given step in Drange
-    #       max is the maximum u_field value computed
-    #       min is the minimum u_field value computed
-    #
-    def _dirErrorConSpd(self, flowfield):
-
-        ref = deepcopy(flowfield)   # A deepcopy of the flowfield to be altered
-        ref2 = deepcopy(self)       # A deepcopy of the vman object to hold new plots
-        U1 = self.flowfield.u_field # The current visual_manager.flowfield object
-        i = self.params.Drange[0]               # A value used to iterate through the values in Drange
-        idx = 0                     # A value used to keep track of the index
-        # a discretized representation of the u_field at percent_height
-        plane = int(self.flowfield.grid_resolution.z * self.params.percent_height)
-        # each 'page' contains an X/Y mesh and a u_field error plot
-        page = [None] * int((self.params.Drange[1] -
-                             self.params.Drange[0]) /
-                             self.params.Drange[2] + 1)
-
-        # each Page contains an X/Y mesh and a u_field
-        # which corresponds to the error plotted in the same 'page' index
-        Page = [None] * int((self.params.Drange[1] -
-                             self.params.Drange[0]) /
-                             self.params.Drange[2] + 1)
-        # MAX holds the largest error value
-        MAX = 0
-        # MIN holds the minimum error value over the given range
-        MIN = 0
-        # max holds the maximum u_field value over the given range
-        max = 0
-        # min holds the minimum u_field value over the given range
-        min = 0
-        while i <= self.params.Drange[1]:
-
-            # set the new wind direction
-            ref.wind_direction = self.flowfield.wind_direction+np.deg2rad(i)
-            # a list of the coordinates of the turbines in the field
-            turbines = [turbine for _, turbine in ref.turbine_map.items()]
-            for k, turbine in enumerate(turbines):
-                turbine.yaw_angle = ref.wind_direction
-            ref.calculate_wake()
-            # The reference field from which the error is calculated
-            U2 = ref.u_field
-            # calculate the error
-            ref2.flowfield.u_field = U2-U1
-
-            page[idx]=[ref2.flowfield.x[:, :, plane],
-                        ref2.flowfield.y[:, :, plane],
-                        ref2.flowfield.u_field[:, :, plane]]
-            Page[idx]=[ref.x[:, :, plane],
-                        ref.y[:, :, plane],
-                        ref.u_field[:, :, plane]]
-            if np.amax(page[idx]) > MAX:
-                MAX = np.amax(page[idx][2])
-            elif np.amin(page[idx]) < MIN:
-                MIN = np.amin(page[idx][2])
-            if np.amax(Page[idx]) > max:
-                max = np.amax(Page[idx][2])
-            elif np.amin(Page[idx][2]) < min:
-                min = np.amin(Page[idx][2])
-            idx += 1
-            i += self.params.Drange[2]
-        idx -= 1
-
-
-        return page, MAX, MIN, Page, max, min
 
     # _grid()
     ##  @brief Creates x, y and z grid meshes from 1D arrays of similar length
@@ -317,7 +77,7 @@ class VisualizationManager():
     #   @return Y grid mesh of y values
     #   @return Z grid mesh of z values
     def _grid(self, x, y, z):
-        X, Y = np.mgrid[min(x):max(x):self.grid_res[0], min(y):max(y):self.grid_res[1]]
+        X, Y = np.mgrid[min(x):max(x):self.grid_resolution[0], min(y):max(y):self.grid_resolution[1]]
         Z = griddata((x, y), z, (X, Y), method='linear')
         # scipy.interpolate.griddata((x, y), z, (xi, yi), method='cubic')
 
@@ -343,62 +103,82 @@ class VisualizationManager():
     #   so you can see the actual plot of the u_field which the error is generated from.
     def animateDnSerror(self):
 
-        Espeed = self.flowfield.wind_speed # estimated wind speed
-        Edir = np.rad2deg(self.flowfield.wind_direction) # estimated wind direction
+        Espeed = self.WF.wind_speed # estimated wind speed
+        Edir = self.WF.wind_direction # estimated wind direction
+        self.WF.set_incoming(Espeed, Edir)
+        Uref = deepcopy(self.WF.u_field)
+        Smax = np.amax(Uref)
+        Smin = np.amin(Uref)
         # title string
         Tstr = 'Flowfield Estimation Error\n(estimated wind direction: ' \
                + str(Edir) + ' degrees)\n' \
                + '(estimated wind speed: ' + str(Espeed) + ' mph)'
-        ref = deepcopy(self)    # reference flowfield
-        U1 = self.flowfield.u_field # test flowfield
-        i = self.params.Srange[0]   # i is used to iterate through the speed range
+
         errMax = 0 # keep track of the maximum error
         spdMax = 0 # keep track of the maximum speed
         spdMin = 0 # keep track of the minimum speed
-        idx = 0 # integer index of current iteration
+        idx = 0 # integer index of current speed iteration
+        idy = 0 # integer index of current direction iteration
         # array of error fields
-        page = [None] * int((self.params.Srange[1] -
+        idx_max = int((self.params.Srange[1] -
                              self.params.Srange[0]) /
                             self.params.Srange[2] + 1)
-        # array of u_fields
-        Page = [None] * int((self.params.Srange[1] -
-                             self.params.Srange[0]) /
-                            self.params.Srange[2] + 1)
-        # array of VisualizationManager objects
-        vman = [None] * int((self.params.Srange[1] -
-                             self.params.Srange[0]) /
-                            self.params.Srange[2] + 1)
+        idy_max = int((self.params.Drange[1] -
+                       self.params.Drange[0]) /
+                      self.params.Drange[2] + 1)
 
+        # array of arrays of error fields
+        page = [None] * idx_max
+        # array of arrays of u_fields
+        Page = [None] * idx_max
+        i = self.params.Srange[0]  # i is used to iterate through the speed range
         while i <= self.params.Srange[1]:
-            # set the speed in the JSON object
-            self.WF['farm']['properties']['wind_speed'] = i
-            # make a new vman object with it
-            vman[idx] = VisualizationManager(self.WF, self.grid_res)
-            # calculate error fields over the direction range at the current speed
-            page[idx], Emax, Emin, Page[idx], Smax, Smin = \
-                self._dirErrorConSpd(vman[idx].flowfield)
-            # keep track of maximums
-            if Emax > errMax:
-                errMax = Emax
-            if abs(Emin) > errMax:
-                errMax = abs(Emin)
-            if Smax > spdMax:
-                spdMax = Smax
-            if Smin < spdMin:
-                spdMin = Smin
-            # let the user know something is happening
-            print("iteration " + str(idx) + " complete")
+            idy = 0
+            j = self.params.Drange[0]
+            temp_page = [None] * idy_max
+            Temp_Page = [None] * idy_max
+
+            while j <= self.params.Drange[1]:
+                # set the speed in the JSON object
+                self.WF.set_incoming(i,j)
+                U = deepcopy(self.WF.u_field)
+                Uerr = U-Uref
+
+                temp_page[idy]=deepcopy(Uerr)
+                Temp_Page[idy]=deepcopy(U)
+
+                # calculate error fields over the direction range at the current speed
+                Emax = np.amax(Uerr)
+                Emin = np.amin(Uerr)
+                # keep track of maximums
+                if Emax > errMax:
+                    errMax = Emax
+                if abs(Emin) > errMax:
+                    errMax = abs(Emin)
+                if Smax > spdMax:
+                    spdMax = Smax
+                if Smin < spdMin:
+                    spdMin = Smin
+
+
+
+                # increment j by the direction step
+                j += abs(self.params.Drange[2])
+                print("direction iteration "+str(idy+1)+" of "+str(idy_max)+" complete.")
+                idy += 1
             # increment i by the speed step
             i += abs(self.params.Srange[2])
-            # increment the index
+                # increment the index
+            print("speed iteration " + str(idx+1) +" of "+str(idx_max)+" complete")
+            page[idx]=deepcopy(temp_page)
+            Page[idx]=deepcopy(Temp_Page)
             idx += 1
-        # decrement the index since we just left the loop
-        idx -= 1
         # print some of the measurements/calculations
         print('max speed: ' + str(spdMax))
         print('min speed: ' + str(spdMin))
         print('max error: ' + str(errMax))
-
+        idx -= 1
+        idy -= 1
         # start setting up the plot
 
         # range and resolution of the error plot
@@ -412,16 +192,13 @@ class VisualizationManager():
         # put the index in the middle for the speed slider
         idx = round(idx/2)
         # set up an index for the direction slider
-        idy = int(abs(self.params.Drange[0])/self.params.Drange[2])
-        # start with an initial image
-        #im_h = plt.contourf(page[idx][idy][0], page[idx][idy][1], page[idx][idy][2], v,
-        #                    cmap='seismic')
-        # set plot title
+        idy = round(idy/2)
+        # set font size
         fontsize = 14
 
 
         C_A = plt.gca()
-        map = C_A.contourf(page[idx][idy][0], page[idx][idy][1], page[idx][idy][2], v,
+        map = C_A.contourf(self.WF.x_mesh, self.WF.y_mesh, page[idx][idy], v,
                             cmap='seismic')
         plt.suptitle(Tstr, fontsize=fontsize)
         C_A.set_aspect('equal')
@@ -430,10 +207,10 @@ class VisualizationManager():
                   -15 * 8 * np.sin(np.deg2rad(0)), head_width=50, head_length=50)
         C_A.set_xlabel('meters', fontsize=fontsize)
         C_A.set_ylabel('meters', fontsize=fontsize)
-        divider = make_axes_locatable(C_A)
-        cax = divider.append_axes("right", size="5%", pad=0.05)
+        #divider = make_axes_locatable(C_A)
+        #cax = divider.append_axes("right", size="5%", pad=0.05)
 
-        # cax, _ = mpl.colorbar.make_axes(C_A)
+        cax, _ = mpl.colorbar.make_axes(C_A)
         ## @var cbr
         # holds a copy of the colorbar
         # plt.colorbar(im, fraction=0.046, pad=0.04)
@@ -444,12 +221,13 @@ class VisualizationManager():
         self._cbr.set_clim(vmin=errMax * -1, vmax=errMax)
         self._cbr.set_label('Error in m/s', fontsize=fontsize)
         # put the turbines in the plot
-        for coord, turbine in ref.flowfield.turbine_map.items():
-            a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
-            b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-            a.rotate_z(turbine.yaw_angle, coord.as_tuple())
-            b.rotate_z(turbine.yaw_angle, coord.as_tuple())
-            C_A.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+        for coord, turbine in self.WF.turbines:
+            x_0 = coord.x1 + np.sin(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+            x_1 = coord.x1 - np.sin(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+            y_0 = coord.x2 - np.cos(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+            y_1 = coord.x2 + np.cos(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+            C_A.plot([x_0, x_1], [y_0, y_1], color='k', linewidth=1)
+
         for tick in C_A.xaxis.get_major_ticks():
             tick.label.set_fontsize(14)
         for tick in C_A.yaxis.get_major_ticks():
@@ -469,7 +247,7 @@ class VisualizationManager():
                             'actual wind direction',
                             self.params.Drange[0],
                             self.params.Drange[1],
-                            valinit=0.0)
+                            valinit=Edir)
         slider_dir.valtext.set_text('{}'.format(Edir) + ' degrees')
         # set up the error/u_field button
         self._boolBTN = False
@@ -497,21 +275,22 @@ class VisualizationManager():
             # set the new direction value
             dirvalue = idy * self.params.Drange[2] + self.params.Drange[0]
             # put the direction value in the slider text
-            slider_dir.valtext.set_text('{}'.format(Edir + dirvalue) + ' degrees')
+            slider_dir.valtext.set_text('{}'.format(dirvalue) + ' degrees')
             # clear the current plot
             C_A.clear()
             #self._cbr.remove()
             # plot the turbines
-            for coord, turbine in self.flowfield.turbine_map.items():
-                a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
-                b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
-                a.rotate_z(turbine.yaw_angle, coord.as_tuple())
-                b.rotate_z(turbine.yaw_angle, coord.as_tuple())
-                C_A.plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            for coord, turbine in self.WF.turbines:
+                x_0 = coord.x1 + np.sin(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+                x_1 = coord.x1 - np.sin(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+                y_0 = coord.x2 - np.cos(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+                y_1 = coord.x2 + np.cos(np.deg2rad(turbine.yaw_angle)) * turbine.rotor_radius
+                C_A.plot([x_0, x_1], [y_0, y_1], color='k', linewidth=1)
+
             # set up the plot for either error or u_field plot depending on the button
             if not self._boolBTN:
                 # plot the error data
-                map = C_A.contourf(page[idx][idy][0], page[idx][idy][1], page[idx][idy][2], v,
+                map = C_A.contourf(self.WF.x_mesh, self.WF.y_mesh, page[idx][idy], v,
                          cmap='seismic', vmin=errMax*-1,vmax=errMax)
 
                 # set the colorbar
@@ -523,7 +302,7 @@ class VisualizationManager():
                 self._cbr.draw_all()
             else:
                 # plot the u_field data
-                map = C_A.contourf(Page[idx][idy][0], Page[idx][idy][1], Page[idx][idy][2], V,
+                map = C_A.contourf(self.WF.x_mesh, self.WF.y_mesh, Page[idx][idy], V,
                          cmap='gnuplot2', vmin=spdMin,vmax=spdMax)
                 # set the colorbar
                 self._cbr = plt.colorbar(map, cax=cax)
@@ -868,7 +647,6 @@ class VisualizationManager():
     # @param ANIMATE=False If set to true, the result plays automatically
     # @param FILE=None If a file name is given, an mp4 is created of the animation
     # @param xBar=None If an xBar is given, it will be used as the measurement set
-    # @param TV=False If TV is set to true, time varying SOWFA data will be used.
     # @param self.params.v0 takes a wind speed in meters per second
     # @param self.params.d0 takes a wind direction in degrees
     # @param self.params.vBar takes a wind speed in meters per second
@@ -892,12 +670,13 @@ class VisualizationManager():
     #                       for these calculations. the slider on the bottom
     #                       allows you to see the mask at different iterations
     #
-    def reducedSM(self, MAT=False, ANIMATE=False, FILE=None, xBar=None, SHOW=True):
+    def reducedSM(self, MAT=False, ANIMATE=False, FILE=None, xBar=None):
         # calculate f(vbar,dbar) = xBar
         print('vBar = ' + str(self.params.vBar))
         print('dBar = ' + str(self.params.dBar))
         vdBar = [[self.params.vBar], [self.params.dBar]]
         self.WF['farm']['properties']['wind_speed'] = self.params.vBar
+        #self.WF['turbine']['properties']['yaw_angle']=np.rad2deg(-self.params.dBar)
         ff_bar_vman = VisualizationManager(self.WF, self.grid_res)
         ff_bar_vman.flowfield.wind_direction = self.params.dBar
         turbines = [turbine for _, turbine in ff_bar_vman.flowfield.turbine_map.items()]
@@ -908,21 +687,18 @@ class VisualizationManager():
         X = deepcopy(ff_bar_vman.flowfield.x[:,:,plane])
         Y = deepcopy(ff_bar_vman.flowfield.y[:,:,plane])
 
-        TV = False # assume xBar is not time-varying
+
         if(xBar is None):
-            print("no xBar provided, using vBar and dBar with FLORIS")
+            print("no xBar provided, using vBar and dBar")
             ff_bar = deepcopy(ff_bar_vman.flowfield.u_field[:,:,plane])
             ff = deepcopy(ff_bar)
             self.xBar = np.vstack(ff.flatten())  # 1xn
-        elif xBar.ndim==2:
-            print("Static xBar provided")
+        else:
+            print("xBar provided")
             ff_bar = deepcopy(xBar)
             ff = deepcopy(ff_bar)
             self.xBar = np.vstack(ff.flatten())
-        else:
-            print("Time varying xBar provided")
-            TV = True
-            self.xBar = deepcopy(xBar)
+
 
         # initialize error
         vdErr = [[self.params.vBar - self.params.v0],
@@ -954,17 +730,15 @@ class VisualizationManager():
                   abs(directionError[iters]) > self.params.dirErrMax ):
             # set new wind speed estimate for floris model
             self.WF['farm']['properties']['wind_speed'] = vd_k[0][0]
+            #self.WF['turbine']['properties']['yaw_angle'] = np.rad2deg(-vd_k[1][0])
             # calculate f(vk,dk) = temp_x_k
             temp0_vman = VisualizationManager(self.WF, self.grid_res)
             temp0_vman.flowfield.wind_direction = vd_k[1][0]  # new wind direction estimate
             turbines = [turbine for _, turbine in temp0_vman.flowfield.turbine_map.items()]
             for k, turbine in enumerate(turbines):
                 turbine.yaw_angle = vd_k[1][0]
-
             temp0_vman.flowfield.calculate_wake()  # recalculate field for new wind direction
             temp_x_k = deepcopy(temp0_vman.flowfield.u_field)
-            if TV: #if it is a time-varying SOWFA file, get the current ff_bar
-                ff_bar = deepcopy(self.xBar[iters])
             err_field.append(abs(ff_bar-temp_x_k[:,:,plane]))
             if np.amax(err_field[iters]) > errMax:
                 errMax = np.amax(err_field[iters])
@@ -994,59 +768,42 @@ class VisualizationManager():
             # calculate gradient
             temp_df_dv = (temp_x_ev[:,:,plane] - temp_x_k[:,:,plane]) / self.params.epSpeed  # partial of f WRT speed
             temp_df_dd = (temp_x_ed[:,:,plane] - temp_x_k[:,:,plane]) / self.params.epDir  # partial of f WRT direction
-            temp_Xk = temp_x_k[:,:,plane].flatten()
+            temp_grad_fk = np.column_stack([temp_df_dv.flatten(), temp_df_dd.flatten()])  # 2xn gradient of f (jacobian)
+            temp_sens_mat_pinv = np.linalg.pinv(temp_grad_fk)
 
             # calculate mask
-            temp_dMax = np.amax(np.abs(temp_df_dd))
-            temp_vMax = np.amax(np.abs(temp_df_dv))
-            temp_Zd = np.abs(temp_df_dd / temp_dMax)
-            temp_Zv = np.abs(temp_df_dv / temp_vMax)
+            temp_dMax = np.amax(np.abs(temp_sens_mat_pinv[1]))
+            temp_vMax = np.amax(np.abs(temp_sens_mat_pinv[0]))
+            temp_Zd = np.abs(temp_sens_mat_pinv[1] / temp_dMax)
+            temp_Zv = np.abs(temp_sens_mat_pinv[0] / temp_vMax)
             temp_Z_mask = temp_Zd * temp_Zv / np.amax(temp_Zd * temp_Zv)
-            temp_Z_mask = np.where(temp_Z_mask >= self.params.mask_thresh, 1, 0).flatten()
-            sens_mat0 = list()
-            sens_mat1 = list()
-            Xbar = list()
-            Xk = list()
-            # removal of lines and columns
-            for i in range(len(temp_Z_mask)):
-                if temp_Z_mask[i] == 1:
-                    if TV:
-                        temp_xBar = np.vstack(self.xBar[iters].flatten())
-                        Xbar.append(temp_xBar[i])
-                        del temp_xBar
-                    else:
-                        Xbar.append(self.xBar[i])
-
-                    Xk.append(temp_Xk[i])
-                    sens_mat0.append(temp_df_dv.flatten()[i])
-                    sens_mat1.append(temp_df_dd.flatten()[i])
-            Xbar = np.vstack(np.array(Xbar))
-            Xk = np.vstack(np.array(Xk))
-            sens_mat0 = np.vstack(np.array(sens_mat0))
-            sens_mat1 = np.vstack(np.array(sens_mat1))
-            sens_mat_pinv = np.linalg.pinv(np.column_stack([sens_mat0, sens_mat1]))*self.params.damping
+            # print(np.amax(temp_Z_mask))
+            temp_Z_mask = np.where(temp_Z_mask > self.params.mask_thresh, 1, 0)
+            # print(temp_Z_mask)
+            temp_sens_mat_pinv[0] = temp_sens_mat_pinv[0] * temp_Z_mask
+            temp_sens_mat_pinv[1] = temp_sens_mat_pinv[1] * temp_Z_mask
             masks.append(temp_Z_mask)
             mask_per.append(100*np.sum(temp_Z_mask)/grid_sz)
             # calculate pseudoinverse[gradient{f(vk,dk)}]*{xBar-f(vk,dk)} = adj_vd (adjustment to current v&d estimates)
-            adj_vd = np.matmul(sens_mat_pinv, Xbar - Xk)
+            adj_vd = np.matmul(temp_sens_mat_pinv, self.xBar - np.vstack(temp_x_k[:,:,plane].flatten()))
+            # print(adj_vd)
             # calculate v_k+1 and d_k+1
             vd_kp1 = vd_k + adj_vd
-
-
             # update vd_k for next iteration
             vd_k = deepcopy(vd_kp1)
+            # actually starting loop with 2nd iteration
             iters = iters + 1
             iterations.append(iters)
             print('\n\niteration ' + str(iters) + ' complete.')
+
             # calculate error = [[vbar],[dbar]]-[[vk],[dk]]
             vdErr = vdBar - vd_k
             print('Speed error: ' + str(vdErr[0][0]))
-            print('Direction error: ' + str(np.rad2deg(vdErr[1][0])) + '\N{DEGREE SIGN}')
+            print('Direction error: ' + str(np.rad2deg(vdErr[1][0]))+'\N{DEGREE SIGN}')
             speedError.append(vdErr[0][0])
             directionError.append(vdErr[1][0])
             V_k.append(vd_k[0][0])
             D_k.append(vd_k[1][0])
-
 
             # delete temporary objects
             del temp0_vman
@@ -1057,9 +814,9 @@ class VisualizationManager():
             del temp_x_ed
             del temp_df_dv
             del temp_df_dd
+            del temp_grad_fk
             del adj_vd
             del vd_kp1
-
         temp0_vman = VisualizationManager(self.WF, self.grid_res)
         temp0_vman.flowfield.wind_direction = vd_k[1][0]  # new wind direction estimate
         temp0_vman.flowfield.calculate_wake()  # recalculate field for new wind direction
@@ -1071,10 +828,11 @@ class VisualizationManager():
         print('Max error = '+str(errMax))
         print('Total iterations: ' + str(iters))
 
-        #### PLOTTING #####
+
         fontsize=14
         f = plt.figure(figsize=(10, 7.5))
         gs = f.add_gridspec(2, 3)
+        # f, axarr = plt.subplots(2, 2, sharex='col', figsize=(10,7.5))
         sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
         sld = Slider(sld_ax,
                      'iterations',
@@ -1086,21 +844,33 @@ class VisualizationManager():
                    '\nThreshold: ' + str(self.params.mask_thresh) + ' Iterations: ' + str(iters) +
                    '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' + str(np.rad2deg(vdErr[1][0])) +
                    '\N{DEGREE SIGN} ev = ' + str(vdErr[0][0]))
+        # axarr[0][0].plot(iterations, V_k)
+        # axarr[0][0].set_title('speed estimate')
         spdErrAx = f.add_subplot(gs[0,0], title='speed error')
         spdErrAx.plot(iterations, speedError)
+        # axarr[0][0].set_title('speed error')
         dirErrAx = f.add_subplot(gs[1,0], title='direction error')
         dirErrAx.plot(iterations, np.rad2deg(directionError))
+        # axarr[1][0].set_title('direction error')
         dirErrAx.set_xlabel('iterations')
+
         errMapAx = f.add_subplot(gs[0,1:], title='u_field error')
         v = np.linspace(0, errMax, 100)
         V = np.linspace(0, errMax, 5)
         cont = errMapAx.contourf(X, Y, err_field[0],v,cmap='gnuplot2')
 
+        # cont = axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[0].flatten(),
+        #                    cmap='gnuplot2')
         cb = plt.colorbar(cont, ax=errMapAx)
         cb.set_clim(vmin=0, vmax=errMax)
         cb.set_ticks(V, True)
         cb.set_label('u_field error')
         cb.draw_all()
+        # axarr[0][1].set_title('u_field error')
+
+        #axarr[1][0].plot(iterations, np.rad2deg(D_k))
+        #axarr[1][0].set_title('direction estimate')
+        #axarr[1][0].set_xlabel('iterations')
 
         maskAx = f.add_subplot(gs[1,1:])
         for tick in maskAx.xaxis.get_major_ticks():
@@ -1119,6 +889,9 @@ class VisualizationManager():
         print(ratio_default)
         errMapAx.set_aspect('equal')
         maskAx.set_aspect('equal')
+        #ratio_default = (axarr[1][1].get_xlim()[1] - axarr[1][1].get_xlim()[0]) / \
+        #               (axarr[1][1].get_ylim()[1] - axarr[1][1].get_ylim()[0])
+        # axarr[1][1].set_aspect(ratio_default)
         cb2 = plt.colorbar(mappable=cont, ax=maskAx)
         cb2.set_clim(vmin=0, vmax=errMax)
         cb2.set_ticks(V)
@@ -1137,6 +910,7 @@ class VisualizationManager():
                 tick.label.set_fontsize(fontsize)
             for tick in maskAx.yaxis.get_major_ticks():
                 tick.label.set_fontsize(fontsize)
+        # axarr[1][1].set_title('mask')
         if(MAT):
             scio.savemat('mat/' + str(i)+'turbs_'+str(self.params.vBar) + '-' + str(self.params.v0) + '_' + \
                          str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) +\
@@ -1147,6 +921,7 @@ class VisualizationManager():
         print('max coverage: '+str(np.amax(mask_per))+'%')
         print('min coverage: '+str(np.amin(mask_per))+'%')
         print('average coverage: ' + str(np.average(mask_per)) + '%')
+        # f.tight_layout()
         plt.subplots_adjust(left=0.05,
                             bottom=0.15,
                             right=0.95,
@@ -1157,11 +932,15 @@ class VisualizationManager():
 
             idx = int(round(sld.val))
             sld.valtext.set_text('iteration '+'{}'.format(idx))
+            #for i in range(2):
+             #   for j in range(2):
+             #       axarr[i][j].clear()
             spdErrAx.clear()
             dirErrAx.clear()
             errMapAx.clear()
             maskAx.clear()
             errMapAx.contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
+            # axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[idx].flatten(), cmap='gnuplot2')
             maskAx.scatter(x,y,masks[idx],color='black')
             maskAx.text(-220, 290, str(round(V_k[idx],2)) + ' m/s, ' + \
                         str(round(np.rad2deg(D_k[idx]),2)) + '\N{DEGREE SIGN}', fontsize=fontsize)
@@ -1172,9 +951,19 @@ class VisualizationManager():
                 tick.label.set_fontsize(fontsize)
             for tick in maskAx.yaxis.get_major_ticks():
                 tick.label.set_fontsize(fontsize)
+            # axarr[1][1].set_title('mask')
+            # axarr[0][1].set_title('u_field error')
+            #axarr[1][0].plot(iterations, np.rad2deg(D_k))
+            #axarr[1][0].axvline(idx, color='red')
+            #axarr[1][0].set_title('direction estimate')
+            #axarr[1][0].set_xlabel('iterations')
             dirErrAx.plot(iterations, np.rad2deg(directionError))
             dirErrAx.axvline(idx, color='red')
             dirErrAx.set_title('direction error')
+            #axarr[1][1].set_xlabel('iterations')
+            #axarr[0][0].plot(iterations, V_k)
+            #axarr[0][0].axvline(idx, color='red')
+            #axarr[0][0].set_title('speed estimate')
             spdErrAx.plot(iterations, speedError)
             spdErrAx.axvline(idx, color='red')
             spdErrAx.set_title('speed error')
@@ -1190,7 +979,9 @@ class VisualizationManager():
             print(sum(masks[idx]))
         sld.on_changed(update_plot)
         def animate(frame, *fargs):
-            # if it's not at the end, increment the slider value
+            # check if it is playing
+            #if self._play:
+                # if it's not at the end, increment the slider value
             if sld.val < sld.valmax-1:
                 temp = sld.val
                 sld.set_val(temp + 1)
@@ -1204,8 +995,308 @@ class VisualizationManager():
             # render to video. to make it play faster, increase fps
             if FILE:
                 an.save(FILE+'.mp4',fps=7,dpi=300)
-        if SHOW:
+        plt.show()
+
+    # TV_SM_SOWFA
+    ## @brief Plots the convergence of speed and direction estimates
+    # based on a time-varying reduced sensitivity matrix
+    #
+    # @param ANIMATE=False If set to true, the result plays automatically
+    # @param FILE=None If a file name is given, an mp4 is created of the animation
+    # @param VTKpath The absolute path to the SOWFA postprocessing folder
+    #           containing the VTK files being used, ex. "L:\\SOWFAdata\\oneTurb_lowTI\\postProcessing\\slicedatainstantaneous"
+    # @param VTKrange The range of data to use, ex. [20005, 22000]
+    # @param increment Tells the program the spacing between postprocessing folders
+    #        ex. 5 for instantaneous data, 100 for mean data
+    # @param VTKfilename The name of the file being used, ex."T_slice_horizontal_1.vtk"
+    # @param self.params.v0 takes a wind speed in meters per second
+    # @param self.params.d0 takes a wind direction in degrees
+    # @param self.params.vBar takes a wind speed in meters per second
+    # @param self.params.dBar takes a wind direction in degrees
+    # @param self.params.epSpeed is an epsilon over which to calculate df/dv (derivative of speed)
+    # @param self.params.epDir is an epsilon over which to calculate df/dd (derivative of direction)
+    # @param self.params.spErrMax is a speed error threshold for stopping iterations
+    # @param self.params.dirErrMax is a direction error threshold for stopping iterations
+    # @param self.params.mask_thresh threshold value for reducing the normalized sensitivity matrix
+    #
+    #
+    # Generates a figure with four plots:
+    #   1.  top left:     speed estimate error vs. iterations
+    #   2.  bottom left:  direction estimate error vs. iterations
+    #   3.  top right:      u_field estimation error. slider on bottom
+    #                       allows you to see the map at different iterations
+    #   4.  bottom right:   the mask being applied to the sensitivity matrix
+    #                       for these calculations. the slider on the bottom
+    #                       allows you to see the mask at different iterations
+    #
+    def TV_SM_SOWFA(self, VTKpath, VTKfilename, VTKrange, increment, ANIMATE=False, FILE=None ):
+            # calculate f(vbar,dbar) = xBar
+            print('vBar = ' + str(self.params.vBar))
+            print('dBar = ' + str(self.params.dBar))
+            vdBar = [[self.params.vBar], [self.params.dBar]]
+            plane = int(self.flowfield.grid_resolution.z * self.params.percent_height)
+            X = deepcopy(self.flowfield.x[:, :, plane])
+            Y = deepcopy(self.flowfield.y[:, :, plane])
+
+            # initialize error
+            vdErr = [[self.params.vBar - self.params.v0],
+                     [self.params.dBar - self.params.d0]]  # initial error
+            speedError = list()  # list for history of speed error
+            directionError = list()  # list for history of direction error
+            print('Initial speed error = ' + str(vdErr[0]))
+            print('Initial direction error = ' + str(vdErr[1]))
+            speedError.append(vdErr[0][0])
+            directionError.append(vdErr[1][0])
+
+            # set up first iteration
+            iters = 0
+            iterations = list()  # iteration list for graphing
+            iterations.append(iters)
+            V_k = list()  # list for history of vk
+            D_k = list()  # list for history of dk
+            V_k.append(self.params.v0)
+            D_k.append(self.params.d0)
+            vd_k = [[self.params.v0], [self.params.d0]]  # initial estimate
+            err_field = list()
+            masks = list()
+            errMax = 0
+            inc_add = 0
+            while iters+inc_add < (VTKrange[1]-VTKrange[0])/increment and \
+                    (abs(speedError[iters]) > self.params.spErrMax or \
+                     abs(directionError[iters]) > self.params.dirErrMax):
+                VTK_good=False
+                while not VTK_good:
+
+                    try:
+                        if(VTKpath.find("instantaneous")):
+                            VTK = VTKreader(VTKpath, str((iters+inc_add)*increment+VTKrange[0])+'/'+VTKfilename, self, False)
+                        else:
+                            VTK = VTKreader(VTKpath, str((iters+inc_add) * increment + VTKrange[0]) + '/' + VTKfilename, self)
+                        VTK_good = True
+                    except:
+                        print(VTKpath + '/' + str((iters+inc_add) * increment + VTKrange[0]) + '/' + VTKfilename + ' is invalid')
+                        inc_add=inc_add+1
+                        if iters+inc_add>=(VTKrange[1]-VTKrange[0])/increment:
+                            print("ERROR: Choose a different end file. Index out of bounds")
+                            break
+                if iters + inc_add >= (VTKrange[1] - VTKrange[0]) / increment:
+
+                    break
+                xBar = deepcopy(VTK.u_field)
+                ff_bar = deepcopy(xBar)
+                ff = deepcopy(ff_bar)
+                self.xBar = np.vstack(ff.flatten())
+                #print(xBar)
+                # set new wind speed estimate for floris model
+                self.WF['farm']['properties']['wind_speed'] = vd_k[0][0]
+                # calculate f(vk,dk) = temp_x_k
+                temp0_vman = VisualizationManager(self.WF, self.grid_res)
+                temp0_vman.flowfield.wind_direction = vd_k[1][0]  # new wind direction estimate
+                temp0_vman.flowfield.calculate_wake()  # recalculate field for new wind direction
+                temp_x_k = deepcopy(temp0_vman.flowfield.u_field)
+                err_field.append(abs(ff_bar - temp_x_k[:, :, plane]))
+                if np.amax(err_field[iters]) > errMax:
+                    errMax = np.amax(err_field[iters])
+                # print vk,dk as new speed and direction estimates
+                print('vk = ' + str(vd_k[0][0]))
+                print('dk = ' + str(vd_k[1][0]))
+
+                # calculate f(vk+ev,dk) = temp_x_ev
+                self.WF['farm']['properties']['wind_speed'] = vd_k[0][
+                                                                  0] + self.params.epSpeed  # add speed epsilon to current estimate
+                temp1_vman = VisualizationManager(self.WF, self.grid_res)
+                temp1_vman.flowfield.wind_direction = vd_k[1][0]  # set wind direction to current estimate
+                temp1_vman.flowfield.calculate_wake()
+                temp_x_ev = deepcopy(temp1_vman.flowfield.u_field)
+
+                # calculate f(vk,dk+ed) = temp_x_ed
+                temp2_vman = deepcopy(temp0_vman)  # we can use same flowfield from temp0
+                temp2_vman.flowfield.wind_direction = vd_k[1][
+                                                          0] + self.params.epDir  # set wind direction to current estimate + epsilon
+                temp2_vman.flowfield.calculate_wake()  # recalculate wake for new wind speed
+                temp_x_ed = deepcopy(temp2_vman.flowfield.u_field)
+
+                # calculate gradient
+                temp_df_dv = (temp_x_ev[:, :, plane] - temp_x_k[:, :,
+                                                       plane]) / self.params.epSpeed  # partial of f WRT speed
+                temp_df_dd = (temp_x_ed[:, :, plane] - temp_x_k[:, :,
+                                                       plane]) / self.params.epDir  # partial of f WRT direction
+                temp_grad_fk = np.column_stack(
+                    [temp_df_dv.flatten(), temp_df_dd.flatten()])  # 2xn gradient of f (jacobian)
+                temp_sens_mat_pinv = np.linalg.pinv(temp_grad_fk)
+
+                # calculate mask
+                temp_dMax = np.amax(np.abs(temp_sens_mat_pinv[1]))
+                temp_vMax = np.amax(np.abs(temp_sens_mat_pinv[0]))
+                temp_Zd = np.abs(temp_sens_mat_pinv[1] / temp_dMax)
+                temp_Zv = np.abs(temp_sens_mat_pinv[0] / temp_vMax)
+                temp_Z_mask = temp_Zd * temp_Zv / np.amax(temp_Zd * temp_Zv)
+                # print(np.amax(temp_Z_mask))
+                temp_Z_mask = np.where(temp_Z_mask > self.params.mask_thresh, 1, 0)
+                # print(temp_Z_mask)
+                temp_sens_mat_pinv[0] = temp_sens_mat_pinv[0] * temp_Z_mask
+                temp_sens_mat_pinv[1] = temp_sens_mat_pinv[1] * temp_Z_mask
+                masks.append(temp_Z_mask)
+
+                # calculate pseudoinverse[gradient{f(vk,dk)}]*{xBar-f(vk,dk)} = adj_vd (adjustment to current v&d estimates)
+                adj_vd = np.matmul(temp_sens_mat_pinv, self.xBar - np.vstack(temp_x_k[:, :, plane].flatten()))
+                # print(adj_vd)
+                # calculate v_k+1 and d_k+1
+                vd_kp1 = vd_k + adj_vd
+                # update vd_k for next iteration
+                vd_k = deepcopy(vd_kp1)
+                # actually starting loop with 2nd iteration
+                iters = iters + 1
+                iterations.append(iters)
+                print('\n\niteration ' + str(iters) + ' complete.')
+
+                # calculate error = [[vbar],[dbar]]-[[vk],[dk]]
+                vdErr = vdBar - vd_k
+                print('Speed error: ' + str(vdErr[0][0]))
+                print('Direction error: ' + str(vdErr[1][0]))
+                speedError.append(vdErr[0][0])
+                directionError.append(vdErr[1][0])
+                V_k.append(vd_k[0][0])
+                D_k.append(vd_k[1][0])
+
+                # delete temporary objects
+                del temp0_vman
+                del temp_x_k
+                del temp1_vman
+                del temp_x_ev
+                del temp2_vman
+                del temp_x_ed
+                del temp_df_dv
+                del temp_df_dd
+                del temp_grad_fk
+                del adj_vd
+                del vd_kp1
+            temp0_vman = VisualizationManager(self.WF, self.grid_res)
+            temp0_vman.flowfield.wind_direction = vd_k[1][0]  # new wind direction estimate
+            temp0_vman.flowfield.calculate_wake()  # recalculate field for new wind direction
+            temp_x_k = deepcopy(temp0_vman.flowfield.u_field)
+            err_field.append(abs(ff_bar - temp_x_k[:, :, plane]))
+            masks.append(temp_Z_mask)
+            if np.amax(err_field[iters]) > errMax:
+                errMax = np.amax(err_field[iters])
+            print('Max error = ' + str(errMax))
+            print('Total iterations: ' + str(iters))
+
+            f, axarr = plt.subplots(2, 2, sharex='col', figsize=(10, 7.5))
+            sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
+            sld = Slider(sld_ax,
+                         'iterations',
+                         0, iters, valinit=0)
+            sld.valtext.set_text('iteration 0')
+            f.suptitle('Speed estimate: ' + str(self.params.v0) + ' m/s, Actual: ' + str(self.params.vBar) +
+                       ' m/s\nDirection estimate: ' + str(np.rad2deg(self.params.d0)) + '\N{DEGREE SIGN}' +
+                       ', Actual: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                       '\nThreshold: ' + str(self.params.mask_thresh) + ' Iterations: ' + str(iters) +
+                       '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' + str(vdErr[1][0]) +
+                       ' ev = ' + str(vdErr[0][0]))
+            # axarr[0][0].plot(iterations, V_k)
+            # axarr[0][0].set_title('speed estimate')
+            axarr[0][0].plot(iterations, speedError)
+            axarr[0][0].set_title('speed error')
+            v = np.linspace(0, errMax, 100)
+            V = np.linspace(0, errMax, 5)
+            cont = axarr[0][1].contourf(X, Y, err_field[0], v, cmap='gnuplot2')
+            # cont = axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[0].flatten(),
+            #                    cmap='gnuplot2')
+            cb = plt.colorbar(cont, ax=axarr[0][1])
+            cb.set_clim(vmin=0, vmax=errMax)
+            cb.set_ticks(V, True)
+            cb.set_label('u_field error')
+            cb.draw_all()
+            axarr[0][1].set_title('u_field error')
+            # axarr[1][0].plot(iterations, np.rad2deg(D_k))
+            # axarr[1][0].set_title('direction estimate')
+            # axarr[1][0].set_xlabel('iterations')
+            axarr[1][0].plot(iterations, np.rad2deg(directionError))
+            axarr[1][0].set_title('direction error')
+            axarr[1][0].set_xlabel('iterations')
+            x, y = deepcopy(X), deepcopy(Y)
+            scat = axarr[1][1].scatter(x.flatten(), y.flatten(), masks[0], color='black')
+            cb2 = plt.colorbar(mappable=cont, ax=axarr[1][1])
+            cb2.set_clim(vmin=0, vmax=errMax)
+            cb2.set_ticks(V)
+            cb2.draw_all()
+            cb2.remove()
+            for coord, turbine in self.flowfield.turbine_map.items():
+                a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
+                b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
+                a.rotate_z(turbine.yaw_angle - self.flowfield.wind_direction, coord.as_tuple())
+                b.rotate_z(turbine.yaw_angle - self.flowfield.wind_direction, coord.as_tuple())
+                axarr[0][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='white')
+                axarr[1][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+            axarr[1][1].set_title('mask')
+
+            # f.tight_layout()
+            plt.subplots_adjust(left=0.05,
+                                bottom=0.15,
+                                right=0.95,
+                                top=0.83,
+                                wspace=0.27,
+                                hspace=0.19)
+
+            def update_plot(val):
+
+                idx = int(round(sld.val))
+                sld.valtext.set_text('iteration ' + '{}'.format(idx))
+                for i in range(2):
+                    for j in range(2):
+                        axarr[i][j].clear()
+                axarr[0][1].contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
+                # axarr[0][2].scatter(x=X[:, :, plane].flatten(), y=Y[:, :, plane].flatten(), c=err_field[idx].flatten(), cmap='gnuplot2')
+                axarr[1][1].scatter(x, y, masks[idx], color='black')
+                axarr[1][1].set_title('mask')
+                axarr[0][1].set_title('u_field error')
+                # axarr[1][0].plot(iterations, np.rad2deg(D_k))
+                # axarr[1][0].axvline(idx, color='red')
+                # axarr[1][0].set_title('direction estimate')
+                # axarr[1][0].set_xlabel('iterations')
+                axarr[1][0].plot(iterations, np.rad2deg(directionError))
+                axarr[1][0].axvline(idx, color='red')
+                axarr[1][0].set_title('direction error')
+                axarr[1][0].set_xlabel('iterations')
+                # axarr[0][0].plot(iterations, V_k)
+                # axarr[0][0].axvline(idx, color='red')
+                # axarr[0][0].set_title('speed estimate')
+                axarr[0][0].plot(iterations, speedError)
+                axarr[0][0].axvline(idx, color='red')
+                axarr[0][0].set_title('speed error')
+
+                for coord, turbine in self.flowfield.turbine_map.items():
+                    a = Coordinate(coord.x, coord.y - turbine.rotor_radius)
+                    b = Coordinate(coord.x, coord.y + turbine.rotor_radius)
+                    a.rotate_z(turbine.yaw_angle - self.flowfield.wind_direction, coord.as_tuple())
+                    b.rotate_z(turbine.yaw_angle - self.flowfield.wind_direction, coord.as_tuple())
+                    axarr[0][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='white')
+                    axarr[1][1].plot([a.xprime, b.xprime], [a.yprime, b.yprime], 'k', linewidth=1, color='black')
+                plt.draw()
+                print(sum(masks[idx]))
+
+            sld.on_changed(update_plot)
+
+            def animate(frame, *fargs):
+                # check if it is playing
+                # if self._play:
+                # if it's not at the end, increment the slider value
+                if sld.val < sld.valmax - 1:
+                    temp = sld.val
+                    sld.set_val(temp + 1)
+                else:
+                    # if it's at the end, set it to the beginning
+                    sld.set_val(sld.valmin)
+
+            # set the animate function to the FuncAnimation function for animation
+            if ANIMATE:
+                an = anim.FuncAnimation(f, animate, interval=100, frames=sld.valmax * 5)
+                # render to video. to make it play faster, increase fps
+                if FILE:
+                    an.save(FILE + '.mp4', fps=7, dpi=300)
             plt.show()
+
 
     # params
     ## @brief  A class used to pass parameters to various functions
@@ -1248,4 +1339,4 @@ class VisualizationManager():
         ## a range of directions: [min direction err, max direction err, step]
         Drange = [-2.0, 2.0, 0.25]  # [min dir error, max dir error, step]
         ## a JSON windfarm object
-        damping = 1.0
+
