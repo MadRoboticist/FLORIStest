@@ -2,105 +2,32 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MultiUAVSOWFA.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/RegenPaperResults.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VTK2ufile.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VTKreader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/36_turb_input_new.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/AnimateError_new.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FLORIS_iface.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/VIZMAN_new.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/oneTurb_input_new.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/twoTurb_input_new.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/FLORIStest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FLORIStest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/36_turb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/36_turb_input.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimateError.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/AnimateError.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/BFPlanOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COSPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/COSPlanOnline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/COSPlanTV.py" beforeDir="false" afterPath="$PROJECT_DIR$/COSPlanTV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPath.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LearnPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/LearnPathOnline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiUAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiUAV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PlotSensitivityMatrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/PlotSensitivityMatrix.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/TV_SM_SOWFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/TV_SM_SOWFA.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.015_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.015_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0175_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0175_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.01_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.01_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.025_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.025_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.02_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.02_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.05_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.05_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0_dirERR.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0_dirERR.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0_spdERR.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.0_spdERR.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.1_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.1_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.2_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.2_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.3_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.3_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.4_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.4_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.5_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.5_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.6_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.6_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.7_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.7_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.8_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.8_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.9_dirERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_13.0-8.0_10.0-0.0_0.9_spdERR.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_100_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_100_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_10_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_10_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_15_dirERR_UAV.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_15_dirERR_UAV.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_15_spdERR_UAV.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_15_spdERR_UAV.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_20_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_20_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_25_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_25_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_30_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_30_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_35_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_35_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_40_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_40_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_45_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_45_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_50_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_50_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_55_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_55_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_5_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_5_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_60_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_60_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_65_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_65_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_70_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_70_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_75_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_75_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_80_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_80_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_85_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_85_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_90_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_90_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_95_dirERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_8.0_0.0_95_spdERR_UAV.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/2turbs_err_arrays.mat" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV0.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV0.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV1.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV2.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV3.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV4.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV4.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV5.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV6.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV6.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV7.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV7.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV8.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV8.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/twoTurbFLORISconvVgamma.m" beforeDir="false" afterPath="$PROJECT_DIR$/mat/twoTurbFLORISconvVgamma.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/twoTurbFLORISerrVSM.m" beforeDir="false" afterPath="$PROJECT_DIR$/mat/twoTurbFLORISerrVSM.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mat/twoTurbFLORISerrVSth.m" beforeDir="false" afterPath="$PROJECT_DIR$/mat/twoTurbFLORISerrVSth.m" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readVTK.py" beforeDir="false" afterPath="$PROJECT_DIR$/readVTK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/visualization_manager_DJ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/example_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/example_input.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/input_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/input_reader.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oneTurb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/oneTurb_input.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readVTK.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/readVTK.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readVTK2.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/readVTK2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twoTurb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/twoTurb_input.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/visualization_manager_DJ.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -108,181 +35,89 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="FUSProjectUsageTrigger">
-    <session id="-1518924592">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="7" />
-          <entry key="project.open.time.103" value="1" />
-          <entry key="project.open.time.112" value="1" />
-          <entry key="project.open.time.118" value="1" />
-          <entry key="project.open.time.121" value="1" />
-          <entry key="project.open.time.124" value="1" />
-          <entry key="project.open.time.45" value="2" />
-          <entry key="project.open.time.74" value="1" />
-          <entry key="project.opened" value="8" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="json" value="2" />
-          <entry key="py" value="19" />
-          <entry key="vmoptions" value="2" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JSON" value="2" />
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="19" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="json" value="127" />
-          <entry key="py" value="18352" />
-          <entry key="vmoptions" value="7" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JSON" value="127" />
-          <entry key="PLAIN_TEXT" value="7" />
-          <entry key="Python" value="18352" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-931210854">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="12" />
-          <entry key="project.open.time.11" value="1" />
-          <entry key="project.open.time.16" value="1" />
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.21" value="1" />
-          <entry key="project.open.time.22" value="1" />
-          <entry key="project.open.time.25" value="1" />
-          <entry key="project.open.time.29" value="1" />
-          <entry key="project.open.time.3" value="2" />
-          <entry key="project.open.time.33" value="2" />
-          <entry key="project.open.time.35" value="1" />
-          <entry key="project.open.time.5" value="4" />
-          <entry key="project.opened" value="16" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="json" value="3" />
-          <entry key="md" value="3" />
-          <entry key="me" value="1" />
-          <entry key="py" value="60" />
-          <entry key="tcl" value="1" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JSON" value="3" />
-          <entry key="Markdown" value="3" />
-          <entry key="PLAIN_TEXT" value="2" />
-          <entry key="Python" value="60" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="dummy" value="52" />
-          <entry key="json" value="345" />
-          <entry key="md" value="1412" />
-          <entry key="me" value="117" />
-          <entry key="py" value="67405" />
-          <entry key="tcl" value="7" />
-          <entry key="txt" value="62" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JSON" value="345" />
-          <entry key="Markdown" value="1412" />
-          <entry key="PLAIN_TEXT" value="238" />
-          <entry key="Python" value="67405" />
-        </counts>
-      </usages-collector>
-    </session>
-    <session id="-971535125">
-      <usages-collector id="statistics.lifecycle.project">
-        <counts>
-          <entry key="project.closed" value="12" />
-          <entry key="project.open.time.15" value="2" />
-          <entry key="project.open.time.17" value="1" />
-          <entry key="project.open.time.18" value="1" />
-          <entry key="project.open.time.2" value="1" />
-          <entry key="project.open.time.23" value="2" />
-          <entry key="project.open.time.24" value="1" />
-          <entry key="project.open.time.27" value="1" />
-          <entry key="project.open.time.29" value="2" />
-          <entry key="project.open.time.31" value="1" />
-          <entry key="project.open.time.32" value="2" />
-          <entry key="project.open.time.34" value="1" />
-          <entry key="project.open.time.39" value="2" />
-          <entry key="project.open.time.5" value="2" />
-          <entry key="project.open.time.53" value="1" />
-          <entry key="project.opened" value="20" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.open">
-        <counts>
-          <entry key="json" value="7" />
-          <entry key="md" value="1" />
-          <entry key="py" value="72" />
-          <entry key="u" value="4" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.open">
-        <counts>
-          <entry key="JSON" value="7" />
-          <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="4" />
-          <entry key="Python" value="72" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.extensions.edit">
-        <counts>
-          <entry key="json" value="39" />
-          <entry key="py" value="42763" />
-          <entry key="u" value="33" />
-        </counts>
-      </usages-collector>
-      <usages-collector id="statistics.file.types.edit">
-        <counts>
-          <entry key="JSON" value="39" />
-          <entry key="PLAIN_TEXT" value="33" />
-          <entry key="Python" value="42763" />
-        </counts>
-      </usages-collector>
-    </session>
-  </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pathPlan.py">
+        <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="290">
-              <caret line="1586" column="22" selection-start-line="1586" selection-start-column="22" selection-end-line="1586" selection-end-column="22" />
+            <state relative-caret-position="-461">
+              <caret line="35" column="88" selection-start-line="35" selection-start-column="88" selection-end-line="35" selection-end-column="88" />
               <folding>
-                <element signature="e#104#159#0" expanded="true" />
-                <marker date="1570720941068" expanded="true" signature="35131:35140" ph="..." />
-                <marker date="1570720941068" expanded="true" signature="65582:65583" ph="..." />
+                <element signature="e#620#638#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/MultiUAVSOWFA.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/oneTurb_input_new.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="480">
-              <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+            <state relative-caret-position="276">
+              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/VIZMAN_new.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="341" selection-start-line="341" selection-end-line="341" />
               <folding>
-                <element signature="e#180#237#0" expanded="true" />
+                <element signature="e#663#694#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/old/visualization_manager_DJ.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="253">
+              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/farm.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="280" column="13" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="13" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine.py">
+          <provider selected="true" editor-type-id="text-editor" />
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine_map.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="136">
+              <caret line="88" selection-start-line="88" selection-end-line="88" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/plotting.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="177">
+              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/visualization.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="18">
+              <caret line="34" column="50" selection-start-line="29" selection-start-column="8" selection-end-line="34" selection-end-column="50" />
+              <folding>
+                <element signature="e#557#585#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -332,6 +167,7 @@
     </findStrings>
   </component>
   <component name="Git.Settings">
+    <option name="UPDATE_TYPE" value="MERGE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="IdeDocumentHistory">
@@ -390,10 +226,10 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="156" />
     <option name="width" value="653" />
-    <option name="height" value="916" />
+    <option name="height" value="788" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
@@ -410,50 +246,49 @@
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="FLORIStest" type="462c0819:PsiDirectoryNode" />
+              <item name="old" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="Python37" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
+              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
               <item name="Lib" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
-              <item name="venv" type="462c0819:PsiDirectoryNode" />
-              <item name="Lib" type="462c0819:PsiDirectoryNode" />
-              <item name="site-packages" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
-              <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
               <item name="venv" type="462c0819:PsiDirectoryNode" />
               <item name="Lib" type="462c0819:PsiDirectoryNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
@@ -462,15 +297,22 @@
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
+              <item name="floris" type="462c0819:PsiDirectoryNode" />
+              <item name="simulation" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="FLORIStest" type="b2602c69:ProjectViewProjectNode" />
               <item name="External Libraries" type="cb654da1:ExternalLibrariesNode" />
-              <item name="&lt; Python 3.7 (venv) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="&lt; Python 3.7 (ECEN5458proj) &gt;" type="70bed36:NamedLibraryElementNode" />
+              <item name="venv" type="462c0819:PsiDirectoryNode" />
+              <item name="Lib" type="462c0819:PsiDirectoryNode" />
               <item name="site-packages" type="462c0819:PsiDirectoryNode" />
               <item name="floris" type="462c0819:PsiDirectoryNode" />
+              <item name="tools" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -480,23 +322,24 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="VM&#9;FILE&#9;file://C:/Users/David James/.PyCharmCE2018.2/config/pycharm.exe.vmoptions" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../SOWFAdata/readVTK.py" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
+      <recent name="F:\Documents\PyCharmProjects\FLORIStest\plots\36turbFLORIS" />
+      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\plots" />
+      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
       <recent name="C:\Users\David James\venv\Lib\site-packages\floris" />
       <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
       <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\examples" />
       <recent name="C:\Users\David James\PycharmProjects\FLORIStest\examples" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
-      <recent name="F:\Documents\PyCharmProjects\FLORIStest\plots\36turbFLORIS" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\plots" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -670,15 +513,14 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-4" y="-4" width="1288" height="924" extended-state="6" />
-    <editor active="true" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.2533757" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1688988" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.3287841" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.43424317" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.45171848" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39702234" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -711,9 +553,6 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout-to-restore>
   </component>
-  <component name="VcsContentAnnotationSettings">
-    <option name="myLimit" value="2678400000" />
-  </component>
   <component name="VcsManagerConfiguration">
     <ignored-roots>
       <path value="$PROJECT_DIR$/FLORIStest" />
@@ -730,25 +569,9 @@
     <entry file="file://$APPLICATION_CONFIG_DIR$/pycharm.exe.vmoptions" />
     <entry file="file://$USER_HOME$/Downloads/FLORIStest/FLORIStest/examples/example_script.py" />
     <entry file="file://$PROJECT_DIR$/examples/OptModules.py" />
-    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.old.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-3216" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="128">
-          <caret line="17" column="20" lean-forward="true" selection-start-line="17" selection-start-column="20" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../floris/floris/floris.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-176">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.old.py" />
+    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.py" />
+    <entry file="file://$PROJECT_DIR$/../floris/floris/floris.py" />
     <entry file="file://$PROJECT_DIR$/venv/Lib/tcl8.6/init.tcl">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -756,20 +579,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/../floris/examples/example_script.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="191">
-          <caret line="32" column="42" selection-start-line="32" selection-start-column="42" selection-end-line="32" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/contour.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="1584" column="32" selection-start-line="1584" selection-start-column="32" selection-end-line="1584" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/../floris/examples/example_script.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/contour.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/tkinter/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1286">
@@ -778,83 +589,19 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/PathPlanner.py" />
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/ffmpeg/video.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1776" />
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/animation.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="118">
-          <caret line="163" selection-start-line="163" selection-end-line="163" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/ffmpeg/video.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/animation.py" />
     <entry file="file://$PROJECT_DIR$/example_script.py" />
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/input_reader.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/turbine.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-864" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/36_turb_input.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="166">
-          <caret line="99" column="30" lean-forward="true" selection-start-line="99" selection-start-column="30" selection-end-line="99" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/twoTurb_input.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="208">
-          <caret line="22" column="14" selection-start-line="22" selection-start-column="14" selection-end-line="22" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/oneTurb_input.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="144">
-          <caret line="15" column="34" lean-forward="true" selection-start-line="15" selection-start-column="34" selection-end-line="15" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../SOWFAdata/readVTK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="261">
-          <caret line="196" column="18" lean-forward="true" selection-start-line="196" selection-start-column="18" selection-end-line="196" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/axis.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="502">
-          <caret line="1196" selection-start-line="1196" selection-end-line="1196" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="13" column="30" lean-forward="true" selection-start-line="13" selection-start-column="30" selection-end-line="13" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/figure.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="450">
-          <caret line="2131" selection-start-line="2131" selection-end-line="2131" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/example_input.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2096">
-          <caret line="131" column="19" selection-start-line="131" selection-start-column="19" selection-end-line="131" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/input_reader.py" />
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/turbine.py" />
+    <entry file="file://$PROJECT_DIR$/36_turb_input.json" />
+    <entry file="file://$PROJECT_DIR$/twoTurb_input.json" />
+    <entry file="file://$PROJECT_DIR$/oneTurb_input.json" />
+    <entry file="file://$PROJECT_DIR$/../SOWFAdata/readVTK.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/axis.py" />
+    <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py" />
+    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/figure.py" />
+    <entry file="file://$PROJECT_DIR$/example_input.json" />
     <entry file="file://$PROJECT_DIR$/LearnPathOnline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2720">
@@ -862,13 +609,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/wake_deflection.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="231">
-          <caret line="64" column="14" selection-start-line="64" selection-start-column="14" selection-end-line="64" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/wake_deflection.py" />
     <entry file="file://$PROJECT_DIR$/RegenPaperResults.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="89">
@@ -879,26 +620,8 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/readVTK.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="5" column="11" selection-start-line="5" selection-start-column="6" selection-end-line="5" selection-end-column="11" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/readVTK2.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="112">
-          <caret line="73" column="17" selection-start-line="73" selection-start-column="17" selection-end-line="73" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/readVTK.py" />
+    <entry file="file://$PROJECT_DIR$/readVTK2.py" />
     <entry file="file://$PROJECT_DIR$/twoTurb_lowTI.u">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
@@ -917,17 +640,17 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="-377">
             <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -981,16 +704,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/input_reader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="336">
-          <caret line="21" column="20" lean-forward="true" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="20" />
-          <folding>
-            <element signature="e#719#747#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/input_reader.py" />
     <entry file="file://$PROJECT_DIR$/COSPlanOnline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2031">
@@ -1001,13 +715,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/AnimateError.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="288">
-          <caret line="21" column="58" selection-start-line="21" selection-start-column="20" selection-end-line="21" selection-end-column="58" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/AnimateError.py" />
     <entry file="file://$PROJECT_DIR$/GreedyPath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
@@ -1039,16 +747,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="7490">
-          <caret line="1206" column="16" selection-start-line="1206" selection-start-column="16" selection-end-line="1206" selection-end-column="16" />
-          <folding>
-            <element signature="e#677#732#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py" />
     <entry file="file://$PROJECT_DIR$/pathPlan.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="290">

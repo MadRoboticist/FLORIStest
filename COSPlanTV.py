@@ -2,7 +2,7 @@
 # This is a script which utilizes the greedyPath function in pathPlan.py
 # while doing online updates of the sensitivity matrix and associated estimates
 
-from visualization_manager_DJ import VisualizationManager
+from old.visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
 from UAV import UAV
 import json

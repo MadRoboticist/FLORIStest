@@ -2,13 +2,12 @@
 # This is a script which utilizes the learnPath function in pathPlan.py
 #
 
-from visualization_manager_DJ import VisualizationManager
+from old.visualization_manager_DJ import VisualizationManager
 from pathPlan import PathPlanner
 from UAV import UAV
 import json
 import numpy as np
 import scipy.io as scio
-from readVTK2 import readVTK
 
 with open("twoTurb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file

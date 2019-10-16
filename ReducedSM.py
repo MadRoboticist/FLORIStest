@@ -2,13 +2,9 @@
 # This is a script which runs the reducedSM function from visualization_manager_DJ.py
 #
 
-from floris.floris import Floris
-from copy import deepcopy
-from visualization_manager_DJ import VisualizationManager
-from readVTK import VTKreader
+from old.visualization_manager_DJ import VisualizationManager
 import json
 import numpy as np
-import matplotlib.pyplot as plt
 
 with open("twoTurb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
