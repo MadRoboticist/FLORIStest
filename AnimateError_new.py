@@ -12,8 +12,6 @@ grid_resolution = [48, 15, 15]
 FL = Floris("twoTurb_input_new.json", grid_resolution)
 FL.set_incoming(8.0,270.0)
 
-
-
 vman = VisualizationManager(FL, grid_resolution)  # a new VisualizationManager object
 
 # these are the parameters used by the animateDnSerror() function

@@ -1,19 +1,19 @@
-## \file GreedyPathOnline.py
+## \file COSPlanOnline.py
 # This is a script which utilizes the greedyPath function in pathPlan.py
 # while doing online updates of the sensitivity matrix and associated estimates
 
 from old.visualization_manager_DJ import VisualizationManager
-from pathPlan import PathPlanner
+from old.pathPlan import PathPlanner
 from UAV import UAV
 import json
 import numpy as np
 import scipy.io as scio
 
-with open("twoTurb_input.json") as WFJSON:
+with open("36_turb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
 ## flowfield resolution given as [x_resolution, y_resolution, z_resolution]
-grid_resolution = [48, 15, 15] # [x_res, y_res, z_res]
+grid_resolution = [60, 52, 15] # [x_res, y_res, z_res]
 grid_size = grid_resolution[0]*grid_resolution[1]
 coverage = 0.15
 ## @var vman
@@ -62,9 +62,9 @@ planner = PathPlanner(vman)
 
 
 
-VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataMean\\21600"
+planner.VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataMean\\21600"
 
-VTKfilename = "UAvg_slice_horizontal_1.vtk"
+planner.VTKfilename = "UAvg_slice_horizontal_1.vtk"
 #VTK = VTKreader(VTKpath, VTKfilename, vman)
 #planner.Xbar = deepcopy(VTK.u_field)
 
@@ -76,40 +76,40 @@ UAV1 = UAV(planner)
 #   sets a subtractive penalty value to be applied to a node's
 #   score mask each time it is visited
 #   (set to 0 to apply no subtractive penalty)
-UAV1.maskSUB = 0
+UAV1.maskSUB = 1.0
 ## @var maskMUL
 #   sets a multiplicative penalty value to be applied to a node's
 #   score mask each time it is visited
 #   (set to 1 to apply no multiplicative penalty)
-UAV1.maskMUL = 0.75
+UAV1.maskMUL = 0.5
 ## @var maskMULthenSUB
 #   boolean which decides the order maskSUB and maskMUL are carried out
 UAV1.maskMULthenSUB = True
 ## @var scoreWt
 #   sets the weight of the sensitivity score in path calculations
-UAV1.scoreWt = 10
+UAV1.scoreWt = 0
 ## @var dSwt
 #   sets the weight of the derivative of the sensitivity score
 #   wrt transition in path calculations
-UAV1.dSwt = 2
+UAV1.dSwt = 0
 ## @var d2Swt
 #   sets the weight of the 2nd derivative of the sensitivity score
 #   wrt transition in path calculations
-UAV1.d2Swt = 2
+UAV1.d2Swt = 0
 ## @var windWt
 #   sets the weight of the wind direction vs. transition heading
 #   in path calculations
-UAV1.windWt = 2
+UAV1.windWt = 0
 ## @var headWt
 #   sets the weight of the UAV heading vs. transition heading
 #   in path calculations
-UAV1.headWt = 4
+UAV1.headWt = 0
 ## @var waveWt
 #   sets the weight of the wave map in path calculations
-UAV1.waveWt = 50
+UAV1.waveWt = 0
 ## @var timeWt
 #   sets the weight of time/iterations elapsed in path calculations
-UAV1.timeWt = 0.25
+UAV1.timeWt = 0
 ## Holds a UAV's "GPS" point
 # starting point for this script is 200,-250
 #
@@ -135,30 +135,33 @@ UAV1.init_mask_size = int(UAV1.patrolMax*0.9)
 # after the first iteration.
 #
 # see definition at pathPlan.UAV.plan_horizon
-UAV1.plan_horizon = int(grid_size*0.05)
+UAV1.plan_horizon = int(grid_size*coverage*0.3)
 ## A parameter which decides how many moves the UAV will take on
 # the planned path before it recalculates the estimates and the plan
 #
 # see definition at pathPlan.UAV.moves2recalc
-UAV1.moves2recalc = int(UAV1.plan_horizon*0.5)
+UAV1.moves2recalc = int(UAV1.plan_horizon*0.9)
 
 dirErr = list()
 dirErr.append(abs(planner.params.dBar - planner.params.d0))
 spdErr = list()
 spdErr.append(abs(planner.params.vBar - planner.params.v0))
+planner.percent_plan = 1 #percentage of planned steps that will be taken
 # run it for the indicated number of recalculations
 i=0
 while dirErr[i]>planner.params.dirErrMax or spdErr[i]>planner.params.spErrMax:
-#for i in range(150):
+#for i in range(10):
     print('iteration '+ str(i))
-    planner.greedyPath(UAV1)  # recalculate the plan
+    planner.COSPlan(UAV1)  # recalculate the plan
     UAV1.move() # move the UAV
-    planner.updateEstimates(UAV1) # recalculate the estimates
+    if (len(UAV1.GPSpath) >= UAV1.init_mask_size):
+        planner.updateEstimates(UAV1)  # recalculate the estimates
     dirErr.append(abs(planner.params.dBar - planner.params.d0))
     spdErr.append(abs(planner.params.vBar - planner.params.v0))
     i=i+1
-
-MAT = True
+#planner.plotScoreMapUAV(UAV1)
+#planner.show()
+MAT = False
 
 if(MAT):
     scio.savemat('mat/2turbs_'+str(vman.params.vBar) + '_' + \
@@ -168,12 +171,9 @@ if(MAT):
          str(np.rad2deg(vman.params.dBar)) + '_' + str(int(100*coverage)) + \
          '_dirERR_UAV.mat', mdict={'dirErrUAV'+str(int(100*coverage)): dirErr})
 
-planner.printAVGs()
-# filename = "UAV_36turb_SOWFA-Xbar" # set the file name
+#planner.printAVGs()
+filename = "UAV_36turb_COSPlan" # set the file name
 # animate what happened
-# planner.plotHistory(UAV1, None, True) # don't save the animation, show the plot
-# planner.plotHistory(UAV1, filename, False) # save the animation as an mp4, don't show the plot
-
-
-
+#planner.plotHistory(UAV1, None, True) # don't save the animation, show the plot
+planner.plotHistory(UAV1, filename, False) # save the animation as an mp4, don't show the plot
 

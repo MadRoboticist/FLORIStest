@@ -288,7 +288,7 @@ class UAV:
                 self.IDXpath.append(deepcopy(self.IDXplan[i]))
                 XY = deepcopy(self.IDXplan[i])
                 self.measure.append(self.planner.getMeasure(XY))
-                #print("1")
+                #print("measurement taken")
                 self.GPSpath.append(deepcopy(self.GPSplan[i]))
                 #print("2")
                 self.idx = self.IDXpath[len(self.IDXpath) - 1]
@@ -330,5 +330,7 @@ class UAV:
                 self.dS = tempdS
                 self.heading = tempHead
                 self.path_mask = deepcopy(tempMask)
+                self.measure = deepcopy(tempMeasure)
                 print("Error: This number of steps has not been planned.")
                 return
+        self.mask_size.append(np.sum(np.where(np.array(self.path_mask) < 1, 1, 0)))

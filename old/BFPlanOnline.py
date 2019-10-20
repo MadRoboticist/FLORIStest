@@ -1,21 +1,21 @@
-## \file COSPlanOnline.py
+## \file BFPlanOnline.py
 # This is a script which utilizes the greedyPath function in pathPlan.py
 # while doing online updates of the sensitivity matrix and associated estimates
 
 from old.visualization_manager_DJ import VisualizationManager
-from pathPlan import PathPlanner
+from old.pathPlan import PathPlanner
 from UAV import UAV
 import json
 import numpy as np
 import scipy.io as scio
 
-with open("36_turb_input.json") as WFJSON:
+with open("twoTurb_input.json") as WFJSON:
     ## a JSON windfarm object read from a file
     WF = json.load(WFJSON) # a JSON windfarm object read from a file
 ## flowfield resolution given as [x_resolution, y_resolution, z_resolution]
-grid_resolution = [60, 52, 15] # [x_res, y_res, z_res]
+grid_resolution = [48, 15, 15] # [x_res, y_res, z_res]
 grid_size = grid_resolution[0]*grid_resolution[1]
-coverage = 0.15
+coverage = 0.10
 ## @var vman
 # @brief VisualizationManager object
 #
@@ -62,9 +62,9 @@ planner = PathPlanner(vman)
 
 
 
-planner.VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataMean\\21600"
+VTKpath = "L:\\SOWFAdata\\twoTurb_lowTI\\postProcessing\\sliceDataMean\\21600"
 
-planner.VTKfilename = "UAvg_slice_horizontal_1.vtk"
+VTKfilename = "UAvg_slice_horizontal_1.vtk"
 #VTK = VTKreader(VTKpath, VTKfilename, vman)
 #planner.Xbar = deepcopy(VTK.u_field)
 
@@ -149,10 +149,10 @@ spdErr.append(abs(planner.params.vBar - planner.params.v0))
 planner.percent_plan = 1 #percentage of planned steps that will be taken
 # run it for the indicated number of recalculations
 i=0
-while dirErr[i]>planner.params.dirErrMax or spdErr[i]>planner.params.spErrMax:
-#for i in range(10):
+#while dirErr[i]>planner.params.dirErrMax or spdErr[i]>planner.params.spErrMax:
+for i in range(1):
     print('iteration '+ str(i))
-    planner.COSPlan(UAV1)  # recalculate the plan
+    planner.quadSearchPlan(UAV1)  # recalculate the plan
     UAV1.move() # move the UAV
     if (len(UAV1.GPSpath) >= UAV1.init_mask_size):
         planner.updateEstimates(UAV1)  # recalculate the estimates

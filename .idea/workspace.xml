@@ -2,32 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/36_turb_input_new.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/AnimateError_new.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/FLORIS_iface.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/VIZMAN_new.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/oneTurb_input_new.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/twoTurb_input_new.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/FLORIStest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/FLORIStest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/36_turb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/36_turb_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/AnimateError.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/AnimateError.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/BFPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/BFPlanOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COSPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/COSPlanOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/COSPlanTV.py" beforeDir="false" afterPath="$PROJECT_DIR$/COSPlanTV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPath.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/GreedyPathOnline.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/LearnPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/LearnPathOnline.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/SingleUAV.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/TV_SM_SOWFA_new.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old/MultiUAV.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/old/ReducedSM.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pathPlan_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/AnimateError_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/AnimateError_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BFPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/BFPlanOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COSPlanOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/COSPlanOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/COSPlanTV.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/COSPlanTV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/FLORIS_iface.py" beforeDir="false" afterPath="$PROJECT_DIR$/FLORIS_iface.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GreedyPath.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/GreedyPath.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GreedyPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/GreedyPathOnline.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/LearnPathOnline.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/LearnPathOnline.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/MultiUAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiUAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PlotSensitivityMatrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/PlotSensitivityMatrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/example_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/example_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/input_reader.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/input_reader.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/oneTurb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/oneTurb_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readVTK.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/readVTK.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/readVTK2.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/readVTK2.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/twoTurb_input.json" beforeDir="false" afterPath="$PROJECT_DIR$/old/twoTurb_input.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/visualization_manager_DJ.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/visualization_manager_DJ.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiUAVSOWFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/MultiUAVSOWFA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ReducedSM.py" beforeDir="false" afterPath="$PROJECT_DIR$/ReducedSM_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/RegenPaperResults.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/RegenPaperResults.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TV_SM_SOWFA.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/TV_SM_SOWFA.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/VIZMAN_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/VIZMAN_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/data/ACCsub/2turbs_1UAV_1.0.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/data/ACCsub/2turbs_1UAV_1.0.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pathPlan.py" beforeDir="false" afterPath="$PROJECT_DIR$/old/pathPlan.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,87 +35,89 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
+        <entry file="file://$PROJECT_DIR$/pathPlan_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-461">
-              <caret line="35" column="88" selection-start-line="35" selection-start-column="88" selection-end-line="35" selection-end-column="88" />
+            <state relative-caret-position="17">
+              <caret line="315" column="13" lean-forward="true" selection-start-line="315" selection-start-column="13" selection-end-line="315" selection-end-column="13" />
               <folding>
-                <element signature="e#620#638#0" expanded="true" />
+                <element signature="e#104#159#0" expanded="true" />
+                <element signature="e#462#473#0" />
+                <element signature="e#688#1025#0" />
+                <element signature="e#1027#1082#0" />
+                <element signature="e#1137#2193#0" />
+                <element signature="e#2477#5255#0" />
+                <element signature="e#5867#6290#0" />
+                <element signature="e#6394#6485#0" />
+                <element signature="e#7141#9196#0" />
+                <element signature="e#8677#10716#0" />
+                <element signature="e#9807#11032#0" />
+                <element signature="e#11294#12947#0" />
+                <element signature="e#21128#23376#0" />
+                <element signature="e#24468#27815#0" />
+                <element signature="e#34535#34918#0" />
+                <element signature="e#35529#35542#0" />
+                <element signature="e#33100#47992#0" />
+                <element signature="e#50756#60066#0" />
+                <element signature="e#60111#61213#0" />
+                <element signature="e#61251#64591#0" />
+                <element signature="e#64646#65374#0" />
+                <element signature="e#65436#65723#0" />
+                <element signature="e#65768#66123#0" />
+                <element signature="e#66161#67385#0" />
+                <element signature="e#52802#55771#0" />
+                <element signature="e#55963#56215#0" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/oneTurb_input_new.json">
+        <entry file="file://$PROJECT_DIR$/36_turb_input_new.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="276">
-              <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+            <state relative-caret-position="268">
+              <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SingleUAV.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="17">
+              <caret line="110" column="22" lean-forward="true" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UAV.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="237">
+              <caret line="283" column="21" lean-forward="true" selection-start-line="283" selection-start-column="21" selection-end-line="283" selection-end-column="21" />
+              <folding>
+                <element signature="e#112#137#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/MultiUAV.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="98">
+              <caret line="283" column="19" lean-forward="true" selection-start-line="283" selection-start-column="19" selection-end-line="283" selection-end-column="19" />
+              <folding>
+                <element signature="e#300#343#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/VIZMAN_new.py">
+        <entry file="file://$PROJECT_DIR$/old/36_turb_input.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="341" selection-start-line="341" selection-end-line="341" />
-              <folding>
-                <element signature="e#663#694#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/old/visualization_manager_DJ.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="253">
-              <caret line="22" column="1" selection-start-line="22" selection-start-column="1" selection-end-line="22" selection-end-column="1" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/farm.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="280" column="13" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="13" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine.py">
-          <provider selected="true" editor-type-id="text-editor" />
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine_map.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="136">
-              <caret line="88" selection-start-line="88" selection-end-line="88" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/plotting.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="177">
-              <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/visualization.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="18">
-              <caret line="34" column="50" selection-start-line="29" selection-start-column="8" selection-end-line="34" selection-end-column="50" />
-              <folding>
-                <element signature="e#557#585#0" expanded="true" />
-              </folding>
+            <state>
+              <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -134,18 +133,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>GPS point</find>
-      <find>Error: [</find>
-      <find>UAV.v0</find>
-      <find>self.params</find>
-      <find>self.params.v0</find>
-      <find>self.params.d0</find>
-      <find>self.params.vBar</find>
-      <find>Estim</find>
-      <find>_update_cost_map</find>
-      <find>_update_</find>
-      <find>v0</find>
-      <find>self.hist</find>
       <find>self.hist.append</find>
       <find>self.planner.hist</find>
       <find>score_map</find>
@@ -157,13 +144,25 @@
       <find>axbig</find>
       <find>self.s</find>
       <find>hist</find>
-      <find>mask_size</find>
       <find>iters</find>
       <find>self.measure</find>
       <find>self.VTKpath</find>
       <find>maxX</find>
       <find>ff</find>
       <find>self.steps_taken</find>
+      <find>Coordinate</find>
+      <find>greedy</find>
+      <find>print</find>
+      <find>self._grid</find>
+      <find>self.WF.set_incoming</find>
+      <find>update</find>
+      <find>updateEstimatesR</find>
+      <find>updateEstimatesT</find>
+      <find>measure</find>
+      <find>updateE</find>
+      <find>self.xB</find>
+      <find>mask_size</find>
+      <find>calcScoreMap</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -173,15 +172,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/flow_field.py" />
-        <option value="$PROJECT_DIR$/examples/visualization_manager.py" />
-        <option value="$PROJECT_DIR$/examples/example_input2.json" />
-        <option value="$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/input_reader.py" />
-        <option value="$APPLICATION_CONFIG_DIR$/pycharm.exe.vmoptions" />
-        <option value="$USER_HOME$/Downloads/FLORIStest/FLORIStest/examples/example_script.py" />
-        <option value="$PROJECT_DIR$/examples/example_script.py" />
-        <option value="$PROJECT_DIR$/examples/OptModules.py" />
-        <option value="$PROJECT_DIR$/../floris/floris/input_reader.py" />
         <option value="$PROJECT_DIR$/Read.me" />
         <option value="$PROJECT_DIR$/examples/example_input.json" />
         <option value="$PROJECT_DIR$/../floris/examples/example_script.py" />
@@ -209,24 +199,34 @@
         <option value="$PROJECT_DIR$/readVTK2.py" />
         <option value="$USER_HOME$/venv/Lib/site-packages/floris/wake_deflection.py" />
         <option value="$PROJECT_DIR$/GreedyPathOnline.py" />
-        <option value="$PROJECT_DIR$/RegenPaperResults.py" />
         <option value="$PROJECT_DIR$/venv/VTKreader.py" />
         <option value="$PROJECT_DIR$/ReducedSM.py" />
         <option value="$PROJECT_DIR$/readVTK.py" />
         <option value="$PROJECT_DIR$/twoTurb_lowTI.u" />
         <option value="$PROJECT_DIR$/VTKreader.py" />
-        <option value="$PROJECT_DIR$/UAV.py" />
         <option value="$PROJECT_DIR$/VTK2ufile.py" />
         <option value="$PROJECT_DIR$/COSPlanTV.py" />
-        <option value="$PROJECT_DIR$/MultiUAV.py" />
         <option value="$PROJECT_DIR$/visualization_manager_DJ.py" />
-        <option value="$PROJECT_DIR$/TV_SM_SOWFA.py" />
         <option value="$PROJECT_DIR$/pathPlan.py" />
         <option value="$PROJECT_DIR$/MultiUAVSOWFA.py" />
+        <option value="$PROJECT_DIR$/AnimateError_new.py" />
+        <option value="$PROJECT_DIR$/old/ReducedSM.py" />
+        <option value="$PROJECT_DIR$/ReducedSM_new.py" />
+        <option value="$PROJECT_DIR$/TV_SM_SOWFA.py" />
+        <option value="$PROJECT_DIR$/TV_SM_SOWFA_new.py" />
+        <option value="$PROJECT_DIR$/RegenPaperResults.py" />
+        <option value="$PROJECT_DIR$/old/pathPlan.py" />
+        <option value="$PROJECT_DIR$/VIZMAN_new.py" />
+        <option value="$PROJECT_DIR$/RegenPaperResults_new.py" />
+        <option value="$PROJECT_DIR$/FLORIS_iface.py" />
+        <option value="$PROJECT_DIR$/SingleUAV.py" />
+        <option value="$PROJECT_DIR$/UAV.py" />
+        <option value="$PROJECT_DIR$/pathPlan_new.py" />
+        <option value="$PROJECT_DIR$/MultiUAV.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="156" />
     <option name="width" value="653" />
     <option name="height" value="788" />
@@ -237,6 +237,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -318,28 +319,28 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SearchEverywhereHistoryKey" value="VM&#9;FILE&#9;file://C:/Users/David James/.PyCharmCE2018.2/config/pycharm.exe.vmoptions" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../SOWFAdata/readVTK.py" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
-      <recent name="F:\Documents\PyCharmProjects\FLORIStest\plots\36turbFLORIS" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\plots" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest\" />
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest" />
       <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
       <recent name="C:\Users\David James\venv\Lib\site-packages\floris" />
       <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\examples" />
-      <recent name="C:\Users\David James\PycharmProjects\FLORIStest\examples" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest\old" />
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest" />
+      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
+      <recent name="F:\Documents\PyCharmProjects\FLORIStest\plots\36turbFLORIS" />
+      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\plots" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -354,8 +355,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python.MultiUAVSOWFA">
-    <configuration name="COSPlanTV" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python.MultiUAV">
+    <configuration name="MultiUAV" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FLORIStest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -367,7 +368,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/COSPlanTV.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MultiUAV.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -376,7 +377,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="MultiUAVSOWFA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="RegenPaperResults" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FLORIStest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -388,7 +389,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/MultiUAVSOWFA.py" />
+      <option name="SCRIPT_NAME" value="C:\Users\hustu\Documents\GitHub\FLORIStest\old\RegenPaperResults.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -397,7 +398,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="TV_SM_SOWFA" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="RegenPaperResults_new" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FLORIStest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -409,7 +410,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TV_SM_SOWFA.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/RegenPaperResults_new.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -418,7 +419,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="VTK2ufile" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="SingleUAV" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FLORIStest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -430,7 +431,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VTK2ufile.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/SingleUAV.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -439,7 +440,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="VTKreader" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="TV_SM_SOWFA_new" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="FLORIStest" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -451,7 +452,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/VTKreader.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/TV_SM_SOWFA_new.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -461,19 +462,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.VTK2ufile" />
-      <item itemvalue="Python.TV_SM_SOWFA" />
-      <item itemvalue="Python.VTKreader" />
-      <item itemvalue="Python.COSPlanTV" />
-      <item itemvalue="Python.MultiUAVSOWFA" />
+      <item itemvalue="Python.TV_SM_SOWFA_new" />
+      <item itemvalue="Python.RegenPaperResults" />
+      <item itemvalue="Python.RegenPaperResults_new" />
+      <item itemvalue="Python.SingleUAV" />
+      <item itemvalue="Python.MultiUAV" />
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.MultiUAVSOWFA" />
-        <item itemvalue="Python.TV_SM_SOWFA" />
-        <item itemvalue="Python.COSPlanTV" />
-        <item itemvalue="Python.VTK2ufile" />
-        <item itemvalue="Python.VTKreader" />
+        <item itemvalue="Python.MultiUAV" />
+        <item itemvalue="Python.SingleUAV" />
+        <item itemvalue="Python.RegenPaperResults_new" />
+        <item itemvalue="Python.RegenPaperResults" />
+        <item itemvalue="Python.TV_SM_SOWFA_new" />
       </list>
     </recent_temporary>
   </component>
@@ -509,18 +510,25 @@
       <option name="project" value="LOCAL" />
       <updated>1557440233246</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="merge laptop and lab computer code">
+      <created>1571080094481</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1571080094481</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1688988" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.3287841" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.45171848" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32569557" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.42716858" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39702234" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -534,19 +542,19 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
     <layout-to-restore>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18843469" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1688988" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32899022" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.43811074" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3990228" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32569557" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.42716858" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.39702234" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
-      <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.50039715" side_tool="true" weight="0.22208437" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -559,50 +567,16 @@
     </ignored-roots>
     <MESSAGE value="added path planning module" />
     <MESSAGE value="update path planning module, doxygen" />
-    <option name="LAST_COMMIT_MESSAGE" value="update path planning module, doxygen" />
+    <MESSAGE value="merge laptop and lab computer code" />
+    <option name="LAST_COMMIT_MESSAGE" value="merge laptop and lab computer code" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/examples/example_optimization.py" />
-    <entry file="file://$PROJECT_DIR$/examples/example_input2.json" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/input_reader.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37-32/Lib/site-packages/floris/floris.py" />
-    <entry file="file://$APPLICATION_CONFIG_DIR$/pycharm.exe.vmoptions" />
-    <entry file="file://$USER_HOME$/Downloads/FLORIStest/FLORIStest/examples/example_script.py" />
-    <entry file="file://$PROJECT_DIR$/examples/OptModules.py" />
-    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.old.py" />
-    <entry file="file://$PROJECT_DIR$/../floris/floris/input_reader.py" />
-    <entry file="file://$PROJECT_DIR$/../floris/floris/floris.py" />
-    <entry file="file://$PROJECT_DIR$/venv/Lib/tcl8.6/init.tcl">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/../floris/examples/example_script.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/contour.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/tkinter/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1286">
-          <caret line="752" column="14" selection-start-line="752" selection-start-column="14" selection-end-line="752" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/PathPlanner.py" />
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/ffmpeg/video.py" />
-    <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/animation.py" />
-    <entry file="file://$PROJECT_DIR$/example_script.py" />
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/input_reader.py" />
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/turbine.py" />
-    <entry file="file://$PROJECT_DIR$/36_turb_input.json" />
-    <entry file="file://$PROJECT_DIR$/twoTurb_input.json" />
-    <entry file="file://$PROJECT_DIR$/oneTurb_input.json" />
     <entry file="file://$PROJECT_DIR$/../SOWFAdata/readVTK.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/axis.py" />
     <entry file="file://$PROJECT_DIR$/PlotSensitivityMatrix.py" />
     <entry file="file://$USER_HOME$/AppData/Local/Programs/Python/Python37/Lib/site-packages/matplotlib/figure.py" />
     <entry file="file://$PROJECT_DIR$/example_input.json" />
-    <entry file="file://$PROJECT_DIR$/LearnPathOnline.py">
+    <entry file="file://$PROJECT_DIR$/old/LearnPathOnline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2720">
           <caret line="176" column="29" selection-start-line="176" selection-start-column="29" selection-end-line="176" selection-end-column="29" />
@@ -610,16 +584,6 @@
       </provider>
     </entry>
     <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/wake_deflection.py" />
-    <entry file="file://$PROJECT_DIR$/RegenPaperResults.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="89">
-          <caret line="26" column="13" selection-start-line="26" selection-start-column="13" selection-end-line="26" selection-end-column="13" />
-          <folding>
-            <element signature="e#180#237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/readVTK.py" />
     <entry file="file://$PROJECT_DIR$/readVTK2.py" />
     <entry file="file://$PROJECT_DIR$/twoTurb_lowTI.u">
@@ -640,11 +604,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/README.md">
-      <provider editor-type-id="text-editor">
-        <state relative-caret-position="80">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-        </state>
-      </provider>
       <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
         <state split_layout="SPLIT">
           <first_editor relative-caret-position="-377">
@@ -653,14 +612,9 @@
           <second_editor />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ReducedSM.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="313">
-          <caret line="52" column="42" selection-start-line="52" selection-start-column="42" selection-end-line="52" selection-end-column="42" />
-          <folding>
-            <element signature="e#111#143#0" expanded="true" />
-          </folding>
+      <provider editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
         </state>
       </provider>
     </entry>
@@ -674,17 +628,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UAV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-800">
-          <caret line="124" column="35" selection-start-line="124" selection-start-column="35" selection-end-line="124" selection-end-column="35" />
-          <folding>
-            <element signature="e#112#137#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/BFPlanOnline.py">
+    <entry file="file://$PROJECT_DIR$/old/BFPlanOnline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="416">
           <caret line="173" column="34" selection-start-line="173" selection-start-column="34" selection-end-line="173" selection-end-column="34" />
@@ -694,7 +638,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/GreedyPathOnline.py">
+    <entry file="file://$PROJECT_DIR$/old/GreedyPathOnline.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="254">
           <caret line="16" column="33" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
@@ -705,18 +649,8 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/input_reader.py" />
-    <entry file="file://$PROJECT_DIR$/COSPlanOnline.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2031">
-          <caret line="127" selection-start-line="127" selection-end-line="127" />
-          <folding>
-            <element signature="e#180#237#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/AnimateError.py" />
-    <entry file="file://$PROJECT_DIR$/GreedyPath.py">
+    <entry file="file://$PROJECT_DIR$/old/GreedyPath.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="384">
           <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
@@ -726,47 +660,309 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MultiUAV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="63">
-          <caret line="4" column="43" selection-start-line="4" selection-start-column="43" selection-end-line="4" selection-end-column="43" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/TV_SM_SOWFA.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="688">
-          <caret line="45" column="12" selection-start-line="45" selection-start-column="12" selection-end-line="45" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/COSPlanTV.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" column="57" lean-forward="true" selection-start-line="4" selection-start-column="57" selection-end-line="4" selection-end-column="57" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/visualization_manager_DJ.py" />
-    <entry file="file://$PROJECT_DIR$/pathPlan.py">
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/plotting.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="290">
-          <caret line="1586" column="22" selection-start-line="1586" selection-start-column="22" selection-end-line="1586" selection-end-column="22" />
+        <state relative-caret-position="177">
+          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/tools/visualization.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="18">
+          <caret line="34" column="50" selection-start-line="29" selection-start-column="8" selection-end-line="34" selection-end-column="50" />
           <folding>
-            <element signature="e#104#159#0" expanded="true" />
-            <marker date="1570720941068" expanded="true" signature="35131:35140" ph="..." />
-            <marker date="1570720941068" expanded="true" signature="65582:65583" ph="..." />
+            <element signature="e#557#585#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/MultiUAVSOWFA.py">
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine_map.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="36" column="11" selection-start-line="36" selection-start-column="11" selection-end-line="36" selection-end-column="11" />
+        <state relative-caret-position="136">
+          <caret line="88" selection-start-line="88" selection-end-line="88" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/turbine.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/oneTurb_input_new.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="276">
+          <caret line="19" column="14" selection-start-line="19" selection-start-column="14" selection-end-line="19" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/TV_SM_SOWFA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#159#216#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ReducedSM_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="19" column="33" selection-start-line="19" selection-start-column="33" selection-end-line="19" selection-end-column="33" />
+          <folding>
+            <element signature="e#111#154#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/ReducedSM.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="646">
+          <caret line="40" column="39" lean-forward="true" selection-start-line="40" selection-start-column="39" selection-end-line="40" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/visualization_manager_DJ.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20349">
+          <caret line="1208" selection-start-line="894" selection-start-column="4" selection-end-line="1208" />
+          <folding>
+            <element signature="e#677#732#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/AnimateError_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="14" selection-start-line="14" selection-end-line="14" />
+          <folding>
+            <element signature="e#215#260#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/farm.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="4675">
+          <caret line="280" column="13" selection-start-line="280" selection-start-column="13" selection-end-line="280" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/RegenPaperResults.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="2006">
+          <caret line="118" column="95" selection-start-line="118" selection-start-column="95" selection-end-line="118" selection-end-column="95" />
           <folding>
             <element signature="e#180#237#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAV_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="334" lean-forward="true" selection-start-line="334" selection-end-line="334" />
+          <folding>
+            <element signature="e#112#137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/COSPlanOnline.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="150" column="3" lean-forward="true" selection-start-line="150" selection-start-column="3" selection-end-line="150" selection-end-column="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/TV_SM_SOWFA_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="24" lean-forward="true" selection-start-line="8" selection-end-line="24" />
+          <folding>
+            <element signature="e#159#202#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/pathPlan.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="107">
+          <caret line="1503" lean-forward="true" selection-start-line="1500" selection-start-column="8" selection-end-line="1503" />
+          <folding>
+            <element signature="e#104#159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/RegenPaperResults_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="69" column="60" selection-start-line="69" selection-start-column="60" selection-end-line="69" selection-end-column="60" />
+          <folding>
+            <element signature="e#180#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VIZMAN_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="396" lean-forward="true" selection-start-line="381" selection-start-column="8" selection-end-line="396" />
+          <folding>
+            <element signature="e#663#694#0" expanded="true" />
+            <element signature="e#1673#1693#0" />
+            <element signature="e#2032#2427#0" />
+            <element signature="e#2434#2448#0" />
+            <element signature="e#4128#14625#0" />
+            <element signature="e#14631#14654#0" />
+            <element signature="e#15356#17546#0" />
+            <element signature="e#31371#31382#0" />
+            <element signature="e#64976#64984#0" />
+            <element signature="e#65331#67016#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/wake.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="136" lean-forward="true" selection-start-line="136" selection-end-line="136" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/floris.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="135" lean-forward="true" selection-start-line="135" selection-end-line="135" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="54" lean-forward="true" selection-start-line="8" selection-start-column="54" selection-end-line="8" selection-end-column="54" />
+          <folding>
+            <element signature="e#620#638#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/MultiUAVSOWFA.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="46" selection-start-line="46" selection-end-line="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SingleUAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="110" column="22" lean-forward="true" selection-start-line="110" selection-start-column="22" selection-end-line="110" selection-end-column="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="237">
+          <caret line="283" column="21" lean-forward="true" selection-start-line="283" selection-start-column="21" selection-end-line="283" selection-end-column="21" />
+          <folding>
+            <element signature="e#112#137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/MultiUAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="49" column="8" lean-forward="true" selection-start-line="49" selection-start-column="8" selection-end-line="49" selection-end-column="8" />
+          <folding>
+            <element signature="e#300#361#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/36_turb_input_new.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="268">
+          <caret line="24" column="14" lean-forward="true" selection-start-line="24" selection-start-column="14" selection-end-line="24" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/simulation/flow_field.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="251">
+          <caret line="463" lean-forward="true" selection-start-line="463" selection-end-line="463" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pathPlan_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="315" column="13" lean-forward="true" selection-start-line="315" selection-start-column="13" selection-end-line="315" selection-end-column="13" />
+          <folding>
+            <element signature="e#104#159#0" expanded="true" />
+            <element signature="e#462#473#0" />
+            <element signature="e#688#1025#0" />
+            <element signature="e#1027#1082#0" />
+            <element signature="e#1137#2193#0" />
+            <element signature="e#2477#5255#0" />
+            <element signature="e#5867#6290#0" />
+            <element signature="e#6394#6485#0" />
+            <element signature="e#7141#9196#0" />
+            <element signature="e#8677#10716#0" />
+            <element signature="e#9807#11032#0" />
+            <element signature="e#11294#12947#0" />
+            <element signature="e#21128#23376#0" />
+            <element signature="e#24468#27815#0" />
+            <element signature="e#34535#34918#0" />
+            <element signature="e#35529#35542#0" />
+            <element signature="e#33100#47992#0" />
+            <element signature="e#50756#60066#0" />
+            <element signature="e#60111#61213#0" />
+            <element signature="e#61251#64591#0" />
+            <element signature="e#64646#65374#0" />
+            <element signature="e#65436#65723#0" />
+            <element signature="e#65768#66123#0" />
+            <element signature="e#66161#67385#0" />
+            <element signature="e#52802#55771#0" />
+            <element signature="e#55963#56215#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/matplotlib/animation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-317">
+          <caret line="864" column="20" selection-start-line="864" selection-start-column="20" selection-end-line="864" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MultiUAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="98">
+          <caret line="283" column="19" lean-forward="true" selection-start-line="283" selection-start-column="19" selection-end-line="283" selection-end-column="19" />
+          <folding>
+            <element signature="e#300#343#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/COSPlanTV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="129" lean-forward="true" selection-start-line="91" selection-end-line="129" />
+          <folding>
+            <element signature="e#176#237#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/old/36_turb_input.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" lean-forward="true" selection-start-column="1" selection-end-column="1" />
         </state>
       </provider>
     </entry>

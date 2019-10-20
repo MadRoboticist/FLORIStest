@@ -3,7 +3,7 @@
 #
 
 from old.visualization_manager_DJ import VisualizationManager
-from pathPlan import PathPlanner
+from old.pathPlan import PathPlanner
 from UAV import UAV
 import json
 import numpy as np

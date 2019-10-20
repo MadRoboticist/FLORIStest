@@ -22,12 +22,18 @@ class FLORIS_sub:
         # Initialize the FLORIS interface fi
         self.grid_resolution = grid_resolution
         self.fi = wfct.floris_utilities.FlorisInterface(json_file)
+        #print("getting turbine yaw angles")
         self.yaw = self.fi.get_yaw_angles()
+        #print("setting up horizontal plane")
         self.hor_plane = wfct.cut_plane.HorPlane(
-            self.fi.get_flow_data(),
+            self.fi.get_hub_height_flow_data(),
             self.fi.floris.farm.turbines[0].hub_height
         )
+        #print("horizontal plane defined")
+        self.set_resolution(grid_resolution)
+        #print("calculating u-field")
         self.update_ufield()
+        #print("u-field calculated")
         with open(json_file) as WFJSON:
             ## a JSON windfarm object read from a file
             WF = json.load(WFJSON)  # a JSON windfarm object read from a file
@@ -59,15 +65,10 @@ class FLORIS_sub:
 
     def update_ufield(self):
         self.hor_plane = wfct.cut_plane.HorPlane(
-            self.fi.get_flow_data(),
+            self.fi.get_hub_height_flow_data(),
             self.fi.floris.farm.turbines[0].hub_height
         )
         wfct.cut_plane.change_resolution(self.hor_plane, self.grid_resolution)
-        self.u_field = np.asarray(self.hor_plane.u_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0]))
-        self.x_mesh = np.asarray(self.hor_plane.x1_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0]))
-        self.y_mesh = np.asarray(self.hor_plane.x2_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0]))
-    def plot_u_field(self):
-        # Plot and show
-        fig, ax = plt.subplots()
-        wfct.visualization.visualize_cut_plane(self.hor_plane, ax=ax)
-        plt.show()
+        self.u_field = np.asarray(self.hor_plane.u_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0])).transpose()
+        self.x_mesh = np.asarray(self.hor_plane.x1_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0])).transpose()
+        self.y_mesh = np.asarray(self.hor_plane.x2_mesh.reshape(self.grid_resolution[1],self.grid_resolution[0])).transpose()
