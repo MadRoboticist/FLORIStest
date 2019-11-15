@@ -359,14 +359,12 @@ class VisualizationManager():
     # @param self.params.mask_thresh threshold value for reducing the normalized sensitivity matrix
     #
     #
-    # Generates a figure with six plots:
-    #   1.  top left:       speed estimate vs. iterations
-    #   2.  bottom left:    direction estimate vs. iterations
-    #   3.  top center:     speed estimate error vs. iterations
-    #   4.  bottom center:  direction estimate error vs. iterations
-    #   5.  top right:      u_field estimation error. slider on bottom
+    # Generates a figure with four plots:
+    #   1.  top left:       speed estimate error vs. iterations
+    #   2.  bottom left:    direction estimate error vs. iterations
+    #   3.  top right:      u_field estimation error. slider on bottom
     #                       allows you to see the map at different iterations
-    #   6.  bottom right:   the mask being applied to the sensitivity matrix
+    #   4.  bottom right:   the mask being applied to the sensitivity matrix
     #                       for these calculations. the slider on the bottom
     #                       allows you to see the mask at different iterations
     #
@@ -672,6 +670,750 @@ class VisualizationManager():
         if SHOW:
             plt.show()
 
+    # reducedSM_vdy
+    ## @brief Plots the convergence of speed, direction and yaw estimates
+    # based on a reduced sensitivity matrix
+    #
+    # @param ANIMATE=False If set to true, the result plays automatically
+    # @param FILE=None If a file name is given, an mp4 is created of the animation
+    # @param xBar=None If an xBar is given, it will be used as the measurement set
+    # @param self.params.v0 takes a wind speed in meters per second
+    # @param self.params.d0 takes a wind direction in radians
+    # @param self.params.y0 takes a turbine yaw in radians
+    # @param self.params.vBar takes a wind speed in meters per second
+    # @param self.params.dBar takes a wind direction in radians
+    # @param self.params.yBar takes a turbine yaw in radians
+    # @param self.params.epSpeed is an epsilon over which to calculate df/dv (derivative of speed)
+    # @param self.params.epDir is an epsilon over which to calculate df/dd (derivative of direction)
+    # @param self.params.epYaw is an epsilon over which to calculate df/dy (derivative of yaw)
+    # @param self.params.spErrMax is a speed error threshold for stopping iterations
+    # @param self.params.dirErrMax is a direction error threshold for stopping iterations
+    # @param self.params.yawErrMax is a yaw error threshold for stoppin iterations
+    # @param self.params.iterMax is the maximum number of iterations to complete
+    # @param self.params.mask_thresh threshold value for reducing the normalized sensitivity matrix
+    #
+    #
+    # Generates a figure with five plots:
+    #   1.  top left:       speed estimate error vs. iterations
+    #   2.  center left:    direction estimate error vs. iterations
+    #   3.  bottom left:    yaw estimate error vs. iterations
+    #   4.  top right:      u_field estimation error. slider on bottom
+    #                       allows you to see the map at different iterations
+    #   5.  bottom right:   the mask being applied to the sensitivity matrix
+    #                       for these calculations. the slider on the bottom
+    #                       allows you to see the mask at different iterations
+    #
+    def reducedSM_vdy(self, MAT=False, ANIMATE=False, FILE=None, xBar=None, SHOW=True):
+        # calculate f(vbar,dbar) = xBar
+        print('vBar = ' + str(self.params.vBar)+' m/s')
+        print('dBar = ' + str(np.deg2rad(self.params.dBar))+'\N{DEGREE SIGN}')
+        print('yBar = ' + str(np.rad2deg(self.params.yBar))+'\N{DEGREE SIGN}')
+        vdyBar = [[self.params.vBar], [self.params.dBar],[self.params.yBar]]
+        X = self.WF.x_mesh
+        Y = self.WF.y_mesh
+
+        TV = False  # assume xBar is not time-varying
+        if (xBar is None):
+            print("no xBar provided, using vBar and dBar with FLORIS")
+            self.WF.set_vdy(self.params.vBar, np.rad2deg(self.params.dBar),np.rad2deg(self.params.yBar))
+            ff_bar = deepcopy(self.WF.u_field)
+            ff = deepcopy(ff_bar)
+            self.xBar = np.vstack(ff.flatten())  # 1xn
+        elif xBar.ndim == 2:
+            print("Static xBar provided")
+            ff_bar = deepcopy(xBar)
+            ff = deepcopy(ff_bar)
+            self.xBar = np.vstack(ff.flatten())
+        else:
+            print("Time varying xBar provided")
+            TV = True
+            self.xBar = deepcopy(xBar)
+
+        # initialize error
+        vdyErr = [[self.params.vBar - self.params.v0],
+                 [self.params.dBar - self.params.d0],
+                 [self.params.yBar - self.params.y0]]  # initial error
+        speedError = list()  # list for history of speed error
+        directionError = list()  # list for history of direction error
+        yawError = list()
+        print('Initial speed error = ' + str(vdyErr[0][0])+' m/s')
+        print('Initial direction error = ' + str(np.rad2deg(vdyErr[1][0]))+'\N{DEGREE SIGN}')
+        print('Initial yaw error = ' + str(np.rad2deg(vdyErr[2][0]))+'\N{DEGREE SIGN}')
+        speedError.append(vdyErr[0][0])
+        directionError.append(vdyErr[1][0])
+        yawError.append(vdyErr[2][0])
+        # set up first iteration
+        iters = 0
+        iterations = list()  # iteration list for graphing
+        iterations.append(iters)
+        V_k = list()  # list for history of vk
+        D_k = list()  # list for history of dk
+        Y_k = list()  # list for history of yk
+        V_k.append(self.params.v0)
+        D_k.append(self.params.d0)
+        Y_k.append(self.params.y0)
+        vdy_k = [[self.params.v0], [self.params.d0], [self.params.y0]]  # initial estimate
+        err_field = list()
+        ref_err_field_norm = list()
+        err_field_norm = list()
+        masks = list()
+        mask_per = list()
+        grid_sz = self.grid_resolution[0] * self.grid_resolution[1]
+        errMax = 0
+        self.WF.set_vdy(vdyBar[0][0], np.rad2deg(vdyBar[1][0]), np.rad2deg(vdyBar[2][0]))
+        ref_x_k = deepcopy(self.WF.u_field)
+        while iters < self.params.iterMax and \
+                (abs(speedError[iters]) > self.params.spErrMax or \
+                 abs(directionError[iters]) > self.params.dirErrMax or \
+                        abs(yawError[iters]) > self.params.yawErrMax):
+            # set new wind speed estimate for floris model
+            self.WF.set_vdy(vdy_k[0][0], np.rad2deg(vdy_k[1][0]), np.rad2deg(vdy_k[2][0]))
+            # calculate f(vk,dk) = temp_x_k
+            temp_x_k = deepcopy(self.WF.u_field)
+            # print("temp_xk.shape: ",temp_x_k.shape)
+            if TV:  # if it is a time-varying SOWFA file, get the current ff_bar
+                ff_bar = deepcopy(self.xBar[iters])
+            err_field.append(abs(ff_bar - temp_x_k))
+            err_field_norm.append(np.linalg.norm(abs(ff_bar - temp_x_k)))
+            ref_err_field_norm.append(np.linalg.norm(abs(ff_bar - ref_x_k)))
+            if np.amax(err_field[iters]) > errMax:
+                errMax = np.amax(err_field[iters])
+            # print vk,dk as new speed and direction estimates
+            print('vk = ' + str(vdy_k[0][0])+' m/s')
+            print('dk = ' + str(np.rad2deg(vdy_k[1][0]))+'\N{DEGREE SIGN}')
+            print('yk = ' + str(np.rad2deg(vdy_k[2][0]))+'\N{DEGREE SIGN}')
+            # calculate f(vk+ev,dk,yk) = temp_x_ev
+            self.WF.set_vdy(vdy_k[0][0] + self.params.epSpeed,
+                                 np.rad2deg(vdy_k[1][0]),
+                                 np.rad2deg(vdy_k[2][0]))  # add speed epsilon to current estimate
+            temp_x_ev = deepcopy(self.WF.u_field)
+
+            # calculate f(vk,dk+ed,yk) = temp_x_ed
+            self.WF.set_vdy(vdy_k[0][0],
+                           np.rad2deg(vdy_k[1][0] + self.params.epDir),
+                           np.rad2deg(vdy_k[2][0]))  # set wind direction to current estimate + epsilon
+            temp_x_ed = deepcopy(self.WF.u_field)
+
+            # calculate f(vk,dk,yk+ey) = temp_x_ed
+            self.WF.set_vdy(vdy_k[0][0],
+                           np.rad2deg(vdy_k[1][0]),
+                           np.rad2deg(vdy_k[2][0] + self.params.epYaw))  # set wind direction to current estimate + epsilon
+            temp_x_ey = deepcopy(self.WF.u_field)
+
+            # calculate gradient
+            temp_df_dv = (temp_x_ev - temp_x_k) / self.params.epSpeed  # partial of f WRT speed
+            temp_df_dd = (temp_x_ed - temp_x_k) / self.params.epDir  # partial of f WRT direction
+            temp_df_dy = (temp_x_ey - temp_x_k) / self.params.epYaw  # partial of f WRT yaw
+            temp_Xk = temp_x_k.flatten()
+
+            # calculate mask
+            temp_dMax = np.amax(np.abs(temp_df_dd))
+            temp_vMax = np.amax(np.abs(temp_df_dv))
+            temp_yMax = np.amax(np.abs(temp_df_dy))
+            temp_Zd = np.abs(temp_df_dd / temp_dMax)
+            temp_Zv = np.abs(temp_df_dv / temp_vMax)
+            temp_Zy = np.abs(temp_df_dy / temp_yMax)
+            temp_Z_mask = temp_Zd * temp_Zv * temp_Zy/ np.amax(temp_Zd * temp_Zv * temp_Zy)
+            temp_Z_mask = np.where(temp_Z_mask >= self.params.mask_thresh, 1, 0).flatten()
+            sens_mat0 = list()
+            sens_mat1 = list()
+            sens_mat2 = list()
+            Xbar = list()
+            Xk = list()
+            # removal of lines and columns
+            for i in range(len(temp_Z_mask)):
+                if temp_Z_mask[i] == 1:
+                    if TV:
+                        temp_xBar = np.vstack(self.xBar[iters].flatten())
+                        Xbar.append(temp_xBar[i])
+                        del temp_xBar
+                    else:
+                        Xbar.append(self.xBar[i])
+
+                    Xk.append(temp_Xk[i])
+                    sens_mat0.append(temp_df_dv.flatten()[i])
+                    sens_mat1.append(temp_df_dd.flatten()[i])
+                    sens_mat2.append(temp_df_dy.flatten()[i])
+            Xbar = np.vstack(np.array(Xbar))
+            Xk = np.vstack(np.array(Xk))
+            sens_mat0 = np.vstack(np.array(sens_mat0))
+            sens_mat1 = np.vstack(np.array(sens_mat1))
+            sens_mat2 = np.vstack(np.array(sens_mat2))
+            sens_mat_pinv = np.linalg.pinv(np.column_stack([sens_mat0, sens_mat1, sens_mat2]))
+            masks.append(temp_Z_mask)
+            mask_per.append(100 * np.sum(temp_Z_mask) / grid_sz)
+            # calculate pseudoinverse[gradient{f(vk,dk)}]*{xBar-f(vk,dk)} = adj_vd (adjustment to current v&d estimates)
+            adj_vdy = np.matmul(sens_mat_pinv, Xbar - Xk)
+            # calculate v_k+1 and d_k+1
+            vdy_kp1 = vdy_k + adj_vdy
+
+            # update vd_k for next iteration
+            vdy_k = deepcopy(vdy_kp1)
+            iters = iters + 1
+            iterations.append(iters)
+            print('\n\niteration ' + str(iters) + ' complete.')
+            # calculate error = [[vbar],[dbar]]-[[vk],[dk]]
+            vdyErr = vdyBar - vdy_k
+            print('Speed error: ' + str(vdyErr[0][0])+' m/s')
+            print('Direction error: ' + str(np.rad2deg(vdyErr[1][0])) + '\N{DEGREE SIGN}')
+            print('Yaw error: ' + str(np.rad2deg(vdyErr[2][0])) + '\N{DEGREE SIGN}')
+            speedError.append(vdyErr[0][0])
+            directionError.append(vdyErr[1][0])
+            yawError.append(vdyErr[2][0])
+            V_k.append(vdy_k[0][0])
+            D_k.append(vdy_k[1][0])
+            Y_k.append(vdy_k[2][0])
+
+            # delete temporary objects
+            del temp_x_k
+            del temp_x_ev
+            del temp_x_ed
+            del temp_x_ey
+            del temp_df_dv
+            del temp_df_dd
+            del temp_df_dy
+            del adj_vdy
+            del vdy_kp1
+
+        self.WF.set_vdy(vdy_k[0][0], np.rad2deg(vdy_k[1][0]), np.rad2deg(vdy_k[2][0]))
+        temp_x_k = deepcopy(self.WF.u_field)
+        err_field.append(abs(ff_bar - temp_x_k))
+        ref_err_field_norm.append(np.linalg.norm(ff_bar - ref_x_k))
+        err_field_norm.append(np.linalg.norm(ff_bar - temp_x_k))
+        if np.amax(err_field[iters]) > errMax:
+            errMax = np.amax(err_field[iters])
+        masks.append(temp_Z_mask)
+        print('Max error = ' + str(errMax))
+        print('Total iterations: ' + str(iters))
+
+        #### PLOTTING #####
+        fontsize = 14
+        f = plt.figure(figsize=(10, 7.5))
+        gs = f.add_gridspec(6, 3)
+        sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
+        sld = Slider(sld_ax,
+                     'iterations',
+                     0, iters, valinit=0)
+        sld.valtext.set_text('iteration 0')
+        f.suptitle('Speed estimate: ' + str(self.params.v0) + ' m/s, Actual: ' + str(self.params.vBar) +
+                   ' m/s\nDirection estimate: ' + str(np.rad2deg(self.params.d0)) + '\N{DEGREE SIGN}' +
+                   ', Actual: ' + str(np.rad2deg(self.params.dBar)) + '\N{DEGREE SIGN}' +
+                   '\nYaw estimate: ' + str(self.params.y0) + '\N{DEGREE SIGN}' +
+                   ', Actual: ' + str(np.rad2deg(self.params.yBar)) + '\N{DEGREE SIGN}' +
+                   '\nThreshold: ' + str(self.params.mask_thresh) + ' Iterations: ' + str(iters) +
+                   '\nFinal error: e\N{GREEK SMALL LETTER THETA} = ' + str(np.rad2deg(vdyErr[1][0])) +
+                   '\N{DEGREE SIGN}, e\N{GREEK SMALL LETTER PHI} = ' + str(np.rad2deg(vdyErr[2][0])) +
+                   '\N{DEGREE SIGN}, ev = ' + str(vdyErr[0][0]) + 'm/s, ')
+        spdErrAx = f.add_subplot(gs[0:2, 0], title='speed error')
+        spdErrAx.plot(iterations, speedError)
+        dirErrAx = f.add_subplot(gs[2:4, 0], title='direction error')
+        dirErrAx.plot(iterations, np.rad2deg(directionError))
+        yawErrAx = f.add_subplot(gs[4:, 0], title='yaw error')
+        yawErrAx.plot(iterations, np.rad2deg(yawError))
+        yawErrAx.set_xlabel('iterations')
+        errMapAx = f.add_subplot(gs[0:3, 1:], title='u_field error')
+        v = np.linspace(0, errMax, 100)
+        V = np.linspace(0, errMax, 5)
+        cont = errMapAx.contourf(X, Y, err_field[0], v, cmap='gnuplot2')
+
+        cb = plt.colorbar(cont, ax=errMapAx)
+        cb.set_clim(vmin=0, vmax=errMax)
+        cb.set_ticks(V, True)
+        cb.set_label('u_field error')
+        cb.draw_all()
+
+        maskAx = f.add_subplot(gs[3:, 1:])
+        for tick in maskAx.xaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        for tick in maskAx.yaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        x, y = deepcopy(X), deepcopy(Y)
+        scat = maskAx.scatter(x.flatten(), y.flatten(), masks[0], color='black')
+        maskAx.text(-220, 290, str(self.params.v0) + ' m/s, ' + \
+                    str(np.rad2deg(self.params.d0)) + '\N{DEGREE SIGN}, ' + \
+                    str(np.rad2deg(self.params.y0)) + '\N{DEGREE SIGN}', fontsize=fontsize)
+        maskAx.arrow(-220, 225, 15 * self.params.v0 * np.cos(self.params.d0),
+                     -15 * self.params.v0 * np.sin(self.params.d0), head_width=50, head_length=50)
+        maskAx.set_xlabel('meters', fontsize=fontsize)
+        ratio_default = (maskAx.get_xlim()[1] - maskAx.get_xlim()[0]) / \
+                        (maskAx.get_ylim()[1] - maskAx.get_ylim()[0])
+        print(ratio_default)
+        errMapAx.set_aspect('equal')
+        maskAx.set_aspect('equal')
+        cb2 = plt.colorbar(mappable=cont, ax=maskAx)
+        cb2.set_clim(vmin=0, vmax=errMax)
+        cb2.set_ticks(V)
+        cb2.draw_all()
+        cb2.remove()
+        i = 0
+        for coord, turbine in self.WF.turbines:
+            x_0 = coord.x1 + np.sin(self.params.y0) * turbine.rotor_radius
+            x_1 = coord.x1 - np.sin(self.params.y0) * turbine.rotor_radius
+            y_0 = coord.x2 - np.cos(self.params.y0) * turbine.rotor_radius
+            y_1 = coord.x2 + np.cos(self.params.y0) * turbine.rotor_radius
+            X_0 = coord.x1 + np.sin(self.params.yBar) * turbine.rotor_radius
+            X_1 = coord.x1 - np.sin(self.params.yBar) * turbine.rotor_radius
+            Y_0 = coord.x2 - np.cos(self.params.yBar) * turbine.rotor_radius
+            Y_1 = coord.x2 + np.cos(self.params.yBar) * turbine.rotor_radius
+
+            errMapAx.plot([x_0, x_1], [y_0, y_1], color='lime', linewidth=1)
+            maskAx.plot([x_0, x_1], [y_0, y_1], color='red', linewidth=1)
+            errMapAx.plot([X_0, X_1], [Y_0, Y_1], color='white', linewidth=1)
+            maskAx.plot([X_0, X_1], [Y_0, Y_1], color='black', linewidth=1)
+
+            for tick in maskAx.xaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            for tick in maskAx.yaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            i += 1
+        if (MAT):
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) + \
+                         str(np.rad2deg(self.params.yBar)) + '-' + str(np.rad2deg(self.params.y0)) + \
+                         '_' + str(self.params.mask_thresh) + '_spdERR.mat',
+                         mdict={'spdErrTh' + str(int(self.params.mask_thresh * 10)): speedError})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) + \
+                         str(np.rad2deg(self.params.yBar)) + '-' + str(np.rad2deg(self.params.y0)) + \
+                         '_' + str(self.params.mask_thresh) + '_dirERR.mat',
+                         mdict={'dirErrTh' + str(int(self.params.mask_thresh * 10)): directionError})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) + \
+                         str(np.rad2deg(self.params.yBar)) + '-' + str(np.rad2deg(self.params.y0)) + \
+                         '_' + str(self.params.mask_thresh) + '_yawERR.mat',
+                         mdict={'yawErrTh' + str(int(self.params.mask_thresh * 10)): yawError})
+
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '_refERRnorm.mat',
+                         mdict={'refERRnorm' + str(int(self.params.mask_thresh * 10)): ref_err_field_norm})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '_ERRnorm.mat',
+                         mdict={'ERRnorm' + str(int(self.params.mask_thresh * 10)): err_field_norm})
+        print('max coverage: ' + str(np.amax(mask_per)) + '%')
+        print('min coverage: ' + str(np.amin(mask_per)) + '%')
+        print('average coverage: ' + str(np.average(mask_per)) + '%')
+        plt.subplots_adjust(left=0.05,
+                            bottom=0.15,
+                            right=0.95,
+                            top=0.83,
+                            wspace=0.27,
+                            hspace=0.19)
+
+        def update_plot(val):
+
+            idx = int(round(sld.val))
+            sld.valtext.set_text('iteration ' + '{}'.format(idx))
+            spdErrAx.clear()
+            dirErrAx.clear()
+            yawErrAx.clear()
+            errMapAx.clear()
+            maskAx.clear()
+            errMapAx.contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
+            maskAx.scatter(x, y, masks[idx], color='black')
+            maskAx.text(-220, 290, str(round(V_k[idx], 2)) + ' m/s, ' + \
+                        str(round(np.rad2deg(D_k[idx]), 2)) + '\N{DEGREE SIGN}, ' + \
+                        str(round(np.rad2deg(Y_k[idx]), 2)) + '\N{DEGREE SIGN}', fontsize=fontsize)
+            maskAx.arrow(-220, 225, 15 * V_k[idx] * np.cos(D_k[idx]),
+                         -15 * V_k[idx] * np.sin(D_k[idx]), head_width=50, head_length=50)
+            maskAx.set_xlabel('meters', fontsize=fontsize)
+            for tick in maskAx.xaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            for tick in maskAx.yaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            dirErrAx.plot(iterations, np.rad2deg(directionError))
+            dirErrAx.axvline(idx, color='red')
+            dirErrAx.set_title('direction error')
+            spdErrAx.plot(iterations, speedError)
+            spdErrAx.axvline(idx, color='red')
+            spdErrAx.set_title('speed error')
+            yawErrAx.plot(iterations, yawError)
+            yawErrAx.axvline(idx, color='red')
+            yawErrAx.set_title('yaw error')
+
+            for coord, turbine in self.WF.turbines:
+                x_0 = coord.x1 + np.sin(Y_k[idx]) * turbine.rotor_radius
+                x_1 = coord.x1 - np.sin(Y_k[idx]) * turbine.rotor_radius
+                y_0 = coord.x2 - np.cos(Y_k[idx]) * turbine.rotor_radius
+                y_1 = coord.x2 + np.cos(Y_k[idx]) * turbine.rotor_radius
+                X_0 = coord.x1 + np.sin(self.params.yBar) * turbine.rotor_radius
+                X_1 = coord.x1 - np.sin(self.params.yBar) * turbine.rotor_radius
+                Y_0 = coord.x2 - np.cos(self.params.yBar) * turbine.rotor_radius
+                Y_1 = coord.x2 + np.cos(self.params.yBar) * turbine.rotor_radius
+
+                errMapAx.plot([x_0, x_1], [y_0, y_1], color='lime', linewidth=1)
+                maskAx.plot([x_0, x_1], [y_0, y_1], color='red', linewidth=1)
+                errMapAx.plot([X_0, X_1], [Y_0, Y_1], color='white', linewidth=1)
+                maskAx.plot([X_0, X_1], [Y_0, Y_1], color='black', linewidth=1)
+                plt.draw()
+            print(sum(masks[idx]))
+
+        sld.on_changed(update_plot)
+
+        def animate(frame, *fargs):
+            # if it's not at the end, increment the slider value
+            if sld.val < sld.valmax - 1:
+                temp = sld.val
+                sld.set_val(temp + 1)
+            else:
+                # if it's at the end, set it to the beginning
+                sld.set_val(sld.valmin)
+
+        # set the animate function to the FuncAnimation function for animation
+        if ANIMATE:
+            an = anim.FuncAnimation(f, animate, interval=100, frames=sld.valmax * 5)
+            # render to video. to make it play faster, increase fps
+            if FILE:
+                an.save(FILE + '.mp4', fps=7, dpi=300)
+        if SHOW:
+            plt.show()
+
+    # reducedSM_vy
+    ## @brief Plots the convergence of speed and yaw estimates
+    # based on a reduced sensitivity matrix
+    #
+    # @param ANIMATE=False If set to true, the result plays automatically
+    # @param FILE=None If a file name is given, an mp4 is created of the animation
+    # @param xBar=None If an xBar is given, it will be used as the measurement set
+    # @param self.params.v0 takes a wind speed in meters per second
+    # @param self.params.y0 takes a turbine yaw in radians
+    # @param self.params.vBar takes a wind speed in meters per second
+    # @param self.params.yBar takes a turbine yaw in radians
+    # @param self.params.epSpeed is an epsilon over which to calculate df/dv (derivative of speed)
+    # @param self.params.epYaw is an epsilon over which to calculate df/dy (derivative of yaw)
+    # @param self.params.spErrMax is a speed error threshold for stopping iterations
+    # @param self.params.yawErrMax is a direction error threshold for stopping iterations
+    # @param self.params.iterMax is the maximum number of iterations to complete
+    # @param self.params.mask_thresh threshold value for reducing the normalized sensitivity matrix
+    #
+    #
+    # Generates a figure with four plots:
+    #   1.  top left:       speed estimate error vs. iterations
+    #   2.  bottom left:    yaw estimate error vs. iterations
+    #   3.  top right:      u_field estimation error. slider on bottom
+    #                       allows you to see the map at different iterations
+    #   4.  bottom right:   the mask being applied to the sensitivity matrix
+    #                       for these calculations. the slider on the bottom
+    #                       allows you to see the mask at different iterations
+    #
+    def reducedSM_vy(self, MAT=False, ANIMATE=False, FILE=None, xBar=None, SHOW=True):
+        # calculate f(vbar,dbar) = xBar
+        print('vBar = ' + str(self.params.vBar) + ' m/s')
+        print('yBar = ' + str(np.rad2deg(self.params.yBar)) + '\N{DEGREE SIGN}')
+        vyBar = [[self.params.vBar], [self.params.yBar]]
+        X = self.WF.x_mesh
+        Y = self.WF.y_mesh
+
+        TV = False  # assume xBar is not time-varying
+        if (xBar is None):
+            print("no xBar provided, using vBar and dBar with FLORIS")
+            self.WF.set_vy(self.params.vBar, np.rad2deg(self.params.yBar))
+            ff_bar = deepcopy(self.WF.u_field)
+            ff = deepcopy(ff_bar)
+            self.xBar = np.vstack(ff.flatten())  # 1xn
+        elif xBar.ndim == 2:
+            print("Static xBar provided")
+            ff_bar = deepcopy(xBar)
+            ff = deepcopy(ff_bar)
+            self.xBar = np.vstack(ff.flatten())
+        else:
+            print("Time varying xBar provided")
+            TV = True
+            self.xBar = deepcopy(xBar)
+
+        # initialize error
+        vyErr = [[self.params.vBar - self.params.v0],
+                 [self.params.yBar - self.params.y0]]  # initial error
+        speedError = list()  # list for history of speed error
+        yawError = list()
+        print('Initial speed error = ' + str(vyErr[0][0]) + ' m/s')
+        print('Initial yaw error = ' + str(np.rad2deg(vyErr[1][0])) + '\N{DEGREE SIGN}')
+        speedError.append(vyErr[0][0])
+        yawError.append(vyErr[1][0])
+        # set up first iteration
+        iters = 0
+        iterations = list()  # iteration list for graphing
+        iterations.append(iters)
+        V_k = list()  # list for history of vk
+        Y_k = list()  # list for history of yk
+        V_k.append(self.params.v0)
+        Y_k.append(self.params.y0)
+        vy_k = [[self.params.v0], [self.params.y0]]  # initial estimate
+        err_field = list()
+        ref_err_field_norm = list()
+        err_field_norm = list()
+        masks = list()
+        mask_per = list()
+        grid_sz = self.grid_resolution[0] * self.grid_resolution[1]
+        errMax = 0
+        self.WF.set_vy(vyBar[0][0], np.rad2deg(vyBar[1][0]))
+        ref_x_k = deepcopy(self.WF.u_field)
+        while iters < self.params.iterMax and \
+                (abs(speedError[iters]) > self.params.spErrMax or \
+                 abs(yawError[iters]) > self.params.yawErrMax):
+            # set new wind speed estimate for floris model
+            self.WF.set_vy(vy_k[0][0], np.rad2deg(vy_k[1][0]))
+            # calculate f(vk,dk) = temp_x_k
+            temp_x_k = deepcopy(self.WF.u_field)
+            # print("temp_xk.shape: ",temp_x_k.shape)
+            if TV:  # if it is a time-varying SOWFA file, get the current ff_bar
+                ff_bar = deepcopy(self.xBar[iters])
+            err_field.append(abs(ff_bar - temp_x_k))
+            err_field_norm.append(np.linalg.norm(abs(ff_bar - temp_x_k)))
+            ref_err_field_norm.append(np.linalg.norm(abs(ff_bar - ref_x_k)))
+            if np.amax(err_field[iters]) > errMax:
+                errMax = np.amax(err_field[iters])
+            # print vk,dk as new speed and direction estimates
+            print('vk = ' + str(vy_k[0][0]) + ' m/s')
+            print('yk = ' + str(np.rad2deg(vy_k[1][0])) + '\N{DEGREE SIGN}')
+            # calculate f(vk+ev,yk) = temp_x_ev
+            self.WF.set_vy(vy_k[0][0] + self.params.epSpeed,
+                        np.rad2deg(vy_k[1][0]))  # add speed epsilon to current estimate
+            temp_x_ev = deepcopy(self.WF.u_field)
+
+            # calculate f(vk,yk+ey) = temp_x_ed
+            self.WF.set_vy(vy_k[0][0],
+                        np.rad2deg(vy_k[1][0] + self.params.epYaw))  # set wind direction to current estimate + epsilon
+            temp_x_ey = deepcopy(self.WF.u_field)
+
+            # calculate gradient
+            temp_df_dv = (temp_x_ev - temp_x_k) / self.params.epSpeed  # partial of f WRT speed
+            temp_df_dy = (temp_x_ey - temp_x_k) / self.params.epYaw  # partial of f WRT yaw
+            temp_Xk = temp_x_k.flatten()
+
+            # calculate mask
+            temp_vMax = np.amax(np.abs(temp_df_dv))
+            temp_yMax = np.amax(np.abs(temp_df_dy))
+            temp_Zv = np.abs(temp_df_dv / temp_vMax)
+            temp_Zy = np.abs(temp_df_dy / temp_yMax)
+            temp_Z_mask = temp_Zv * temp_Zy / np.amax(temp_Zv * temp_Zy)
+            temp_Z_mask = np.where(temp_Z_mask >= self.params.mask_thresh, 1, 0).flatten()
+            sens_mat0 = list()
+            sens_mat1 = list()
+            Xbar = list()
+            Xk = list()
+            # removal of lines and columns
+            for i in range(len(temp_Z_mask)):
+                if temp_Z_mask[i] == 1:
+                    if TV:
+                        temp_xBar = np.vstack(self.xBar[iters].flatten())
+                        Xbar.append(temp_xBar[i])
+                        del temp_xBar
+                    else:
+                        Xbar.append(self.xBar[i])
+
+                    Xk.append(temp_Xk[i])
+                    sens_mat0.append(temp_df_dv.flatten()[i])
+                    sens_mat1.append(temp_df_dy.flatten()[i])
+            Xbar = np.vstack(np.array(Xbar))
+            Xk = np.vstack(np.array(Xk))
+            sens_mat0 = np.vstack(np.array(sens_mat0))
+            sens_mat1 = np.vstack(np.array(sens_mat1))
+            sens_mat_pinv = np.linalg.pinv(np.column_stack([sens_mat0, sens_mat1]))
+            masks.append(temp_Z_mask)
+            mask_per.append(100 * np.sum(temp_Z_mask) / grid_sz)
+            # calculate pseudoinverse[gradient{f(vk,dk)}]*{xBar-f(vk,dk)} = adj_vd (adjustment to current v&d estimates)
+            adj_vy = np.matmul(sens_mat_pinv, Xbar - Xk)
+            # calculate v_k+1 and d_k+1
+            vy_kp1 = vy_k + adj_vy
+
+            # update vd_k for next iteration
+            vy_k = deepcopy(vy_kp1)
+            iters = iters + 1
+            iterations.append(iters)
+            print('\n\niteration ' + str(iters) + ' complete.')
+            # calculate error = [[vbar],[dbar]]-[[vk],[dk]]
+            vyErr = vyBar - vy_k
+            print('Speed error: ' + str(vyErr[0][0]) + ' m/s')
+            print('Yaw error: ' + str(np.rad2deg(vyErr[1][0])) + '\N{DEGREE SIGN}')
+            speedError.append(vyErr[0][0])
+            yawError.append(vyErr[1][0])
+            V_k.append(vy_k[0][0])
+            Y_k.append(vy_k[1][0])
+
+            # delete temporary objects
+            del temp_x_k
+            del temp_x_ev
+            del temp_x_ey
+            del temp_df_dv
+            del temp_df_dy
+            del adj_vy
+            del vy_kp1
+
+        self.WF.set_vy(vy_k[0][0], np.rad2deg(vy_k[1][0]))
+        temp_x_k = deepcopy(self.WF.u_field)
+        err_field.append(abs(ff_bar - temp_x_k))
+        ref_err_field_norm.append(np.linalg.norm(ff_bar - ref_x_k))
+        err_field_norm.append(np.linalg.norm(ff_bar - temp_x_k))
+        if np.amax(err_field[iters]) > errMax:
+            errMax = np.amax(err_field[iters])
+        masks.append(temp_Z_mask)
+        print('Max error = ' + str(errMax))
+        print('Total iterations: ' + str(iters))
+
+        #### PLOTTING #####
+        fontsize = 14
+        f = plt.figure(figsize=(10, 7.5))
+        gs = f.add_gridspec(6, 3)
+        sld_ax = plt.axes([0.23, 0.02, 0.56, 0.02])
+        sld = Slider(sld_ax,
+                     'iterations',
+                     0, iters, valinit=0)
+        sld.valtext.set_text('iteration 0')
+        f.suptitle('Speed estimate: ' + str(self.params.v0) + ' m/s, Actual: ' + str(self.params.vBar) +
+                   '\nYaw estimate: ' + str(self.params.y0) + '\N{DEGREE SIGN}' +
+                   ', Actual: ' + str(np.rad2deg(self.params.yBar)) + '\N{DEGREE SIGN}' +
+                   '\nThreshold: ' + str(self.params.mask_thresh) + ' Iterations: ' + str(iters) +
+                   '\nFinal error: e\N{GREEK SMALL LETTER PHI} = ' + str(np.rad2deg(vyErr[1][0])) +
+                   '\N{DEGREE SIGN}, ev = ' + str(vyErr[0][0]) + 'm/s, ')
+        spdErrAx = f.add_subplot(gs[0:3, 0], title='speed error')
+        spdErrAx.plot(iterations, speedError)
+        yawErrAx = f.add_subplot(gs[3:, 0], title='yaw error')
+        yawErrAx.plot(iterations, np.rad2deg(yawError))
+        yawErrAx.set_xlabel('iterations')
+        errMapAx = f.add_subplot(gs[0:3, 1:], title='u_field error')
+        v = np.linspace(0, errMax, 100)
+        V = np.linspace(0, errMax, 5)
+        cont = errMapAx.contourf(X, Y, err_field[0], v, cmap='gnuplot2')
+
+        cb = plt.colorbar(cont, ax=errMapAx)
+        cb.set_clim(vmin=0, vmax=errMax)
+        cb.set_ticks(V, True)
+        cb.set_label('u_field error')
+        cb.draw_all()
+
+        maskAx = f.add_subplot(gs[3:, 1:])
+        for tick in maskAx.xaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        for tick in maskAx.yaxis.get_major_ticks():
+            tick.label.set_fontsize(fontsize)
+        x, y = deepcopy(X), deepcopy(Y)
+        scat = maskAx.scatter(x.flatten(), y.flatten(), masks[0], color='black')
+        maskAx.text(-220, 290, str(self.params.v0) + ' m/s, ' + \
+                    str(np.rad2deg(self.params.y0)) + '\N{DEGREE SIGN}', fontsize=fontsize)
+        maskAx.arrow(-220, 225, 15 * self.params.v0 * np.cos(self.params.y0),
+                     -15 * self.params.v0 * np.sin(self.params.y0), head_width=50, head_length=50)
+        maskAx.set_xlabel('meters', fontsize=fontsize)
+        ratio_default = (maskAx.get_xlim()[1] - maskAx.get_xlim()[0]) / \
+                        (maskAx.get_ylim()[1] - maskAx.get_ylim()[0])
+        print(ratio_default)
+        errMapAx.set_aspect('equal')
+        maskAx.set_aspect('equal')
+        cb2 = plt.colorbar(mappable=cont, ax=maskAx)
+        cb2.set_clim(vmin=0, vmax=errMax)
+        cb2.set_ticks(V)
+        cb2.draw_all()
+        cb2.remove()
+        i = 0
+        for coord, turbine in self.WF.turbines:
+            x_0 = coord.x1 + np.sin(self.params.y0) * turbine.rotor_radius
+            x_1 = coord.x1 - np.sin(self.params.y0) * turbine.rotor_radius
+            y_0 = coord.x2 - np.cos(self.params.y0) * turbine.rotor_radius
+            y_1 = coord.x2 + np.cos(self.params.y0) * turbine.rotor_radius
+            X_0 = coord.x1 + np.sin(self.params.yBar) * turbine.rotor_radius
+            X_1 = coord.x1 - np.sin(self.params.yBar) * turbine.rotor_radius
+            Y_0 = coord.x2 - np.cos(self.params.yBar) * turbine.rotor_radius
+            Y_1 = coord.x2 + np.cos(self.params.yBar) * turbine.rotor_radius
+
+            errMapAx.plot([x_0, x_1], [y_0, y_1], color='lime', linewidth=1)
+            maskAx.plot([x_0, x_1], [y_0, y_1], color='red', linewidth=1)
+            errMapAx.plot([X_0, X_1], [Y_0, Y_1], color='white', linewidth=1)
+            maskAx.plot([X_0, X_1], [Y_0, Y_1], color='black', linewidth=1)
+
+            for tick in maskAx.xaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            for tick in maskAx.yaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            i += 1
+        if (MAT):
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) + \
+                         str(np.rad2deg(self.params.yBar)) + '-' + str(np.rad2deg(self.params.y0)) + \
+                         '_' + str(self.params.mask_thresh) + '_spdERR.mat',
+                         mdict={'spdErrTh' + str(int(self.params.mask_thresh * 10)): speedError})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '-' + str(np.rad2deg(self.params.d0)) + \
+                         str(np.rad2deg(self.params.yBar)) + '-' + str(np.rad2deg(self.params.y0)) + \
+                         '_' + str(self.params.mask_thresh) + '_yawERR.mat',
+                         mdict={'yawErrTh' + str(int(self.params.mask_thresh * 10)): yawError})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '_refERRnorm.mat',
+                         mdict={'refERRnorm' + str(int(self.params.mask_thresh * 10)): ref_err_field_norm})
+            scio.savemat('mat/' + str(i) + 'turbs_' + str(self.params.vBar) + '-' + str(self.params.v0) + '_' +
+                         str(np.rad2deg(self.params.dBar)) + '_ERRnorm.mat',
+                         mdict={'ERRnorm' + str(int(self.params.mask_thresh * 10)): err_field_norm})
+        print('max coverage: ' + str(np.amax(mask_per)) + '%')
+        print('min coverage: ' + str(np.amin(mask_per)) + '%')
+        print('average coverage: ' + str(np.average(mask_per)) + '%')
+        plt.subplots_adjust(left=0.05,
+                            bottom=0.15,
+                            right=0.95,
+                            top=0.83,
+                            wspace=0.27,
+                            hspace=0.19)
+
+        def update_plot(val):
+
+            idx = int(round(sld.val))
+            sld.valtext.set_text('iteration ' + '{}'.format(idx))
+            spdErrAx.clear()
+            yawErrAx.clear()
+            errMapAx.clear()
+            maskAx.clear()
+            errMapAx.contourf(X, Y, err_field[idx], v, cmap='gnuplot2')
+            maskAx.scatter(x, y, masks[idx], color='black')
+            maskAx.text(-220, 290, str(round(V_k[idx], 2)) + ' m/s, ' + \
+                        str(round(np.rad2deg(Y_k[idx]), 2)) + '\N{DEGREE SIGN}', fontsize=fontsize)
+            maskAx.arrow(-220, 225, 15 * V_k[idx] * np.cos(Y_k[idx]),
+                         -15 * V_k[idx] * np.sin(Y_k[idx]), head_width=50, head_length=50)
+            maskAx.set_xlabel('meters', fontsize=fontsize)
+            for tick in maskAx.xaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            for tick in maskAx.yaxis.get_major_ticks():
+                tick.label.set_fontsize(fontsize)
+            spdErrAx.plot(iterations, speedError)
+            spdErrAx.axvline(idx, color='red')
+            spdErrAx.set_title('speed error')
+            yawErrAx.plot(iterations, yawError)
+            yawErrAx.axvline(idx, color='red')
+            yawErrAx.set_title('yaw error')
+
+            for coord, turbine in self.WF.turbines:
+                x_0 = coord.x1 + np.sin(Y_k[idx]) * turbine.rotor_radius
+                x_1 = coord.x1 - np.sin(Y_k[idx]) * turbine.rotor_radius
+                y_0 = coord.x2 - np.cos(Y_k[idx]) * turbine.rotor_radius
+                y_1 = coord.x2 + np.cos(Y_k[idx]) * turbine.rotor_radius
+                X_0 = coord.x1 + np.sin(self.params.yBar) * turbine.rotor_radius
+                X_1 = coord.x1 - np.sin(self.params.yBar) * turbine.rotor_radius
+                Y_0 = coord.x2 - np.cos(self.params.yBar) * turbine.rotor_radius
+                Y_1 = coord.x2 + np.cos(self.params.yBar) * turbine.rotor_radius
+
+                errMapAx.plot([x_0, x_1], [y_0, y_1], color='lime', linewidth=1)
+                maskAx.plot([x_0, x_1], [y_0, y_1], color='red', linewidth=1)
+                errMapAx.plot([X_0, X_1], [Y_0, Y_1], color='white', linewidth=1)
+                maskAx.plot([X_0, X_1], [Y_0, Y_1], color='black', linewidth=1)
+                plt.draw()
+            print(sum(masks[idx]))
+
+        sld.on_changed(update_plot)
+
+        def animate(frame, *fargs):
+            # if it's not at the end, increment the slider value
+            if sld.val < sld.valmax - 1:
+                temp = sld.val
+                sld.set_val(temp + 1)
+            else:
+                # if it's at the end, set it to the beginning
+                sld.set_val(sld.valmin)
+
+        # set the animate function to the FuncAnimation function for animation
+        if ANIMATE:
+            an = anim.FuncAnimation(f, animate, interval=100, frames=sld.valmax * 5)
+            # render to video. to make it play faster, increase fps
+            if FILE:
+                an.save(FILE + '.mp4', fps=7, dpi=300)
+        if SHOW:
+            plt.show()
+
     # params
     ## @brief  A class used to pass parameters to various functions
     #
@@ -686,20 +1428,28 @@ class VisualizationManager():
         v0 = 8.0  # initial speed estimate
         ## d0 serves as the initial direction estimate
         d0 = np.deg2rad(0.0)  # initial direction estimate
+        ## y0 serves as the initial yaw estimate
+        y0 = np.deg2rad(0.0)
         ## speed epsilon for calculating the sensitivity matrix
         epSpeed = 0.001  # speed epsilon (ev)
         ## direction epsilon for calculating the sensitivity matrix
         epDir = 0.0001  # direction epsilon (ed)
+        ## yaw epsilon for calculating sensitivity matrix
+        epYaw = 0.0001
         ## speed error threshold for stopping iterations
         spErrMax = 0.1  # speed error threshold
         ## direction error threshold for stopping iterations
         dirErrMax = 0.01  # direction error threshold
+        ## yaw error threshold for stopping iterations
+        yawErrMax = 0.01
         ## iteration threshold for stopping iterations
         iterMax = 40  # iteration threshold
         ## vBar serves as the 'actual' wind speed
         vBar = 8.0
         ## dBar serves as the 'actual' wind direction
         dBar = np.deg2rad(0.0) # actual wind direction
+        ## yBar serves as the 'actual' yaw direction
+        yBar = np.deg2rad(0.0)
         ## eliminate values in the normalized sensitivity matrix lower than 0.35
         mask_thresh = 0.35 # masking threshold for normalized sensitivity matrix
         ## a value between zero & one
@@ -712,5 +1462,5 @@ class VisualizationManager():
         Srange = [speed - 2.0, speed + 2.0, 0.25]  # {min speed, max speed, step}
         ## a range of directions: [min direction err, max direction err, step]
         Drange = [-2.0, 2.0, 0.25]  # [min dir error, max dir error, step]
-        ## a JSON windfarm object
-
+        ## a range of yaws: [min yaw err, max yaw err, step]
+        Yrange = [-2.0, 2.0, 0.25]

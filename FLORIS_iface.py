@@ -52,6 +52,19 @@ class FLORIS_sub:
         self.fi.calculate_wake()
         self.update_ufield()
 
+    def set_vdy(self, v, th, y):
+        self.fi.reinitialize_flow_field(v, th)
+        self.wind_speed = v
+        self.wind_direction = th
+        self.fi.calculate_wake(y)
+        self.update_ufield()
+
+    def set_vy(self, v, y):
+        self.fi.reinitialize_flow_field(wind_speed=v)
+        self.wind_speed = v
+        self.fi.calculate_wake(y)
+        self.update_ufield()
+
     def set_incoming(self, v, th):
         self.fi.reinitialize_flow_field(v, th)
         self.wind_speed = v
