@@ -336,7 +336,7 @@ if(MAT):
 #planner.printAVGs()
 filename = "UAV_36turb_swarm_75_varinit_15perc_NEW_FL" # set the file name
 # animate what happened
-planner = PathPlanner(vman)
+planner = PathPlanner(vman, YAW=True)
 
 planner.plotHistory(UAVs, None, False) # don't save the animation, show the plot
 #planner.plotHistory(UAVs, fiilename, False) # save the animation as an mp4, don't show the plot
