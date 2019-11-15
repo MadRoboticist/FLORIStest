@@ -11,11 +11,16 @@ class UAV:
     def __init__(self, planner):
         self.v0 = planner.params.v0
         self.d0 = planner.params.d0
+        self.y0 = planner.params.y0
         # This section contains "ACTUAL" values
         self.minX = 0
         self.minY = 0
         self.maxX = 48
         self.maxY = 15
+        self.minX_GPS = 0
+        self.maxX_GPS = 0
+        self.minY_GPS = 0
+        self.maxY_GPS = 0
         ## @var GPS
         # Holds the "GPS" location
         # of the UAV. Currently, the GPS location is an
@@ -170,7 +175,10 @@ class UAV:
         self.score = 0
         # clear the plan mask
         self.plan_mask = deepcopy(self.path_mask)
-        self.planner.sens_mat = deepcopy(self.planner.vman.calcSensitivityMatrix(self.v0, self.d0))
+        if not self.planner.YAW:
+            self.planner.sens_mat = deepcopy(self.planner.vman.calcSensitivityMatrix(self.v0, self.d0))
+        else:
+            self.planner.sens_mat = deepcopy(self.planner.vman.calcSensitivityMatrix_vy(self.v0, self.y0))
         # update the score map
         self.planner.calcScoreMap()
 
@@ -236,15 +244,22 @@ class UAV:
                         self.update_mask(self.path_mask,
                                          self.IDXpath[i])
                 #print("here")
-                self.planner.hist.append(deepcopy([self.planner.score_map,
-                                              self.GPSpath,
-                                              self.GPSplan,
-                                              self.wave_map,
-                                              self.planner.error[len(self.planner.error) - 1],
-                                              self.v0,
-                                              self.d0]))
-
-
+                if not self.planner.YAW:
+                    self.planner.hist.append(deepcopy([self.planner.score_map,
+                                                  self.GPSpath,
+                                                  self.GPSplan,
+                                                  self.wave_map,
+                                                  self.planner.error[len(self.planner.error) - 1],
+                                                  self.v0,
+                                                  self.d0]))
+                else:
+                    self.planner.hist.append(deepcopy([self.planner.score_map,
+                                                       self.GPSpath,
+                                                       self.GPSplan,
+                                                       self.wave_map,
+                                                       self.planner.error[len(self.planner.error) - 1],
+                                                       self.v0,
+                                                       self.y0]))
 
             except Exception as e:
 
@@ -270,7 +285,7 @@ class UAV:
         tempMask = deepcopy(self.path_mask)
         # step through the current plan
 
-        #print("steps planned: "+str(self.planner.steps_planned))
+        print("steps planned: "+str(self.planner.steps_planned))
         if len(self.planner.hist)>0 and len(self.GPSpath)>=self.init_mask_size:
             moves = self.moves2recalc
         else:
@@ -314,14 +329,22 @@ class UAV:
                     for i in range(len(self.IDXpath)):
                         self.update_mask(self.path_mask,
                                          self.IDXpath[i])
-
-                self.planner.hist.append(deepcopy([self.planner.score_map,
-                                              self.GPSpath,
-                                              self.GPSplan,
-                                              self.wave_map,
-                                              self.planner.error[len(self.planner.error) - 1],
-                                              self.v0,
-                                              self.d0]))
+                if not self.planner.YAW:
+                    self.planner.hist.append(deepcopy([self.planner.score_map,
+                                                  self.GPSpath,
+                                                  self.GPSplan,
+                                                  self.wave_map,
+                                                  self.planner.error[len(self.planner.error) - 1],
+                                                  self.v0,
+                                                  self.d0]))
+                else:
+                    self.planner.hist.append(deepcopy([self.planner.score_map,
+                                                       self.GPSpath,
+                                                       self.GPSplan,
+                                                       self.wave_map,
+                                                       self.planner.error[len(self.planner.error) - 1],
+                                                       self.v0,
+                                                       self.y0]))
 
             except:
                 # set everything back to how it was

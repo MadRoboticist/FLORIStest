@@ -340,6 +340,32 @@ class VisualizationManager():
 
         return sens_mat
 
+    def calcSensitivityMatrix_vy(self, v0, y0):
+        # set wind speed estimate for floris model
+        self.WF.set_vy(v0, np.rad2deg(y0))
+        # calculate f(v0,d0) = ff
+        ff = deepcopy(self.WF.u_field)
+
+        # print v0,d0 as initial speed and direction estimates
+        # print('v0 = ' + str(self.params.v0))
+        # print('d0 = ' + str(self.params.d0))
+
+        # calculate f(v0+ev,d0) = ff_v1
+        self.WF.set_vy(v0 + self.params.epSpeed, np.rad2deg(y0))   # add speed epsilon
+        ff_v1 = deepcopy(self.WF.u_field)
+
+        # calculate f(v0,d0+ed) = ff_d1
+        self.WF.set_vy(v0,np.rad2deg(y0 + self.params.epYaw))  # add direction epsilon
+        ff_d1 = deepcopy(self.WF.u_field)
+
+        # calculate gradient of f(v,d) = grad_f
+        dfdv = (ff_v1 - ff) / self.params.epSpeed  # partial of f WRT speed
+        dfdy = (ff_d1 - ff) / self.params.epYaw  # partial of f WRT direction
+
+        sens_mat = [dfdv, dfdy]  # 2xn gradient of f (jacobian)
+
+        return sens_mat
+
     # reducedSM
     ## @brief Plots the convergence of speed and direction estimates
     # based on a reduced sensitivity matrix
