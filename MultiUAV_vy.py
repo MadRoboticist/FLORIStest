@@ -106,7 +106,7 @@ for i in range(len(GPS)):
     # this is basically the number of nodes in the pseudoinverse mask
     #
     # see definition at pathPlan.UAV.patrolMax
-    UAVs[i].patrolMax = int(grid_size*coverage/len(UAVs))
+    UAVs[i].patrolMax = int(grid_size*coverage/len(GPS))
 
     ## A parameter which decides how far ahead the planner will work
     # for the first iteration.
@@ -124,7 +124,7 @@ for i in range(len(GPS)):
     # after the first iteration.
     #
     # see definition at pathPlan.UAV.plan_horizon
-    UAVs[i].plan_horizon = int(grid_size*coverage*0.3/len(UAVs))
+    UAVs[i].plan_horizon = int(grid_size*coverage*0.3/len(GPS))
 
     ## A parameter which decides how many moves the UAV will take on
     # the planned path before it recalculates the estimates and the plan
