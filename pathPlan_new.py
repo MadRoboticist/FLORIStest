@@ -1477,7 +1477,6 @@ class PathPlanner:
                     axbig.plot([i[0] for i in uv.planner.hist[idx][1]],
                                [i[1] for i in uv.planner.hist[idx][1]], linewidth=1.0,
                                color=self.colors[ids % len(self.colors)])
-                    print(ids, np.rad2deg(uv.planner.hist[idx][6]))
                     for coor, turb in self.WF.turbines:
                         turbix = self._findGPSindex([coor.x1, coor.x2], False)
                         if uv.minX <= turbix[0] < uv.maxX and \
