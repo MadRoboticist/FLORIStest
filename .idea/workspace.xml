@@ -2,13 +2,23 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="86bab00e-ec83-4893-9a26-1998f74a1047" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/MultiUAV_vy.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/SingleUAV_vy.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/MultiUAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiUAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UAV.py" beforeDir="false" afterPath="$PROJECT_DIR$/UAV.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/VIZMAN_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/VIZMAN_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/1Turb_lowTI.u" beforeDir="false" afterPath="$PROJECT_DIR$/old/1Turb_lowTI.u" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/36_Turb_lowTI.u" beforeDir="false" afterPath="$PROJECT_DIR$/old/36_Turb_lowTI.u" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/MultiUAV_vy.py" beforeDir="false" afterPath="$PROJECT_DIR$/MultiUAV_vy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/SingleUAV_vy.py" beforeDir="false" afterPath="$PROJECT_DIR$/SingleUAV_vy.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV0.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV0.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV1.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV1.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV2.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV2.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV3.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV3.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV4.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV4.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV5.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV5.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV6.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV6.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV7.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV7.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mat/36turbs_UAV8.mat" beforeDir="false" afterPath="$PROJECT_DIR$/mat/36turbs_UAV8.mat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/oneTurb_lowTI.u" beforeDir="false" afterPath="$PROJECT_DIR$/old/oneTurb_lowTI.u" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pathPlan_new.py" beforeDir="false" afterPath="$PROJECT_DIR$/pathPlan_new.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/twoTurb_lowTI.u" beforeDir="false" afterPath="$PROJECT_DIR$/old/twoTurb_lowTI.u" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -18,20 +28,44 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/SingleUAV_vy.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pathPlan_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="268">
-              <caret line="75" column="20" lean-forward="true" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+            <state relative-caret-position="102">
+              <caret line="1414" column="24" selection-start-line="1414" selection-start-column="24" selection-end-line="1414" selection-end-column="24" />
+              <folding>
+                <element signature="e#104#159#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SingleUAV_vy.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="355">
+              <caret line="96" column="19" lean-forward="true" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/UAV.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="284">
+              <caret line="99" column="27" lean-forward="true" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+              <folding>
+                <element signature="e#112#137#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/MultiUAV_vy.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="33">
-              <caret line="331" column="8" lean-forward="true" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
+            <state relative-caret-position="284">
+              <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
               <folding>
                 <element signature="e#300#343#0" expanded="true" />
               </folding>
@@ -42,8 +76,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/VIZMAN_new.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1">
-              <caret line="44" column="33" lean-forward="true" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+            <state relative-caret-position="612">
+              <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
               <folding>
                 <element signature="e#663#694#0" expanded="true" />
               </folding>
@@ -54,10 +88,34 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="251">
-              <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
+            <state relative-caret-position="1224">
+              <caret line="76" selection-start-line="76" selection-end-line="76" />
               <folding>
                 <element signature="e#620#638#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VTKreader.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="6256">
+              <caret line="370" selection-start-line="370" selection-end-line="370" />
+              <folding>
+                <element signature="e#0#18#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/VTK2ufile.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="68">
+              <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+              <folding>
+                <element signature="e#0#16#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -74,19 +132,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>greedy</find>
-      <find>print</find>
-      <find>self._grid</find>
-      <find>self.WF.set_incoming</find>
-      <find>update</find>
-      <find>updateEstimatesR</find>
-      <find>updateEstimatesT</find>
-      <find>measure</find>
-      <find>updateE</find>
-      <find>self.xB</find>
-      <find>mask_size</find>
-      <find>calcScoreMap</find>
-      <find>set_sdy</find>
       <find>reducedSM_</find>
       <find>calcSensitivityMatrix</find>
       <find>calcS</find>
@@ -104,6 +149,19 @@
       <find>updateEs</find>
       <find>updateEst</find>
       <find>self.planner.error</find>
+      <find>anim</find>
+      <find>plotH</find>
+      <find>updateE</find>
+      <find>moveTV</find>
+      <find>moveTV_</find>
+      <find>_findGPSindex</find>
+      <find>ind %</find>
+      <find>uav</find>
+      <find>ind</find>
+      <find>maskMUL</find>
+      <find>__</find>
+      <find>uav.</find>
+      <find>uav.planner.</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -159,15 +217,15 @@
         <option value="$PROJECT_DIR$/FLORIS_iface.py" />
         <option value="$PROJECT_DIR$/ReducedSM_vy.py" />
         <option value="$PROJECT_DIR$/VIZMAN_new.py" />
-        <option value="$PROJECT_DIR$/UAV.py" />
-        <option value="$PROJECT_DIR$/pathPlan_new.py" />
         <option value="$PROJECT_DIR$/MultiUAV.py" />
         <option value="$PROJECT_DIR$/SingleUAV_vy.py" />
+        <option value="$PROJECT_DIR$/UAV.py" />
+        <option value="$PROJECT_DIR$/pathPlan_new.py" />
         <option value="$PROJECT_DIR$/MultiUAV_vy.py" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds">
     <option name="x" value="156" />
     <option name="width" value="653" />
     <option name="height" value="788" />
@@ -178,6 +236,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -254,7 +313,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -264,19 +322,19 @@
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest\" />
-      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest" />
-      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
-      <recent name="C:\Users\David James\venv\Lib\site-packages\floris" />
-      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest\old" />
       <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest" />
       <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
       <recent name="F:\Documents\PyCharmProjects\FLORIStest\plots\36turbFLORIS" />
       <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest\plots" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest\" />
+      <recent name="C:\Users\hustu\Documents\GitHub\FLORIStest" />
+      <recent name="F:\Documents\PyCharmProjects\FLORIStest" />
+      <recent name="C:\Users\David James\venv\Lib\site-packages\floris" />
+      <recent name="C:\Users\David James\Documents\PyCharmProjects\FLORIStest" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -457,15 +515,15 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <frame x="156" y="0" width="653" height="788" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1688988" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.3691057" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32569557" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.42716858" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.49960285" visible="true" weight="0.32671756" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.39702234" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -508,23 +566,11 @@
     <option name="LAST_COMMIT_MESSAGE" value="merge laptop and lab computer code" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$USER_HOME$/venv/Lib/site-packages/floris/wake_deflection.py" />
-    <entry file="file://$PROJECT_DIR$/readVTK.py" />
     <entry file="file://$PROJECT_DIR$/readVTK2.py" />
-    <entry file="file://$PROJECT_DIR$/twoTurb_lowTI.u">
+    <entry file="file://$PROJECT_DIR$/old/twoTurb_lowTI.u">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" column="2" lean-forward="true" selection-start-line="1" selection-start-column="2" selection-end-line="1" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VTKreader.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="304">
-          <caret line="370" selection-start-line="370" selection-end-line="370" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -540,16 +586,6 @@
             <caret line="11" column="27" selection-start-line="11" selection-start-column="27" selection-end-line="11" selection-end-column="27" />
           </first_editor>
           <second_editor />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/VTK2ufile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="528">
-          <caret line="33" column="31" lean-forward="true" selection-start-line="33" selection-start-column="31" selection-end-line="33" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#16#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -833,60 +869,94 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/UAV.py">
+    <entry file="file://$PROJECT_DIR$/old/1Turb_lowTI.u">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="124">
-          <caret line="346" column="65" lean-forward="true" selection-start-line="346" selection-start-column="65" selection-end-line="346" selection-end-column="65" />
-          <folding>
-            <element signature="e#112#137#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="378">
+          <caret line="73" lean-forward="true" selection-start-line="73" selection-end-line="73" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
+    <entry file="file://$PROJECT_DIR$/../ECEN5458-Project/ECEN5458proj/venv/Lib/site-packages/floris/utilities.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="251">
-          <caret line="42" lean-forward="true" selection-start-line="42" selection-end-line="42" />
-          <folding>
-            <element signature="e#620#638#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/MultiUAV_vy.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="33">
-          <caret line="331" column="8" lean-forward="true" selection-start-line="331" selection-start-column="8" selection-end-line="331" selection-end-column="8" />
-          <folding>
-            <element signature="e#300#343#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="136">
+          <caret line="8" column="51" selection-start-line="8" selection-start-column="51" selection-end-line="8" selection-end-column="51" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/VIZMAN_new.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1">
-          <caret line="44" column="33" lean-forward="true" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
+        <state relative-caret-position="612">
+          <caret line="44" column="33" selection-start-line="44" selection-start-column="33" selection-end-line="44" selection-end-column="33" />
           <folding>
             <element signature="e#663#694#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pathPlan_new.py">
+    <entry file="file://$PROJECT_DIR$/FLORIS_iface.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="1554" lean-forward="true" selection-start-line="1554" selection-end-line="1554" />
+        <state relative-caret-position="1224">
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
           <folding>
-            <element signature="e#104#159#0" expanded="true" />
+            <element signature="e#620#638#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VTKreader.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="6256">
+          <caret line="370" selection-start-line="370" selection-end-line="370" />
+          <folding>
+            <element signature="e#0#18#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/VTK2ufile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#16#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/SingleUAV_vy.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="268">
-          <caret line="75" column="20" lean-forward="true" selection-start-line="75" selection-start-column="20" selection-end-line="75" selection-end-column="20" />
+        <state relative-caret-position="355">
+          <caret line="96" column="19" lean-forward="true" selection-start-line="96" selection-start-column="19" selection-end-line="96" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/UAV.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="99" column="27" lean-forward="true" selection-start-line="99" selection-start-column="27" selection-end-line="99" selection-end-column="27" />
+          <folding>
+            <element signature="e#112#137#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pathPlan_new.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="1414" column="24" selection-start-line="1414" selection-start-column="24" selection-end-line="1414" selection-end-column="24" />
+          <folding>
+            <element signature="e#104#159#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/MultiUAV_vy.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="17" column="15" selection-start-line="17" selection-start-column="15" selection-end-line="17" selection-end-column="15" />
+          <folding>
+            <element signature="e#300#343#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
