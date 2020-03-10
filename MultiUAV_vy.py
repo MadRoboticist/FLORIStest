@@ -14,11 +14,11 @@ from copy import deepcopy
 
 # 'actual' values
 vBar = 8.0  # meters per second
-yBar = 0.0  # yaw in degrees
-iterations = 10
+yBar = 10.0  # yaw in degrees
+iterations = 20
 # initial estimates
-v0 = [vBar-2.0, vBar-1.0, vBar, vBar+1.0, vBar+2.0, vBar+3.0, vBar+4.0, vBar+5.0, vBar+6.0]
-y0 = [yBar-40.0, yBar-30.0, yBar-20.0, yBar-10.0, yBar, yBar+10.0, yBar+20.0, yBar+30.0, yBar+40.0]
+v0 = [vBar-1.125, vBar-3.0, vBar+4.5, vBar+8.25, vBar+12, vBar+10.125, vBar+6.375, vBar+2.625, vBar+0.75]
+y0 = [yBar-45.0, yBar-33.75, yBar-22.5, yBar-11.25, yBar, yBar+11.25, yBar+22.5, yBar+33.75, yBar+45.0]
 # UAV index boundaries
 xMin = [0, 20, 40, 0, 20, 40, 0, 20, 40]
 xMax = [20, 40, 60, 20, 40, 60, 20, 40, 60]

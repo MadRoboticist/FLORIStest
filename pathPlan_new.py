@@ -1167,17 +1167,18 @@ class PathPlanner:
         # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
         vd_kp1 = vd_k + np.matmul(sens_mat_pinv, Xbar - Xk)
         # update the estimates
-        UAV.v0 = vd_kp1[0][0]
-        UAV.d0 = vd_kp1[1][0]
-        # update the wind field estimate
-        self.WF.set_incoming(UAV.v0, np.rad2deg(UAV.d0))
-        # update the sensitivity matrix
-        self.sens_mat = deepcopy(self.vman.calcSensitivityMatrix(UAV.v0, UAV.d0))
-        # update the score map
-        self.calcScoreMap()
-        # keep track of the error signals for plotting
-        error = [self.params.vBar - UAV.v0,
-                 self.params.dBar - UAV.d0]
+        if not np.isnan(vd_kp1[0][0]) and not np.isnan(vd_kp1[1][0]):
+            UAV.v0 = vd_kp1[0][0]
+            UAV.d0 = vd_kp1[1][0]
+            # update the wind field estimate
+            self.WF.set_incoming(UAV.v0, np.rad2deg(UAV.d0))
+            # update the sensitivity matrix
+            self.sens_mat = deepcopy(self.vman.calcSensitivityMatrix(UAV.v0, UAV.d0))
+            # update the score map
+            self.calcScoreMap()
+            # keep track of the error signals for plotting
+            error = [self.params.vBar - UAV.v0,
+                     self.params.dBar - UAV.d0]
         print("Actual: "+str([self.params.vBar, self.params.dBar]))
         print("New estimate: " + str([UAV.v0, UAV.d0]))
         print("Error: [v,theta]=" + str(error))
@@ -1233,15 +1234,16 @@ class PathPlanner:
         # calculate the next estimate: Vdk+1 = Vdk + sens_mat_pinv*(Xbar-Xk)
         vy_kp1 = vy_k + np.matmul(sens_mat_pinv, Xbar - Xk)
         # update the estimates
-        UAV.v0 = vy_kp1[0][0]
-        UAV.y0 = vy_kp1[1][0]
-        # update the wind field estimate
-        self.WF.set_vy(UAV.v0, np.rad2deg(UAV.y0))
-        # update the sensitivity matrix
-        self.sens_mat = deepcopy(self.vman.calcSensitivityMatrix_vy(UAV.v0, UAV.y0))
-        # update the score map
-        self.calcScoreMap()
-        # keep track of the error signals for plotting
+        if not np.isnan(vy_kp1[0][0]) and not np.isnan(vy_kpq[1][0]):
+            UAV.v0 = vy_kp1[0][0]
+            UAV.y0 = vy_kp1[1][0]
+            # update the wind field estimate
+            self.WF.set_vy(UAV.v0, np.rad2deg(UAV.y0))
+            # update the sensitivity matrix
+            self.sens_mat = deepcopy(self.vman.calcSensitivityMatrix_vy(UAV.v0, UAV.y0))
+            # update the score map
+            self.calcScoreMap()
+            # keep track of the error signals for plotting
         error = [self.params.vBar - UAV.v0,
                  self.params.yBar - UAV.y0]
         print("Actual: "+str([self.params.vBar, self.params.yBar]))

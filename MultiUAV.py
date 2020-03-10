@@ -13,10 +13,11 @@ import scipy.io as scio
 
 # 'actual' values
 vBar = 8.0 # meters per second
-dBar = 270.0 # degrees counterclockwise from North
+dBar = 280.0 # degrees counterclockwise from North
 
 ############### XBAR FROM SOWFA MODEL #####################
 # read *.u file into list
+'''
 print("reading in xBar from SOWFA")
 SOWFAfile = "36_Turb_lowTI.u"
 xBar = []
@@ -30,13 +31,14 @@ with open(SOWFAfile) as f:
             if len(lines)==0: break
             xBar.append(np.loadtxt(lines, dtype=int))
             lines = []
+
 xBar = np.array(xBar) # convert to array
 grid_resolution = [xBar.shape[1], xBar.shape[2], 15] # [x_res, y_res, z_res]
-
+'''
 ########## RESOLUTION FOR FLORIS V. FLORIS ####################
 ########### UNCOMMENT THE NEXT TWO LINES TO USE FLORIS XBAR ######################
-#grid_resolution = [60, 52, 15] ## 36 turbines
-#xBar = None
+grid_resolution = [60, 52, 15] ## 36 turbines
+xBar = None
 
 grid_size = grid_resolution[0]*grid_resolution[1]
 coverage = 0.15

@@ -28,7 +28,7 @@ ylabel('steps to convergence');
 hold on
 %plot(fliplr(gamma),converg,'-.o')
 yyaxis left
-%plot(per_covg_max,mask_max,'-*',per_covg_max,mask_min,'-x',per_covg_max,mask_avg,'-o')
+plot(per_covg_max,mask_max,'-*',per_covg_max,mask_min,'-x',per_covg_max,mask_avg,'-o')
 ylabel('% coverage');
 xlabel('Max. % Coverage');
 legend('max. coverage','min. coverage','avg. coverage','convergence')
